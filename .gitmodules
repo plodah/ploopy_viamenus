@@ -1,0 +1,3 @@
+[submodule "modules/plodah"]
+	path = modules/plodah
+	url = https://github.com/plodah/qmk_modules
