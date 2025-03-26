@@ -1,0 +1,40 @@
+{
+    "version": 1,
+    "notes": "Hello",
+    "author": "plodah",
+    "documentation": "...",
+    "keyboard": "ploopyco/trackball_nano",
+    "keymap": "via",
+    "layout": "LAYOUT",
+    "modules": [
+        "plodah/mouse_jiggler",
+        "plodah/task_switch"
+    ],
+    "config": {
+        "bootmagic": {
+            "matrix": [0, 0]
+        },
+        "build": {
+            "lto": true
+        },
+        "dynamic_keymap": {
+            "layer_count": 4
+        },
+        "features": {
+            "backlight": false,
+            "bootmagic": false,
+            "combo": false,
+            "console": false,
+            "deferred_exec": true,
+            "encoder_map": false,
+            "extrakey": true,
+            "mousekey": true,
+            "rgblight": false,
+            "rgb_matrix": false,
+            "tap_dance": false,
+            "via": true
+        },
+        "keyboard_name": "Trackball Thumb | viamenus",
+        "manufacturer": "Ploopy"
+    }
+}

@@ -1,0 +1,37 @@
+{
+    "version": 1,
+    "notes": "Hello",
+    "author": "plodah",
+    "documentation": "...",
+    "keyboard": "ploopyco/trackball_mini",
+    "keymap": "via",
+    "layout": "LAYOUT",
+    "modules": [
+        "plodah/mouse_jiggler",
+        "plodah/task_switch"
+    ],
+    "config": {
+        "bootmagic": {
+            "matrix": [0, 0]
+        },
+        "build": {
+            "lto": true
+        },
+        "dynamic_keymap": {
+            "layer_count": 4
+        },
+        "features": {
+            "backlight": false,
+            "combo": true,
+            "console": false,
+            "deferred_exec": true,
+            "encoder_map": false,
+            "rgblight": false,
+            "rgb_matrix": false,
+            "tap_dance": true,
+            "via": true
+        },
+        "keyboard_name": "Trackball Mini | viamenus",
+        "manufacturer": "Ploopy"
+    }
+}
