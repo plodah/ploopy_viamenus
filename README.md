@@ -2,8 +2,9 @@
 
 ![android-chrome-192x192](https://user-images.githubusercontent.com/1714072/222621960-ddfb8ee6-a486-4c66-8852-b204ba7c807b.png)
 
-This repository is a [qmk_userspace](https://docs.qmk.fm/newbs_external_userspace); it is a supplementary repo to qmk_firmware, containing only keymaps.
-These keymaps enable a variety of additional features for Ploopy trackballs and mice. These features can be configured in the Via interface, and don't require rebuilding firmware to change.
+
+This repository is a [qmk_userspace](https://docs.qmk.fm/newbs_external_userspace). These keymaps are supplementary to [qmk_firmware](https://github.com/qmk/qmk_firmware).
+The firmware enables a variety of additional features for Ploopy trackballs and mice and allows their configuration with Via interface.
 
 ![image](https://github.com/user-attachments/assets/e5b72bf5-0b04-4f57-8a35-5bbeeb1a6875)
 
