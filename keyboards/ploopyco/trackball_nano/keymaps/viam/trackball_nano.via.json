@@ -8,7 +8,9 @@
     },
     "customKeycodes": [
         { "name": "DPI Config", "title": "DPI Config", "shortName": "DPI" },
-        { "name": "Drag Scroll", "title": "Drag Scroll", "shortName": "DragScl" }
+        { "name": "Ploopy Drag Scroll", "title": "Ploopy Drag Scroll", "shortName": "DragScl" },
+        { "name": "Better Drag Scroll Momentary", "title": "Better Drag Scroll Momentary", "shortName": "Drg Mo" },
+        { "name": "Better Drag Scroll Toggle", "title": "Better Drag Scroll Toggle", "shortName": "Drg Tg" }
     ],
     "layouts": {
         "keymap": [["0,0"]]

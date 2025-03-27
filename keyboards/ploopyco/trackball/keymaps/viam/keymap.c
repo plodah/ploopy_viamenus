@@ -16,15 +16,37 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
  #include QMK_KEYBOARD_H
+
+ enum layers {
+     _BASE,
+     _FNA,
+     _FNB,
+ };
+
+ enum keymap_keycodes {
+     KB_DPI_CONFIG       = QK_KB_0,
+     KB_DRAG_SCROLL,
+     BETTER_DRAG_SCROLL_MOMENTARY,
+     BETTER_DRAG_SCROLL_TOGGLE,
+ };
+
+ enum {
+     TD_DRAGSCROLL,
+ };
+
  #include "common.c"
 
+ #define P_DRGTD TD(TD_DRAGSCROLL)
+ #define P_DPI DPI_CONFIG
+ #define P_DRGMO BETTER_DRAG_SCROLL_MOMENTARY
+ #define P_DRGTG BETTER_DRAG_SCROLL_TOGGLE
+
+ #define P_MS4FA LT(_FNA, KC_BTN4)
+ #define P_MS5FB LT(_FNB, KC_BTN5)
+
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [0] = LAYOUT( KC_BTN1, KC_BTN3, KC_BTN2, KC_BTN4, KC_BTN5 ),
-    [1] = LAYOUT( _______, _______, _______, _______, _______ ),
-    [2] = LAYOUT( _______, _______, _______, _______, _______ ),
-    [3] = LAYOUT( _______, _______, _______, _______, _______ ),
-    [4] = LAYOUT( _______, _______, _______, _______, _______ ),
-    [5] = LAYOUT( _______, _______, _______, _______, _______ ),
-    [6] = LAYOUT( _______, _______, _______, _______, _______ ),
-    [7] = LAYOUT( _______, _______, _______, _______, _______ )
+    [_BASE] = LAYOUT( KC_BTN1, KC_BTN3, KC_BTN2, P_MS4FA, P_MS5FB ),
+    [_FNA] = LAYOUT( CM_TSKP, DPI_CONFIG, CM_TSKN, _______, _______ ),
+    [_FNB] = LAYOUT( CM_TSKP, DPI_CONFIG, CM_TSKN, _______, _______ )
 };

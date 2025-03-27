@@ -5,7 +5,9 @@ enum layers {
 };
 
 enum keymap_keycodes {
-    BETTER_DRAG_SCROLL_MOMENTARY = QK_USER_0,
+    KB_DPI_CONFIG       = QK_KB_0,
+    KB_DRAG_SCROLL,
+    BETTER_DRAG_SCROLL_MOMENTARY,
     BETTER_DRAG_SCROLL_TOGGLE,
 };
 
