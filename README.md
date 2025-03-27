@@ -41,10 +41,11 @@ Keys allow you to "alt tab" between open Windows.
 Alt is held for ~1 second after this key released to allow switching between several windows.
 
 ## How do I use it?
-1. Download firmware from [**Releases**](https://github.com/plodah/ploopy_viamenus/releases)
-2. Flash the firmware; e.g. with QMK toolbox. [Here is QMK's guide](https://docs.qmk.fm/newbs_flashing)
-3. Import the json file to Via's 🖌️ design tab. If you don't have 🖌️ at the top of the Via, enable design tab it in settings ⚙️
-4. When updating to a new release, please update both firmware and Via JSON
+1. Download Firmware and JSON from [**Releases**](https://github.com/plodah/ploopy_viamenus/releases)
+   - _Dated releases include the json- `latest` release is built automatically and I haven't figured out github actions to include json yet._
+3. Flash the firmware; e.g. with QMK toolbox. [Here is QMK's guide](https://docs.qmk.fm/newbs_flashing)
+4. Import the json file to Via's 🖌️ design tab. If you don't have 🖌️ at the top of the Via, enable design tab it in settings ⚙️
+5. When updating to a new release, please update both firmware and Via JSON
 
 ### Problems and workarounds
 #### Tapdance and Community Module keycodes
