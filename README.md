@@ -1,6 +1,6 @@
 # Plodah's Via Menus for Ploopy
-
 ![alt text](readme-examplemenu.png)
+
 This is a [qmk_userspace](https://docs.qmk.fm/newbs_external_userspace) containing supplementar keymaps for [qmk_firmware](https://github.com/qmk/qmk_firmware).
 This produces firmware that includes a variety of additional features for Ploopy trackballs which can be configured within Via.
 
@@ -20,8 +20,14 @@ Kinda improved version of dragscroll.
 - Enable/disable dragscroll with caps/num/scroll lock
 - If toggled on, it will be deactivated by another key press
 - invert dragscroll direction for x/y independently
+
 ### Mouse Jiggler 
+The pointer will move an imperceptably small amount, in a pseudo-random direction at a pseudo-random interval.
+This should be enough to keep your computer awake when you're not using it, but since it's only 1-2 px at a time, it's small enough that it doesn't hinder normal mouse usage.
 _I am not liable for any disciplinary action taken by your employer!_
+The jiggler will draw a circle to confirm it has been enabled, and a horizontal line to show when it's turned off.
+Can be switched on/off by key press, via menu or gesture.
+
 ### Gestures
 Similar to _"Wiggleball"_ 
 Wiggle the cursor to enable dragscroll or mouse jiggler (or not, if you prefer)
