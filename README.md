@@ -61,6 +61,7 @@ These will show as their hexidecimal keycode in Via and can only be assigned wit
 5. The way I've set things up, Via uses only 1 byte for DPI. 
    The value (0-255) is multiplied by 10 when applying the DPI, meaning the limit is 2550. 
    Should make this a 2 byte value, and directly apply without this calculation.
+6. Mouse jiggler- could expose different jiggle patterns, multipliers & speeds as via menu.
 
 ### Stuff I would like to do, but have no earthly idea how to achieve
 1. Scroll by moving the pointer in a circle.
