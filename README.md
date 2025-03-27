@@ -70,6 +70,7 @@ These will show as their hexidecimal keycode in Via and can only be assigned wit
 6. Mouse jiggler- could expose different jiggle patterns, multipliers & speeds as via menu.
 7. maybe allow equivalent of ROTATIONAL_TRANSFORM_ANGLE to use trackball sideways
 8. check the dragscroll inversion on adept/madromys. Inversion state seems er.. inverted
+9. Dragscroll straightening
 
 ### Stuff I would like to do, but have no earthly idea how to achieve
 1. Scroll by moving the pointer in a circle.
