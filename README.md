@@ -68,6 +68,8 @@ These will show as their hexidecimal keycode in Via and can only be assigned wit
    The value (0-255) is multiplied by 10 when applying the DPI, meaning the limit is 2550. 
    Should make this a 2 byte value, and directly apply without this calculation.
 6. Mouse jiggler- could expose different jiggle patterns, multipliers & speeds as via menu.
+7. maybe allow equivalent of ROTATIONAL_TRANSFORM_ANGLE to use trackball sideways
+8. check the dragscroll inversion on adept/madromys. Inversion state seems er.. inverted
 
 ### Stuff I would like to do, but have no earthly idea how to achieve
 1. Scroll by moving the pointer in a circle.
