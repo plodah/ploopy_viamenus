@@ -1,13 +1,18 @@
 # Plodah's Via Menus for Ploopy
+
+This firmware for Ploopy trackballs & mice enables the use of menus in Via to control mouse settings. It also adds a variety of additional features.
+
+This repo is essentially a [qmk_userspace](https://docs.qmk.fm/newbs_external_userspace) containing supplementary keymaps for [qmk_firmware](https://github.com/qmk/qmk_firmware).
+
+### Please Note
+**Testing has been limited!**
+I use this firmware on my Adept or Thumb daily, but I'm just one guy and I don't have every trackball to test this on, so there could be issues that I've never imagined.
+
+I'd recommend that you're comfortable returning your device to the original firmware if needed.
+If you do encounter problems, please let me know or PR a fix but I can't commit to fixing any issue and provide no warranty etc. It's free after all!
+
 ![alt text](readme-examplemenu.png)
 
-This is a [qmk_userspace](https://docs.qmk.fm/newbs_external_userspace) containing supplementar keymaps for [qmk_firmware](https://github.com/qmk/qmk_firmware).
-This produces firmware that includes a variety of additional features for Ploopy trackballs which can be configured within Via.
-
-## Please Note
-Testing on this has been limited. I had all this stuff in my qmk_userspace repo, mixed in with a bunch of keyboard stuff.
-I've tested this on my Adept and Thumb .. but not extensively.
-If there are problems, let me know or PR a fix.
 
 ## What does it do?
 ### DPI Config
@@ -68,3 +73,12 @@ These will show as their hexidecimal keycode in Via and can only be assigned wit
 2. Use a text input box for DPI presets rather than a dropdown list.
 3. Provide a better interface for tapdances and community module keycodes.
 99. world peace
+
+## I regret everything, take me back
+If it all gets too much and you yearn for a simpler time, and want to return your device to the original firmware
+1. Download the original firmware. Good sources are:-
+    - [Via](https://www.caniusevia.com/docs/download_firmware)
+    - [Ploopy's Github](https://github.com/ploopyco) - there's a repo per device and firmware location varies.
+    - [keyboard.gay](https://keyboard.gay/)🏳️‍🌈 for Vial firmware
+2. Flash the firmware; e.g. with QMK toolbox. [Here is QMK's guide](https://docs.qmk.fm/newbs_flashing)
+3. Remove the imported json from Via or clear site data from your browser.
