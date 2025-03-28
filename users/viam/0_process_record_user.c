@@ -18,6 +18,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
     #endif // defined(KC_PL_SCRL)
 
+    #if defined(COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE)
+      case PL_MSJG:
+        // jiggler_toggle();
+        process_record_mouse_jiggler(COMMUNITY_MODULE_MOUSE_JIGGLER_TOGGLE, record);
+        return false;
+    #endif // defined(COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE)
+
+    #if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE)
+      case PL_TSKN:
+        process_record_task_switch(COMMUNITY_MODULE_TASK_SWITCH_NEXT, record);
+        return false;
+      case PL_TSKP:
+        process_record_task_switch(COMMUNITY_MODULE_TASK_SWITCH_PREVIOUS, record);
+        return false;
+    #endif // defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE)
+
   }
   return true;
 }

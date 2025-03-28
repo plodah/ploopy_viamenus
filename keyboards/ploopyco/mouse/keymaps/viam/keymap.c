@@ -11,6 +11,9 @@ enum keymap_keycodes {
     KB_DRAG_SCROLL,
     BETTER_DRAG_SCROLL_MOMENTARY,
     BETTER_DRAG_SCROLL_TOGGLE,
+    PL_MSJG,
+    PL_TSKN,
+    PL_TSKP,
 };
 
 enum {
@@ -36,7 +39,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         P_MS4FA, P_MS5FB, DPI_CONFIG
     ),
     [_FNA] = LAYOUT(
-        CM_MSJG, CM_TSKP, _______, CM_TSKN, _______,
+        CM_MSJG, PL_TSKP, _______, PL_TSKN, _______,
         _______, _______, _______
     ),
     [_FNB] = LAYOUT(

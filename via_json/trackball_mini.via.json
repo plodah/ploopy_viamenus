@@ -10,7 +10,10 @@
         { "name": "DPI Config", "title": "DPI Config", "shortName": "DPI" },
         { "name": "Ploopy Drag Scroll", "title": "Ploopy Drag Scroll", "shortName": "DragScl" },
         { "name": "Better Drag Scroll Momentary", "title": "Better Drag Scroll Momentary", "shortName": "Drg Mo" },
-        { "name": "Better Drag Scroll Toggle", "title": "Better Drag Scroll Toggle", "shortName": "Drg Tg" }
+        { "name": "Better Drag Scroll Toggle", "title": "Better Drag Scroll Toggle", "shortName": "Drg Tg" },
+        { "name": "Mouse Jiggler Toggle", "title": "Mouse Jiggler Toggle", "shortName": "MsJig" },
+        { "name": "Task Switcher Next", "title": "Task Switcher Next", "shortName": "Tsk Nxt" },
+        { "name": "Task Switcher Previous", "title": "Task Switcher Previous", "shortName": "Tsk Prv" }
     ],
     "layouts": {
         "keymap": [

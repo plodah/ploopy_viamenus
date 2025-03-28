@@ -28,6 +28,9 @@
      KB_DRAG_SCROLL,
      BETTER_DRAG_SCROLL_MOMENTARY,
      BETTER_DRAG_SCROLL_TOGGLE,
+     PL_MSJG,
+     PL_TSKN,
+     PL_TSKP,
  };
 
  enum {
@@ -47,6 +50,6 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT( KC_BTN1, KC_BTN3, KC_BTN2, P_MS4FA, P_MS5FB ),
-    [_FNA] = LAYOUT( CM_TSKP, DPI_CONFIG, CM_TSKN, _______, _______ ),
-    [_FNB] = LAYOUT( CM_TSKP, DPI_CONFIG, CM_TSKN, _______, _______ )
+    [_FNA] = LAYOUT( PL_TSKP, DPI_CONFIG, PL_TSKN, _______, _______ ),
+    [_FNB] = LAYOUT( PL_TSKP, DPI_CONFIG, PL_TSKN, _______, _______ )
 };
