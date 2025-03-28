@@ -37,9 +37,20 @@ Can be switched on/off by key press, via menu or gesture.
 ### Gestures
 Similar to _"Wiggleball"_ 
 Wiggle the cursor to enable dragscroll or mouse jiggler (or not, if you prefer)
+
 ### Task Switcher
 Keys allow you to "alt tab" between open Windows. 
 Alt is held for ~1 second after this key released to allow switching between several windows.
+
+### Custom Keycodes
+| Key | Description |
+| --- | --- |
+| DPI Config | Stock Ploopy key to cycle between DPI presets |
+| Ploopy Drag Scroll | Stock Ploopy key to turn on the original dragscroll.. it does **not** play nice with the "better" dragscroll keys |
+| Better Drag Scroll Momentary | drag scroll mode on while held |
+| Better Drag Scroll Toggle | toggles drag scroll mode off/on |
+| Taskswitch Next | i.e. Alt + Tab |
+| Taskswitch Prev | i.e. Alt + Shift + Tab |
 
 ## How do I use it?
 1. Download Firmware and JSON from [**Releases**](https://github.com/plodah/ploopy_viamenus/releases)
@@ -49,15 +60,14 @@ Alt is held for ~1 second after this key released to allow switching between sev
 5. When updating to a new release, please update both firmware and Via JSON
 
 ### Problems and workarounds
-#### Tapdance and Community Module keycodes
-Several keys that are implemented in this firmware are not in "ranges" that are supported properly by Via.
-These will show as their hexidecimal keycode in Via and can only be assigned with the same;
+#### Tapdances
+Via only supports the "keyboard" level custom keycodes. Those that are set up in a module, or at the user level can't be added to the custom menu
+I've created "proxy" keycodes at the keyboard level for most, but haven't found a similar workaround for tapdance next.
+These will appear as their hex keycode in Via and can only be assigned with the same;
+
 | Key | Code | Notes |
 | --- | --- | --- | 
 | Dragscroll Tapdance | `0x5700` | Momentary dragscroll, toggles when tapped twice |
-| Mouse Jiggler | `0x77c0` | |
-| Taskswitch Next | `0x77c1` | i.e. Alt + Tab |
-| Taskswitch Prev | `0x77c2` | i.e. Alt + Shift + Tab |
 
 ## What doesn't it do?
 ### Stuff that I think is possible, and may implement later
@@ -69,14 +79,14 @@ These will show as their hexidecimal keycode in Via and can only be assigned wit
    The value (0-255) is multiplied by 10 when applying the DPI, meaning the limit is 2550. 
    Should make this a 2 byte value, and directly apply without this calculation.
 6. Mouse jiggler- could expose different jiggle patterns, multipliers & speeds as via menu.
-7. maybe allow equivalent of ROTATIONAL_TRANSFORM_ANGLE to use trackball sideways
-8. check the dragscroll inversion on adept/madromys. Inversion state seems er.. inverted
+7. Maybe allow equivalent of ROTATIONAL_TRANSFORM_ANGLE to use trackball sideways
+8. Check the dragscroll inversion on adept/madromys. Inversion state seems er.. inverted
 9. Dragscroll straightening
 
 ### Stuff I would like to do, but have no earthly idea how to achieve
-1. Scroll by moving the pointer in a circle.
+1. Additional gesture to scroll by moving the pointer in a circle.
 2. Use a text input box for DPI presets rather than a dropdown list.
-3. Provide a better interface for tapdances and community module keycodes.
+3. Provide a better interface for tapdances ~~and community module keycodes~~ **fixed the community module kc's**
 99. world peace
 
 ## I regret everything, take me back
