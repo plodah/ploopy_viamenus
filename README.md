@@ -22,6 +22,7 @@ Can additionally apply global multiplier to DPI
 Kinda improved version of dragscroll. 
 - Momentary and Toggle keys available.
 - Tapdance, which will act as a momentary dragscroll, but when tapped twice will toggle
+- Mofify the dragscroll divisor to adjust scroll speed relative to DPI
 - Enable/disable dragscroll with caps/num/scroll lock
 - If toggled on, it will be deactivated by another key press
 - invert dragscroll direction for x/y independently
@@ -61,7 +62,7 @@ These will show as their hexidecimal keycode in Via and can only be assigned wit
 ## What doesn't it do?
 ### Stuff that I think is possible, and may implement later
 1. "Sniper" mode  -- momentarily reduce DPI by some factor while "sniper" key held.
-2. Dragscroll DPI or divisor control.
+2. ~~Dragscroll DPI or divisor control.~~ **DONE**
 3. Turbo keys/buttons. -- repeatedly send a click at a certain interval.
 4. Dragscroll ends on other key press. make this optional.
 5. The way I've set things up, Via uses only 1 byte for DPI. 
