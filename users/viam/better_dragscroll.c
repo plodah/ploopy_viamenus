@@ -36,7 +36,15 @@
                     return false;
                 #if !defined(BETTER_DRAGSCROLL_INDEFINITE)
                 default:
-                    better_dragscroll_enabled_bypress = 0; // this is potentially breaking but can't test
+                    #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
+                        if(ploopyvia_config.dragscroll_end_on_keypress){
+                            better_dragscroll_enabled_bypress = 0;
+                        }
+                    #else // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
+                        #if defined(BETTER_DRAGSCROLL_END_ON_KEYPRESS)
+                            better_dragscroll_enabled_bypress = 0;
+                        #endif // defined(BETTER_DRAGSCROLL_END_ON_KEYPRESS)
+                    #endif // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
                     break;
                 #endif // !defined(BETTER_DRAGSCROLL_INDEFINITE)
             }

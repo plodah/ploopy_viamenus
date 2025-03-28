@@ -45,6 +45,12 @@
         #else // BETTER_DRAGSCROLL_SCRLK_ENABLE
             .dragscroll_scroll       = false,
         #endif // BETTER_DRAGSCROLL_SCRLK_ENABLE
+
+        #if defined(BETTER_DRAGSCROLL_END_ON_KEYPRESS)
+            .dragscroll_end_on_keypress = true,
+        #else // BETTER_DRAGSCROLL_END_ON_KEYPRESS
+            .dragscroll_end_on_keypress = false,
+        #endif // BETTER_DRAGSCROLL_END_ON_KEYPRESS
     };
 
     void values_load(void)
@@ -205,6 +211,11 @@
                 dprintf("dragscroll_scroll: %d\n", ploopyvia_config.dragscroll_scroll);
                 break;
 
+            case id_ploopystuff_dragscroll_end_on_keypress:
+                ploopyvia_config.dragscroll_end_on_keypress = *value_data;
+                dprintf("dragscroll_end_on_keypress: %d\n", ploopyvia_config.dragscroll_end_on_keypress);
+                break;
+
             case id_ploopystuff_dpi_presets:
                 dpi_array[value_data[0]] = (value_data[1]*10) * (ploopyvia_config.dpi_multiplier/20) ;
                 dprintf("dpi_presets[%d]: %d\n", value_data[0], value_data[1]);
@@ -274,6 +285,10 @@
 
             case id_ploopystuff_dragscroll_scroll:
                 *value_data = ploopyvia_config.dragscroll_scroll;
+                break;
+
+            case id_ploopystuff_dragscroll_end_on_keypress:
+                *value_data = ploopyvia_config.dragscroll_end_on_keypress;
                 break;
         }
     }

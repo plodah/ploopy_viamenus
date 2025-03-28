@@ -24,7 +24,7 @@ Kinda improved version of dragscroll.
 - Tapdance, which will act as a momentary dragscroll, but when tapped twice will toggle
 - Mofify the dragscroll divisor to adjust scroll speed relative to DPI
 - Enable/disable dragscroll with caps/num/scroll lock
-- If toggled on, it will be deactivated by another key press
+- If toggled on, dragscroll can optionally be deactivated by another key press
 - invert dragscroll direction for x/y independently
 
 ### Mouse Jiggler 
@@ -64,7 +64,7 @@ These will show as their hexidecimal keycode in Via and can only be assigned wit
 1. "Sniper" mode  -- momentarily reduce DPI by some factor while "sniper" key held.
 2. ~~Dragscroll DPI or divisor control.~~ **DONE**
 3. Turbo keys/buttons. -- repeatedly send a click at a certain interval.
-4. Dragscroll ends on other key press. make this optional.
+4. ~~Dragscroll ends on other key press. make this optional.~~
 5. The way I've set things up, Via uses only 1 byte for DPI. 
    The value (0-255) is multiplied by 10 when applying the DPI, meaning the limit is 2550. 
    Should make this a 2 byte value, and directly apply without this calculation.
