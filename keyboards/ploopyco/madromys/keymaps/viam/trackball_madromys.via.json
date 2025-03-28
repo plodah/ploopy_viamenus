@@ -161,19 +161,73 @@
                             "content": ["id_ploopystuff_dragscroll_invert_v", 0, 22]
                         },
                         {
+                            "label": "Dragscroll Divisor X",
+                            "type": "dropdown",
+                            "options": [
+                                ["1", 4],
+                                ["1.5", 6],
+                                ["2", 8],
+                                ["2.5", 10],
+                                ["3", 12],
+                                ["3.5", 14],
+                                ["4", 16],
+                                ["4.5", 18],
+                                ["5", 20],
+                                ["6", 24],
+                                ["7", 28],
+                                ["8", 32],
+                                ["10", 40],
+                                ["12", 48],
+                                ["16", 64],
+                                ["20", 80],
+                                ["24", 96],
+                                ["32", 128],
+                                ["48", 192],
+                                ["64", 255]
+                            ],
+                            "content": ["id_ploopystuff_dragscroll_divisor_h", 0, 23]
+                        },
+                        {
+                            "label": "Dragscroll Divisor Y",
+                            "type": "dropdown",
+                            "options": [
+                                ["1", 4],
+                                ["1.5", 6],
+                                ["2", 8],
+                                ["2.5", 10],
+                                ["3", 12],
+                                ["3.5", 14],
+                                ["4", 16],
+                                ["4.5", 18],
+                                ["5", 20],
+                                ["6", 24],
+                                ["7", 28],
+                                ["8", 32],
+                                ["10", 40],
+                                ["12", 48],
+                                ["16", 64],
+                                ["20", 80],
+                                ["24", 96],
+                                ["32", 128],
+                                ["48", 192],
+                                ["64", 255]
+                            ],
+                            "content": ["id_ploopystuff_dragscroll_divisor_v", 0, 24]
+                        },
+                        {
                             "label": "Dragscroll on Caps Lock",
                             "type": "toggle",
-                            "content": ["id_ploopystuff_dragscroll_caps", 0, 23]
+                            "content": ["id_ploopystuff_dragscroll_caps", 0, 25]
                         },
                         {
                             "label": "Dragscroll on Num Lock",
                             "type": "toggle",
-                            "content": ["id_ploopystuff_dragscroll_num", 0, 24]
+                            "content": ["id_ploopystuff_dragscroll_num", 0, 26]
                         },
                         {
                             "label": "Dragscroll on Scroll Lock",
                             "type": "toggle",
-                            "content": ["id_ploopystuff_dragscroll_scroll", 0, 25]
+                            "content": ["id_ploopystuff_dragscroll_scroll", 0, 27]
                         }
                     ]
                 },

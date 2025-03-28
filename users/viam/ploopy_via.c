@@ -1,3 +1,4 @@
+#include "better_dragscroll.h"
 #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
     #pragma once
 
@@ -12,6 +13,8 @@
         .wiggleball_count          = PLOOPY_MSGESTURE_WIGGLES,
         .wiggleball_action_h       = GESTURE_ACTION_NOTHING,
         .wiggleball_action_v       = GESTURE_ACTION_NOTHING,
+        .dragscroll_divisor_h      = 4 * BETTER_DRAGSCROLL_DIVISOR_H,
+        .dragscroll_divisor_v      = 4 * BETTER_DRAGSCROLL_DIVISOR_V,
 
         #if defined(BETTER_DRAGSCROLL_INVERT_H)
           .dragscroll_invert_h       = true,
@@ -23,7 +26,7 @@
           .dragscroll_invert_v       = true,
         #else // BETTER_DRAGSCROLL_INVERT_V
           .dragscroll_invert_v       = false,
-        #endif // BETTER_DRAGSCROLL_INVERT_V
+        #endif // BETTER_DRA
 
         #if defined(BETTER_DRAGSCROLL_CAPLK_ENABLE)
             .dragscroll_caps         = true,
@@ -65,12 +68,12 @@
         // OK to load from EEPROM
         if (via_eeprom_is_valid()) {
             values_load();
-            update_dpi();
-            ploopy_msGestureUpdate();
         } else	{
             values_save();
             // DO NOT set EEPROM valid here, let caller do this
         }
+        update_dpi();
+        ploopy_msGestureUpdate();
     }
 
     void via_custom_value_command_kb(uint8_t *data, uint8_t length) {
@@ -177,6 +180,16 @@
                 dprintf("dragscroll_invert_v:%d\n", ploopyvia_config.dragscroll_invert_v);
                 break;
 
+            case id_ploopystuff_dragscroll_divisor_h:
+                ploopyvia_config.dragscroll_divisor_h = *value_data;
+                dprintf("dragscroll_divisor_h:%d\n", ploopyvia_config.dragscroll_divisor_h);
+                break;
+
+            case id_ploopystuff_dragscroll_divisor_v:
+                ploopyvia_config.dragscroll_divisor_v = *value_data;
+                dprintf("dragscroll_divisor_v:%d\n", ploopyvia_config.dragscroll_divisor_v);
+                break;
+
             case id_ploopystuff_dragscroll_caps:
                 ploopyvia_config.dragscroll_caps = *value_data;
                 dprintf("dragscroll_caps: %d\n", ploopyvia_config.dragscroll_caps);
@@ -241,6 +254,14 @@
 
             case id_ploopystuff_dragscroll_invert_v:
                 *value_data = ploopyvia_config.dragscroll_invert_v;
+                break;
+
+            case id_ploopystuff_dragscroll_divisor_h:
+                *value_data = ploopyvia_config.dragscroll_divisor_h;
+                break;
+
+            case id_ploopystuff_dragscroll_divisor_v:
+                *value_data = ploopyvia_config.dragscroll_divisor_v;
                 break;
 
             case id_ploopystuff_dragscroll_caps:
