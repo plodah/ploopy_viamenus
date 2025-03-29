@@ -11,9 +11,6 @@
         "plodah/task_switch"
     ],
     "config": {
-        "bootmagic": {
-            "matrix": [0, 1]
-        },
         "build": {
             "lto": false
         },
