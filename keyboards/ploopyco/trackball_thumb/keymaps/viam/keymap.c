@@ -37,7 +37,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [_FNA] = LAYOUT(
         _______, PL_TSKP, _______, PL_TSKN, _______,
-        CM_MSJG
+        PL_MSJG
     ),
     [_FNB] = LAYOUT(
         _______, _______, _______, _______, _______,

@@ -39,7 +39,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         P_MS4FA, P_MS5FB, DPI_CONFIG
     ),
     [_FNA] = LAYOUT(
-        CM_MSJG, PL_TSKP, _______, PL_TSKN, _______,
+        PL_MSJG, PL_TSKP, _______, PL_TSKN, _______,
         _______, _______, _______
     ),
     [_FNB] = LAYOUT(
