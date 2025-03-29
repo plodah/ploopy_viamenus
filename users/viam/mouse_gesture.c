@@ -6,9 +6,9 @@
 
   void ploopy_msGestureUpdate(void){
     #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
-      PLOOPY_MSGESTURE_X.action = ploopyvia_config.wiggleball_action_h;
-      PLOOPY_MSGESTURE_Y.action = ploopyvia_config.wiggleball_action_v;
-      gestureCount              = ploopyvia_config.wiggleball_count;
+      PLOOPY_MSGESTURE_X.action = ploopyvia_config.gesture_action_h;
+      PLOOPY_MSGESTURE_Y.action = ploopyvia_config.gesture_action_v;
+      gestureCount              = ploopyvia_config.gesture_count;
     #else
       PLOOPY_MSGESTURE_X.action = GESTURE_ACTION_DRAGSCROLL;
       PLOOPY_MSGESTURE_Y.action = GESTURE_ACTION_MSJIGGLER;

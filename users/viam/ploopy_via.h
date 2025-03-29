@@ -15,6 +15,7 @@ enum via_ploopystuff_value {
     id_ploopystuff_gesture_count = 11,
     id_ploopystuff_gesture_action_h,
     id_ploopystuff_gesture_action_v,
+    id_ploopystuff_combos_enabled,
     id_ploopystuff_dragscroll_invert_h = 21,
     id_ploopystuff_dragscroll_invert_v,
     id_ploopystuff_dragscroll_divisor_h,
@@ -33,11 +34,12 @@ enum via_ploopystuff_value {
 
 typedef struct {
     uint8_t dpi_multiplier; // Value stored *20 to allow fraction in uint8
-    uint8_t wiggleball_count;
-    uint8_t wiggleball_action_h;
-    uint8_t wiggleball_action_v;
     bool    pointer_invert_h;
     bool    pointer_invert_v;
+    uint8_t gesture_count;
+    uint8_t gesture_action_h;
+    uint8_t gesture_action_v;
+    bool    combos_enabled;
     bool    dragscroll_invert_h;
     bool    dragscroll_invert_v;
     uint8_t dragscroll_divisor_h; // Value stored *4 to allow fraction in uint8

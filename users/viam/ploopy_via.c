@@ -10,12 +10,12 @@
 
     via_ploopystuff_config ploopyvia_config = {
         .dpi_multiplier            = 20,
-        .wiggleball_count          = PLOOPY_MSGESTURE_WIGGLES,
-        .wiggleball_action_h       = GESTURE_ACTION_NOTHING,
-        .wiggleball_action_v       = GESTURE_ACTION_NOTHING,
+        .gesture_count             = PLOOPY_MSGESTURE_WIGGLES,
+        .gesture_action_h          = GESTURE_ACTION_NOTHING,
+        .gesture_action_v          = GESTURE_ACTION_NOTHING,
         .dragscroll_divisor_h      = 4 * BETTER_DRAGSCROLL_DIVISOR_H,
         .dragscroll_divisor_v      = 4 * BETTER_DRAGSCROLL_DIVISOR_V,
-
+        .combos_enabled            = false,
         #if defined(BETTER_DRAGSCROLL_INVERT_H)
           .dragscroll_invert_h       = true,
         #else // BETTER_DRAGSCROLL_INVERT_H
@@ -159,21 +159,26 @@
                 break;
 
             case id_ploopystuff_gesture_count:
-                ploopyvia_config.wiggleball_count = *value_data;
+                ploopyvia_config.gesture_count = *value_data;
                 ploopy_msGestureUpdate();
-                dprintf("gesture_count:%d\n", ploopyvia_config.wiggleball_count);
+                dprintf("gesture_count:%d\n", ploopyvia_config.gesture_count);
                 break;
 
             case id_ploopystuff_gesture_action_h:
-                ploopyvia_config.wiggleball_action_h = *value_data;
+                ploopyvia_config.gesture_action_h = *value_data;
                 ploopy_msGestureUpdate();
-                dprintf("gesture_action_h:%d\n", ploopyvia_config.wiggleball_action_h);
+                dprintf("gesture_action_h:%d\n", ploopyvia_config.gesture_action_h);
                 break;
 
             case id_ploopystuff_gesture_action_v:
-                ploopyvia_config.wiggleball_action_v = *value_data;
+                ploopyvia_config.gesture_action_v = *value_data;
                 ploopy_msGestureUpdate();
-                dprintf("gesture_action_v:%d\n", ploopyvia_config.wiggleball_action_v);
+                dprintf("gesture_action_v:%d\n", ploopyvia_config.gesture_action_v);
+                break;
+
+            case id_ploopystuff_combos_enabled:
+                ploopyvia_config.combos_enabled = *value_data;
+                dprintf("combos_enabled:%d\n", ploopyvia_config.combos_enabled);
                 break;
 
             case id_ploopystuff_dragscroll_invert_h:
@@ -248,15 +253,19 @@
                 break;
 
             case id_ploopystuff_gesture_count:
-                *value_data = ploopyvia_config.wiggleball_count;
+                *value_data = ploopyvia_config.gesture_count;
                 break;
 
             case id_ploopystuff_gesture_action_h:
-                *value_data = ploopyvia_config.wiggleball_action_h;
+                *value_data = ploopyvia_config.gesture_action_h;
                 break;
 
             case id_ploopystuff_gesture_action_v:
-                *value_data = ploopyvia_config.wiggleball_action_v;
+                *value_data = ploopyvia_config.gesture_action_v;
+                break;
+
+            case id_ploopystuff_combos_enabled:
+                *value_data = ploopyvia_config.combos_enabled;
                 break;
 
             case id_ploopystuff_dragscroll_invert_h:

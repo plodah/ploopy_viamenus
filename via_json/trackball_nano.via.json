@@ -111,6 +111,11 @@
                                 ["Mouse Jiggler", 2]
                             ],
                             "content": ["id_ploopystuff_gesture_action_v", 0, 13]
+                        },
+                        {
+                            "label": "Combos Enable",
+                            "type": "toggle",
+                            "content": ["id_ploopystuff_combos_enabled", 0, 14]
                         }
                     ]
                 },
