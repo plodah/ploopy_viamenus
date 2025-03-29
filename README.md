@@ -90,10 +90,17 @@ These will appear as their hex keycode in Via and can only be assigned with the 
 99. world peace
 
 ## I regret everything, take me back
-If it all gets too much and you yearn for a simpler time, and want to return your device to the original firmware
+If it all gets too much and you yearn for a simpler time, and wish to return your device to the original firmware or just something simpler.
+
 1. Download the original firmware. Good sources are:-
     - [Via](https://www.caniusevia.com/docs/download_firmware)
     - [Ploopy's Github](https://github.com/ploopyco) - there's a repo per device and firmware location varies.
     - [keyboard.gay](https://keyboard.gay/)🏳️‍🌈 for Vial firmware
 2. Flash the firmware; e.g. with QMK toolbox. [Here is QMK's guide](https://docs.qmk.fm/newbs_flashing)
+   - _In the releases before 2025-03-29, be aware that the "bootmagic" key may be different to original firmware_
+     - _e.g. Thumb: little button (originally scroll wheel) Adept: top left (originally bottom left)_
 3. Remove the imported json from Via or clear site data from your browser.
+4. If you were encountering a bug that made it impossible to use your trackball, let me know so I might be able to fix it.
+
+Thanks for reading,
+Plodah
