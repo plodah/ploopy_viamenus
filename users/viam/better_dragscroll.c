@@ -26,28 +26,29 @@
         // if (!process_record_better_dragscroll_kb(keycode, record)) {
         //     return false;
         // }
-        if(record->event.pressed){
-            switch (keycode) {
-                case BETTER_DRAG_SCROLL_MOMENTARY:
-                    better_dragscroll_momentary(record->event.pressed);
-                    return false;
-                case BETTER_DRAG_SCROLL_TOGGLE:
-                    better_dragscroll_toggle(record->event.pressed);
-                    return false;
-                #if !defined(BETTER_DRAGSCROLL_INDEFINITE)
+
+        switch (keycode) {
+            case BETTER_DRAG_SCROLL_MOMENTARY:
+                better_dragscroll_momentary(record->event.pressed);
+                return false;
+            case BETTER_DRAG_SCROLL_TOGGLE:
+                better_dragscroll_toggle(record->event.pressed);
+                return false;
+            #if !defined(BETTER_DRAGSCROLL_INDEFINITE)
                 default:
-                    #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
-                        if(ploopyvia_config.dragscroll_end_on_keypress){
-                            better_dragscroll_enabled_bypress = 0;
-                        }
-                    #else // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
-                        #if defined(BETTER_DRAGSCROLL_END_ON_KEYPRESS)
-                            better_dragscroll_enabled_bypress = 0;
-                        #endif // defined(BETTER_DRAGSCROLL_END_ON_KEYPRESS)
-                    #endif // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
+                    if(record->event.pressed){
+                        #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
+                            if(ploopyvia_config.dragscroll_end_on_keypress){
+                                better_dragscroll_enabled_bypress = 0;
+                            }
+                        #else // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
+                            #if defined(BETTER_DRAGSCROLL_END_ON_KEYPRESS)
+                                better_dragscroll_enabled_bypress = 0;
+                            #endif // defined(BETTER_DRAGSCROLL_END_ON_KEYPRESS)
+                        #endif // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
+                    }
                     break;
-                #endif // !defined(BETTER_DRAGSCROLL_INDEFINITE)
-            }
+            #endif // !defined(BETTER_DRAGSCROLL_INDEFINITE)
         }
         return true;
     }
