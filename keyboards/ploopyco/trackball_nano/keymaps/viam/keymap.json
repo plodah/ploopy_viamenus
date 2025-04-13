@@ -7,8 +7,6 @@
     "keymap": "via",
     "layout": "LAYOUT",
     "modules": [
-        "plodah/mouse_jiggler",
-        "plodah/task_switch"
     ],
     "config": {
         "build": {
@@ -24,8 +22,8 @@
             "console": false,
             "deferred_exec": true,
             "encoder_map": false,
-            "extrakey": true,
-            "mousekey": true,
+            "extrakey": false,
+            "mousekey": false,
             "rgblight": false,
             "rgb_matrix": false,
             "tap_dance": false,
