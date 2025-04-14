@@ -18,5 +18,11 @@ bool better_dragscroll_enabled_bypress;
 void better_dragscroll_toggle(bool pressed);
 void better_dragscroll_momentary(bool pressed);
 #if defined(BETTER_DRAGSCROLL_SCRLK_ENABLE) || defined(BETTER_DRAGSCROLL_CAPLK_ENABLE) || defined(BETTER_DRAGSCROLL_NUMLK_ENABLE) || (defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS))
-    bool led_update_better_dragscroll(led_t led_state);
+    bool led_update_better_dragscroll_led_state(led_t led_state);
+
+    #if defined(BETTER_DRAGSCROLL_ON_HOST_VALUE_TOGGLED) || (defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS))
+        void led_initialize_better_dragscroll(void);
+        void led_deinitialize_better_dragscroll(void);
+        void led_update_better_dragscroll(void);
+    #endif
 #endif //     #if defined(BETTER_DRAGSCROLL_SCRLK_ENABLE) || defined(BETTER_DRAGSCROLL_CAPLK_ENABLE) || defined(BETTER_DRAGSCROLL_NUMLK_ENABLE) || (defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS))

@@ -51,6 +51,12 @@
         #else // BETTER_DRAGSCROLL_END_ON_KEYPRESS
             .dragscroll_end_on_keypress = false,
         #endif // BETTER_DRAGSCROLL_END_ON_KEYPRESS
+
+        #if defined(BETTER_DRAGSCROLL_ON_HOST_VALUE_TOGGLED)
+            .dragscroll_on_host_value_toggled = true,
+        #else // BETTER_DRAGSCROLL_ON_HOST_VALUE_TOGGLED
+            .dragscroll_on_host_value_toggled = false,
+        #endif // BETTER_DRAGSCROLL_ON_HOST_VALUE_TOGGLED
     };
 
     void values_load(void)
@@ -221,6 +227,12 @@
                 dprintf("dragscroll_end_on_keypress: %d\n", ploopyvia_config.dragscroll_end_on_keypress);
                 break;
 
+            case id_ploopystuff_dragscroll_on_host_value_toggled:
+                ploopyvia_config.dragscroll_on_host_value_toggled = *value_data;
+                dprintf("dragscroll_on_host_value_toggled: %d\n", ploopyvia_config.dragscroll_on_host_value_toggled);
+                led_update_better_dragscroll();
+                break;
+
             case id_ploopystuff_dpi_presets:
                 dpi_array[value_data[0]] = (value_data[1]*10) * (ploopyvia_config.dpi_multiplier/20) ;
                 dprintf("dpi_presets[%d]: %d\n", value_data[0], value_data[1]);
@@ -299,6 +311,9 @@
             case id_ploopystuff_dragscroll_end_on_keypress:
                 *value_data = ploopyvia_config.dragscroll_end_on_keypress;
                 break;
+
+            case id_ploopystuff_dragscroll_on_host_value_toggled:
+                *value_data = ploopyvia_config.dragscroll_on_host_value_toggled;
         }
     }
 
