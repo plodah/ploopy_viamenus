@@ -247,6 +247,11 @@
                             "label": "Dragscroll end on keypress",
                             "type": "toggle",
                             "content": ["id_ploopystuff_dragscroll_end_on_keypress", 0, 28]
+                        },
+                        {
+                            "label": "Dragscroll on Toggled Initial Host Values",
+                            "type": "toggle",
+                            "content": ["id_ploopystuff_dragscroll_on_host_value_toggled", 0, 29]
                         }
                     ]
                 },
