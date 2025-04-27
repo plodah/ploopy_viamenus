@@ -25,11 +25,6 @@ enum via_ploopystuff_value {
     id_ploopystuff_dragscroll_scroll,
     id_ploopystuff_dragscroll_end_on_keypress,
     id_ploopystuff_dpi_presets = 31,
-    id_ploopystuff_dpi_preset1 = 31,
-    id_ploopystuff_dpi_preset2,
-    id_ploopystuff_dpi_preset3,
-    id_ploopystuff_dpi_preset4,
-    id_ploopystuff_dpi_preset5,
 };
 
 typedef struct {
