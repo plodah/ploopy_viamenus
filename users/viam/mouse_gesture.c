@@ -90,8 +90,12 @@
     if(ploopy_msGestureDebounce || ploopy_msGestureCooldown){
         return mouse_report;
     }
-    PLOOPY_MSGESTURE_X.accum += (10 * mouse_report.x);
-    PLOOPY_MSGESTURE_Y.accum += (10 * mouse_report.y);
+    if(PLOOPY_MSGESTURE_X.action != 0){
+        PLOOPY_MSGESTURE_X.accum += (10 * mouse_report.x);
+    }
+    if(PLOOPY_MSGESTURE_Y.action != 0){
+        PLOOPY_MSGESTURE_Y.accum += (10 * mouse_report.y);
+    }
 
     if( abs(PLOOPY_MSGESTURE_X.accum) > abs(PLOOPY_MSGESTURE_Y.accum) && abs(PLOOPY_MSGESTURE_X.accum) > PLOOPY_MSGESTURE_THRESHOLD ){
         ploopy_msGestureSwitchDebounce = defer_exec(PLOOPY_MSGESTURE_DEBOUNCE, PLOOPY_MSGESTURE_expireDebounce, NULL);
