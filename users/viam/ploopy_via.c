@@ -93,12 +93,12 @@
             {
                 case id_custom_set_value:
                 {
-                    ploopyvia_dpi_config_set_value(value_id_and_data);
+                    ploopyvia_config_set_value(value_id_and_data);
                     break;
                 }
                 case id_custom_get_value:
                 {
-                    ploopyvia_dpi_config_get_value(value_id_and_data);
+                    ploopyvia_config_get_value(value_id_and_data);
                     break;
                 }
                 case id_custom_save:
@@ -118,7 +118,7 @@
         *command_id = id_unhandled;
     }
 
-    void ploopyvia_dpi_config_set_value( uint8_t *data )
+    void ploopyvia_config_set_value( uint8_t *data )
     {
         uint8_t *value_id   = &(data[0]);
         uint8_t *value_data = &(data[1]);
@@ -230,7 +230,7 @@
         }
     }
 
-    void ploopyvia_dpi_config_get_value( uint8_t *data )
+    void ploopyvia_config_get_value( uint8_t *data )
     {
         uint8_t *value_id   = &(data[0]);
         uint8_t *value_data = &(data[1]);
