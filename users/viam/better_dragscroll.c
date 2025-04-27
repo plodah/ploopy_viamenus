@@ -119,22 +119,81 @@
     }
 
     #if defined(BETTER_DRAGSCROLL_SCRLK_ENABLE) || defined(BETTER_DRAGSCROLL_CAPLK_ENABLE) || defined(BETTER_DRAGSCROLL_NUMLK_ENABLE) || (defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS))
-    bool led_update_better_dragscroll(led_t led_state) {
+        #if defined(BETTER_DRAGSCROLL_ON_HOST_VALUE_TOGGLED) || (defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS))
+            static bool dragscroll_initial_led_state_initialized = false;
+            static led_t dragscroll_initial_led_state;
+
+            static uint32_t led_initialization_timeout(uint32_t trigger_time, void *cb_arg) {
+                led_update_better_dragscroll();
+                return 0; // Don't repeat
+            }
+        #endif // defined(BETTER_DRAGSCROLL_ON_HOST_VALUE_TOGGLED) || (defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS))
+
+    void led_initialize_better_dragscroll(void) {
+        #if defined(BETTER_DRAGSCROLL_ON_HOST_VALUE_TOGGLED) || (defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS))
+            static const int init_timeout_delay = 1000;
+
+            if (!ploopyvia_config.dragscroll_on_host_value_toggled) {
+                led_update_better_dragscroll();
+                return;
+            }
+
+            // We may receive multiple led update events during startup, so just
+            // ignore them when in this mode. And only react to actual changes.
+            defer_exec(init_timeout_delay, led_initialization_timeout, NULL);
+        #else
+            led_update_better_dragscroll_led_state(host_keyboard_led_state());
+        #endif // defined(BETTER_DRAGSCROLL_ON_HOST_VALUE_TOGGLED) || (defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS))
+    }
+
+    void led_update_better_dragscroll(void) {
+        led_t host_state = host_keyboard_led_state();
+
+        #if defined(BETTER_DRAGSCROLL_ON_HOST_VALUE_TOGGLED) || (defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS))
+            dragscroll_initial_led_state_initialized = true;
+        #endif // defined(BETTER_DRAGSCROLL_ON_HOST_VALUE_TOGGLED) || (defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS))
+
+        if (ploopyvia_config.dragscroll_on_host_value_toggled) {
+            dragscroll_initial_led_state = host_state;
+        }
+
+        led_update_better_dragscroll_led_state(host_state);
+    }
+
+    void led_deinitialize_better_dragscroll(void) {
+        #if defined(BETTER_DRAGSCROLL_ON_HOST_VALUE_TOGGLED) || (defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS))
+            dragscroll_initial_led_state_initialized = false;
+        #endif // defined(BETTER_DRAGSCROLL_ON_HOST_VALUE_TOGGLED) || (defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS))
+    }
+
+    bool led_update_better_dragscroll_led_state(led_t led_state) {
+        static led_t default_initial_value = {0};
+        led_t *initial_value = &default_initial_value;
+
+        #if defined(BETTER_DRAGSCROLL_ON_HOST_VALUE_TOGGLED) || (defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS))
+            if (!dragscroll_initial_led_state_initialized)
+                return false;
+
+            if (ploopyvia_config.dragscroll_on_host_value_toggled) {
+                initial_value = &dragscroll_initial_led_state;
+            }
+        #endif
+
 
         if( false
         #if (defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS))
-            || (ploopyvia_config.dragscroll_caps && led_state.caps_lock)
-            || (ploopyvia_config.dragscroll_num && led_state.num_lock)
-            || (ploopyvia_config.dragscroll_scroll && led_state.scroll_lock)
+            || (ploopyvia_config.dragscroll_caps && led_state.caps_lock != initial_value->caps_lock)
+            || (ploopyvia_config.dragscroll_num && led_state.num_lock != initial_value->num_lock)
+            || (ploopyvia_config.dragscroll_scroll && led_state.scroll_lock != initial_value->scroll_lock)
         #else // (defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS))
             #if defined(BETTER_DRAGSCROLL_SCRLK_ENABLE)
-                || led_state.scroll_lock
+                || led_state.scroll_lock != initial_value->scroll_lock
             #endif // BETTER_DRAGSCROLL_SCRLK_ENABLE
             #if defined(BETTER_DRAGSCROLL_CAPLK_ENABLE)
-                || led_state.caps_lock
+                || led_state.caps_lock != initial_value->caps_lock
             #endif // BETTER_DRAGSCROLL_CAPLK_ENABLE
             #if defined(BETTER_DRAGSCROLL_NUMLK_ENABLE)
-                || led_state.num_lock
+                || led_state.num_lock != initial_value->num_lock
             #endif // BETTER_DRAGSCROLL_NUMLK_ENABLE
         #endif // (defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS))
         ){
