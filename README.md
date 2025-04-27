@@ -60,6 +60,9 @@ Alt is held for ~1 second after this key released to allow switching between sev
 5. When updating to a new release, please update both firmware and Via JSON
 
 ### Problems and workarounds
+#### Known Issues
+DPI settings seem to be volatile in many iterations of this firmware
+
 #### Tapdances
 Via only supports the "keyboard" level custom keycodes. Those that are set up in a module, or at the user level can't be added to the custom menu
 I've created "proxy" keycodes at the keyboard level for most, but haven't found a similar workaround for tapdance next.
@@ -75,18 +78,19 @@ These will appear as their hex keycode in Via and can only be assigned with the 
 2. ~~Dragscroll DPI or divisor control.~~ **DONE**
 3. Turbo keys/buttons. -- repeatedly send a click at a certain interval.
 4. ~~Dragscroll ends on other key press. make this optional.~~
-5. The way I've set things up, Via uses only 1 byte for DPI. 
-   The value (0-255) is multiplied by 10 when applying the DPI, meaning the limit is 2550. 
-   Should make this a 2 byte value, and directly apply without this calculation.
-6. Mouse jiggler- could expose different jiggle patterns, multipliers & speeds as via menu.
-7. Maybe allow equivalent of ROTATIONAL_TRANSFORM_ANGLE to use trackball sideways
-8. Check the dragscroll inversion on adept/madromys. Inversion state seems er.. inverted
-9. Dragscroll straightening
+5. Mouse jiggler- could expose different jiggle patterns, multipliers & speeds as via menu.
+6. Maybe allow equivalent of ROTATIONAL_TRANSFORM_ANGLE to use trackball sideways
+7. Check the dragscroll inversion on adept/madromys. Inversion state seems er.. inverted
+8. Dragscroll straightening
 
 ### Stuff I would like to do, but have no earthly idea how to achieve
 1. Additional gesture to scroll by moving the pointer in a circle.
 2. Use a text input box for DPI presets rather than a dropdown list.
-3. Provide a better interface for tapdances ~~and community module keycodes~~ **fixed the community module kc's**
+3. Use a 16-bit value for DPI. 
+   Currently uses an 8-bit value, multiplied by 10 giving a range of 0-2550 dpi.
+   2-byte / 16-bit value would allow 0-65535 directly (no multiplier)
+   Via only seems to support >8 bit values on sliders & keycode controls.
+4. Provide a better interface for tapdances ~~and community module keycodes~~ **fixed the community module kc's**
 99. world peace
 
 ## I regret everything, take me back
