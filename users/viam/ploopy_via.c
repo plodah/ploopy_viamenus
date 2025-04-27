@@ -29,21 +29,21 @@
         #endif // BETTER_DRA
 
         #if defined(BETTER_DRAGSCROLL_CAPLK_ENABLE)
-            .dragscroll_caps         = true,
+            .dragscroll_caps         = 1,
         #else // BETTER_DRAGSCROLL_CAPLK_ENABLE
-            .dragscroll_caps       = false,
+            .dragscroll_caps       = 0,
         #endif // BETTER_DRAGSCROLL_CAPLK_ENABLE
 
         #if defined(BETTER_DRAGSCROLL_NUMLK_ENABLE)
-            .dragscroll_num         = true,
+            .dragscroll_num         = 1,
         #else // BETTER_DRAGSCROLL_NUMLK_ENABLE
-            .dragscroll_num       = false,
+            .dragscroll_num       = 0,
         #endif // BETTER_DRAGSCROLL_NUMLK_ENABLE
 
         #if defined(BETTER_DRAGSCROLL_SCRLK_ENABLE)
-            .dragscroll_scroll         = true,
+            .dragscroll_scroll         = 1,
         #else // BETTER_DRAGSCROLL_SCRLK_ENABLE
-            .dragscroll_scroll       = false,
+            .dragscroll_scroll       = 0,
         #endif // BETTER_DRAGSCROLL_SCRLK_ENABLE
 
         #if defined(BETTER_DRAGSCROLL_END_ON_KEYPRESS)
@@ -80,6 +80,7 @@
         }
         update_dpi();
         ploopy_msGestureUpdate();
+        led_update_better_dragscroll(host_keyboard_led_state());
     }
 
     void via_custom_value_command_kb(uint8_t *data, uint8_t length) {
@@ -204,16 +205,19 @@
             case id_ploopystuff_dragscroll_caps:
                 ploopyvia_config.dragscroll_caps = *value_data;
                 dprintf("dragscroll_caps: %d\n", ploopyvia_config.dragscroll_caps);
+                led_update_better_dragscroll(host_keyboard_led_state());
                 break;
 
             case id_ploopystuff_dragscroll_num:
                 ploopyvia_config.dragscroll_num = *value_data;
                 dprintf("dragscroll_num: %d\n", ploopyvia_config.dragscroll_num);
+                led_update_better_dragscroll(host_keyboard_led_state());
                 break;
 
             case id_ploopystuff_dragscroll_scroll:
                 ploopyvia_config.dragscroll_scroll = *value_data;
                 dprintf("dragscroll_scroll: %d\n", ploopyvia_config.dragscroll_scroll);
+                led_update_better_dragscroll(host_keyboard_led_state());
                 break;
 
             case id_ploopystuff_dragscroll_end_on_keypress:

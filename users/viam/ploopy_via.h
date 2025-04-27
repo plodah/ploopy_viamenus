@@ -39,9 +39,9 @@ typedef struct {
     bool    dragscroll_invert_v;
     uint8_t dragscroll_divisor_h; // Value stored *4 to allow fraction in uint8
     uint8_t dragscroll_divisor_v; // Value stored *4 to allow fraction in uint8
-    bool    dragscroll_caps;
-    bool    dragscroll_num;
-    bool    dragscroll_scroll;
+    uint8_t dragscroll_caps;
+    uint8_t dragscroll_num;
+    uint8_t dragscroll_scroll;
     bool    dragscroll_end_on_keypress;
 } via_ploopystuff_config;
 

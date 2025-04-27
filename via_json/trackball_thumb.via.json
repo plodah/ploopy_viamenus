@@ -222,17 +222,32 @@
                         },
                         {
                             "label": "Dragscroll on Caps Lock",
-                            "type": "toggle",
+                            "type": "dropdown",
+                            "options": [
+                                ["Off", 0],
+                                ["Scroll while enabled", 1],
+                                ["Scroll while disabled", 2]
+                            ],
                             "content": ["id_ploopystuff_dragscroll_caps", 0, 25]
                         },
                         {
                             "label": "Dragscroll on Num Lock",
-                            "type": "toggle",
+                            "type": "dropdown",
+                            "options": [
+                                ["Off", 0],
+                                ["Scroll while enabled", 1],
+                                ["Scroll while disabled", 2]
+                            ],
                             "content": ["id_ploopystuff_dragscroll_num", 0, 26]
                         },
                         {
                             "label": "Dragscroll on Scroll Lock",
-                            "type": "toggle",
+                            "type": "dropdown",
+                            "options": [
+                                ["Off", 0],
+                                ["Scroll while enabled", 1],
+                                ["Scroll while disabled", 2]
+                            ],
                             "content": ["id_ploopystuff_dragscroll_scroll", 0, 27]
                         },
                         {
