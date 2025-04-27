@@ -1,8 +1,8 @@
-#include "better_dragscroll.h"
 #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
     #pragma once
 
     // #include QMK_KEYBOARD_H
+    #include "better_dragscroll.h"
     #include "via.h" // uses EEPROM address, lighting value IDs
     #include "mouse_jiggler.h"
     #include "ploopy_via.h"
