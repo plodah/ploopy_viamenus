@@ -10,11 +10,11 @@
 
     via_ploopystuff_config ploopyvia_config = {
         .dpi_multiplier            = 20,
+        .pointer_invert_h          = false,
+        .pointer_invert_v          = false,
         .gesture_count             = PLOOPY_MSGESTURE_WIGGLES,
         .gesture_action_h          = GESTURE_ACTION_NOTHING,
         .gesture_action_v          = GESTURE_ACTION_NOTHING,
-        .dragscroll_divisor_h      = 4 * BETTER_DRAGSCROLL_DIVISOR_H,
-        .dragscroll_divisor_v      = 4 * BETTER_DRAGSCROLL_DIVISOR_V,
         .combos_enabled            = false,
         #if defined(BETTER_DRAGSCROLL_INVERT_H)
           .dragscroll_invert_h       = true,
@@ -27,6 +27,9 @@
         #else // BETTER_DRAGSCROLL_INVERT_V
           .dragscroll_invert_v       = false,
         #endif // BETTER_DRA
+
+        .dragscroll_divisor_h      = 4 * BETTER_DRAGSCROLL_DIVISOR_H,
+        .dragscroll_divisor_v      = 4 * BETTER_DRAGSCROLL_DIVISOR_V,
 
         #if defined(BETTER_DRAGSCROLL_CAPLK_ENABLE)
             .dragscroll_caps         = 1,
@@ -254,6 +257,14 @@
 
             case id_ploopystuff_msjiggler_enabled:
                 *value_data = msJigMainToken != INVALID_DEFERRED_TOKEN;
+                break;
+
+            case id_ploopystuff_pointer_invert_h:
+                *value_data = ploopyvia_config.pointer_invert_h;
+                break;
+
+            case id_ploopystuff_pointer_invert_v:
+                *value_data = ploopyvia_config.pointer_invert_v;
                 break;
 
             case id_ploopystuff_gesture_count:
