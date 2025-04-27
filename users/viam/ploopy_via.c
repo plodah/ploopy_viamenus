@@ -8,7 +8,7 @@
     #include "ploopy_via.h"
     #include "mouse_gesture.h"
 
-    via_ploopystuff_config ploopyvia_config = {
+    via_ploopystuff_config ploopyvia_config_default = {
         .dpi_multiplier            = 20,
         .pointer_invert_h          = false,
         .pointer_invert_v          = false,
@@ -77,7 +77,9 @@
         // OK to load from EEPROM
         if (via_eeprom_is_valid()) {
             values_load();
-        } else	{
+        }
+        else {
+            ploopyvia_config = ploopyvia_config_default;
             values_save();
             // DO NOT set EEPROM valid here, let caller do this
         }
