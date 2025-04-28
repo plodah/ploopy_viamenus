@@ -6,10 +6,11 @@ This repo is essentially a [qmk_userspace](https://docs.qmk.fm/newbs_external_us
 
 ### Please Note
 **Testing has been limited!**
-I use this firmware on my Adept or Thumb daily, but I'm just one guy and I don't have every trackball to test this on, so there could be issues that I've never imagined.
+I use this firmware on my Adept or Thumb daily, but I'm just one guy and I don't have every model to test with.
+There have been problems found that I didn't notice myself, and still could be more.
 
-I'd recommend that you're comfortable returning your device to the original firmware if needed.
-If you do encounter problems, please let me know or PR a fix but I can't commit to fixing any issue and provide no warranty etc. It's free after all!
+I'd recommend that you're comfortable returning your device to the original firmware in case you come across any such problems.
+Please let me know or PR a fix if you find anything, but I can't commit to fixing any issue and provide no warranty etc. It's free after all!
 
 ![alt text](readme-examplemenu.png)
 
@@ -59,9 +60,12 @@ Alt is held for ~1 second after this key released to allow switching between sev
 4. Import the json file to Via's 🖌️ design tab. If you don't have 🖌️ at the top of the Via, enable design tab it in settings ⚙️
 5. When updating to a new release, please update both firmware and Via JSON
 
+Alternatively, use my version of Via at [via.plodah.uk](https://via.plodah.uk), which would allow you to skip step 4; it already includes these JSON's.  
+
 ### Problems and workarounds
 #### Known Issues
 DPI settings seem to be volatile in many iterations of this firmware
+This should be fixed as of 2025-04-28.
 
 #### Tapdances
 Via only supports the "keyboard" level custom keycodes. Those that are set up in a module, or at the user level can't be added to the custom menu
