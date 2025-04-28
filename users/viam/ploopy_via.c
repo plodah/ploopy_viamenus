@@ -9,44 +9,45 @@
     #include "mouse_gesture.h"
 
     via_ploopystuff_config ploopyvia_config_default = {
-        .dpi_multiplier            = 20,
-        .pointer_invert_h          = false,
-        .pointer_invert_v          = false,
-        .gesture_count             = PLOOPY_MSGESTURE_WIGGLES,
-        .gesture_action_h          = GESTURE_ACTION_NOTHING,
-        .gesture_action_v          = GESTURE_ACTION_NOTHING,
-        .combos_enabled            = false,
+        .dpi_presets                = { 600, 900, 1200, 1600, 2400 },
+        .dpi_multiplier             = 20,
+        .pointer_invert_h           = false,
+        .pointer_invert_v           = false,
+        .gesture_count              = PLOOPY_MSGESTURE_WIGGLES,
+        .gesture_action_h           = GESTURE_ACTION_NOTHING,
+        .gesture_action_v           = GESTURE_ACTION_NOTHING,
+        .combos_enabled             = false,
         #if defined(BETTER_DRAGSCROLL_INVERT_H)
-          .dragscroll_invert_h       = true,
+          .dragscroll_invert_h      = true,
         #else // BETTER_DRAGSCROLL_INVERT_H
-          .dragscroll_invert_h       = false,
+          .dragscroll_invert_h      = false,
         #endif // BETTER_DRAGSCROLL_INVERT_H
 
         #if defined(BETTER_DRAGSCROLL_INVERT_V)
-          .dragscroll_invert_v       = true,
+          .dragscroll_invert_v      = true,
         #else // BETTER_DRAGSCROLL_INVERT_V
-          .dragscroll_invert_v       = false,
+          .dragscroll_invert_v      = false,
         #endif // BETTER_DRA
 
-        .dragscroll_divisor_h      = 4 * BETTER_DRAGSCROLL_DIVISOR_H,
-        .dragscroll_divisor_v      = 4 * BETTER_DRAGSCROLL_DIVISOR_V,
+        .dragscroll_divisor_h       = 4 * BETTER_DRAGSCROLL_DIVISOR_H,
+        .dragscroll_divisor_v       = 4 * BETTER_DRAGSCROLL_DIVISOR_V,
 
         #if defined(BETTER_DRAGSCROLL_CAPLK_ENABLE)
-            .dragscroll_caps         = 1,
+            .dragscroll_caps        = 1,
         #else // BETTER_DRAGSCROLL_CAPLK_ENABLE
-            .dragscroll_caps       = 0,
+            .dragscroll_caps        = 0,
         #endif // BETTER_DRAGSCROLL_CAPLK_ENABLE
 
         #if defined(BETTER_DRAGSCROLL_NUMLK_ENABLE)
             .dragscroll_num         = 1,
         #else // BETTER_DRAGSCROLL_NUMLK_ENABLE
-            .dragscroll_num       = 0,
+            .dragscroll_num         = 0,
         #endif // BETTER_DRAGSCROLL_NUMLK_ENABLE
 
         #if defined(BETTER_DRAGSCROLL_SCRLK_ENABLE)
-            .dragscroll_scroll         = 1,
+            .dragscroll_scroll      = 1,
         #else // BETTER_DRAGSCROLL_SCRLK_ENABLE
-            .dragscroll_scroll       = 0,
+            .dragscroll_scroll      = 0,
         #endif // BETTER_DRAGSCROLL_SCRLK_ENABLE
 
         #if defined(BETTER_DRAGSCROLL_END_ON_KEYPRESS)
@@ -67,6 +68,10 @@
     }
 
     void update_dpi(void) {
+
+        for (int i=0; i<5; i++){
+            dpi_array[i] = ploopyvia_config.dpi_presets[i];
+        }
         pointing_device_set_cpi(dpi_array[keyboard_config.dpi_config]);
         dprintf("Set CPI %d\n", dpi_array[keyboard_config.dpi_config]);
     }
@@ -139,7 +144,7 @@
 
             case id_ploopystuff_dpi_multiplier:
                 for (int i = 0; i <  5; ++i) {
-                    dpi_array[i] = dpi_array[i] / ploopyvia_config.dpi_multiplier * *value_data;
+                    ploopyvia_config.dpi_presets[i] = ploopyvia_config.dpi_presets[i] / ploopyvia_config.dpi_multiplier * *value_data;
                 }
                 ploopyvia_config.dpi_multiplier = *value_data;
                 dprintf("dpi_multiplier: %d\n", ploopyvia_config.dpi_multiplier);
@@ -231,7 +236,7 @@
                 break;
 
             case id_ploopystuff_dpi_presets:
-                dpi_array[value_data[0]] = (value_data[1]*10) * (ploopyvia_config.dpi_multiplier/20) ;
+                ploopyvia_config.dpi_presets[value_data[0]] = (value_data[1]*10) * (ploopyvia_config.dpi_multiplier/20) ;
                 dprintf("dpi_presets[%d]: %d\n", value_data[0], value_data[1]);
                 update_dpi();
                 break;
@@ -247,7 +252,7 @@
         switch ( *value_id )
         {
             case id_ploopystuff_dpi_presets:
-                value_data[1] = (dpi_array[value_data[0]] / 10) / (ploopyvia_config.dpi_multiplier/20)  ;
+                value_data[1] = (ploopyvia_config.dpi_presets[value_data[0]] / 10) / (ploopyvia_config.dpi_multiplier/20)  ;
                 break;
 
             case id_ploopystuff_dpi_preset:
