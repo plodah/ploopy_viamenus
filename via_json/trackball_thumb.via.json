@@ -251,6 +251,11 @@
                             "content": ["id_ploopystuff_dragscroll_scroll", 0, 27]
                         },
                         {
+                            "label": "Dragscroll on Permanently",
+                            "type": "toggle",
+                            "content": ["id_ploopystuff_dragscroll_permanently", 0, 29]
+                        },
+                        {
                             "label": "Dragscroll end on keypress",
                             "type": "toggle",
                             "content": ["id_ploopystuff_dragscroll_end_on_keypress", 0, 28]

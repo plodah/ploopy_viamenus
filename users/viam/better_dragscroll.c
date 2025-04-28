@@ -123,12 +123,13 @@
 
         if( false
         #if (defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS))
-            || (ploopyvia_config.dragscroll_caps == 1 && led_state.caps_lock)
-            || (ploopyvia_config.dragscroll_caps == 2 && ! led_state.caps_lock )
-            || (ploopyvia_config.dragscroll_num == 1 && led_state.num_lock)
-            || (ploopyvia_config.dragscroll_num == 2 && ! led_state.num_lock )
-            || (ploopyvia_config.dragscroll_scroll == 1 && led_state.scroll_lock)
-            || (ploopyvia_config.dragscroll_scroll == 2 && ! led_state.scroll_lock )
+            || ( ploopyvia_config.dragscroll_caps == 1 && led_state.caps_lock)
+            || ( ploopyvia_config.dragscroll_caps == 2 && ! led_state.caps_lock )
+            || ( ploopyvia_config.dragscroll_num == 1 && led_state.num_lock)
+            || ( ploopyvia_config.dragscroll_num == 2 && ! led_state.num_lock )
+            || ( ploopyvia_config.dragscroll_scroll == 1 && led_state.scroll_lock)
+            || ( ploopyvia_config.dragscroll_scroll == 2 && ! led_state.scroll_lock )
+            || ( ploopyvia_config.dragscroll_permanently )
         #else // (defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS))
             #if defined(BETTER_DRAGSCROLL_SCRLK_ENABLE)
                 || led_state.scroll_lock

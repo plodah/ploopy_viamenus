@@ -50,6 +50,8 @@
             .dragscroll_scroll      = 0,
         #endif // BETTER_DRAGSCROLL_SCRLK_ENABLE
 
+        .dragscroll_permanently     = false,
+
         #if defined(BETTER_DRAGSCROLL_END_ON_KEYPRESS)
             .dragscroll_end_on_keypress = true,
         #else // BETTER_DRAGSCROLL_END_ON_KEYPRESS
@@ -230,6 +232,12 @@
                 led_update_better_dragscroll(host_keyboard_led_state());
                 break;
 
+            case id_ploopystuff_dragscroll_permanently:
+                ploopyvia_config.dragscroll_permanently = *value_data;
+                dprintf("dragscroll_permanently: %d\n", ploopyvia_config.dragscroll_permanently);
+                led_update_better_dragscroll(host_keyboard_led_state());
+                break;
+
             case id_ploopystuff_dragscroll_end_on_keypress:
                 ploopyvia_config.dragscroll_end_on_keypress = *value_data;
                 dprintf("dragscroll_end_on_keypress: %d\n", ploopyvia_config.dragscroll_end_on_keypress);
@@ -316,6 +324,10 @@
 
             case id_ploopystuff_dragscroll_scroll:
                 *value_data = ploopyvia_config.dragscroll_scroll;
+                break;
+
+            case id_ploopystuff_dragscroll_permanently:
+                *value_data = ploopyvia_config.dragscroll_permanently;
                 break;
 
             case id_ploopystuff_dragscroll_end_on_keypress:

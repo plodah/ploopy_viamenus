@@ -24,6 +24,7 @@ enum via_ploopystuff_value {
     id_ploopystuff_dragscroll_num,
     id_ploopystuff_dragscroll_scroll,
     id_ploopystuff_dragscroll_end_on_keypress,
+    id_ploopystuff_dragscroll_permanently,
     id_ploopystuff_dpi_presets = 31,
 };
 
@@ -43,6 +44,7 @@ typedef struct {
     uint8_t  dragscroll_num;
     uint8_t  dragscroll_scroll;
     bool     dragscroll_end_on_keypress;
+    bool     dragscroll_permanently;
     uint16_t dpi_presets[5]; // 10 bytes!
 } via_ploopystuff_config;
 
