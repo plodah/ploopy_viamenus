@@ -27,6 +27,8 @@ enum via_ploopystuff_value {
     id_ploopystuff_dragscroll_end_on_keypress,
     id_ploopystuff_dragscroll_permanently,
     id_ploopystuff_dpi_presets = 31,
+    id_ploopystuff_sniper_a_dpi = 41,
+    id_ploopystuff_sniper_b_dpi,
 };
 
 typedef struct {
@@ -47,6 +49,8 @@ typedef struct {
     bool     dragscroll_end_on_keypress;
     bool     dragscroll_permanently;
     uint16_t dpi_presets[5]; // 10 bytes!
+    uint16_t sniper_a_dpi;
+    uint16_t sniper_b_dpi;
 } via_ploopystuff_config;
 
 via_ploopystuff_config ploopyvia_config;
@@ -100,5 +104,8 @@ via_ploopystuff_config ploopyvia_config_default = {
     #else // BETTER_DRAGSCROLL_END_ON_KEYPRESS
         .dragscroll_end_on_keypress = false,
     #endif // BETTER_DRAGSCROLL_END_ON_KEYPRESS
+
+    .sniper_a_dpi               = 100,
+    .sniper_b_dpi               = 200,
 
 };

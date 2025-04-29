@@ -7,6 +7,8 @@
 
     bool better_dragscroll_enabled_bylock = 0;
     bool better_dragscroll_enabled_bypress = 0;
+    bool better_dragscroll_sniper_a_enabled = 0;
+    bool better_dragscroll_sniper_b_enabled = 0;
     float dragscroll_acc_h = 0;
     float dragscroll_acc_v = 0;
 
@@ -34,6 +36,49 @@
             case BETTER_DRAG_SCROLL_TOGGLE:
                 better_dragscroll_toggle(record->event.pressed);
                 return false;
+            case BETTER_DRAG_SCROLL_SNIPER_A_MOMENTARY:
+                if(record->event.pressed){
+                    pointing_device_set_cpi(ploopyvia_config.sniper_a_dpi);
+                }
+                else{
+                    pointing_device_set_cpi(dpi_array[keyboard_config.dpi_config]);
+                }
+                return false;
+            case BETTER_DRAG_SCROLL_SNIPER_A_TOGGLE:
+                if(record->event.pressed){
+                    better_dragscroll_sniper_a_enabled ^= 1;
+                    if(better_dragscroll_sniper_a_enabled){
+                        pointing_device_set_cpi(ploopyvia_config.sniper_a_dpi);
+                    }
+                    else{
+                        pointing_device_set_cpi(dpi_array[keyboard_config.dpi_config]);
+                    }
+                    dprintf("sniper_a_enabled:%d dpi:%d\n", better_dragscroll_sniper_a_enabled, ploopyvia_config.sniper_a_dpi);
+                }
+                return false;
+
+            case BETTER_DRAG_SCROLL_SNIPER_B_MOMENTARY:
+                if(record->event.pressed){
+                    pointing_device_set_cpi(ploopyvia_config.sniper_b_dpi);
+                }
+                else{
+                    pointing_device_set_cpi(dpi_array[keyboard_config.dpi_config]);
+                }
+                return false;
+
+            case BETTER_DRAG_SCROLL_SNIPER_B_TOGGLE:
+                if(record->event.pressed){
+                    better_dragscroll_sniper_b_enabled ^= 1;
+                    if(better_dragscroll_sniper_b_enabled){
+                        pointing_device_set_cpi(ploopyvia_config.sniper_b_dpi);
+                    }
+                    else{
+                        pointing_device_set_cpi(dpi_array[keyboard_config.dpi_config]);
+                    }
+                    dprintf("sniper_b_enabled:%d dpi:%d\n", better_dragscroll_sniper_b_enabled, ploopyvia_config.sniper_b_dpi);
+                }
+                return false;
+
             #if !defined(BETTER_DRAGSCROLL_INDEFINITE)
                 default:
                     if(record->event.pressed){

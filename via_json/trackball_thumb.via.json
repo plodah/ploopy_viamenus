@@ -396,6 +396,43 @@
                             "content": ["id_ploopystuff_dpi_preset[4]", 0, 31, 4]
                         }
                     ]
+                },
+                {
+                    "label": "Sniper DPIs",
+                    "content": [
+                        {
+                            "label": "Sniper DPI A",
+                            "type": "dropdown",
+                            "options": [
+                                ["100", 10],
+                                ["150", 15],
+                                ["200", 20],
+                                ["250", 25],
+                                ["300", 30],
+                                ["350", 35],
+                                ["400", 40],
+                                ["450", 45],
+                                ["500", 50]
+                            ],
+                            "content": ["id_ploopystuff_sniper_a_dpi", 0, 41]
+                        },
+                        {
+                            "label": "Sniper DPI B",
+                            "type": "dropdown",
+                            "options": [
+                                ["100", 10],
+                                ["150", 15],
+                                ["200", 20],
+                                ["250", 25],
+                                ["300", 30],
+                                ["350", 35],
+                                ["400", 40],
+                                ["450", 45],
+                                ["500", 50]
+                            ],
+                            "content": ["id_ploopystuff_sniper_b_dpi", 0, 42]
+                        }
+                    ]
                 }
             ]
         }
