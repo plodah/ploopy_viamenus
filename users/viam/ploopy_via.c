@@ -8,57 +8,6 @@
     #include "ploopy_via.h"
     #include "mouse_gesture.h"
 
-    via_ploopystuff_config ploopyvia_config_default = {
-        .dpi_presets                = { 600, 900, 1200, 1600, 2400 },
-        .dpi_multiplier             = 20,
-        .pointer_invert_h           = false,
-        .pointer_invert_v           = false,
-        .gesture_count              = PLOOPY_MSGESTURE_WIGGLES,
-        .gesture_action_h           = GESTURE_ACTION_NOTHING,
-        .gesture_action_v           = GESTURE_ACTION_NOTHING,
-        .combos_enabled             = false,
-        #if defined(BETTER_DRAGSCROLL_INVERT_H)
-          .dragscroll_invert_h      = true,
-        #else // BETTER_DRAGSCROLL_INVERT_H
-          .dragscroll_invert_h      = false,
-        #endif // BETTER_DRAGSCROLL_INVERT_H
-
-        #if defined(BETTER_DRAGSCROLL_INVERT_V)
-          .dragscroll_invert_v      = true,
-        #else // BETTER_DRAGSCROLL_INVERT_V
-          .dragscroll_invert_v      = false,
-        #endif // BETTER_DRA
-
-        .dragscroll_divisor_h       = 4 * BETTER_DRAGSCROLL_DIVISOR_H,
-        .dragscroll_divisor_v       = 4 * BETTER_DRAGSCROLL_DIVISOR_V,
-
-        #if defined(BETTER_DRAGSCROLL_CAPLK_ENABLE)
-            .dragscroll_caps        = 1,
-        #else // BETTER_DRAGSCROLL_CAPLK_ENABLE
-            .dragscroll_caps        = 0,
-        #endif // BETTER_DRAGSCROLL_CAPLK_ENABLE
-
-        #if defined(BETTER_DRAGSCROLL_NUMLK_ENABLE)
-            .dragscroll_num         = 1,
-        #else // BETTER_DRAGSCROLL_NUMLK_ENABLE
-            .dragscroll_num         = 0,
-        #endif // BETTER_DRAGSCROLL_NUMLK_ENABLE
-
-        #if defined(BETTER_DRAGSCROLL_SCRLK_ENABLE)
-            .dragscroll_scroll      = 1,
-        #else // BETTER_DRAGSCROLL_SCRLK_ENABLE
-            .dragscroll_scroll      = 0,
-        #endif // BETTER_DRAGSCROLL_SCRLK_ENABLE
-
-        .dragscroll_permanently     = false,
-
-        #if defined(BETTER_DRAGSCROLL_END_ON_KEYPRESS)
-            .dragscroll_end_on_keypress = true,
-        #else // BETTER_DRAGSCROLL_END_ON_KEYPRESS
-            .dragscroll_end_on_keypress = false,
-        #endif // BETTER_DRAGSCROLL_END_ON_KEYPRESS
-    };
-
     void values_load(void)
     {
         eeprom_read_block( &ploopyvia_config, ((void*)VIA_EEPROM_CUSTOM_CONFIG_ADDR), sizeof(ploopyvia_config) );
@@ -249,6 +198,15 @@
                 update_dpi();
                 break;
 
+            case id_ploopystuff_sniper_a_dpi:
+                ploopyvia_config.sniper_a_dpi = ((uint8_t)*value_data*10) * (ploopyvia_config.dpi_multiplier/20);
+                dprintf("sniper_a_dpi: %d\n", (uint8_t)*value_data);
+                break;
+
+            case id_ploopystuff_sniper_b_dpi:
+                ploopyvia_config.sniper_b_dpi = ((uint8_t)*value_data*10) * (ploopyvia_config.dpi_multiplier/20) ;
+                dprintf("sniper_b_dpi: %d\n", (uint8_t)*value_data);
+                break;
         }
     }
 
@@ -332,6 +290,14 @@
 
             case id_ploopystuff_dragscroll_end_on_keypress:
                 *value_data = ploopyvia_config.dragscroll_end_on_keypress;
+                break;
+
+            case id_ploopystuff_sniper_a_dpi:
+                *value_data = (ploopyvia_config.sniper_a_dpi / 10) / (ploopyvia_config.dpi_multiplier/20);
+                break;
+
+            case id_ploopystuff_sniper_b_dpi:
+                *value_data = (ploopyvia_config.sniper_b_dpi / 10 ) / (ploopyvia_config.dpi_multiplier/20);
                 break;
         }
     }
