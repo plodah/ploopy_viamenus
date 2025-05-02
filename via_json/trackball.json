@@ -13,7 +13,11 @@
         { "name": "Better DragSc Toggle", "title": "Better Drag Scroll Toggle", "shortName": "Drg Tg" },
         { "name": "Mouse Jiggler Toggle", "title": "Mouse Jiggler Toggle", "shortName": "MsJig" },
         { "name": "Task Switch Next", "title": "Task Switcher Next", "shortName": "Tsk N" },
-        { "name": "Task Switch Prev", "title": "Task Switcher Previous", "shortName": "Tsk P" }
+        { "name": "Task Switch Prev", "title": "Task Switcher Previous", "shortName": "Tsk P" },
+        { "name": "Sniper A Mo", "title": "Sniper A Momentary", "shortName": "SnpA Mo" },
+        { "name": "Sniper A Tg", "title": "Sniper A Toggle", "shortName": "SnpA Tg" },
+        { "name": "Sniper B Mo", "title": "Sniper B Momentary", "shortName": "SnpB Mo" },
+        { "name": "Sniper B Tg", "title": "Sniper B Toggle", "shortName": "SnpB Tg" }
     ],
     "layouts": {
       "keymap": [
