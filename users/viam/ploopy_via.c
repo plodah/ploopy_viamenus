@@ -25,6 +25,7 @@
         }
         pointing_device_set_cpi(dpi_array[keyboard_config.dpi_config]);
         dprintf("Set CPI %d\n", dpi_array[keyboard_config.dpi_config]);
+        eeconfig_update_kb(keyboard_config.raw);
     }
 
     void via_init_kb(void)
