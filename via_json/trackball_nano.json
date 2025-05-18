@@ -17,7 +17,8 @@
         { "name": "Sniper A Mo", "title": "Sniper A Momentary", "shortName": "SnpA Mo" },
         { "name": "Sniper A Tg", "title": "Sniper A Toggle", "shortName": "SnpA Tg" },
         { "name": "Sniper B Mo", "title": "Sniper B Momentary", "shortName": "SnpB Mo" },
-        { "name": "Sniper B Tg", "title": "Sniper B Toggle", "shortName": "SnpB Tg" }
+        { "name": "Sniper B Tg", "title": "Sniper B Toggle", "shortName": "SnpB Tg" },
+        { "name": "Better DragSc Volume", "title": "Better Drag Scroll Volume", "shortName": "Drg Vol" }
     ],
     "layouts": {
         "keymap": [["0,0"]]

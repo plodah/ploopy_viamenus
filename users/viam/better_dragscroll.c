@@ -9,6 +9,7 @@
     bool better_dragscroll_enabled_bypress = 0;
     bool better_dragscroll_sniper_a_enabled = 0;
     bool better_dragscroll_sniper_b_enabled = 0;
+    bool better_dragscroll_volume_enabled = 0;
     float dragscroll_acc_h = 0;
     float dragscroll_acc_v = 0;
 
@@ -42,6 +43,12 @@
                 return false;
             case BETTER_DRAG_SCROLL_TOGGLE:
                 better_dragscroll_toggle(record->event.pressed);
+                return false;
+            case BETTER_DRAG_VOLUME_MOMENTARY:
+                better_dragscroll_volume_enabled = record->event.pressed;
+                if(record->event.pressed){
+                    better_dragscroll_resetacc();
+                }
                 return false;
             case BETTER_DRAG_SCROLL_SNIPER_A_MOMENTARY:
                 if(record->event.pressed){
@@ -167,6 +174,26 @@
             mouse_report.x = 0;
             mouse_report.y = 0;
         }
+        else if(better_dragscroll_volume_enabled){
+
+            #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
+                dragscroll_acc_v += (float)mouse_report.y / ((((float)ploopyvia_config.dragscroll_divisor_v / 4) * BETTER_DRAGSCROLL_VOLUME_DIVISOR));
+            #else // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
+                dragscroll_acc_v += (float)mouse_report.y / (BETTER_DRAGSCROLL_DIVISOR_V * BETTER_DRAGSCROLL_VOLUME_DIVISOR);
+            #endif // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
+
+            if(dragscroll_acc_v >= 1){
+                tap_code(KC_VOLU);
+            }
+            else if(dragscroll_acc_v <= -1){
+                tap_code(KC_VOLD);
+            }
+            dragscroll_acc_v -= (int8_t)dragscroll_acc_v;
+
+            mouse_report.x = 0;
+            mouse_report.y = 0;
+        }
+
         return mouse_report;
     }
 
