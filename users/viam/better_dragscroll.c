@@ -22,14 +22,18 @@
         dprintf("better_dragscroll_toggle\n");
         if(pressed){
             better_dragscroll_enabled_bypress ^= 1;
+            if(better_dragscroll_enabled_bypress){
+                better_dragscroll_resetacc();
+            }
         }
-        better_dragscroll_resetacc();
     }
 
     void better_dragscroll_momentary(bool pressed){
         dprintf("better_dragscroll_momentary\n");
         better_dragscroll_enabled_bypress = pressed;
+        if(pressed){
         better_dragscroll_resetacc();
+        }
     }
 
     bool process_record_better_dragscroll(uint16_t keycode, keyrecord_t *record) {
