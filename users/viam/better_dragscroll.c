@@ -12,16 +12,23 @@
     float dragscroll_acc_h = 0;
     float dragscroll_acc_v = 0;
 
+    void better_dragscroll_resetacc(void){
+            dragscroll_acc_h = 0;
+            dragscroll_acc_v = 0;
+    }
+
     void better_dragscroll_toggle(bool pressed){
         dprintf("better_dragscroll_toggle\n");
         if(pressed){
             better_dragscroll_enabled_bypress ^= 1;
         }
+        better_dragscroll_resetacc();
     }
 
     void better_dragscroll_momentary(bool pressed){
         dprintf("better_dragscroll_momentary\n");
         better_dragscroll_enabled_bypress = pressed;
+        better_dragscroll_resetacc();
     }
 
     bool process_record_better_dragscroll(uint16_t keycode, keyrecord_t *record) {
@@ -188,8 +195,11 @@
         #endif // (defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS))
         ){
             better_dragscroll_enabled_bylock = true;
+            better_dragscroll_resetacc();
         }
-        else {better_dragscroll_enabled_bylock = false;}
+        else {
+            better_dragscroll_enabled_bylock = false;
+        }
         dprintf("better_dragscroll_enabled_bylock %d\n",better_dragscroll_enabled_bylock);
         return true;
     }
