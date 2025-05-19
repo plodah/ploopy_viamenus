@@ -208,6 +208,11 @@
                 ploopyvia_config.sniper_b_dpi = ((uint8_t)*value_data*10) * (ploopyvia_config.dpi_multiplier/20) ;
                 dprintf("sniper_b_dpi: %d\n", (uint8_t)*value_data);
                 break;
+
+            case id_ploopystuff_dragscroll_straighten_sensitivity:
+                ploopyvia_config.dragscroll_straighten_sensitivity = *value_data;
+                dprintf("dragscroll_straighten_sensitivity: %d\n", ploopyvia_config.dragscroll_straighten_sensitivity);
+                break;
         }
     }
 
@@ -299,6 +304,10 @@
 
             case id_ploopystuff_sniper_b_dpi:
                 *value_data = (ploopyvia_config.sniper_b_dpi / 10 ) / (ploopyvia_config.dpi_multiplier/20);
+                break;
+
+            case id_ploopystuff_dragscroll_straighten_sensitivity:
+                *value_data = ploopyvia_config.dragscroll_straighten_sensitivity;
                 break;
         }
     }

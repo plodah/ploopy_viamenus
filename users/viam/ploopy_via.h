@@ -29,6 +29,7 @@ enum via_ploopystuff_value {
     id_ploopystuff_dpi_presets = 31,
     id_ploopystuff_sniper_a_dpi = 41,
     id_ploopystuff_sniper_b_dpi,
+    id_ploopystuff_dragscroll_straighten_sensitivity = 51,
 };
 
 typedef struct {
@@ -51,6 +52,7 @@ typedef struct {
     uint16_t dpi_presets[5]; // 10 bytes!
     uint16_t sniper_a_dpi;
     uint16_t sniper_b_dpi;
+    uint8_t  dragscroll_straighten_sensitivity;
 } via_ploopystuff_config;
 
 via_ploopystuff_config ploopyvia_config;
@@ -98,6 +100,7 @@ via_ploopystuff_config ploopyvia_config_default = {
     #endif // BETTER_DRAGSCROLL_SCRLK_ENABLE
 
     .dragscroll_permanently     = false,
+    .dragscroll_straighten_sensitivity = 0,
 
     #if defined(BETTER_DRAGSCROLL_END_ON_KEYPRESS)
         .dragscroll_end_on_keypress = true,

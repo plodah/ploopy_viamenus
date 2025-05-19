@@ -19,6 +19,7 @@
 bool better_dragscroll_enabled_bylock;
 bool better_dragscroll_enabled_bypress;
 bool better_dragscroll_volume_enabled;
+bool better_dragscroll_straighten_enable;
 
 void better_dragscroll_toggle(bool pressed);
 void better_dragscroll_momentary(bool pressed);

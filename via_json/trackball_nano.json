@@ -128,16 +128,6 @@
                     "label": "Dragscroll",
                     "content": [
                         {
-                            "label": "Dragscroll Invert X",
-                            "type": "toggle",
-                            "content": ["id_ploopystuff_dragscroll_invert_h", 0, 21]
-                        },
-                        {
-                            "label": "Dragscroll Invert Y",
-                            "type": "toggle",
-                            "content": ["id_ploopystuff_dragscroll_invert_v", 0, 22]
-                        },
-                        {
                             "label": "Dragscroll Divisor X",
                             "type": "dropdown",
                             "options": [
@@ -191,6 +181,36 @@
                             ],
                             "content": ["id_ploopystuff_dragscroll_divisor_v", 0, 24]
                         },
+                        {
+                            "label": "Dragscroll Invert X",
+                            "type": "toggle",
+                            "content": ["id_ploopystuff_dragscroll_invert_h", 0, 21]
+                        },
+                        {
+                            "label": "Dragscroll Invert Y",
+                            "type": "toggle",
+                            "content": ["id_ploopystuff_dragscroll_invert_v", 0, 22]
+                        },
+                        {
+                            "label": "Dragscroll Straighten",
+                            "type": "dropdown",
+                            "options": [
+                                ["Off",    0],
+                                ["25%",   25],
+                                ["50%",   50],
+                                ["75%",   75],
+                                ["85%",   85],
+                                ["90%",   90],
+                                ["95%",   95],
+                                ["100%", 100]
+                            ],
+                            "content": ["id_ploopystuff_dragscroll_straighten_enabled", 0, 51]
+                        }
+                    ]
+                },
+                {
+                    "label": "Moar Dragscroll",
+                    "content": [
                         {
                             "label": "Dragscroll on Caps Lock",
                             "type": "dropdown",
