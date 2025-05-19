@@ -25,10 +25,18 @@
     #include "ploopy_via.h"
 
     #if !defined(SCROLL_HISTORY_SIZE)
-        #define SCROLL_HISTORY_SIZE 10
+        #if defined(RP2040)
+            #define SCROLL_HISTORY_SIZE 25
+        #else
+            #define SCROLL_HISTORY_SIZE 10
+        #endif
     #endif
     #if !defined(SCROLL_HISTORY_FREQ)
-        #define SCROLL_HISTORY_FREQ 10
+        #if defined(RP2040)
+            #define SCROLL_HISTORY_FREQ 10
+        #else
+            #define SCROLL_HISTORY_FREQ 25
+        #endif
     #endif
 
     int8_t drgstraight_history_x[SCROLL_HISTORY_SIZE];
