@@ -19,6 +19,7 @@ Please let me know or PR a fix if you find anything, but I can't commit to fixin
 ### DPI Config
 Configure 5 **DPI** presets and switch between them.
 Can additionally apply global multiplier to DPI
+
 ### Dragscroll
 Kinda improved version of dragscroll. 
 - Momentary and Toggle keys available.
@@ -27,6 +28,12 @@ Kinda improved version of dragscroll.
 - Enable/disable dragscroll with caps/num/scroll lock
 - If toggled on, dragscroll can optionally be deactivated by another key press
 - invert dragscroll direction for x/y independently
+- Dragscroll Straightening; slight left/right scrolling can be ignored while scrolling up/down. 
+  Also Vertical scrolling ignored while scrolling Left/Right. 
+  Sensitivity is adjustable; e.g. "75% sensitivity" will ignore lesser scroll where it's <75% of the greater scroll. 100% sensitivity is fully one-dimensional.
+
+### Drag-volume
+While this key is held, pointer movement is stopped and up/down movement adjusts volume.
 
 ### Mouse Jiggler 
 The pointer will move an imperceptably small amount, in a pseudo-random direction at a pseudo-random interval.
@@ -34,6 +41,10 @@ This should be enough to keep your computer awake when you're not using it, but 
 _I am not liable for any disciplinary action taken by your employer!_
 The jiggler will draw a circle to confirm it has been enabled, and a horizontal line to show when it's turned off.
 Can be switched on/off by key press, via menu or gesture.
+
+### Sniper mode
+Change DPI while the appropriate button is held
+Called this "sniper" mode since it's useful for fine movement, but could also be used with a high DPI instead.
 
 ### Gestures
 Similar to _"Wiggleball"_ 
@@ -78,22 +89,23 @@ These will appear as their hex keycode in Via and can only be assigned with the 
 
 ## What doesn't it do?
 ### Stuff that I think is possible, and may implement later
-1. "Sniper" mode  -- momentarily reduce DPI by some factor while "sniper" key held.
-2. ~~Dragscroll DPI or divisor control.~~ **DONE**
+1. ~~"Sniper" mode  -- momentarily reduce DPI by some factor while "sniper" key held.~~  **DONE** 2 May 2025
+2. ~~Dragscroll DPI or divisor control.~~ **DONE** 28 Mar 2025
 3. Turbo keys/buttons. -- repeatedly send a click at a certain interval.
-4. ~~Dragscroll ends on other key press. make this optional.~~
+4. ~~Dragscroll ends on other key press. make this optional.~~ **DONE** 28 Mar 2025
 5. Mouse jiggler- could expose different jiggle patterns, multipliers & speeds as via menu.
 6. Maybe allow equivalent of ROTATIONAL_TRANSFORM_ANGLE to use trackball sideways
 7. Check the dragscroll inversion on adept/madromys. Inversion state seems er.. inverted
-8. Dragscroll straightening
+8. ~~Dragscroll straightening~~ **DONE** 19 May 2025
+9. ~~Drag-Volume~~ Hold a key and move the mouse up/down to adjust volume **DONE** 18 May 2025
 
-### Stuff I would like to do, but have no earthly idea how to achieve
-1. Additional gesture to scroll by moving the pointer in a circle.
+### Stuff I would like to achieve, but have no earthly idea how to do so
+1. Additional gesture to scroll by drawing a circle with the pointer.
 2. Use a text input box for DPI presets rather than a dropdown list.
-3. Use a 16-bit value for DPI. 
+3. Use a 16-bit value for DPI.
    Currently uses an 8-bit value, multiplied by 10 giving a range of 0-2550 dpi.
    2-byte / 16-bit value would allow 0-65535 directly (no multiplier)
-   Via only seems to support >8 bit values on sliders & keycode controls.
+   Via only seems to support 16 bit values on sliders & keycode controls. Uses a dropdown currently.
 4. Provide a better interface for tapdances ~~and community module keycodes~~ **fixed the community module kc's**
 99. world peace
 
