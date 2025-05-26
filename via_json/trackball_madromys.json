@@ -76,7 +76,7 @@
                                 ["4", 3],
                                 ["5", 4]
                             ],
-                            "content": ["id_ploopystuff_dpi_preset", 0, 1]
+                            "content": ["id_ploopystuff_dpi_activepreset", 0, 1]
                         },
                         {
                             "label": "DPI Multiplier",
@@ -316,7 +316,7 @@
                                 ["2000", 200],
                                 ["2400", 240]
                             ],
-                            "content": ["id_ploopystuff_dpi_preset[0]", 0, 31, 0]
+                            "content": ["id_ploopystuff_dpi_presets[0]", 0, 31, 0]
                         },
                         {
                             "label": "Preset 2",
@@ -342,7 +342,7 @@
                                 ["2000", 200],
                                 ["2400", 240]
                             ],
-                            "content": ["id_ploopystuff_dpi_preset[1]", 0, 31, 1]
+                            "content": ["id_ploopystuff_dpi_presets[1]", 0, 31, 1]
                         },
                         {
                             "label": "Preset 3",
@@ -368,7 +368,7 @@
                                 ["2000", 200],
                                 ["2400", 240]
                             ],
-                            "content": ["id_ploopystuff_dpi_preset[2]", 0, 31, 2]
+                            "content": ["id_ploopystuff_dpi_presets[2]", 0, 31, 2]
                         },
                         {
                             "label": "Preset 4",
@@ -394,7 +394,7 @@
                                 ["2000", 200],
                                 ["2400", 240]
                             ],
-                            "content": ["id_ploopystuff_dpi_preset[3]", 0, 31, 3]
+                            "content": ["id_ploopystuff_dpi_presets[3]", 0, 31, 3]
                         },
                         {
                             "label": "Preset 5",
@@ -420,7 +420,7 @@
                                 ["2000", 200],
                                 ["2400", 240]
                             ],
-                            "content": ["id_ploopystuff_dpi_preset[4]", 0, 31, 4]
+                            "content": ["id_ploopystuff_dpi_presets[4]", 0, 31, 4]
                         }
                     ]
                 },

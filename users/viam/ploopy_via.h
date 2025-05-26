@@ -8,7 +8,7 @@ void values_load(void);
 void values_save(void);
 
 enum via_ploopystuff_value {
-    id_ploopystuff_dpi_preset = 1,
+    id_ploopystuff_dpi_activepreset = 1,
     id_ploopystuff_dpi_multiplier,
     id_ploopystuff_msjiggler_enabled,
     id_ploopystuff_pointer_invert_h,

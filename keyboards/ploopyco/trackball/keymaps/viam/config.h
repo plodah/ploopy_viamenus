@@ -17,13 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
- #pragma once
+#pragma once
 
- #define DYNAMIC_KEYMAP_LAYER_COUNT 8
+#define DYNAMIC_KEYMAP_LAYER_COUNT 8
 
- #define PLOOPY_VIAMENUS
- #define BETTER_DRAGSCROLL
- #define VIA_EEPROM_CUSTOM_CONFIG_SIZE 31
-  #define PLOOPY_MSGESTURE_ENABLE
- #define BETTER_DRAGSCROLL_TAPDANCE
- #define COMBO_SHOULD_TRIGGER
+#define PLOOPY_VIAMENUS
+#define BETTER_DRAGSCROLL
+#define VIA_EEPROM_CUSTOM_CONFIG_SIZE 31
+#define PLOOPY_MSGESTURE_ENABLE
+#define BETTER_DRAGSCROLL_TAPDANCE
+#define COMBO_SHOULD_TRIGGER

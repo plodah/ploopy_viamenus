@@ -88,7 +88,7 @@
 
         switch ( *value_id )
         {
-            case id_ploopystuff_dpi_preset:
+            case id_ploopystuff_dpi_activepreset:
                 keyboard_config.dpi_config = *value_data;
                 dprintf("dpi_preset: %d\n", keyboard_config.dpi_config);
                 update_dpi();
@@ -227,7 +227,7 @@
                 value_data[1] = (ploopyvia_config.dpi_presets[value_data[0]] / 10) / (ploopyvia_config.dpi_multiplier/20)  ;
                 break;
 
-            case id_ploopystuff_dpi_preset:
+            case id_ploopystuff_dpi_activepreset:
                 *value_data = keyboard_config.dpi_config;
                 break;
             case id_ploopystuff_dpi_multiplier:
