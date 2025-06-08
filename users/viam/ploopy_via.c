@@ -4,6 +4,7 @@
     // #include QMK_KEYBOARD_H
     #include "better_dragscroll.h"
     #include "via.h" // uses EEPROM address, lighting value IDs
+    #include "eeprom.h"
     #include "mouse_jiggler.h"
     #include "ploopy_via.h"
     #include "mouse_gesture.h"
