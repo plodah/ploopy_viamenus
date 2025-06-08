@@ -8,12 +8,12 @@
     #include "ploopy_via.h"
     #include "mouse_gesture.h"
 
-    void values_load(void)
+    void ploopyvia_config_load(void)
     {
         eeprom_read_block( &ploopyvia_config, 0, sizeof(ploopyvia_config) );
     }
 
-    void values_save(void)
+    void ploopyvia_config_save(void)
     {
         eeprom_update_block( &ploopyvia_config, 0, sizeof(ploopyvia_config) );
     }
@@ -33,11 +33,11 @@
         // If the EEPROM has the magic, the data is good.
         // OK to load from EEPROM
         if (via_eeprom_is_valid()) {
-            values_load();
+            ploopyvia_config_load();
         }
         else {
             ploopyvia_config = ploopyvia_config_default;
-            values_save();
+            ploopyvia_config_save();
             // DO NOT set EEPROM valid here, let caller do this
         }
         update_dpi();
@@ -66,7 +66,7 @@
                 }
                 case id_custom_save:
                 {
-                    values_save();
+                    ploopyvia_config_save();
                     break;
                 }
                 default:
