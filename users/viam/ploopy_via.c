@@ -3,7 +3,6 @@
 
     // #include QMK_KEYBOARD_H
     #include "better_dragscroll.h"
-    #include "via.h" // uses EEPROM address, lighting value IDs
     #include "eeprom.h"
     #include "mouse_jiggler.h"
     #include "ploopy_via.h"
@@ -11,12 +10,12 @@
 
     void values_load(void)
     {
-        eeprom_read_block( &ploopyvia_config, ((void*)VIA_EEPROM_CUSTOM_CONFIG_ADDR), sizeof(ploopyvia_config) );
+        eeprom_read_block( &ploopyvia_config, 0, sizeof(ploopyvia_config) );
     }
 
     void values_save(void)
     {
-        eeprom_update_block( &ploopyvia_config, ((void*)VIA_EEPROM_CUSTOM_CONFIG_ADDR), sizeof(ploopyvia_config) );
+        eeprom_update_block( &ploopyvia_config, 0, sizeof(ploopyvia_config) );
     }
 
     void update_dpi(void) {
