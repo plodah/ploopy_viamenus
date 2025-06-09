@@ -167,6 +167,7 @@
                             "label": "Dragscroll Divisor X",
                             "type": "dropdown",
                             "options": [
+                                ["Off", 0],
                                 ["1", 4],
                                 ["1.5", 6],
                                 ["2", 8],
@@ -194,6 +195,7 @@
                             "label": "Dragscroll Divisor Y",
                             "type": "dropdown",
                             "options": [
+                                ["Off", 0],
                                 ["1", 4],
                                 ["1.5", 6],
                                 ["2", 8],
