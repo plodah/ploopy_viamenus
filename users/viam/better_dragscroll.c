@@ -180,10 +180,10 @@
         if (better_dragscroll_enabled_bylock || better_dragscroll_enabled_bypress) {
 
             #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
-                if(dragscroll_divisor_h > 0){
+                if(ploopyvia_config.dragscroll_divisor_h > 0){
                     dragscroll_acc_h += (float)mouse_report.x / ((float)ploopyvia_config.dragscroll_divisor_h / 4);
                 }
-                if(dragscroll_divisor_v > 0){
+                if(ploopyvia_config.dragscroll_divisor_h > 0){
                     dragscroll_acc_v += (float)mouse_report.y / ((float)ploopyvia_config.dragscroll_divisor_v / 4);
                 }
                 #else // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
