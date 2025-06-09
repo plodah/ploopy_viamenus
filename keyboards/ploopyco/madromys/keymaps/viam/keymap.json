@@ -3,7 +3,6 @@
     "notes": "Hello",
     "author": "Plodah",
     "documentation": "...",
-    "keyboard": "ploopyco/madromys",
     "keymap": "via",
     "layout": "LAYOUT",
     "modules": [
@@ -11,9 +10,6 @@
         "plodah/task_switch"
     ],
     "config": {
-        "build": {
-            "lto": false
-        },
         "dynamic_keymap": {
             "layer_count": 4
         },
