@@ -3,19 +3,20 @@
 
     // #include QMK_KEYBOARD_H
     #include "better_dragscroll.h"
-    #include "eeprom.h"
+    #include "via.h"
     #include "mouse_jiggler.h"
     #include "ploopy_via.h"
     #include "mouse_gesture.h"
-
     void ploopyvia_config_load(void)
     {
-        eeprom_read_block( &ploopyvia_config, 0, sizeof(ploopyvia_config) );
+        // eeprom_read_block( &ploopyvia_config, VIA_EEPROM_CUSTOM_CONFIG_ADDR, sizeof(ploopyvia_config) );
+        eeconfig_read_user_datablock(&ploopyvia_config, 0, EECONFIG_USER_DATA_SIZE);
     }
 
     void ploopyvia_config_save(void)
     {
-        eeprom_update_block( &ploopyvia_config, 0, sizeof(ploopyvia_config) );
+        // eeprom_update_block( &ploopyvia_config, VIA_EEPROM_CUSTOM_CONFIG_ADDR, sizeof(ploopyvia_config) );
+        eeconfig_update_user_datablock(&ploopyvia_config, 0, EECONFIG_USER_DATA_SIZE);
     }
 
     void update_dpi(void) {
@@ -30,15 +31,8 @@
 
     void via_init_kb(void)
     {
-        // If the EEPROM has the magic, the data is good.
-        // OK to load from EEPROM
-        if (via_eeprom_is_valid()) {
-            ploopyvia_config_load();
-        }
-        else {
+        if(ploopyvia_config.dpi_multiplier == 0){
             ploopyvia_config = ploopyvia_config_default;
-            ploopyvia_config_save();
-            // DO NOT set EEPROM valid here, let caller do this
         }
         update_dpi();
         ploopy_msGestureUpdate();
@@ -182,15 +176,15 @@
                 led_update_better_dragscroll(host_keyboard_led_state());
                 break;
 
+            case id_ploopystuff_dragscroll_end_on_keypress:
+                ploopyvia_config.dragscroll_end_on_keypress = *value_data;
+                dprintf("dragscroll_end_on_keypress: %d\n", ploopyvia_config.dragscroll_end_on_keypress);
+                break;
+
             case id_ploopystuff_dragscroll_permanently:
                 ploopyvia_config.dragscroll_permanently = *value_data;
                 dprintf("dragscroll_permanently: %d\n", ploopyvia_config.dragscroll_permanently);
                 led_update_better_dragscroll(host_keyboard_led_state());
-                break;
-
-            case id_ploopystuff_dragscroll_end_on_keypress:
-                ploopyvia_config.dragscroll_end_on_keypress = *value_data;
-                dprintf("dragscroll_end_on_keypress: %d\n", ploopyvia_config.dragscroll_end_on_keypress);
                 break;
 
             case id_ploopystuff_dpi_presets:
@@ -201,12 +195,12 @@
 
             case id_ploopystuff_sniper_a_dpi:
                 ploopyvia_config.sniper_a_dpi = ((uint8_t)*value_data*10) * (ploopyvia_config.dpi_multiplier/20);
-                dprintf("sniper_a_dpi: %d\n", (uint8_t)*value_data);
+                dprintf("sniper_a_dpi: %d\n", ploopyvia_config.sniper_a_dpi);
                 break;
 
             case id_ploopystuff_sniper_b_dpi:
                 ploopyvia_config.sniper_b_dpi = ((uint8_t)*value_data*10) * (ploopyvia_config.dpi_multiplier/20) ;
-                dprintf("sniper_b_dpi: %d\n", (uint8_t)*value_data);
+                dprintf("sniper_b_dpi: %d\n", ploopyvia_config.sniper_b_dpi);
                 break;
 
             case id_ploopystuff_dragscroll_straighten_sensitivity:
@@ -223,91 +217,120 @@
 
         switch ( *value_id )
         {
-            case id_ploopystuff_dpi_presets:
-                value_data[1] = (ploopyvia_config.dpi_presets[value_data[0]] / 10) / (ploopyvia_config.dpi_multiplier/20)  ;
-                break;
-
             case id_ploopystuff_dpi_activepreset:
                 *value_data = keyboard_config.dpi_config;
+                dprintf("dpi_preset: %d\n", keyboard_config.dpi_config);
                 break;
+
             case id_ploopystuff_dpi_multiplier:
                 *value_data = ploopyvia_config.dpi_multiplier;
+                dprintf("dpi_multiplier: %d\n", ploopyvia_config.dpi_multiplier);
                 break;
 
             case id_ploopystuff_msjiggler_enabled:
-                *value_data = msJigMainToken != INVALID_DEFERRED_TOKEN;
+                if(msJigMainToken != INVALID_DEFERRED_TOKEN){
+                    dprintf("msjiggler_enabled true \n");
+                    *value_data = true;
+                }
+                else{
+                    dprintf("msjiggler_enabled false \n");
+                    *value_data = false;
+                }
                 break;
 
             case id_ploopystuff_pointer_invert_h:
                 *value_data = ploopyvia_config.pointer_invert_h;
+                dprintf("pointer_invert_h:%d\n", ploopyvia_config.pointer_invert_h);
                 break;
 
             case id_ploopystuff_pointer_invert_v:
                 *value_data = ploopyvia_config.pointer_invert_v;
+                dprintf("pointer_invert_v:%d\n", ploopyvia_config.pointer_invert_v);
                 break;
 
             case id_ploopystuff_gesture_count:
                 *value_data = ploopyvia_config.gesture_count;
+                dprintf("gesture_count:%d\n", ploopyvia_config.gesture_count);
                 break;
 
             case id_ploopystuff_gesture_action_h:
                 *value_data = ploopyvia_config.gesture_action_h;
+                dprintf("gesture_action_h:%d\n", ploopyvia_config.gesture_action_h);
                 break;
 
             case id_ploopystuff_gesture_action_v:
                 *value_data = ploopyvia_config.gesture_action_v;
+                dprintf("gesture_action_v:%d\n", ploopyvia_config.gesture_action_v);
                 break;
 
             case id_ploopystuff_combos_enabled:
                 *value_data = ploopyvia_config.combos_enabled;
+                dprintf("combos_enabled:%d\n", ploopyvia_config.combos_enabled);
                 break;
 
             case id_ploopystuff_dragscroll_invert_h:
                 *value_data = ploopyvia_config.dragscroll_invert_h;
+                dprintf("dragscroll_invert_h:%d\n", ploopyvia_config.dragscroll_invert_h);
                 break;
 
             case id_ploopystuff_dragscroll_invert_v:
                 *value_data = ploopyvia_config.dragscroll_invert_v;
+                dprintf("dragscroll_invert_v:%d\n", ploopyvia_config.dragscroll_invert_v);
                 break;
 
             case id_ploopystuff_dragscroll_divisor_h:
                 *value_data = ploopyvia_config.dragscroll_divisor_h;
+                dprintf("dragscroll_divisor_h:%d\n", ploopyvia_config.dragscroll_divisor_h);
                 break;
 
             case id_ploopystuff_dragscroll_divisor_v:
                 *value_data = ploopyvia_config.dragscroll_divisor_v;
+                dprintf("dragscroll_divisor_v:%d\n", ploopyvia_config.dragscroll_divisor_v);
                 break;
 
             case id_ploopystuff_dragscroll_caps:
                 *value_data = ploopyvia_config.dragscroll_caps;
+                dprintf("dragscroll_caps: %d\n", ploopyvia_config.dragscroll_caps);
                 break;
 
             case id_ploopystuff_dragscroll_num:
                 *value_data = ploopyvia_config.dragscroll_num;
+                dprintf("dragscroll_num: %d\n", ploopyvia_config.dragscroll_num);
                 break;
 
             case id_ploopystuff_dragscroll_scroll:
                 *value_data = ploopyvia_config.dragscroll_scroll;
-                break;
-
-            case id_ploopystuff_dragscroll_permanently:
-                *value_data = ploopyvia_config.dragscroll_permanently;
+                dprintf("dragscroll_scroll: %d\n", ploopyvia_config.dragscroll_scroll);
                 break;
 
             case id_ploopystuff_dragscroll_end_on_keypress:
                 *value_data = ploopyvia_config.dragscroll_end_on_keypress;
+                dprintf("dragscroll_end_on_keypress: %d\n", ploopyvia_config.dragscroll_end_on_keypress);
+                break;
+
+            case id_ploopystuff_dragscroll_permanently:
+                *value_data = ploopyvia_config.dragscroll_permanently;
+                dprintf("dragscroll_permanently: %d\n", ploopyvia_config.dragscroll_permanently);
+                break;
+
+            case id_ploopystuff_dpi_presets:
+                value_data[1] = (ploopyvia_config.dpi_presets[value_data[0]] / 10) / (ploopyvia_config.dpi_multiplier/20)  ;
+                dprintf("dpi_presets[%d]: %d\n", value_data[0], ploopyvia_config.dpi_presets[value_data[0]]);
                 break;
 
             case id_ploopystuff_sniper_a_dpi:
                 *value_data = (ploopyvia_config.sniper_a_dpi / 10) / (ploopyvia_config.dpi_multiplier/20);
+                dprintf("sniper_a_dpi: %d\n", ploopyvia_config.sniper_a_dpi);
                 break;
 
             case id_ploopystuff_sniper_b_dpi:
                 *value_data = (ploopyvia_config.sniper_b_dpi / 10 ) / (ploopyvia_config.dpi_multiplier/20);
+                dprintf("sniper_b_dpi: %d\n", ploopyvia_config.sniper_b_dpi);
                 break;
 
             case id_ploopystuff_dragscroll_straighten_sensitivity:
                 *value_data = ploopyvia_config.dragscroll_straighten_sensitivity;
+                dprintf("dragscroll_straighten_sensitivity: %d\n", ploopyvia_config.dragscroll_straighten_sensitivity);
                 break;
         }
     }

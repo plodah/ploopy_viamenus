@@ -57,8 +57,7 @@ typedef struct {
 
 via_ploopystuff_config ploopyvia_config;
 
-via_ploopystuff_config ploopyvia_config_default = {
-    .dpi_presets                = { 600, 900, 1200, 1600, 2400 },
+static via_ploopystuff_config ploopyvia_config_default = {
     .dpi_multiplier             = 20,
     .pointer_invert_h           = false,
     .pointer_invert_v           = false,
@@ -99,16 +98,15 @@ via_ploopystuff_config ploopyvia_config_default = {
         .dragscroll_scroll      = 0,
     #endif // BETTER_DRAGSCROLL_SCRLK_ENABLE
 
-    .dragscroll_permanently     = false,
-    .dragscroll_straighten_sensitivity = 0,
-
     #if defined(BETTER_DRAGSCROLL_END_ON_KEYPRESS)
         .dragscroll_end_on_keypress = true,
     #else // BETTER_DRAGSCROLL_END_ON_KEYPRESS
         .dragscroll_end_on_keypress = false,
     #endif // BETTER_DRAGSCROLL_END_ON_KEYPRESS
 
+    .dragscroll_permanently     = false,
+    .dpi_presets                = { 600, 900, 1200, 1600, 2400 },
     .sniper_a_dpi               = 100,
     .sniper_b_dpi               = 200,
-
+    .dragscroll_straighten_sensitivity = 0,
 };
