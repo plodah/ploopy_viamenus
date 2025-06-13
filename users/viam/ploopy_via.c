@@ -7,15 +7,13 @@
     #include "mouse_jiggler.h"
     #include "ploopy_via.h"
     #include "mouse_gesture.h"
-    void ploopyvia_config_load(void)
-    {
-        // eeprom_read_block( &ploopyvia_config, VIA_EEPROM_CUSTOM_CONFIG_ADDR, sizeof(ploopyvia_config) );
+    void ploopyvia_config_load(void) {
+        // ploopyvia_config.raw = eeconfig_read_user();
         eeconfig_read_user_datablock(&ploopyvia_config, 0, EECONFIG_USER_DATA_SIZE);
     }
 
-    void ploopyvia_config_save(void)
-    {
-        // eeprom_update_block( &ploopyvia_config, VIA_EEPROM_CUSTOM_CONFIG_ADDR, sizeof(ploopyvia_config) );
+    void ploopyvia_config_save(void) {
+        // eeconfig_update_user(ploopyvia_config.raw);
         eeconfig_update_user_datablock(&ploopyvia_config, 0, EECONFIG_USER_DATA_SIZE);
     }
 
@@ -29,14 +27,21 @@
         eeconfig_update_kb(keyboard_config.raw);
     }
 
-    void via_init_kb(void)
-    {
+    void keyboard_post_init_user_viamenus(void) {
+        ploopyvia_config_load();
         if(ploopyvia_config.dpi_multiplier == 0){
-            ploopyvia_config = ploopyvia_config_default;
+            eeconfig_init_user();
         }
         update_dpi();
         ploopy_msGestureUpdate();
         led_update_better_dragscroll(host_keyboard_led_state());
+        dprintf("keyboard_post_init_user\n");
+    }
+
+    void eeconfig_init_user(void) {
+        ploopyvia_config = ploopyvia_config_default;
+        ploopyvia_config_save();
+        dprintf("eeconfig_init_user\n");
     }
 
     void via_custom_value_command_kb(uint8_t *data, uint8_t length) {
