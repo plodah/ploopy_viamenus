@@ -22,7 +22,7 @@
             "combo": true,
             "console": false,
             "deferred_exec": true,
-            "encoder_map": false,
+            "encoder_map": true,
             "rgblight": false,
             "rgb_matrix": false,
             "tap_dance": true,

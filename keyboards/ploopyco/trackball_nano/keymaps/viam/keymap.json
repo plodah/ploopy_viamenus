@@ -4,7 +4,7 @@
     "author": "plodah",
     "documentation": "...",
     "keyboard": "ploopyco/trackball_nano",
-    "keymap": "via",
+    "keymap": "viam",
     "layout": "LAYOUT",
     "modules": [
         "plodah/mouse_jiggler",
@@ -32,6 +32,11 @@
             "via": true
         },
         "keyboard_name": "Trackball Nano | viamenus",
-        "manufacturer": "Ploopy"
+        "manufacturer": "Ploopy",
+        "matrix_pins": {
+            "direct": [
+                ["E2"]
+            ]
+        }
     }
 }
