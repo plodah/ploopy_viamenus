@@ -1,29 +1,29 @@
 #if defined(COMBO_ENABLE)
   #pragma once
 
-    const uint16_t PROGMEM pl_combo_ms12[] = {KC_BTN1, KC_BTN2, COMBO_END};
-    const uint16_t PROGMEM pl_combo_ms15[] = {KC_BTN1, KC_BTN5, COMBO_END};
-    const uint16_t PROGMEM pl_combo_ms24[] = {KC_BTN2, KC_BTN4, COMBO_END};
-    const uint16_t PROGMEM pl_combo_ms25[] = {KC_BTN2, KC_BTN5, COMBO_END};
+    const uint16_t PROGMEM pl_combo_ms12[] = {MS_BTN1, MS_BTN2, COMBO_END};
+    const uint16_t PROGMEM pl_combo_ms15[] = {MS_BTN1, MS_BTN5, COMBO_END};
+    const uint16_t PROGMEM pl_combo_ms24[] = {MS_BTN2, MS_BTN4, COMBO_END};
+    const uint16_t PROGMEM pl_combo_ms25[] = {MS_BTN2, MS_BTN5, COMBO_END};
 
-    const uint16_t PROGMEM pl_combo_ms15_lt1[] = {KC_BTN1 , LT(1, KC_BTN5), COMBO_END};
-    const uint16_t PROGMEM pl_combo_ms15_lt2[] = {KC_BTN1 , LT(2, KC_BTN5), COMBO_END};
-    const uint16_t PROGMEM pl_combo_ms24_lt1[] = {KC_BTN2 , LT(1, KC_BTN4), COMBO_END};
-    const uint16_t PROGMEM pl_combo_ms25_lt1[] = {KC_BTN2 , LT(1, KC_BTN5), COMBO_END};
-    const uint16_t PROGMEM pl_combo_ms25_lt2[] = {KC_BTN2 , LT(2, KC_BTN5), COMBO_END};
+    const uint16_t PROGMEM pl_combo_ms15_lt1[] = {MS_BTN1 , LT(1, MS_BTN5), COMBO_END};
+    const uint16_t PROGMEM pl_combo_ms15_lt2[] = {MS_BTN1 , LT(2, MS_BTN5), COMBO_END};
+    const uint16_t PROGMEM pl_combo_ms24_lt1[] = {MS_BTN2 , LT(1, MS_BTN4), COMBO_END};
+    const uint16_t PROGMEM pl_combo_ms25_lt1[] = {MS_BTN2 , LT(1, MS_BTN5), COMBO_END};
+    const uint16_t PROGMEM pl_combo_ms25_lt2[] = {MS_BTN2 , LT(2, MS_BTN5), COMBO_END};
 
-    const uint16_t PROGMEM pl_combo_ms1d[] = {KC_BTN1, BETTER_DRAG_SCROLL_MOMENTARY, COMBO_END};
-    const uint16_t PROGMEM pl_combo_ms2d[] = {KC_BTN2, BETTER_DRAG_SCROLL_MOMENTARY, COMBO_END};
+    const uint16_t PROGMEM pl_combo_ms1d[] = {MS_BTN1, BETTER_DRAG_SCROLL_MOMENTARY, COMBO_END};
+    const uint16_t PROGMEM pl_combo_ms2d[] = {MS_BTN2, BETTER_DRAG_SCROLL_MOMENTARY, COMBO_END};
 
     #if defined(COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE)
-      const uint16_t PROGMEM pl_combo_ms14[] = {KC_BTN1, KC_BTN4, COMBO_END};
-      const uint16_t PROGMEM pl_combo_ms14_lt1[] = {KC_BTN1 , LT(1, KC_BTN4), COMBO_END};
-      const uint16_t PROGMEM pl_combo_ms45[] = {KC_BTN4, KC_BTN5, COMBO_END};
-      const uint16_t PROGMEM pl_combo_ms45_lt01[] = {KC_BTN4 , LT(1, KC_BTN5), COMBO_END};
-      const uint16_t PROGMEM pl_combo_ms45_lt02[] = {KC_BTN4 , LT(2, KC_BTN5), COMBO_END};
-      const uint16_t PROGMEM pl_combo_ms45_lt10[] = {LT(1, KC_BTN4) , KC_BTN5, COMBO_END};
-      const uint16_t PROGMEM pl_combo_ms45_lt11[] = {LT(1, KC_BTN4) , LT(1, KC_BTN5), COMBO_END};
-      const uint16_t PROGMEM pl_combo_ms45_lt12[] = {LT(1, KC_BTN4) , LT(2, KC_BTN5), COMBO_END};
+      const uint16_t PROGMEM pl_combo_ms14[] = {MS_BTN1, MS_BTN4, COMBO_END};
+      const uint16_t PROGMEM pl_combo_ms14_lt1[] = {MS_BTN1 , LT(1, MS_BTN4), COMBO_END};
+      const uint16_t PROGMEM pl_combo_ms45[] = {MS_BTN4, MS_BTN5, COMBO_END};
+      const uint16_t PROGMEM pl_combo_ms45_lt01[] = {MS_BTN4 , LT(1, MS_BTN5), COMBO_END};
+      const uint16_t PROGMEM pl_combo_ms45_lt02[] = {MS_BTN4 , LT(2, MS_BTN5), COMBO_END};
+      const uint16_t PROGMEM pl_combo_ms45_lt10[] = {LT(1, MS_BTN4) , MS_BTN5, COMBO_END};
+      const uint16_t PROGMEM pl_combo_ms45_lt11[] = {LT(1, MS_BTN4) , LT(1, MS_BTN5), COMBO_END};
+      const uint16_t PROGMEM pl_combo_ms45_lt12[] = {LT(1, MS_BTN4) , LT(2, MS_BTN5), COMBO_END};
     #endif // defined(COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE)
 
     combo_t key_combos[] = {

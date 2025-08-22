@@ -56,14 +56,14 @@ enum {
 #define P_SNTGB BETTER_DRAG_SCROLL_SNIPER_B_TOGGLE
 #define P_DRGVL BETTER_DRAG_VOLUME_MOMENTARY
 
-#define P_MS4FA LT(_FNA, KC_BTN4)
-#define P_MS5FB LT(_FNB, KC_BTN5)
+#define P_MS4FA LT(_FNA, MS_BTN4)
+#define P_MS5FB LT(_FNB, MS_BTN5)
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT(
-        P_MS4FA, P_MS5FB, KC_BTN3, KC_BTN2,
-        KC_BTN1,                   TD(TD_DRAGSCROLL)
+        P_MS4FA, P_MS5FB, MS_BTN3, MS_BTN2,
+        MS_BTN1,                   TD(TD_DRAGSCROLL)
     ),
     [_FNA] = LAYOUT(
         _______, PL_TSKP, PL_TSKN, _______,

@@ -39,7 +39,7 @@ enum keymap_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT(
-        KC_BTN1
+        MS_BTN1
     )
 };
 
