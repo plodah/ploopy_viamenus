@@ -284,7 +284,9 @@
         else if(better_dragscroll_volume_enabled){
 
             #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
-                dragscroll_acc_v += (float)mouse_report.y / ((((float)ploopyvia_config.dragscroll_divisor_v / 4) * BETTER_DRAGSCROLL_VOLUME_DIVISOR));
+                if(ploopyvia_config.dragscroll_divisor_v > 0){
+                    dragscroll_acc_v += (float)mouse_report.y / (((float)ploopyvia_config.dragscroll_divisor_v / 4) * BETTER_DRAGSCROLL_VOLUME_DIVISOR);
+                }
             #else // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
                 dragscroll_acc_v += (float)mouse_report.y / (BETTER_DRAGSCROLL_DIVISOR_V * BETTER_DRAGSCROLL_VOLUME_DIVISOR);
             #endif // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)

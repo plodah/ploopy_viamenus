@@ -59,7 +59,6 @@ enum {
 #define P_MS4FA LT(_FNA, KC_BTN4)
 #define P_MS5FB LT(_FNB, KC_BTN5)
 
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT(
         P_MS4FA, P_MS5FB, KC_BTN3, KC_BTN2,
