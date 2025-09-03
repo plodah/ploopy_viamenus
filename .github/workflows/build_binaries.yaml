@@ -11,8 +11,8 @@ jobs:
     uses: qmk/.github/.github/workflows/qmk_userspace_build.yml@main
     if: github.ref == 'refs/heads/main'
     with:
-      qmk_repo: qmk/qmk_firmware
-      qmk_ref: master
+      qmk_repo: plodah/qmk_firmware
+      qmk_ref: ploopybuilds
 
   publish:
     name: 'QMK Userspace Publish'
