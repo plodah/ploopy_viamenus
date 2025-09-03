@@ -1,0 +1,120 @@
+diff --git a/keyboards/ploopyco/madromys/info.json b/keyboards/ploopyco/madromys/info.json
+index b5e74d3bc2..019745fd7a 100644
+--- a/keyboards/ploopyco/madromys/info.json
++++ b/keyboards/ploopyco/madromys/info.json
+@@ -7,7 +7,6 @@
+     "bootloader": "rp2040",
+     "usb": {
+         "vid": "0x5043",
+-        "pid": "0x5C47",
+         "max_power": 100
+     },
+     "features": {
+diff --git a/keyboards/ploopyco/madromys/rev1_001/keyboard.json b/keyboards/ploopyco/madromys/rev1_001/keyboard.json
+index 5cb4ee3938..37775dccc0 100644
+--- a/keyboards/ploopyco/madromys/rev1_001/keyboard.json
++++ b/keyboards/ploopyco/madromys/rev1_001/keyboard.json
+@@ -1,6 +1,7 @@
+ {
+     "usb": {
+-        "device_version": "1.0.0"
++        "device_version": "1.0.0",
++        "pid": "0x5C47"
+     },
+     "diode_direction": "COL2ROW",
+     "matrix_pins": {
+diff --git a/keyboards/ploopyco/madromys/rev1_001_8button/config.h b/keyboards/ploopyco/madromys/rev1_001_8button/config.h
+new file mode 100644
+index 0000000000..4da14a17a0
+--- /dev/null
++++ b/keyboards/ploopyco/madromys/rev1_001_8button/config.h
+@@ -0,0 +1,26 @@
++/* Copyright 2023 Colin Lam (Ploopy Corporation)
++ * Copyright 2020 Christopher Courtney, aka Drashna Jael're  (@drashna) <drashna@live.com>
++ * Copyright 2019 Sunjun Kim
++ *
++ * This program is free software: you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation, either version 2 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#pragma once
++
++#include "ploopyco/madromys/config.h"
++#ifdef UNUSABLE_PINS
++  #undef UNUSABLE_PINS
++#endif
++
++#define UNUSABLE_PINS { GP1, GP3, GP6, GP8, GP10, GP16, GP18, GP20, GP22, GP24, GP25, GP26, GP27, GP28, GP29 }
+diff --git a/keyboards/ploopyco/madromys/rev1_001_8button/keyboard.json b/keyboards/ploopyco/madromys/rev1_001_8button/keyboard.json
+new file mode 100644
+index 0000000000..c8906b3ecb
+--- /dev/null
++++ b/keyboards/ploopyco/madromys/rev1_001_8button/keyboard.json
+@@ -0,0 +1,48 @@
++{
++    "usb": {
++        "device_version": "1.0.0",
++        "pid": "0x5C48"
++    },
++    "diode_direction": "COL2ROW",
++    "matrix_pins": {
++        "direct": [
++            ["GP15", "GP17", "GP19", "GP21", "GP23", "GP11", "GP4", "GP14"]
++        ]
++    },
++    "layouts": {
++        "LAYOUT": {
++            "layout": [
++                {"matrix": [0, 1], "label":"Top Left Left", "x":0, "y":0, "h":2},
++                {"matrix": [0, 2], "label":"Top Left", "x":1.25, "y":0, "h":1.25},
++                {"matrix": [0, 3], "label":"Top Right", "x":2.5, "y":0, "h":1.25},
++                {"matrix": [0, 4], "label":"Top Right Right", "x":3.75, "y":0, "h":2},
++                {"matrix": [0, 0], "label":"Bottom Left", "x":0, "y":2.25, "w":1.75, "h":2},
++                {"matrix": [0, 5], "label":"Bottom Right", "x":3, "y":2.25, "w":1.75, "h":2}
++            ]
++        },
++        "LAYOUT_8": {
++            "layout": [
++                {"matrix": [0, 1], "label":"Top Left Left", "x":0, "y":0, "h":1.25},
++                {"matrix": [0, 2], "label":"Top Left", "x":1.25, "y":0, "h":1.25},
++                {"matrix": [0, 3], "label":"Top Right", "x":2.5, "y":0, "h":1.25},
++                {"matrix": [0, 4], "label":"Top Right Right", "x":3.75, "y":0, "h":1.25},
++                {"matrix": [0, 6], "label":"Mid Left", "x":0, "y":1.5, "w":1.25, "h":1},
++                {"matrix": [0, 7], "label":"Mid Right", "x":3.5, "y":1.5, "w":1.25, "h":1},
++                {"matrix": [0, 0], "label":"Bottom Left", "x":0, "y":2.75, "w":1.75, "h":1.5},
++                {"matrix": [0, 5], "label":"Bottom Right", "x":3, "y":2.75, "w":1.75, "h":1.5}
++            ]
++         }
++    },
++    "rgblight": {
++        "led_count": 3,
++        "max_brightness": 40,
++        "animations": {
++            "breathing": true,
++            "rainbow_mood": true,
++            "rainbow_swirl": true
++        }
++    },
++    "ws2812": {
++        "pin": "GP12"
++    }
++}
+diff --git a/keyboards/ploopyco/madromys/rev1_001_8button/readme.md b/keyboards/ploopyco/madromys/rev1_001_8button/readme.md
+new file mode 100644
+index 0000000000..94e7574162
+--- /dev/null
++++ b/keyboards/ploopyco/madromys/rev1_001_8button/readme.md
+@@ -0,0 +1,3 @@
++This is the R1.001+ version of Madromys, but uses all 8 button positions. Future versions may have other features.
++
++See the [main readme](../readme.md) for more details. 

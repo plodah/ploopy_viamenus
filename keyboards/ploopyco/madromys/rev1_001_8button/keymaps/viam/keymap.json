@@ -1,0 +1,30 @@
+{
+    "version": 1,
+    "notes": "Hello",
+    "author": "Plodah",
+    "documentation": "...",
+    "keymap": "viam",
+    "layout": "LAYOUT",
+    "modules": [
+        "plodah/mouse_jiggler",
+        "plodah/task_switch"
+    ],
+    "config": {
+        "dynamic_keymap": {
+            "layer_count": 4
+        },
+        "features": {
+            "backlight": false,
+            "combo": true,
+            "console": false,
+            "deferred_exec": true,
+            "encoder_map": false,
+            "rgblight": false,
+            "rgb_matrix": false,
+            "tap_dance": true,
+            "via": true
+        },
+        "keyboard_name": "8-button Adept (Madromys) | viamenus",
+        "manufacturer": "Ploopy"
+    }
+}
