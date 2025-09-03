@@ -18,7 +18,6 @@
     }
 
     void update_dpi(void) {
-
         for (int i=0; i<5; i++){
             dpi_array[i] = ploopyvia_config.dpi_presets[i];
         }
@@ -85,8 +84,7 @@
         uint8_t *value_id   = &(data[0]);
         uint8_t *value_data = &(data[1]);
 
-        switch ( *value_id )
-        {
+        switch ( *value_id ) {
             case id_ploopystuff_dpi_activepreset:
                 keyboard_config.dpi_config = *value_data;
                 dprintf("dpi_preset: %d\n", keyboard_config.dpi_config);
