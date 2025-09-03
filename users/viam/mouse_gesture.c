@@ -4,6 +4,12 @@
   #include "better_dragscroll.h"
   #include "ploopy_via.h"
 
+  deferred_token ploopy_msGestureSwitchCooldown = INVALID_DEFERRED_TOKEN;
+  deferred_token ploopy_msGestureSwitchDebounce = INVALID_DEFERRED_TOKEN;
+
+  bool ploopy_msGestureDebounce = false;
+  bool ploopy_msGestureCooldown = false;
+
   void ploopy_msGestureUpdate(void){
     #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
       PLOOPY_MSGESTURE_X.action = ploopyvia_config.gesture_action_h;
@@ -15,11 +21,6 @@
       gestureCount = PLOOPY_MSGESTURE_WIGGLES;
     #endif
   }
-  deferred_token ploopy_msGestureSwitchCooldown = INVALID_DEFERRED_TOKEN;
-  deferred_token ploopy_msGestureSwitchDebounce = INVALID_DEFERRED_TOKEN;
-
-  bool ploopy_msGestureDebounce = false;
-  bool ploopy_msGestureCooldown = false;
 
   void ploopy_msGestureResetX(void){
     PLOOPY_MSGESTURE_X.accum = 0;
@@ -42,7 +43,6 @@
     ploopy_msGestureResetY();
   }
 
-  //
   uint32_t PLOOPY_MSGESTURE_expireXTimeout(uint32_t trigger_time, void *cb_arg){
     PLOOPY_MSGESTURE_X.accum = 0;
     PLOOPY_MSGESTURE_X.count = 0;
