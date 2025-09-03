@@ -210,6 +210,46 @@
                 ploopyvia_config.dragscroll_straighten_sensitivity = *value_data;
                 dprintf("dragscroll_straighten_sensitivity: %d\n", ploopyvia_config.dragscroll_straighten_sensitivity);
                 break;
+
+            case id_ploopystuff_dragscroll_dragact_a_up:
+                ploopyvia_config.dragscroll_dragact_a_up = value_data[0] << 8 | value_data[1];
+                dprintf("dragscroll_dragact_a_up: %d\n", ploopyvia_config.dragscroll_dragact_a_up);
+                break;
+
+            case id_ploopystuff_dragscroll_dragact_a_down:
+                ploopyvia_config.dragscroll_dragact_a_down = value_data[0] << 8 | value_data[1];
+                dprintf("dragscroll_dragact_a_down: %d\n", ploopyvia_config.dragscroll_dragact_a_down);
+                break;
+
+            case id_ploopystuff_dragscroll_dragact_a_left:
+                ploopyvia_config.dragscroll_dragact_a_left = value_data[0] << 8 | value_data[1];
+                dprintf("dragscroll_dragact_a_left: %d\n", ploopyvia_config.dragscroll_dragact_a_left);
+                break;
+
+            case id_ploopystuff_dragscroll_dragact_a_right:
+                ploopyvia_config.dragscroll_dragact_a_right = value_data[0] << 8 | value_data[1];
+                dprintf("dragscroll_dragact_a_right: %d\n", ploopyvia_config.dragscroll_dragact_a_right);
+                break;
+
+            case id_ploopystuff_dragscroll_dragact_b_up:
+                ploopyvia_config.dragscroll_dragact_b_up = value_data[0] << 8 | value_data[1];
+                dprintf("dragscroll_dragact_b_up: %d\n", ploopyvia_config.dragscroll_dragact_b_up);
+                break;
+
+            case id_ploopystuff_dragscroll_dragact_b_down:
+                ploopyvia_config.dragscroll_dragact_b_down = value_data[0] << 8 | value_data[1];
+                dprintf("dragscroll_dragact_b_down: %d\n", ploopyvia_config.dragscroll_dragact_b_down);
+                break;
+
+            case id_ploopystuff_dragscroll_dragact_b_left:
+                ploopyvia_config.dragscroll_dragact_b_left = value_data[0] << 8 | value_data[1];
+                dprintf("dragscroll_dragact_b_left: %d\n", ploopyvia_config.dragscroll_dragact_b_left);
+                break;
+
+            case id_ploopystuff_dragscroll_dragact_b_right:
+                ploopyvia_config.dragscroll_dragact_b_right = value_data[0] << 8 | value_data[1];
+                dprintf("dragscroll_dragact_b_right: %d\n", ploopyvia_config.dragscroll_dragact_b_right);
+                break;
         }
     }
 
@@ -335,6 +375,56 @@
                 *value_data = ploopyvia_config.dragscroll_straighten_sensitivity;
                 dprintf("dragscroll_straighten_sensitivity: %d\n", ploopyvia_config.dragscroll_straighten_sensitivity);
                 break;
+
+
+            case id_ploopystuff_dragscroll_dragact_a_up:
+                value_data[0] = ploopyvia_config.dragscroll_dragact_a_up >> 8;
+                value_data[1] = ploopyvia_config.dragscroll_dragact_a_up & 0xFF;
+                dprintf("dragscroll_dragact_a_up: %d\n", ploopyvia_config.dragscroll_dragact_a_up);
+                break;
+
+            case id_ploopystuff_dragscroll_dragact_a_down:
+                value_data[0] = ploopyvia_config.dragscroll_dragact_a_down >> 8;
+                value_data[1] = ploopyvia_config.dragscroll_dragact_a_down & 0xFF;
+                dprintf("dragscroll_dragact_a_down: %d\n", ploopyvia_config.dragscroll_dragact_a_down);
+                break;
+
+            case id_ploopystuff_dragscroll_dragact_a_left:
+                value_data[0] = ploopyvia_config.dragscroll_dragact_a_left >> 8;
+                value_data[1] = ploopyvia_config.dragscroll_dragact_a_left & 0xFF;
+                dprintf("dragscroll_dragact_a_left: %d\n", ploopyvia_config.dragscroll_dragact_a_left);
+                break;
+
+            case id_ploopystuff_dragscroll_dragact_a_right:
+                value_data[0] = ploopyvia_config.dragscroll_dragact_a_right >> 8;
+                value_data[1] = ploopyvia_config.dragscroll_dragact_a_right & 0xFF;
+                dprintf("dragscroll_dragact_a_right: %d\n", ploopyvia_config.dragscroll_dragact_a_right);
+                break;
+
+            case id_ploopystuff_dragscroll_dragact_b_up:
+                value_data[0] = ploopyvia_config.dragscroll_dragact_b_up >> 8;
+                value_data[1] = ploopyvia_config.dragscroll_dragact_b_up & 0xFF;
+                dprintf("dragscroll_dragact_b_up: %d\n", ploopyvia_config.dragscroll_dragact_b_up);
+                break;
+
+            case id_ploopystuff_dragscroll_dragact_b_down:
+                value_data[0] = ploopyvia_config.dragscroll_dragact_b_down >> 8;
+                value_data[1] = ploopyvia_config.dragscroll_dragact_b_down & 0xFF;
+                dprintf("dragscroll_dragact_b_down: %d\n", ploopyvia_config.dragscroll_dragact_b_down);
+                break;
+
+            case id_ploopystuff_dragscroll_dragact_b_left:
+                value_data[0] = ploopyvia_config.dragscroll_dragact_b_left >> 8;
+                value_data[1] = ploopyvia_config.dragscroll_dragact_b_left & 0xFF;
+                dprintf("dragscroll_dragact_b_left: %d\n", ploopyvia_config.dragscroll_dragact_b_left);
+                break;
+
+            case id_ploopystuff_dragscroll_dragact_b_right:
+                value_data[0] = ploopyvia_config.dragscroll_dragact_b_right >> 8;
+                value_data[1] = ploopyvia_config.dragscroll_dragact_b_right & 0xFF;
+                dprintf("dragscroll_dragact_b_right: %d\n", ploopyvia_config.dragscroll_dragact_b_right);
+                break;
+
         }
     }
 

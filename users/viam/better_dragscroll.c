@@ -52,7 +52,7 @@
     bool better_dragscroll_enabled_bypress = 0;
     bool better_dragscroll_sniper_a_enabled = 0;
     bool better_dragscroll_sniper_b_enabled = 0;
-    bool better_dragscroll_volume_enabled = 0;
+    bool better_dragscroll_dragaction_enabled = 0;
     float dragscroll_acc_h = 0;
     float dragscroll_acc_v = 0;
 
@@ -92,10 +92,17 @@
             case BETTER_DRAG_SCROLL_TOGGLE:
                 better_dragscroll_toggle(record->event.pressed);
                 return false;
-            case BETTER_DRAG_VOLUME_MOMENTARY:
-                better_dragscroll_volume_enabled = record->event.pressed;
+            case BETTER_DRAG_ACTION_A_MOMENTARY:
+            case BETTER_DRAG_ACTION_B_MOMENTARY:
+                better_dragscroll_dragaction_enabled = record->event.pressed;
                 if(record->event.pressed){
                     better_dragscroll_resetacc();
+                    if(keycode == BETTER_DRAG_ACTION_B_MOMENTARY){
+                        better_dragscroll_dragaction_alt = true;
+                    }
+                    else{
+                        better_dragscroll_dragaction_alt = false;
+                    }
                 }
                 return false;
             case BETTER_DRAG_SCROLL_SNIPER_A_MOMENTARY:
@@ -281,24 +288,67 @@
             mouse_report.x = 0;
             mouse_report.y = 0;
         }
-        else if(better_dragscroll_volume_enabled){
-
+        else if (better_dragscroll_dragaction_enabled){
             #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
+                if(ploopyvia_config.dragscroll_divisor_h > 0){
+                    dragscroll_acc_h += (float)mouse_report.x / (((float)ploopyvia_config.dragscroll_divisor_h / 4) * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR);
+                }
                 if(ploopyvia_config.dragscroll_divisor_v > 0){
-                    dragscroll_acc_v += (float)mouse_report.y / (((float)ploopyvia_config.dragscroll_divisor_v / 4) * BETTER_DRAGSCROLL_VOLUME_DIVISOR);
+                    dragscroll_acc_v += (float)mouse_report.y / (((float)ploopyvia_config.dragscroll_divisor_v / 4) * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR);
                 }
             #else // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
-                dragscroll_acc_v += (float)mouse_report.y / (BETTER_DRAGSCROLL_DIVISOR_V * BETTER_DRAGSCROLL_VOLUME_DIVISOR);
+                dragscroll_acc_h += (float)mouse_report.x / (BETTER_DRAGSCROLL_DIVISOR_H * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR);
+                dragscroll_acc_v += (float)mouse_report.y / (BETTER_DRAGSCROLL_DIVISOR_V * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR);
             #endif // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
 
-            if(dragscroll_acc_v >= 1){
-                tap_code(KC_VOLU);
+            if( abs(dragscroll_acc_v) >= 1 || abs(dragscroll_acc_h) >= 1 )  {
+                dprintf("v:%d\n", (int)dragscroll_acc_v);
+                if( abs(dragscroll_acc_v) > abs(dragscroll_acc_h) ){
+                    if( ( dragscroll_acc_v <= -1 && !ploopyvia_config.dragscroll_invert_v) || (dragscroll_acc_v >= 1 && ploopyvia_config.dragscroll_invert_v)) {
+                        if(!better_dragscroll_dragaction_alt){
+                            tap_code16(ploopyvia_config.dragscroll_dragact_a_down);
+                            dprintf("a_down\n");
+                        }
+                        else{
+                            tap_code16(ploopyvia_config.dragscroll_dragact_b_down);
+                            dprintf("b_down\n");
+                        }
+                    }
+                    else {
+                        if(!better_dragscroll_dragaction_alt){
+                            tap_code16(ploopyvia_config.dragscroll_dragact_a_up);
+                            dprintf("a_up\n");
+                        }
+                        else{
+                            tap_code16(ploopyvia_config.dragscroll_dragact_b_up);
+                            dprintf("b_up\n");
+                        }
+                    }
+                }
+                else {
+                    if( (dragscroll_acc_h <= -1 && !ploopyvia_config.dragscroll_invert_h) || (dragscroll_acc_h >= 1 && ploopyvia_config.dragscroll_invert_h)){
+                        if(!better_dragscroll_dragaction_alt){
+                            tap_code16(ploopyvia_config.dragscroll_dragact_a_left);
+                            dprintf("a_left\n");
+                        }
+                        else{
+                            tap_code16(ploopyvia_config.dragscroll_dragact_b_left);
+                            dprintf("b_left\n");
+                        }
+                    }
+                    else {
+                        if(!better_dragscroll_dragaction_alt){
+                            tap_code16(ploopyvia_config.dragscroll_dragact_a_right);
+                            dprintf("a_right\n");
+                        }
+                        else{
+                            tap_code16(ploopyvia_config.dragscroll_dragact_b_right);
+                            dprintf("b_right\n");
+                        }
+                    }
+                }
+                better_dragscroll_resetacc();
             }
-            else if(dragscroll_acc_v <= -1){
-                tap_code(KC_VOLD);
-            }
-            dragscroll_acc_v -= (int8_t)dragscroll_acc_v;
-
             mouse_report.x = 0;
             mouse_report.y = 0;
         }

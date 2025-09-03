@@ -30,6 +30,14 @@ enum via_ploopystuff_value {
     id_ploopystuff_sniper_a_dpi = 41,
     id_ploopystuff_sniper_b_dpi,
     id_ploopystuff_dragscroll_straighten_sensitivity = 51,
+    id_ploopystuff_dragscroll_dragact_a_up = 61,
+    id_ploopystuff_dragscroll_dragact_a_down,
+    id_ploopystuff_dragscroll_dragact_a_left,
+    id_ploopystuff_dragscroll_dragact_a_right,
+    id_ploopystuff_dragscroll_dragact_b_up,
+    id_ploopystuff_dragscroll_dragact_b_down,
+    id_ploopystuff_dragscroll_dragact_b_left,
+    id_ploopystuff_dragscroll_dragact_b_right,
 };
 
 typedef struct {
@@ -53,6 +61,14 @@ typedef struct {
     uint16_t sniper_a_dpi;
     uint16_t sniper_b_dpi;
     uint8_t  dragscroll_straighten_sensitivity;
+    uint16_t dragscroll_dragact_a_up;
+    uint16_t dragscroll_dragact_a_down;
+    uint16_t dragscroll_dragact_a_left;
+    uint16_t dragscroll_dragact_a_right;
+    uint16_t dragscroll_dragact_b_up;
+    uint16_t dragscroll_dragact_b_down;
+    uint16_t dragscroll_dragact_b_left;
+    uint16_t dragscroll_dragact_b_right;
 } via_ploopystuff_config;
 
 via_ploopystuff_config ploopyvia_config;
@@ -109,4 +125,12 @@ static via_ploopystuff_config ploopyvia_config_default = {
     .sniper_a_dpi               = 100,
     .sniper_b_dpi               = 200,
     .dragscroll_straighten_sensitivity = 0,
+    .dragscroll_dragact_a_up    = KC_VOLU,
+    .dragscroll_dragact_a_down  = KC_VOLD,
+    .dragscroll_dragact_a_left  = KC_NO,
+    .dragscroll_dragact_a_right = KC_NO,
+    .dragscroll_dragact_b_up    = KC_NO,
+    .dragscroll_dragact_b_down  = KC_NO,
+    .dragscroll_dragact_b_left  = KC_NO,
+    .dragscroll_dragact_b_right = KC_NO,
 };

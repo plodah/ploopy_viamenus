@@ -18,7 +18,8 @@
         { "name": "Sniper A Tg", "title": "Sniper A Toggle", "shortName": "SnpA Tg" },
         { "name": "Sniper B Mo", "title": "Sniper B Momentary", "shortName": "SnpB Mo" },
         { "name": "Sniper B Tg", "title": "Sniper B Toggle", "shortName": "SnpB Tg" },
-        { "name": "Better DragSc Volume", "title": "Better Drag Scroll Volume", "shortName": "Drg Vol" }
+        { "name": "Better DragSc Act A", "title": "Better Drag Scroll Action A", "shortName": "Drg AcA" },
+        { "name": "Better DragSc Act B", "title": "Better Drag Scroll Action B", "shortName": "Drg AcB" }
     ],
     "layouts": {
         "labels": [
@@ -464,6 +465,61 @@
                                 ["500", 50]
                             ],
                             "content": ["id_ploopystuff_sniper_b_dpi", 0, 42]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "label": "DragActions",
+            "content": [
+                {
+                    "label": "DragAction A",
+                    "content": [
+                        {
+                            "label": "Up",
+                            "type": "keycode",
+                            "content": ["id_ploopystuff_dragscroll_dragact_a_up", 0, 61]
+                        },
+                        {
+                            "label": "Down",
+                            "type": "keycode",
+                            "content": ["id_ploopystuff_dragscroll_dragact_a_down", 0, 62]
+                        },
+                        {
+                            "label": "Left",
+                            "type": "keycode",
+                            "content": ["id_ploopystuff_dragscroll_dragact_a_left", 0, 63]
+                        },
+                        {
+                            "label": "Right",
+                            "type": "keycode",
+                            "content": ["id_ploopystuff_dragscroll_dragact_a_right", 0, 64]
+                        }
+                    ]
+                },
+                {
+                    "label": "DragAction B",
+                    "content": [
+                        {
+                            "label": "Up",
+                            "type": "keycode",
+                            "content": ["id_ploopystuff_dragscroll_dragact_b_up", 0, 65]
+                        },
+                        {
+                            "label": "Down",
+                            "type": "keycode",
+                            "content": ["id_ploopystuff_dragscroll_dragact_b_down", 0, 66]
+                        },
+                        {
+                            "label": "Left",
+                            "type": "keycode",
+                            "content": ["id_ploopystuff_dragscroll_dragact_b_left", 0, 67]
+                        },
+                        {
+                            "label": "Right",
+                            "type": "keycode",
+                            "content": ["id_ploopystuff_dragscroll_dragact_b_right", 0, 68]
                         }
                     ]
                 }
