@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #pragma once
 
@@ -27,3 +27,5 @@
 #define PLOOPY_MSGESTURE_ENABLE
 #define BETTER_DRAGSCROLL_TAPDANCE
 #define COMBO_SHOULD_TRIGGER
+#define TURBO_FIRE_KEY_A MS_BTN1
+#define TURBO_FIRE_RATE 40

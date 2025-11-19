@@ -12,7 +12,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #include QMK_KEYBOARD_H
 
@@ -23,7 +23,7 @@ enum layers {
 };
 
 enum keymap_keycodes {
-    KB_DPI_CONFIG       = QK_KB_0,
+    KB_DPI_CONFIG = QK_KB_0,
     KB_DRAG_SCROLL,
     BETTER_DRAG_SCROLL_MOMENTARY,
     BETTER_DRAG_SCROLL_TOGGLE,
@@ -36,6 +36,8 @@ enum keymap_keycodes {
     BETTER_DRAG_SCROLL_SNIPER_B_TOGGLE,
     BETTER_DRAG_ACTION_A_MOMENTARY,
     BETTER_DRAG_ACTION_B_MOMENTARY,
+    KB_TURBO_A_TOGGLE,
+    KB_TURBO_A_MOMENTARY,
 };
 
 enum {
@@ -56,16 +58,8 @@ enum {
 #define P_MS4FA LT(_FNA, MS_BTN4)
 #define P_MS5FB LT(_FNB, MS_BTN5)
 
-const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [_BASE] = LAYOUT( MS_BTN1, MS_BTN3, MS_BTN2, P_MS4FA, P_MS5FB ),
-    [_FNA] = LAYOUT( PL_TSKP, DPI_CONFIG, PL_TSKN, _______, _______ ),
-    [_FNB] = LAYOUT( PL_TSKP, DPI_CONFIG, PL_TSKN, _______, _______ )
-};
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_BASE] = LAYOUT(MS_BTN1, MS_BTN3, MS_BTN2, P_MS4FA, P_MS5FB), [_FNA] = LAYOUT(PL_TSKP, DPI_CONFIG, PL_TSKN, _______, _______), [_FNB] = LAYOUT(PL_TSKP, DPI_CONFIG, PL_TSKN, _______, _______)};
 
 #if defined(ENCODER_MAP_ENABLE)
-const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-    [_BASE] = {ENCODER_CCW_CW(MS_WHLD, MS_WHLU)},
-    [_FNA] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
-    [_FNB] = {ENCODER_CCW_CW(_______, _______)}
-};
+const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {[_BASE] = {ENCODER_CCW_CW(MS_WHLD, MS_WHLU)}, [_FNA] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)}, [_FNB] = {ENCODER_CCW_CW(_______, _______)}};
 #endif // ENCODER_MAP_ENABLE
