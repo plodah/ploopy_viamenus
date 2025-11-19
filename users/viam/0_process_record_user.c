@@ -1,5 +1,6 @@
 #pragma once
 
+bool process_record_turbo_fire(uint16_t keycode, keyrecord_t *record);
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   #if defined(BETTER_DRAGSCROLL)
@@ -28,6 +29,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
     #endif // defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE)
 
+    #if defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
+      case KB_TURBO_A_TOGGLE:
+        process_record_turbo_fire(COMMUNITY_MODULE_TURBO_A_TOGGLE, record);
+        return false;
+      case KB_TURBO_A_MOMENTARY:
+        process_record_turbo_fire(COMMUNITY_MODULE_TURBO_A_MOMENTARY, record);
+        return false;
+    #endif // defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
   }
   return true;
 }
