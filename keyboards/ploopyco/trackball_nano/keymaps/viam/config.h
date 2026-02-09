@@ -16,9 +16,9 @@
 
 #pragma once
 
+#include "common.h"
+
 #define PLOOPY_DRAGSCROLL_SCRLK_ENABLE
-#define PLOOPY_VIAMENUS
-#define BETTER_DRAGSCROLL
 #define EECONFIG_USER_DATA_SIZE 47
 #define PLOOPY_MSGESTURE_ENABLE
 

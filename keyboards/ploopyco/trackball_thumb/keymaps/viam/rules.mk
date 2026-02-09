@@ -1,0 +1,1 @@
+AVR_USE_MINIMAL_PRINTF = yes

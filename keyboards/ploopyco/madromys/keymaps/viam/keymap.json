@@ -10,9 +10,6 @@
         "plodah/task_switch"
     ],
     "config": {
-        "dynamic_keymap": {
-            "layer_count": 4
-        },
         "features": {
             "backlight": false,
             "combo": true,
@@ -23,6 +20,9 @@
             "rgb_matrix": false,
             "tap_dance": true,
             "via": true
+        },
+        "ws2812": {
+            "driver": "vendor"
         },
         "keyboard_name": "Adept (Madromys) | viamenus",
         "manufacturer": "Ploopy"

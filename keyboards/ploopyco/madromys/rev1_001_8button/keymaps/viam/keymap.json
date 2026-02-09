@@ -10,9 +10,6 @@
         "plodah/task_switch"
     ],
     "config": {
-        "dynamic_keymap": {
-            "layer_count": 4
-        },
         "features": {
             "backlight": false,
             "combo": true,

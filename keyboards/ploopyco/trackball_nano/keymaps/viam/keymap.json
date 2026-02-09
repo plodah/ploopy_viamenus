@@ -14,9 +14,6 @@
         "build": {
             "lto": true
         },
-        "dynamic_keymap": {
-            "layer_count": 4
-        },
         "features": {
             "backlight": false,
             "bootmagic": false,
@@ -29,7 +26,10 @@
             "rgblight": false,
             "rgb_matrix": false,
             "tap_dance": false,
-            "via": true
+            "via": true,
+            "space_cadet": false,
+            "grave_esc": false,
+            "magic": false
         },
         "keyboard_name": "Trackball Nano | viamenus",
         "manufacturer": "Ploopy",
