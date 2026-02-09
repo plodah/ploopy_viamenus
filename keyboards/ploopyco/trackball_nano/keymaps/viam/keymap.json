@@ -37,6 +37,11 @@
             "direct": [
                 ["E2"]
             ]
+        },
+        "usb": {
+            "shared_endpoint": {
+                "keyboard": true
+            }
         }
     }
 }

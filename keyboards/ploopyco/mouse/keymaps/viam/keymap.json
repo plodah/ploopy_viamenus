@@ -29,6 +29,11 @@
             "magic": false
         },
         "keyboard_name": "Mouse | viamenus",
-        "manufacturer": "Ploopy"
+        "manufacturer": "Ploopy",
+        "usb": {
+            "shared_endpoint": {
+                "keyboard": true
+            }
+        }
     }
 }

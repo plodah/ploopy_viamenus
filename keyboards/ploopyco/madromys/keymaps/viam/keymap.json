@@ -25,6 +25,11 @@
             "driver": "vendor"
         },
         "keyboard_name": "Adept (Madromys) | viamenus",
-        "manufacturer": "Ploopy"
+        "manufacturer": "Ploopy",
+        "usb": {
+            "shared_endpoint": {
+                "keyboard": true
+            }
+        }
     }
 }
