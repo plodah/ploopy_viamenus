@@ -47,20 +47,6 @@ enum {
 
 #include "common.c"
 
-#define P_DRGTD TD(TD_DRAGSCROLL)
-#define P_DPI DPI_CONFIG
-#define P_DRGMO BETTER_DRAG_SCROLL_MOMENTARY
-#define P_DRGTG BETTER_DRAG_SCROLL_TOGGLE
-#define P_SNMOA BETTER_DRAG_SCROLL_SNIPER_A_MOMENTARY
-#define P_SNTGA BETTER_DRAG_SCROLL_SNIPER_A_TOGGLE
-#define P_SNMOB BETTER_DRAG_SCROLL_SNIPER_B_MOMENTARY
-#define P_SNTGB BETTER_DRAG_SCROLL_SNIPER_B_TOGGLE
-
-#define P_MS4FA LT(_FNA, MS_BTN4)
-#define P_MS5FB LT(_FNB, MS_BTN5)
-#define P_DRGACA BETTER_DRAG_ACTION_A_MOMENTARY
-
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT_8(
         P_MS4FA, P_MS5FB, MS_BTN3, MS_BTN2,
@@ -73,7 +59,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         DPI_CONFIG,                P_DRGTG
     ),
     [_FNB] = LAYOUT_8(
-        P_DRGACA, _______, _______, P_SNTGA,
+        P_DGACA, _______, _______, P_SNTGA,
         _______,                   _______,
         PL_MSJG,                   P_DRGTG
     )
