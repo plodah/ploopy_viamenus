@@ -309,6 +309,10 @@
                 ploopyvia_config.dragscroll_dragact_b_right = value_data[0] << 8 | value_data[1];
                 dprintf("dragscroll_dragact_b_right: %d\n", ploopyvia_config.dragscroll_dragact_b_right);
                 break;
+            case id_ploopystuff_dpi_as_slider:
+                ploopyvia_config.dpi_as_slider = *value_data;
+                dprintf("dpi_as_slider: %d\n", ploopyvia_config.dpi_as_slider);
+                break;
         }
     }
 
@@ -505,7 +509,27 @@
                 value_data[1] = ploopyvia_config.dragscroll_dragact_b_right & 0xFF;
                 dprintf("dragscroll_dragact_b_right: %d\n", ploopyvia_config.dragscroll_dragact_b_right);
                 break;
+            case id_ploopystuff_dpi_as_slider:
+                *value_data = ploopyvia_config.dpi_as_slider;
+                dprintf("dpi_as_slider: %d\n", ploopyvia_config.dpi_as_slider);
+                break;
 
+            case id_ploopystuff_mcu_type:
+                #if defined(RP2040)
+                    dprintf("mcu_type: MCU_RP2040\n");
+                    *value_data = MCU_RP2040;
+                #elif defined(atmega32u4)
+                    dprintf("mcu_type: MCU_ATMEGA\n");
+                    *value_data = MCU_ATMEGA;
+                #elif defined(STM32F103) || defined(STM32F303) || defined(STM32F411)
+                    dprintf("mcu_type: MCU_AVR\n");
+                    *value_data = MCU_AVR;
+                #else
+                    dprintf("mcu_type: MCU_UNKNOWN");
+                    *value_data = MCU_UNKNOWN;
+                #endif
+                dprintf("mcu_type: %d\n", ploopyvia_config.dragscroll_dragact_b_right);
+                break;
         }
     }
 

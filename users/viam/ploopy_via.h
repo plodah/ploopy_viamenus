@@ -44,10 +44,20 @@ enum via_ploopystuff_value {
     id_ploopystuff_dragscroll_dragact_b_down,
     id_ploopystuff_dragscroll_dragact_b_left,
     id_ploopystuff_dragscroll_dragact_b_right,
+    id_ploopystuff_dpi_as_slider = 254,
+    id_ploopystuff_mcu_type,
+};
+
+enum mcu_types {
+    MCU_UNKNOWN = 0,
+    MCU_AVR = 1,
+    MCU_ATMEGA = 2,
+    MCU_RP2040 = 3,
 };
 
 typedef struct {
     uint8_t  dpi_multiplier; // Value stored *20 to allow fraction in uint8
+    bool     dpi_as_slider;
     bool     pointer_invert_h;
     bool     pointer_invert_v;
     uint8_t  gesture_count;
@@ -105,8 +115,18 @@ static via_ploopystuff_config ploopyvia_config_default = {
       .dragscroll_invert_v      = false,
     #endif // BETTER_DRA
 
+    #if 4 * BETTER_DRAGSCROLL_DIVISOR_H > 255
+        .dragscroll_divisor_h       = 255,
+    #else // BETTER_DRAGSCROLL_DIVISOR_H
     .dragscroll_divisor_h       = 4 * BETTER_DRAGSCROLL_DIVISOR_H,
     .dragscroll_divisor_v       = 4 * BETTER_DRAGSCROLL_DIVISOR_V,
+    #endif // BETTER_DRAGSCROLL_DIVISOR_H
+
+    #if 4 * BETTER_DRAGSCROLL_DIVISOR_V > 255
+        .dragscroll_divisor_v       = 255,
+    #else // BETTER_DRAGSCROLL_DIVISOR_V
+        .dragscroll_divisor_v       = 4 * BETTER_DRAGSCROLL_DIVISOR_V,
+    #endif // BETTER_DRAGSCROLL_DIVISOR_V
 
     #if defined(BETTER_DRAGSCROLL_CAPLK_ENABLE)
         .dragscroll_caps        = 1,
