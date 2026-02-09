@@ -21,13 +21,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     #if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE)
       case PL_TSKN:
-        process_record_task_switch(COMMUNITY_MODULE_TASK_SWITCH_NEXT, record);
-        return false;
       case PL_TSKP:
-        process_record_task_switch(COMMUNITY_MODULE_TASK_SWITCH_PREVIOUS, record);
+        process_record_task_switch ((keycode - (PL_TSKN - COMMUNITY_MODULE_TASK_SWITCH_NEXT)), record);
         return false;
     #endif // defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE)
 
+    #if defined(COMMUNITY_MODULE_PMW_ROTATION_ENABLE)
+        case PMW_CCW:
+        case PMW_CW:
+        case PMW_RST:
+            process_record_pmw_rotation ((keycode - (PMW_CCW - COMMUNITY_MODULE_PMW_ROTATE_CCW)), record);
+            pmw_rotation_update_via_keypress();
+        return false;
+    #endif //
   }
   return true;
 }

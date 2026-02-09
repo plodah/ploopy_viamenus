@@ -13,6 +13,10 @@ enum via_ploopystuff_value {
     id_ploopystuff_msjiggler_enabled,
     id_ploopystuff_pointer_invert_h,
     id_ploopystuff_pointer_invert_v,
+    #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE
+    id_ploopystuff_pointer_rotation_value,
+    id_ploopystuff_pointer_rotation_is_ccw,
+    #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
     id_ploopystuff_gesture_count = 11,
     id_ploopystuff_gesture_action_h,
     id_ploopystuff_gesture_action_v,
@@ -50,6 +54,10 @@ typedef struct {
     bool     combos_enabled;
     bool     dragscroll_invert_h;
     bool     dragscroll_invert_v;
+    #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE
+    int8_t   pointer_rotation_value;
+    bool     pointer_rotation_is_ccw;
+    #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
     uint8_t  dragscroll_divisor_h; // Value stored *4 to allow fraction in uint8
     uint8_t  dragscroll_divisor_v; // Value stored *4 to allow fraction in uint8
     uint8_t  dragscroll_caps;
@@ -133,4 +141,8 @@ static via_ploopystuff_config ploopyvia_config_default = {
     .dragscroll_dragact_b_down  = KC_NO,
     .dragscroll_dragact_b_left  = KC_NO,
     .dragscroll_dragact_b_right = KC_NO,
+    #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE
+    .pointer_rotation_value     = 0,
+    .pointer_rotation_is_ccw    = false,
+    #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
 };

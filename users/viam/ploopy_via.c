@@ -7,6 +7,10 @@
     #include "mouse_jiggler.h"
     #include "ploopy_via.h"
     #include "mouse_gesture.h"
+    #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE
+      #include "pmw_rotation.h"
+    #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
+
     void ploopyvia_config_load(void) {
         // ploopyvia_config.raw = eeconfig_read_user();
         eeconfig_read_user_datablock(&ploopyvia_config, 0, EECONFIG_USER_DATA_SIZE);
@@ -26,12 +30,41 @@
         eeconfig_update_kb(keyboard_config.raw);
     }
 
+    #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE
+        void pmw_rotation_update_via(void) {
+            int8_t pmw_rotation_temp;
+            if(ploopyvia_config.pointer_rotation_is_ccw){
+                pmw_rotation_temp = ploopyvia_config.pointer_rotation_value;
+            }
+            else{
+                pmw_rotation_temp = - ploopyvia_config.pointer_rotation_value;
+            }
+            pmw_rotation_set_config(true, pmw_rotation_temp);
+            pmw_rotation_config_to_sensor();
+        }
+        void pmw_rotation_update_via_keypress(void) {
+            int8_t pmw_rotation_temp = pmw_rotation_get_config();
+            if(pmw_rotation_temp < 0){
+                ploopyvia_config.pointer_rotation_value = - pmw_rotation_temp;
+                ploopyvia_config.pointer_rotation_is_ccw = 0;
+            }
+            else{
+                ploopyvia_config.pointer_rotation_value = pmw_rotation_temp;
+                ploopyvia_config.pointer_rotation_is_ccw = 1;
+            }
+        }
+    #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
+
+
     void keyboard_post_init_user_viamenus(void) {
         ploopyvia_config_load();
         if(ploopyvia_config.dpi_multiplier == 0){
             eeconfig_init_user();
         }
         update_dpi();
+        #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE
+            pmw_rotation_update_via();
+        #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
         ploopy_msGestureUpdate();
         led_update_better_dragscroll(host_keyboard_led_state());
         dprintf("keyboard_post_init_user\n");
@@ -117,6 +150,20 @@
                 ploopyvia_config.pointer_invert_v = *value_data;
                 dprintf("pointer_invert_v:%d\n", ploopyvia_config.pointer_invert_v);
                 break;
+
+            #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE
+            case id_ploopystuff_pointer_rotation_value:
+                    ploopyvia_config.pointer_rotation_value = *value_data;
+                    dprintf("pointer_rotation_value:%d\n", ploopyvia_config.pointer_rotation_value);
+                    pmw_rotation_update_via();
+                break;
+
+            case id_ploopystuff_pointer_rotation_is_ccw:
+                    ploopyvia_config.pointer_rotation_is_ccw = *value_data;
+                    dprintf("pointer_rotation_is_ccw:%d\n", ploopyvia_config.pointer_rotation_is_ccw);
+                    pmw_rotation_update_via();
+                break;
+            #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
 
             case id_ploopystuff_gesture_count:
                 ploopyvia_config.gesture_count = *value_data;
@@ -290,6 +337,18 @@
                 *value_data = ploopyvia_config.pointer_invert_v;
                 dprintf("pointer_invert_v:%d\n", ploopyvia_config.pointer_invert_v);
                 break;
+
+            #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE
+            case id_ploopystuff_pointer_rotation_value:
+                    *value_data = ploopyvia_config.pointer_rotation_value;
+                    dprintf("pointer_rotation_value:%d\n", ploopyvia_config.pointer_rotation_value);
+                break;
+
+            case id_ploopystuff_pointer_rotation_is_ccw:
+                    *value_data = ploopyvia_config.pointer_rotation_is_ccw;
+                    dprintf("pointer_rotation_is_ccw:%d\n", ploopyvia_config.pointer_rotation_is_ccw);
+                break;
+            #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
 
             case id_ploopystuff_gesture_count:
                 *value_data = ploopyvia_config.gesture_count;
