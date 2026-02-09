@@ -118,8 +118,7 @@ static via_ploopystuff_config ploopyvia_config_default = {
     #if 4 * BETTER_DRAGSCROLL_DIVISOR_H > 255
         .dragscroll_divisor_h       = 255,
     #else // BETTER_DRAGSCROLL_DIVISOR_H
-    .dragscroll_divisor_h       = 4 * BETTER_DRAGSCROLL_DIVISOR_H,
-    .dragscroll_divisor_v       = 4 * BETTER_DRAGSCROLL_DIVISOR_V,
+        .dragscroll_divisor_h       = 4 * BETTER_DRAGSCROLL_DIVISOR_H,
     #endif // BETTER_DRAGSCROLL_DIVISOR_H
 
     #if 4 * BETTER_DRAGSCROLL_DIVISOR_V > 255
