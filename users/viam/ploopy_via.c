@@ -237,6 +237,18 @@
                 led_update_better_dragscroll(host_keyboard_led_state());
                 break;
 
+            case id_ploopystuff_dragscroll_layer_a:
+                ploopyvia_config.dragscroll_layer_a = *value_data;
+                dprintf("dragscroll_layer_a: %d\n", ploopyvia_config.dragscroll_layer_a);
+                led_update_better_dragscroll(host_keyboard_led_state());
+                break;
+
+            case id_ploopystuff_dragscroll_layer_b:
+                ploopyvia_config.dragscroll_layer_b = *value_data;
+                dprintf("dragscroll_layer_b: %d\n", ploopyvia_config.dragscroll_layer_b);
+                led_update_better_dragscroll(host_keyboard_led_state());
+                break;
+
             case id_ploopystuff_dpi_presets:
                 ploopyvia_config.dpi_presets[value_data[0]] = (value_data[1]*10) * (ploopyvia_config.dpi_multiplier/20) ;
                 dprintf("dpi_presets[%d]: %d\n", value_data[0], value_data[1]);
@@ -413,6 +425,16 @@
             case id_ploopystuff_dragscroll_permanently:
                 *value_data = ploopyvia_config.dragscroll_permanently;
                 dprintf("dragscroll_permanently: %d\n", ploopyvia_config.dragscroll_permanently);
+                break;
+
+            case id_ploopystuff_dragscroll_layer_a:
+                *value_data = ploopyvia_config.dragscroll_layer_a;
+                dprintf("dragscroll_layer_a: %d\n", ploopyvia_config.dragscroll_layer_a);
+                break;
+
+            case id_ploopystuff_dragscroll_layer_b:
+                *value_data = ploopyvia_config.dragscroll_layer_b;
+                dprintf("dragscroll_layer_b: %d\n", ploopyvia_config.dragscroll_layer_b);
                 break;
 
             case id_ploopystuff_dpi_presets:

@@ -21,6 +21,8 @@ enum via_ploopystuff_value {
     id_ploopystuff_gesture_action_h,
     id_ploopystuff_gesture_action_v,
     id_ploopystuff_combos_enabled,
+    id_ploopystuff_dragscroll_layer_a = 19,
+    id_ploopystuff_dragscroll_layer_b,
     id_ploopystuff_dragscroll_invert_h = 21,
     id_ploopystuff_dragscroll_invert_v,
     id_ploopystuff_dragscroll_divisor_h,
@@ -65,6 +67,8 @@ typedef struct {
     uint8_t  dragscroll_scroll;
     bool     dragscroll_end_on_keypress;
     bool     dragscroll_permanently;
+    uint8_t  dragscroll_layer_a;
+    uint8_t  dragscroll_layer_b;
     uint16_t dpi_presets[5]; // 10 bytes!
     uint16_t sniper_a_dpi;
     uint16_t sniper_b_dpi;
@@ -129,6 +133,8 @@ static via_ploopystuff_config ploopyvia_config_default = {
     #endif // BETTER_DRAGSCROLL_END_ON_KEYPRESS
 
     .dragscroll_permanently     = false,
+    .dragscroll_layer_a         = 255,
+    .dragscroll_layer_b         = 255,
     .dpi_presets                = { 600, 900, 1200, 1600, 2400 },
     .sniper_a_dpi               = 100,
     .sniper_b_dpi               = 200,

@@ -365,6 +365,8 @@
             || ( ploopyvia_config.dragscroll_num == 2 && ! led_state.num_lock )
             || ( ploopyvia_config.dragscroll_scroll == 1 && led_state.scroll_lock)
             || ( ploopyvia_config.dragscroll_scroll == 2 && ! led_state.scroll_lock )
+            || ( ploopyvia_config.dragscroll_layer_a == get_highest_layer(layer_state | default_layer_state) )
+            || ( ploopyvia_config.dragscroll_layer_b == get_highest_layer(layer_state | default_layer_state) )
             || ( ploopyvia_config.dragscroll_permanently )
         #else // (defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS))
             #if defined(BETTER_DRAGSCROLL_SCRLK_ENABLE)
