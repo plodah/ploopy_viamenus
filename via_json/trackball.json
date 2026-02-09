@@ -19,7 +19,9 @@
         { "name": "Sniper B Mo", "title": "Sniper B Momentary", "shortName": "SnpB Mo" },
         { "name": "Sniper B Tg", "title": "Sniper B Toggle", "shortName": "SnpB Tg" },
         { "name": "Better DragSc Act A", "title": "Better Drag Scroll Action A", "shortName": "Drg AcA" },
-        { "name": "Better DragSc Act B", "title": "Better Drag Scroll Action B", "shortName": "Drg AcB" }
+        { "name": "Better DragSc Act B", "title": "Better Drag Scroll Action B", "shortName": "Drg AcB" },
+        { "name": "Turbo A Tg", "title": "Turbo A Toggle", "shortName": "TbA Tg" },
+        { "name": "Turbo A Mo", "title": "Turbo A Momentary", "shortName": "TbA Mo" }
     ],
     "layouts": {
         "labels": [
