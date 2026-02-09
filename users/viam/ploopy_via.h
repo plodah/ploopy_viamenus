@@ -44,7 +44,8 @@ enum via_ploopystuff_value {
     id_ploopystuff_dragscroll_dragact_b_down,
     id_ploopystuff_dragscroll_dragact_b_left,
     id_ploopystuff_dragscroll_dragact_b_right,
-    id_ploopystuff_dpi_as_slider = 254,
+    id_ploopystuff_sensor_rotation_available = 253,
+    id_ploopystuff_dpi_as_slider,
     id_ploopystuff_mcu_type,
 };
 

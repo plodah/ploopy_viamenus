@@ -250,18 +250,18 @@
                 break;
 
             case id_ploopystuff_dpi_presets:
-                ploopyvia_config.dpi_presets[value_data[0]] = (value_data[1]*10) * (ploopyvia_config.dpi_multiplier/20) ;
+                ploopyvia_config.dpi_presets[value_data[0]] = (value_data[1]*100) * (ploopyvia_config.dpi_multiplier/20);
                 dprintf("dpi_presets[%d]: %d\n", value_data[0], value_data[1]);
                 update_dpi();
                 break;
 
             case id_ploopystuff_sniper_a_dpi:
-                ploopyvia_config.sniper_a_dpi = ((uint8_t)*value_data*10) * (ploopyvia_config.dpi_multiplier/20);
+                ploopyvia_config.sniper_a_dpi = ((uint8_t)*value_data*100) * (ploopyvia_config.dpi_multiplier/20);
                 dprintf("sniper_a_dpi: %d\n", ploopyvia_config.sniper_a_dpi);
                 break;
 
             case id_ploopystuff_sniper_b_dpi:
-                ploopyvia_config.sniper_b_dpi = ((uint8_t)*value_data*10) * (ploopyvia_config.dpi_multiplier/20) ;
+                ploopyvia_config.sniper_b_dpi = ((uint8_t)*value_data*100) * (ploopyvia_config.dpi_multiplier/20);
                 dprintf("sniper_b_dpi: %d\n", ploopyvia_config.sniper_b_dpi);
                 break;
 
@@ -442,17 +442,17 @@
                 break;
 
             case id_ploopystuff_dpi_presets:
-                value_data[1] = (ploopyvia_config.dpi_presets[value_data[0]] / 10) / (ploopyvia_config.dpi_multiplier/20)  ;
+                value_data[1] = (ploopyvia_config.dpi_presets[value_data[0]] / 100) / (ploopyvia_config.dpi_multiplier/20);
                 dprintf("dpi_presets[%d]: %d\n", value_data[0], ploopyvia_config.dpi_presets[value_data[0]]);
                 break;
 
             case id_ploopystuff_sniper_a_dpi:
-                *value_data = (ploopyvia_config.sniper_a_dpi / 10) / (ploopyvia_config.dpi_multiplier/20);
+                *value_data = (ploopyvia_config.sniper_a_dpi / 100 ) / (ploopyvia_config.dpi_multiplier/20);
                 dprintf("sniper_a_dpi: %d\n", ploopyvia_config.sniper_a_dpi);
                 break;
 
             case id_ploopystuff_sniper_b_dpi:
-                *value_data = (ploopyvia_config.sniper_b_dpi / 10 ) / (ploopyvia_config.dpi_multiplier/20);
+                *value_data = (ploopyvia_config.sniper_b_dpi / 100 ) / (ploopyvia_config.dpi_multiplier/20);
                 dprintf("sniper_b_dpi: %d\n", ploopyvia_config.sniper_b_dpi);
                 break;
 
@@ -509,6 +509,7 @@
                 value_data[1] = ploopyvia_config.dragscroll_dragact_b_right & 0xFF;
                 dprintf("dragscroll_dragact_b_right: %d\n", ploopyvia_config.dragscroll_dragact_b_right);
                 break;
+
             case id_ploopystuff_dpi_as_slider:
                 *value_data = ploopyvia_config.dpi_as_slider;
                 dprintf("dpi_as_slider: %d\n", ploopyvia_config.dpi_as_slider);
@@ -529,6 +530,16 @@
                     *value_data = MCU_UNKNOWN;
                 #endif
                 dprintf("mcu_type: %d\n", ploopyvia_config.dragscroll_dragact_b_right);
+                break;
+
+            case id_ploopystuff_sensor_rotation_available:
+                #if defined(COMMUNITY_MODULE_PMW_ROTATION_ENABLE)
+                    dprintf("sensor_rotation_available: 1\n");
+                    *value_data = 1;
+                #else
+                    dprintf("sensor_rotation_available: 0\n");
+                    *value_data = 0;
+                #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
                 break;
         }
     }

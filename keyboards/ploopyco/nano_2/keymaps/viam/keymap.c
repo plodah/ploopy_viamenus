@@ -1,7 +1,8 @@
 /* Copyright 2025 Plodah
- * Copyright 2023 Colin Lam (Ploopy Corporation)
+ * Copyright 2021 Colin Lam (Ploopy Corporation)
  * Copyright 2020 Christopher Courtney, aka Drashna Jael're  (@drashna) <drashna@live.com>
  * Copyright 2019 Sunjun Kim
+ * Copyright 2019 Hiroyuki Okada
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,8 +22,6 @@
 
 enum layers {
     _BASE,
-    _FNA,
-    _FNB,
 };
 
 enum keymap_keycodes {
@@ -39,28 +38,12 @@ enum keymap_keycodes {
     BETTER_DRAG_SCROLL_SNIPER_B_TOGGLE,
     BETTER_DRAG_ACTION_A_MOMENTARY,
     BETTER_DRAG_ACTION_B_MOMENTARY,
-    PMW_CCW,
-    PMW_CW,
-    PMW_RST,
-};
-
-enum {
-    TD_DRAGSCROLL,
 };
 
 #include "common.c"
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT(
-        P_MS4FA, P_MS5FB, MS_BTN3, MS_BTN2,
-        MS_BTN1,                   TD(TD_DRAGSCROLL)
-    ),
-    [_FNA] = LAYOUT(
-        _______, PL_TSKP, PL_TSKN, PMW_RST,
-        DPI_CONFIG,                P_DRGTG
-    ),
-    [_FNB] = LAYOUT(
-        PMW_CCW, _______, PMW_CW, P_SNTGA,
-        PL_MSJG,                   P_DRGTG
+        DRAG_SCROLL
     )
 };

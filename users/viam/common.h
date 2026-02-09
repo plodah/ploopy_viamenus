@@ -1,5 +1,6 @@
 #pragma once
 
+#define VIA_FIRMWARE_VERSION 2
 #define PLOOPY_VIAMENUS
 #define BETTER_DRAGSCROLL
 

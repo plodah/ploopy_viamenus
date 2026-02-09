@@ -7,7 +7,8 @@
     "layout": "LAYOUT",
     "modules": [
         "plodah/mouse_jiggler",
-        "plodah/task_switch"
+        "plodah/task_switch",
+        "plodah/pmw_rotation"
     ],
     "config": {
         "features": {

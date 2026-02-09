@@ -39,6 +39,9 @@ enum keymap_keycodes {
     BETTER_DRAG_SCROLL_SNIPER_B_TOGGLE,
     BETTER_DRAG_ACTION_A_MOMENTARY,
     BETTER_DRAG_ACTION_B_MOMENTARY,
+    PMW_CCW,
+    PMW_CW,
+    PMW_RST,
 };
 
 enum {
