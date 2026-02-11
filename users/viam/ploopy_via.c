@@ -520,12 +520,11 @@
                     dprintf("mcu_type: MCU_RP2040\n");
                     *value_data = MCU_RP2040;
                 #elif defined(QMK_MCU_ATMEGA32U4)
-                    #pragma message "MCU_ATMEGA32U4"
                     dprintf("mcu_type: MCU_ATMEGA32U4\n");
-                    *value_data = MCU_ATMEGA;
+                    *value_data = MCU_ATMEGA32U4;
                 #elif defined(QMK_MCU_STM32L432)
-                    dprintf("mcu_type: MCU_AVR\n");
-                    *value_data = MCU_AVR;
+                    dprintf("mcu_type: MCU_STM32L432\n");
+                    *value_data = MCU_STM32L432;
                 #else
                     dprintf("mcu_type: MCU_UNKNOWN");
                     *value_data = MCU_UNKNOWN;
