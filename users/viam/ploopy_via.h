@@ -44,16 +44,25 @@ enum via_ploopystuff_value {
     id_ploopystuff_dragscroll_dragact_b_down,
     id_ploopystuff_dragscroll_dragact_b_left,
     id_ploopystuff_dragscroll_dragact_b_right,
-    id_ploopystuff_sensor_rotation_available = 253,
+    id_ploopystuff_dummy_menuitem = 251,
+    id_ploopystuff_sensor_type,
+    id_ploopystuff_sensor_rotation_available,
     id_ploopystuff_dpi_as_slider,
     id_ploopystuff_mcu_type,
 };
 
 enum mcu_types {
     MCU_UNKNOWN = 0,
-    MCU_AVR = 1,
-    MCU_ATMEGA = 2,
-    MCU_RP2040 = 3,
+    MCU_ATMEGA32U4,
+    MCU_RP2040,
+    MCU_STM32L432,
+};
+
+enum sensor_types {
+    SENSOR_UNKNOWN = 0,
+    SENSOR_PMW3360,
+    SENSOR_ADNS5050,
+    SENSOR_PAW3222,
 };
 
 typedef struct {

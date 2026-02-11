@@ -845,19 +845,46 @@
                     "label": "Firmware Info",
                     "content": [
                         {
-                            "label": "For information Only!",
+                            "label": "This entire page is for info only!!",
                             "type": "dropdown",
                             "options": [
                                 ["don't change values", 0],
-                                ["don't change values", 0],
-                                ["don't change values", 0]
+                                ["don't change values", 99]
                             ],
-                            "content": ["id_dummy", 0, 255]
+                            "content": ["id_dummy", 0, 251]
                         },
                         {
                             "label": "Firmware Version",
-                            "type": "range",
-                            "options": [0, 255],
+                            "type": "dropdown",
+                            "options": [
+                                ["don't change values", 99],
+                                ["0", 0],
+                                ["1", 1],
+                                ["2", 2],
+                                ["3", 3],
+                                ["4", 4],
+                                ["5", 5],
+                                ["6", 6],
+                                ["7", 7],
+                                ["8", 8],
+                                ["9", 9],
+                                ["10", 10],
+                                ["11", 11],
+                                ["12", 12],
+                                ["13", 13],
+                                ["14", 14],
+                                ["15", 15],
+                                ["16", 16],
+                                ["17", 17],
+                                ["18", 18],
+                                ["19", 19],
+                                ["20", 20],
+                                ["21", 21],
+                                ["22", 22],
+                                ["23", 23],
+                                ["24", 24],
+                                ["25", 25]
+                            ],
                             "content": ["id_firmware_version", 0, 0]
                         },
                         {
@@ -865,40 +892,72 @@
                             "label": "Firmware Update Available",
                             "type": "dropdown",
                             "options": [
-                                ["Yes", 0]
+                                ["Yes", 0],
+                                ["don't change values", 1]
                             ],
-                            "content": ["id_dummy", 0, 0]
+                            "content": ["id_dummy", 0, 251]
                         },
                         {
                             "showIf": "{id_firmware_version} >= 2",
                             "label": "Firmware Update Available",
                             "type": "dropdown",
                             "options": [
-                                ["No", 0]
+                                ["No", 0],
+                                ["don't change values", 1]
                             ],
-                            "content": ["id_dummy", 0, 0]
+                            "content": ["id_dummy", 0, 251]
                         },
                         {
                             "showIf": "{id_firmware_version} >= 2",
-                            "label": "MCU is",
+                            "label": "Rotation Possible",
+                            "type": "dropdown",
+                            "options": [
+                                ["No- Unsupported Sensor", 0],
+                                ["don't change values", 99],
+                                ["Yes", 1],
+                                ["No- Feature disabled in firmware", 0]
+                            ],
+                            "content": ["id_sensor_rotation_available", 0, 253]
+                        }
+                    ]
+                },
+                {
+                    "label": "Hardware Info",
+                    "content": [
+                        {
+                            "label": "This entire page is for info only!!",
+                            "type": "dropdown",
+                            "options": [
+                                ["don't change values", 0],
+                                ["don't change values", 99]
+                            ],
+                            "content": ["id_dummy", 0, 251]
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2",
+                            "label": "MCU",
                             "type": "dropdown",
                             "options": [
                                 ["UNKNOWN", 0],
-                                ["AVR", 1],
-                                ["ATMega", 2],
-                                ["RP2040", 3]
+                                ["don't change values", 99],
+                                ["ATMEGA32U4", 1],
+                                ["RP2040", 2],
+                                ["STM32L432", 3]
                             ],
-                            "content": ["id_device_mcu", 0, 255]
+                            "content": ["id_mcu_type", 0, 255]
                         },
                         {
                             "showIf": "{id_firmware_version} >= 2",
-                            "label": "Rotation Available",
+                            "label": "Sensor",
                             "type": "dropdown",
                             "options": [
-                                ["No", 0],
-                                ["Yes", 1]
+                                ["UNKNOWN", 0],
+                                ["don't change values", 99],
+                                ["PMW3360", 1],
+                                ["ADNS5050", 2],
+                                ["PAW3222", 3]
                             ],
-                            "content": ["id_sensor_rotation_available", 0, 253]
+                            "content": ["id_device_sensor", 0, 252]
                         }
                     ]
                 }

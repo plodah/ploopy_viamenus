@@ -516,26 +516,47 @@
                 break;
 
             case id_ploopystuff_mcu_type:
-                #if defined(RP2040)
+                #if defined(QMK_MCU_RP2040)
                     dprintf("mcu_type: MCU_RP2040\n");
                     *value_data = MCU_RP2040;
-                #elif defined(atmega32u4)
-                    dprintf("mcu_type: MCU_ATMEGA\n");
+                #elif defined(QMK_MCU_ATMEGA32U4)
+                    #pragma message "MCU_ATMEGA32U4"
+                    dprintf("mcu_type: MCU_ATMEGA32U4\n");
                     *value_data = MCU_ATMEGA;
-                #elif defined(STM32F103) || defined(STM32F303) || defined(STM32F411)
+                #elif defined(QMK_MCU_STM32L432)
                     dprintf("mcu_type: MCU_AVR\n");
                     *value_data = MCU_AVR;
                 #else
                     dprintf("mcu_type: MCU_UNKNOWN");
                     *value_data = MCU_UNKNOWN;
                 #endif
-                dprintf("mcu_type: %d\n", ploopyvia_config.dragscroll_dragact_b_right);
+                break;
+
+            case id_ploopystuff_sensor_type:
+                #if defined(POINTING_DEVICE_DRIVER_PMW3360)
+                    dprintf("sensor_type: SENSOR_PMW3360\n");
+                    *value_data = SENSOR_PMW3360;
+                #elif defined(POINTING_DEVICE_DRIVER_ADNS5050)
+                    dprintf("sensor_type: SENSOR_ADNS5050\n");
+                    *value_data = SENSOR_ADNS5050;
+                #elif defined(POINTING_DEVICE_DRIVER_PAW3222)
+                    dprintf("sensor_type: SENSOR_PAW3222\n");
+                    *value_data = SENSOR_PAW3222;
+                #else
+                    dprintf("sensor_type: SENSOR_UNKNOWN\n");
+                    *value_data = SENSOR_UNKNOWN;
+                #endif
                 break;
 
             case id_ploopystuff_sensor_rotation_available:
-                #if defined(COMMUNITY_MODULE_PMW_ROTATION_ENABLE)
-                    dprintf("sensor_rotation_available: 1\n");
-                    *value_data = 1;
+                #if defined(POINTING_DEVICE_DRIVER_PMW3360)
+                    #if defined(COMMUNITY_MODULE_PMW_ROTATION_ENABLE)
+                        dprintf("sensor_rotation_available: 1\n");
+                        *value_data = 1;
+                    #else
+                        dprintf("sensor_rotation_available: 2\n");
+                        *value_data = 2;
+                    #endif
                 #else
                     dprintf("sensor_rotation_available: 0\n");
                     *value_data = 0;
