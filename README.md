@@ -12,28 +12,53 @@ There have been problems found that I didn't notice myself, and still could be m
 I'd recommend that you're comfortable returning your device to the original firmware in case you come across any such problems.
 Please let me know or PR a fix if you find anything, but I can't commit to fixing any issue and provide no warranty etc. It's free after all!
 
-![alt text](readme-examplemenu.png)
-
+![Example menu with DPI preset dropdown menus](readme-examplemenu.png)
 
 ## What does it do?
+### What's new (planned) in Feb 2026 Release
+- Rotate cursor output to compensate for device orientation (where available)
+- Support Nano 2
+- Alter scroll wheel action (for devices that have them)
+- Replace Drag-volume with Drag actions.
+- Updated DPI handling. Optionally use a slider. 
+
 ### DPI Config
 Configure 5 **DPI** presets and switch between them.
-Can additionally apply global multiplier to DPI
+
+Drop-down menus are the default DPI selectors, but using sliders allows a much greater range of options.
+
+To use this, find the `Experience` Menu, and change the `Show DPI as` option to `Slider`.
+
+![Display DPI options as sliders](readme-slider-displayas.png)
+
+Individual DPI presets will then appear as below- this example shows 4300 dpi
+
+![Example showing Preset 4 set to 4300 dpi](readme-slider-example.png)
+
+I also would recommend changing Via's settings to show a numerical value by the slider, as I've done above.
+
+![Settings menu shows how to display a numerical value on sliders.](readme-slider-setting.png)
 
 ### Dragscroll
-Kinda improved version of dragscroll. 
-- Momentary and Toggle keys available.
-- Tapdance, which will act as a momentary dragscroll, but when tapped twice will toggle
-- Mofify the dragscroll divisor to adjust scroll speed relative to DPI
-- Enable/disable dragscroll with caps/num/scroll lock
-- If toggled on, dragscroll can optionally be deactivated by another key press
-- invert dragscroll direction for x/y independently
-- Dragscroll Straightening; slight left/right scrolling can be ignored while scrolling up/down. 
-  Also Vertical scrolling ignored while scrolling Left/Right. 
-  Sensitivity is adjustable; e.g. "75% sensitivity" will ignore lesser scroll where it's <75% of the greater scroll. 100% sensitivity is fully one-dimensional.
+Expanded version of dragscroll. 
+This can be activated in several ways
+- Momentary or Toggle keys
+- When a specific layer is active
+- When caps/num/scroll lock are on
+- a Tapdance, which will act as a momentary dragscroll, but when tapped twice will toggle
 
-### Drag-volume
-While this key is held, pointer movement is stopped and up/down movement adjusts volume.
+As well as several other additions
+- Adjust the dragscroll divisor to control scroll speed relative to DPI
+- invert dragscroll direction for x/y independently
+- Optionally stop dragscroll when another key is pressed
+- Dragscroll Straightening; ignore slight side-scrolling while scrolling up/down (and vice-versa).
+  The sensitivity can be adjusted; 75% sensitivity will ignore side scroll if it's <75% of the greater scroll. 100% sensitivity is fully one-dimensional.
+
+### Drag-~~volume~~ actions
+Hold down this key, and move the ball. 
+While this key is held, pointer movement is stopped and up/down/left/right movement performs some action of your choice. 
+This was originally just Volume, but expanded to allow whatever actions, even if that's just reversing the volume direction.
+What could you use this for? I guess Volume+/-, arrow keys, wasd.
 
 ### Mouse Jiggler 
 The pointer will move an imperceptably small amount, in a pseudo-random direction at a pseudo-random interval.
@@ -44,7 +69,7 @@ Can be switched on/off by key press, via menu or gesture.
 
 ### Sniper mode
 Change DPI while the appropriate button is held
-Called this "sniper" mode since it's useful for fine movement, but could also be used with a high DPI instead.
+Called this "sniper" mode since it's useful for fine movement, but could just as easily increase DPI if preferred.
 
 ### Gestures
 Similar to _"Wiggleball"_ 
@@ -54,15 +79,18 @@ Wiggle the cursor to enable dragscroll or mouse jiggler (or not, if you prefer)
 Keys allow you to "alt tab" between open Windows. 
 Alt is held for ~1 second after this key released to allow switching between several windows.
 
+### Rotate pointer movement  **new for Feb 2026**
+If you want to use the device sideways, reconfigure the sensor to compensate. 
+Can move 90 degrees clockwise/counter-clockwise. Use this in combination with "invert x/y" to allow any orientation through 360 degrees.
+
 ### Custom Keycodes
 | Key | Description |
 | --- | --- |
 | DPI Config | Stock Ploopy key to cycle between DPI presets |
 | Ploopy Drag Scroll | Stock Ploopy key to turn on the original dragscroll.. it does **not** play nice with the "better" dragscroll keys |
-| Better Drag Scroll Momentary | drag scroll mode on while held |
-| Better Drag Scroll Toggle | toggles drag scroll mode off/on |
-| Taskswitch Next | i.e. Alt + Tab |
-| Taskswitch Prev | i.e. Alt + Shift + Tab |
+| Better Drag Scroll Momentary/Toggle | Turn drag scroll on while held, or toggle on/off |
+| Taskswitch Next/Prev | i.e. Alt + Tab or Alt + Shift + Tab includes a brief delay for useability |
+| Sniper Momentary/Togle | additional DPI switching options. |
 
 ## How do I use it?
 1. Download Firmware and JSON from [**Releases**](https://github.com/plodah/ploopy_viamenus/releases)
@@ -75,8 +103,16 @@ Alternatively, use my version of Via at [via.plodah.uk](https://via.plodah.uk), 
 
 ### Problems and workarounds
 #### Known Issues
-DPI settings seem to be volatile in many iterations of this firmware
-This should be fixed as of 2025-04-28.
+##### No major issues 
+...that I have been made aware of.. Y'all just seem to ask for more features   
+##### Running out of room for more
+
+Some devices which run on older ATMEGA chips are very near to running out of space.
+It's likely that this limit will be reached in future and older devices (before 2025) wil have to have things cut out to stay within the measly 28kb available. 
+  
+This Affects the Classic 1, Mouse, Thumb, Mini & Nano 1.
+It does not affect the refreshed versions that came in 2025.
+
 
 #### Tapdances
 Via only supports the "keyboard" level custom keycodes. Those that are set up in a module, or at the user level can't be added to the custom menu
@@ -94,19 +130,15 @@ These will appear as their hex keycode in Via and can only be assigned with the 
 3. Turbo keys/buttons. -- repeatedly send a click at a certain interval.
 4. ~~Dragscroll ends on other key press. make this optional.~~ **DONE** 28 Mar 2025
 5. Mouse jiggler- could expose different jiggle patterns, multipliers & speeds as via menu.
-6. Maybe allow equivalent of ROTATIONAL_TRANSFORM_ANGLE to use trackball sideways
-7. Check the dragscroll inversion on adept/madromys. Inversion state seems er.. inverted
+6. ~~Maybe allow equivalent of ROTATIONAL_TRANSFORM_ANGLE to use trackball sideways~~ **DONE** Feb 2026 for pmw devices. I don't think this is possible on other devices- or at least it's not directly supported by the sensor or its qmk driver.
+7. ~~Check the dragscroll inversion on adept/madromys. Inversion state seems er.. inverted~~ idk, seems fine.. I forget when this was broken
 8. ~~Dragscroll straightening~~ **DONE** 19 May 2025
 9. ~~Drag-Volume~~ Hold a key and move the mouse up/down to adjust volume **DONE** 18 May 2025
+10. In-device pointer accelaration. Drashna already has a module for this, and I will likely just use that.
 
 ### Stuff I would like to achieve, but have no earthly idea how to do so
 1. Additional gesture to scroll by drawing a circle with the pointer.
-2. Use a text input box for DPI presets rather than a dropdown list.
-3. Use a 16-bit value for DPI.
-   Currently uses an 8-bit value, multiplied by 10 giving a range of 0-2550 dpi.
-   2-byte / 16-bit value would allow 0-65535 directly (no multiplier)
-   Via only seems to support 16 bit values on sliders & keycode controls. Uses a dropdown currently.
-4. Provide a better interface for tapdances ~~and community module keycodes~~ **fixed the community module kc's**
+2. Provide a better interface for tapdances ~~and community module keycodes~~ **fixed the community module kc's**
 99. world peace
 
 ## I regret everything, take me back
