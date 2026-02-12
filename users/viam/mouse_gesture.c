@@ -1,6 +1,8 @@
 #if defined(PLOOPY_MSGESTURE_ENABLE) && defined(DEFERRED_EXEC_ENABLE)
   #include "mouse_gesture.h"
+  #ifdef COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
   #include "mouse_jiggler.h"
+  #endif // def COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
   #include "better_dragscroll.h"
   #include "ploopy_via.h"
 
@@ -12,12 +14,16 @@
 
   void ploopy_msGestureUpdate(void){
     #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
-      PLOOPY_MSGESTURE_X.action = ploopyvia_config.gesture_action_h;
-      PLOOPY_MSGESTURE_Y.action = ploopyvia_config.gesture_action_v;
-      gestureCount              = ploopyvia_config.gesture_count;
+        PLOOPY_MSGESTURE_X.action = ploopyvia_config.gesture_action_h;
+        PLOOPY_MSGESTURE_Y.action = ploopyvia_config.gesture_action_v;
+        gestureCount              = ploopyvia_config.gesture_count;
     #else
-      PLOOPY_MSGESTURE_X.action = GESTURE_ACTION_DRAGSCROLL;
-      PLOOPY_MSGESTURE_Y.action = GESTURE_ACTION_MSJIGGLER;
+        PLOOPY_MSGESTURE_X.action = GESTURE_ACTION_DRAGSCROLL;
+        #ifdef COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
+            PLOOPY_MSGESTURE_Y.action = GESTURE_ACTION_MSJIGGLER;
+        #else
+            PLOOPY_MSGESTURE_Y.action = GESTURE_ACTION_NOTHING;
+        #endif // def COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
       gestureCount = PLOOPY_MSGESTURE_WIGGLES;
     #endif
   }
@@ -76,14 +82,16 @@
   void ploopy_msGestureTriggered(uint8_t action){
     ploopy_msGestureCooldown = true;
     ploopy_msGestureSwitchCooldown = defer_exec(PLOOPY_MSGESTURE_COOLDOWN, PLOOPY_MSGESTURE_expireCooldown, NULL);
-    switch(action){
-        case GESTURE_ACTION_MSJIGGLER:
-          jiggler_toggle();
-          break;
-        case GESTURE_ACTION_DRAGSCROLL:
-          better_dragscroll_toggle(true);
-          break;
-    }
+        switch(action){
+            case GESTURE_ACTION_MSJIGGLER:
+                #ifdef COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
+                    jiggler_toggle();
+                #endif // def COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
+                break;
+            case GESTURE_ACTION_DRAGSCROLL:
+                better_dragscroll_toggle(true);
+                break;
+        }
   }
 
   report_mouse_t pointing_device_task_mouse_gesture(report_mouse_t mouse_report) {
@@ -123,12 +131,12 @@
     }
 
     if( PLOOPY_MSGESTURE_X.count >= gestureCount ) {
-        dprintf("X Jiggle a:%d\n", PLOOPY_MSGESTURE_X.action);
+        dprintf("X gesture act:%d\n", PLOOPY_MSGESTURE_X.action);
         ploopy_msGestureTriggered(PLOOPY_MSGESTURE_X.action);
     }
 
     if( PLOOPY_MSGESTURE_Y.count >= gestureCount ) {
-        dprintf("Y Jiggle a:%d\n", PLOOPY_MSGESTURE_Y.action);
+        dprintf("Y gesture act:%d\n", PLOOPY_MSGESTURE_Y.action);
         ploopy_msGestureTriggered(PLOOPY_MSGESTURE_Y.action);
     }
     return mouse_report;

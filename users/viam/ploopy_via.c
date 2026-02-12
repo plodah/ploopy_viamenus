@@ -4,7 +4,9 @@
     // #include QMK_KEYBOARD_H
     #include "better_dragscroll.h"
     #include "via.h"
-    #include "mouse_jiggler.h"
+    #ifdef COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
+        #include "mouse_jiggler.h"
+    #endif // def COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
     #include "ploopy_via.h"
     #include "mouse_gesture.h"
     #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE
@@ -133,13 +135,15 @@
                 update_dpi();
                 break;
 
-            case id_ploopystuff_msjiggler_enabled:
-                if( (msJigMainToken != INVALID_DEFERRED_TOKEN) ^ (*value_data) ) {
-                    // ^ is an XOR, buddy
-                    jiggler_toggle();
-                    dprintf("msjiggler_enabled\n");
-                }
-                break;
+            #ifdef COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
+                case id_ploopystuff_msjiggler_enabled:
+                    if( jiggler_get_state() ^ (*value_data) ) {
+                        // ^ is an XOR, buddy
+                        jiggler_toggle();
+                        dprintf("msjiggler_enabled\n");
+                    }
+                    break;
+            #endif // def COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
 
             case id_ploopystuff_pointer_invert_h:
                 ploopyvia_config.pointer_invert_h = *value_data;
@@ -333,8 +337,9 @@
                 dprintf("dpi_multiplier: %d\n", ploopyvia_config.dpi_multiplier);
                 break;
 
+            #ifdef COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
             case id_ploopystuff_msjiggler_enabled:
-                if(msJigMainToken != INVALID_DEFERRED_TOKEN){
+                if(jiggler_get_state()){
                     dprintf("msjiggler_enabled true \n");
                     *value_data = true;
                 }
@@ -343,6 +348,7 @@
                     *value_data = false;
                 }
                 break;
+            #endif // def COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
 
             case id_ploopystuff_pointer_invert_h:
                 *value_data = ploopyvia_config.pointer_invert_h;
