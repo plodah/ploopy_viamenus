@@ -23,30 +23,7 @@
     #include "quantum.h"
     #include "better_dragscroll.h"
     #include "ploopy_via.h"
-
-    #if !defined(SCROLL_HISTORY_SIZE)
-        #if defined(QMK_MCU_RP2040)
-            #define SCROLL_HISTORY_SIZE 25
-        #else
-            #define SCROLL_HISTORY_SIZE 10
-        #endif
-    #endif
-    #if !defined(SCROLL_HISTORY_FREQ)
-        #if defined(QMK_MCU_RP2040)
-            #define SCROLL_HISTORY_FREQ 10
-        #else
-            #define SCROLL_HISTORY_FREQ 25
-        #endif
-    #endif
-
-    int8_t drgstraight_history_x[SCROLL_HISTORY_SIZE];
-    int8_t drgstraight_history_y[SCROLL_HISTORY_SIZE];
-    uint16_t drgstraight_history_time[SCROLL_HISTORY_SIZE];
-    uint8_t drgstraight_history_head;
-    uint8_t drgstraight_history_tail;
-    float drgstraight_momentum_x;
-    float drgstraight_momentum_y;
-    int8_t drgstraight_i;
+    #include "dragscroll_straighten.h"
 
     bool better_dragscroll_enabled_bylock = 0;
     bool better_dragscroll_enabled_bypress = 0;
@@ -60,9 +37,7 @@
         dragscroll_acc_h = 0;
         dragscroll_acc_v = 0;
         if(ploopyvia_config.dragscroll_straighten_sensitivity){
-            drgstraight_history_tail = drgstraight_history_head;
-            drgstraight_history_x[drgstraight_history_tail] = 0;
-            drgstraight_history_y[drgstraight_history_tail] = 0;
+            drgstraight_reset();
         }
     }
 
@@ -197,60 +172,11 @@
             #endif // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
 
             if(ploopyvia_config.dragscroll_straighten_sensitivity){
-
-                // Borrowed and adapted from Obosob
-                // https://github.com/obosob/qmk_firmware/blob/2b1d6e6c31ac3ddf1e023143d46acafaac1103e5/keyboards/ploopyco/madromys/keymaps/obosob/keymap.c#L84
-                //
-                // Obosob's version would negate only HORIZONTAL scroll where there was more prevailing VERTICAL scroll
-                // This will negate either horizontal or vertical scroll depending on momentum
-                // Sensitivity % is tunable to allow some disgonal scrolling through.
-                //
-                // Removed a bunch of variables, which were used only once. Not sure what that achieved apart from making it more difficult to read.
-
-                // if it's been more than the sampling frequency: advance the head of
-                // the buffer, initialise that frame to zero, and take a timer reading
-                if (timer_elapsed(drgstraight_history_time[drgstraight_history_head]) > SCROLL_HISTORY_FREQ) {
-                    drgstraight_history_head = (drgstraight_history_head + 1) % SCROLL_HISTORY_SIZE;
-                    // if head has met the tail, advance the tail by one
-                    if(drgstraight_history_head == drgstraight_history_tail) {
-                        drgstraight_history_tail = (drgstraight_history_tail + 1) % SCROLL_HISTORY_SIZE;
-                    }
-                    drgstraight_history_time[drgstraight_history_head] = timer_read();
-                    drgstraight_history_x[drgstraight_history_head] = 0;
-                    drgstraight_history_y[drgstraight_history_head] = 0;
-                }
-
-                // add the mouse report to the sample (note that this is signed, it
-                // results in the total amount the cursor would have moved from the
-                // start to end of the frame
-                drgstraight_history_x[drgstraight_history_head] += mouse_report.x;
-                drgstraight_history_y[drgstraight_history_head] += mouse_report.y;
-
-                // iterate over the history buffer, calculate the velocity for each time
-                // step (average velocity for the sample frequency)
-                drgstraight_momentum_x = 0.0;
-                drgstraight_momentum_y = 0.0;
-                drgstraight_i = drgstraight_history_tail;
-
-                while ( (drgstraight_i + 1) % SCROLL_HISTORY_SIZE != (drgstraight_history_head + 1) % SCROLL_HISTORY_SIZE ) {
-                    drgstraight_momentum_x += (float)abs(drgstraight_history_x[(drgstraight_i + 1) % SCROLL_HISTORY_SIZE]) / (float)abs(timer_elapsed(drgstraight_history_time[(drgstraight_i + 1) % SCROLL_HISTORY_SIZE]) - timer_elapsed(drgstraight_history_time[drgstraight_i]));
-                    drgstraight_momentum_y += (float)abs(drgstraight_history_y[(drgstraight_i + 1) % SCROLL_HISTORY_SIZE]) / (float)abs(timer_elapsed(drgstraight_history_time[(drgstraight_i + 1) % SCROLL_HISTORY_SIZE]) - timer_elapsed(drgstraight_history_time[drgstraight_i]));
-                    drgstraight_i = (drgstraight_i + 1) % SCROLL_HISTORY_SIZE;
-                }
-
-                // dprintf("velocity: x:%d y:%d (/10,000)\n", (int16_t)(drgstraight_momentum_x * 10000), (int16_t)(drgstraight_momentum_y * 10000));
-                if ( ((float)ploopyvia_config.dragscroll_straighten_sensitivity / (float)100) * drgstraight_momentum_y > drgstraight_momentum_x ){
-                    // Clear HORIZONTAL accumulation where [sensitivity %] of VERTICAL momentum exceeds HORIZONTAL momentum
-                    dragscroll_acc_h = 0;
-                    // dprintf("cleared horizontal accumulation \n");
-                }
-                else if ( ((float)ploopyvia_config.dragscroll_straighten_sensitivity / (float)100) * drgstraight_momentum_x > drgstraight_momentum_y ){
-                    // Clear VERTICAL accumulation where [sensitivity %] of HORIZONTAL momentum exceeds VERTICAL momentum
-                    dragscroll_acc_v = 0;
-                    // dprintf("cleared vertical accumulation \n");
-                }
-            } // ploopyvia_config.dragscroll_straighten_sensitivity
-
+                pointing_device_task_dragscroll_straighten(mouse_report);
+                if ( drgstraight_cancel_x ){ dragscroll_acc_h = 0; }
+                if ( drgstraight_cancel_y ){ dragscroll_acc_v = 0; }
+            }
+            
             // Assign integer parts of accumulated scroll values to the mouse report
             #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
                 if(ploopyvia_config.dragscroll_invert_h) {

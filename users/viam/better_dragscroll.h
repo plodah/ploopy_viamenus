@@ -18,7 +18,6 @@
 
 bool better_dragscroll_enabled_bylock;
 bool better_dragscroll_enabled_bypress;
-bool better_dragscroll_straighten_enable;
 bool better_dragscroll_dragaction_enabled;
 bool better_dragscroll_dragaction_alt;
 

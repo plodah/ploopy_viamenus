@@ -2,16 +2,17 @@
     #pragma once
 
     // #include QMK_KEYBOARD_H
+    #include "ploopy_via.h"
     #include "better_dragscroll.h"
     #include "via.h"
     #ifdef COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
         #include "mouse_jiggler.h"
     #endif // def COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
-    #include "ploopy_via.h"
     #include "mouse_gesture.h"
     #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE
       #include "pmw_rotation.h"
     #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
+    #include "dragscroll_straighten.h"
 
     void ploopyvia_config_load(void) {
         // ploopyvia_config.raw = eeconfig_read_user();
@@ -57,7 +58,6 @@
         }
     #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
 
-
     void keyboard_post_init_user_viamenus(void) {
         ploopyvia_config_load();
         if(ploopyvia_config.dpi_multiplier == 0){
@@ -67,6 +67,7 @@
         #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE
             pmw_rotation_update_via();
         #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
+        drgstraight_set_sensitivity( ploopyvia_config.dragscroll_straighten_sensitivity );
         ploopy_msGestureUpdate();
         led_update_better_dragscroll(host_keyboard_led_state());
         dprintf("keyboard_post_init_user\n");
@@ -271,6 +272,7 @@
 
             case id_ploopystuff_dragscroll_straighten_sensitivity:
                 ploopyvia_config.dragscroll_straighten_sensitivity = *value_data;
+                drgstraight_set_sensitivity( ploopyvia_config.dragscroll_straighten_sensitivity );
                 dprintf("dragscroll_straighten_sensitivity: %d\n", ploopyvia_config.dragscroll_straighten_sensitivity);
                 break;
 

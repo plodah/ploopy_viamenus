@@ -9,3 +9,4 @@
 #include "0_pointing_device_task_user.c"
 #include "0_process_record_user.c"
 #include "0_keyboard_post_init_user.c"
+#include "dragscroll_straighten.c"
