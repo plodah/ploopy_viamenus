@@ -25,14 +25,14 @@
     #include "ploopy_via.h"
 
     #if !defined(SCROLL_HISTORY_SIZE)
-        #if defined(RP2040)
+        #if defined(QMK_MCU_RP2040)
             #define SCROLL_HISTORY_SIZE 25
         #else
             #define SCROLL_HISTORY_SIZE 10
         #endif
     #endif
     #if !defined(SCROLL_HISTORY_FREQ)
-        #if defined(RP2040)
+        #if defined(QMK_MCU_RP2040)
             #define SCROLL_HISTORY_FREQ 10
         #else
             #define SCROLL_HISTORY_FREQ 25

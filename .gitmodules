@@ -1,3 +1,6 @@
 [submodule "modules/plodah"]
 	path = modules/plodah
 	url = https://github.com/plodah/qmk_modules
+[submodule "modules/drashna"]
+	path = modules/drashna
+	url = https://github.com/drashna/qmk_modules
