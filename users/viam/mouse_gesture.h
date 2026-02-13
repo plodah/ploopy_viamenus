@@ -16,15 +16,15 @@ enum gesture_actions {
     GESTURE_ACTION_MSJIGGLER,
 };
 
-typedef struct PLOOPY_MSGESTURE_t {
+typedef struct ploopy_msgesture_t {
     deferred_token cooldown;
     deferred_token timeout;
     uint8_t action;
     uint8_t count;
     int16_t accum;
     bool stage;
-} PLOOPY_MSGESTURE_t;
+} ploopy_msgesture_t;
 
-PLOOPY_MSGESTURE_t PLOOPY_MSGESTURE_X;
-PLOOPY_MSGESTURE_t PLOOPY_MSGESTURE_Y;
+ploopy_msgesture_t ploopy_msgesture_x;
+ploopy_msgesture_t ploopy_msgesture_y;
 uint8_t gestureCount;
