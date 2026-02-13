@@ -27,17 +27,16 @@
       #include "dragscroll_straighten.h"
     #endif // defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
 
-    bool better_dragscroll_enabled_bylock = 0;
-    bool better_dragscroll_enabled_bypress = 0;
-    bool better_dragscroll_sniper_a_enabled = 0;
-    bool better_dragscroll_sniper_b_enabled = 0;
-    bool better_dragscroll_dragaction_enabled = 0;
-    float dragscroll_acc_h = 0;
-    float dragscroll_acc_v = 0;
+    int8_t accumulated_h = 0;
+    int8_t accumulated_v = 0;
+
+    void better_dragscroll_init(void){
+        ds_state = dragscroll_state_default;
+    }
 
     void better_dragscroll_resetacc(void){
-        dragscroll_acc_h = 0;
-        dragscroll_acc_v = 0;
+        accumulated_h = 0;
+        accumulated_v = 0;
         #if defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
             drgstraight_reset();
         #endif // defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
@@ -46,8 +45,8 @@
     void better_dragscroll_toggle(bool pressed){
         dprintf("better_dragscroll_toggle\n");
         if(pressed){
-            better_dragscroll_enabled_bypress ^= 1;
-            if(better_dragscroll_enabled_bypress){
+            ds_state.enabled_bypress ^= 1;
+            if(ds_state.enabled_bypress){
                 better_dragscroll_resetacc();
             }
         }
@@ -55,17 +54,17 @@
 
     void better_dragscroll_momentary(bool pressed){
         dprintf("better_dragscroll_momentary\n");
-        better_dragscroll_enabled_bypress = pressed;
+        ds_state.enabled_bypress = pressed;
         if(pressed){
             better_dragscroll_resetacc();
         }
     }
 
     void better_dragscroll_set_dpi( void ){
-        if(better_dragscroll_sniper_b_enabled){
+        if(ds_state.sniper_b_enabled){
             pointing_device_set_cpi(ploopyvia_config.sniper_b_dpi);
         }
-        else if(better_dragscroll_sniper_a_enabled){
+        else if(ds_state.sniper_a_enabled){
             pointing_device_set_cpi(ploopyvia_config.sniper_a_dpi);
         }
         else {
@@ -83,43 +82,43 @@
                 return false;
             case BETTER_DRAG_ACTION_A_MOMENTARY:
             case BETTER_DRAG_ACTION_B_MOMENTARY:
-                better_dragscroll_dragaction_enabled = record->event.pressed;
+                ds_state.dragaction_enabled = record->event.pressed;
                 if(record->event.pressed){
                     better_dragscroll_resetacc();
                     if(keycode == BETTER_DRAG_ACTION_B_MOMENTARY){
-                        better_dragscroll_dragaction_alt = true;
+                        ds_state.dragaction_alt = true;
                     }
                     else{
-                        better_dragscroll_dragaction_alt = false;
+                        ds_state.dragaction_alt = false;
                     }
                 }
                 return false;
 
             case BETTER_DRAG_SCROLL_SNIPER_A_MOMENTARY:
-                better_dragscroll_sniper_a_enabled = record->event.pressed;
+                ds_state.sniper_a_enabled = record->event.pressed;
                 better_dragscroll_set_dpi();
-                dprintf("sniper_a_enabled:%d dpi:%d\n", better_dragscroll_sniper_a_enabled, ploopyvia_config.sniper_a_dpi);
+                dprintf("sniper_a_enabled:%d dpi:%d\n", ds_state.sniper_a_enabled, ploopyvia_config.sniper_a_dpi);
                 return false;
 
             case BETTER_DRAG_SCROLL_SNIPER_A_TOGGLE:
                 if(record->event.pressed){
-                    better_dragscroll_sniper_a_enabled ^= 1;
+                    ds_state.sniper_a_enabled ^= 1;
                     better_dragscroll_set_dpi();
-                    dprintf("sniper_a_enabled:%d dpi:%d\n", better_dragscroll_sniper_a_enabled, ploopyvia_config.sniper_a_dpi);
+                    dprintf("sniper_a_enabled:%d dpi:%d\n", ds_state.sniper_a_enabled, ploopyvia_config.sniper_a_dpi);
                 }
                 return false;
 
             case BETTER_DRAG_SCROLL_SNIPER_B_MOMENTARY:
-                better_dragscroll_sniper_b_enabled = record->event.pressed;
+                ds_state.sniper_b_enabled = record->event.pressed;
                 better_dragscroll_set_dpi();
-                dprintf("sniper_b_enabled:%d dpi:%d\n", better_dragscroll_sniper_b_enabled, ploopyvia_config.sniper_b_dpi);
+                dprintf("sniper_b_enabled:%d dpi:%d\n", ds_state.sniper_b_enabled, ploopyvia_config.sniper_b_dpi);
                 return false;
 
             case BETTER_DRAG_SCROLL_SNIPER_B_TOGGLE:
                 if(record->event.pressed){
-                    better_dragscroll_sniper_b_enabled ^= 1;
+                    ds_state.sniper_b_enabled ^= 1;
                     better_dragscroll_set_dpi();
-                    dprintf("sniper_b_enabled:%d dpi:%d\n", better_dragscroll_sniper_b_enabled, ploopyvia_config.sniper_b_dpi);
+                    dprintf("sniper_b_enabled:%d dpi:%d\n", ds_state.sniper_b_enabled, ploopyvia_config.sniper_b_dpi);
                 }
                 return false;
 
@@ -128,11 +127,11 @@
                     if(record->event.pressed){
                         #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
                             if(ploopyvia_config.dragscroll_end_on_keypress){
-                                better_dragscroll_enabled_bypress = 0;
+                                ds_state.enabled_bypress = 0;
                             }
                         #else // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
                             #if defined(BETTER_DRAGSCROLL_END_ON_KEYPRESS)
-                                better_dragscroll_enabled_bypress = 0;
+                                ds_state.enabled_bypress = 0;
                             #endif // defined(BETTER_DRAGSCROLL_END_ON_KEYPRESS)
                         #endif // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
                     }
@@ -159,81 +158,81 @@
             #endif // BETTER_DRAGSCROLL_POINTERINVERT_Y
         #endif // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
 
-        if (better_dragscroll_enabled_bylock || better_dragscroll_enabled_bypress) {
+        if (ds_state.enabled_bylock || ds_state.enabled_bypress) {
 
             #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
                 if(ploopyvia_config.dragscroll_divisor_h > 0){
-                    dragscroll_acc_h += (float)mouse_report.x / ((float)ploopyvia_config.dragscroll_divisor_h / 4);
+                    accumulated_h += (float)mouse_report.x / ((float)ploopyvia_config.dragscroll_divisor_h / 4);
                 }
                 if(ploopyvia_config.dragscroll_divisor_v > 0){
-                    dragscroll_acc_v += (float)mouse_report.y / ((float)ploopyvia_config.dragscroll_divisor_v / 4);
+                    accumulated_v += (float)mouse_report.y / ((float)ploopyvia_config.dragscroll_divisor_v / 4);
                 }
                 #else // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
-                dragscroll_acc_h += (float)mouse_report.x / BETTER_DRAGSCROLL_DIVISOR_H;
-                dragscroll_acc_v += (float)mouse_report.y / BETTER_DRAGSCROLL_DIVISOR_V;
+                accumulated_h += (float)mouse_report.x / BETTER_DRAGSCROLL_DIVISOR_H;
+                accumulated_v += (float)mouse_report.y / BETTER_DRAGSCROLL_DIVISOR_V;
             #endif // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
 
             #if defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
                 if(ploopyvia_config.dragscroll_straighten_sensitivity){
                     pointing_device_task_dragscroll_straighten(mouse_report);
-                    if ( drgstraight_cancel_x ){ dragscroll_acc_h = 0; }
-                    if ( drgstraight_cancel_y ){ dragscroll_acc_v = 0; }
+                    if ( drgstraight_cancel_x ){ accumulated_h = 0; }
+                    if ( drgstraight_cancel_y ){ accumulated_v = 0; }
                 }
             #endif // defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
 
             // Assign integer parts of accumulated scroll values to the mouse report
             #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
                 if(ploopyvia_config.dragscroll_invert_h) {
-                    mouse_report.h = -(int8_t)dragscroll_acc_h;
+                    mouse_report.h = -(int8_t)accumulated_h;
                 } else {
-                    mouse_report.h = (int8_t)dragscroll_acc_h;
+                    mouse_report.h = (int8_t)accumulated_h;
                 }
 
                 if(ploopyvia_config.dragscroll_invert_v) {
-                    mouse_report.v = -(int8_t)dragscroll_acc_v;
+                    mouse_report.v = -(int8_t)accumulated_v;
                 } else {
-                    mouse_report.v = (int8_t)dragscroll_acc_v;
+                    mouse_report.v = (int8_t)accumulated_v;
                 }
             #else // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
                 #if defined(BETTER_DRAGSCROLL_INVERT_H)
-                    mouse_report.h = -(int8_t)dragscroll_acc_h;
+                    mouse_report.h = -(int8_t)accumulated_h;
                 #else
-                    mouse_report.h = (int8_t)dragscroll_acc_h;
+                    mouse_report.h = (int8_t)accumulated_h;
                 #endif // BETTER_DRAGSCROLL_INVERT_V
 
                 #ifdef BETTER_DRAGSCROLL_INVERT_V
-                    mouse_report.v = -(int8_t)dragscroll_acc_v;
+                    mouse_report.v = -(int8_t)accumulated_v;
                 #else
-                    mouse_report.v = (int8_t)dragscroll_acc_v;
+                    mouse_report.v = (int8_t)accumulated_v;
                 #endif // BETTER_DRAGSCROLL_INVERT_V
             #endif // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
 
             // Update accumulated scroll values by subtracting the integer parts
-            dragscroll_acc_h -= (int8_t)dragscroll_acc_h;
-            dragscroll_acc_v -= (int8_t)dragscroll_acc_v;
+            accumulated_h -= (int8_t)accumulated_h;
+            accumulated_v -= (int8_t)accumulated_v;
 
             // Clear the X and Y values of the mouse report
             mouse_report.x = 0;
             mouse_report.y = 0;
         }
-        else if (better_dragscroll_dragaction_enabled){
+        else if (ds_state.dragaction_enabled){
             #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
                 if(ploopyvia_config.dragscroll_divisor_h > 0){
-                    dragscroll_acc_h += (float)mouse_report.x / (((float)ploopyvia_config.dragscroll_divisor_h / 4) * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR);
+                    accumulated_h += (float)mouse_report.x / (((float)ploopyvia_config.dragscroll_divisor_h / 4) * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR);
                 }
                 if(ploopyvia_config.dragscroll_divisor_v > 0){
-                    dragscroll_acc_v += (float)mouse_report.y / (((float)ploopyvia_config.dragscroll_divisor_v / 4) * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR);
+                    accumulated_v += (float)mouse_report.y / (((float)ploopyvia_config.dragscroll_divisor_v / 4) * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR);
                 }
             #else // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
-                dragscroll_acc_h += (float)mouse_report.x / (BETTER_DRAGSCROLL_DIVISOR_H * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR);
-                dragscroll_acc_v += (float)mouse_report.y / (BETTER_DRAGSCROLL_DIVISOR_V * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR);
+                accumulated_h += (float)mouse_report.x / (BETTER_DRAGSCROLL_DIVISOR_H * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR);
+                accumulated_v += (float)mouse_report.y / (BETTER_DRAGSCROLL_DIVISOR_V * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR);
             #endif // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
 
-            if( abs(dragscroll_acc_v) >= 1 || abs(dragscroll_acc_h) >= 1 )  {
-                dprintf("v:%d\n", (int)dragscroll_acc_v);
-                if( abs(dragscroll_acc_v) > abs(dragscroll_acc_h) ){
-                    if( ( dragscroll_acc_v <= -1 && !ploopyvia_config.dragscroll_invert_v) || (dragscroll_acc_v >= 1 && ploopyvia_config.dragscroll_invert_v)) {
-                        if(!better_dragscroll_dragaction_alt){
+            if( abs(accumulated_v) >= 1 || abs(accumulated_h) >= 1 )  {
+                dprintf("v:%d\n", (int)accumulated_v);
+                if( abs(accumulated_v) > abs(accumulated_h) ){
+                    if( ( accumulated_v <= -1 && !ploopyvia_config.dragscroll_invert_v) || (accumulated_v >= 1 && ploopyvia_config.dragscroll_invert_v)) {
+                        if(!ds_state.dragaction_alt){
                             tap_code16(ploopyvia_config.dragscroll_dragact_a_down);
                             dprintf("a_down\n");
                         }
@@ -243,7 +242,7 @@
                         }
                     }
                     else {
-                        if(!better_dragscroll_dragaction_alt){
+                        if(!ds_state.dragaction_alt){
                             tap_code16(ploopyvia_config.dragscroll_dragact_a_up);
                             dprintf("a_up\n");
                         }
@@ -254,8 +253,8 @@
                     }
                 }
                 else {
-                    if( (dragscroll_acc_h <= -1 && !ploopyvia_config.dragscroll_invert_h) || (dragscroll_acc_h >= 1 && ploopyvia_config.dragscroll_invert_h)){
-                        if(!better_dragscroll_dragaction_alt){
+                    if( (accumulated_h <= -1 && !ploopyvia_config.dragscroll_invert_h) || (accumulated_h >= 1 && ploopyvia_config.dragscroll_invert_h)){
+                        if(!ds_state.dragaction_alt){
                             tap_code16(ploopyvia_config.dragscroll_dragact_a_left);
                             dprintf("a_left\n");
                         }
@@ -265,7 +264,7 @@
                         }
                     }
                     else {
-                        if(!better_dragscroll_dragaction_alt){
+                        if(!ds_state.dragaction_alt){
                             tap_code16(ploopyvia_config.dragscroll_dragact_a_right);
                             dprintf("a_right\n");
                         }
@@ -310,13 +309,13 @@
             #endif // BETTER_DRAGSCROLL_NUMLK_ENABLE
         #endif // (defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS))
         ){
-            better_dragscroll_enabled_bylock = true;
+            ds_state.enabled_bylock = true;
             better_dragscroll_resetacc();
         }
         else {
-            better_dragscroll_enabled_bylock = false;
+            ds_state.enabled_bylock = false;
         }
-        dprintf("better_dragscroll_enabled_bylock %d\n",better_dragscroll_enabled_bylock);
+        dprintf("ds_state.enabled_bylock %d\n",ds_state.enabled_bylock);
         return true;
     }
     #endif // defined(DRAGSCROLL_SCRLK_ENABLE) || defined(DRAGSCROLL_CAPLK_ENABLE)
