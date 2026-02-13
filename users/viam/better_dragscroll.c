@@ -27,8 +27,8 @@
       #include "dragscroll_straighten.h"
     #endif // defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
 
-    int8_t accumulated_h = 0;
-    int8_t accumulated_v = 0;
+    int16_t accumulated_h = 0;
+    int16_t accumulated_v = 0;
 
     void better_dragscroll_init(void){
         ds_state = dragscroll_state_default;
@@ -142,6 +142,10 @@
     }
 
     report_mouse_t pointing_device_task_better_dragscroll(report_mouse_t mouse_report) {
+        int16_t tmp_accumulated_v_abs;
+        int16_t tmp_accumulated_h_abs;
+        uint8_t tmp_divisor_h;
+        uint8_t tmp_divisor_v;
         #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
             if(ploopyvia_config.pointer_invert_h){
                 mouse_report.x = -mouse_report.x;
@@ -158,6 +162,14 @@
             #endif // BETTER_DRAGSCROLL_POINTERINVERT_Y
         #endif // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
 
+        if(ds_state.enabled_bylock || ds_state.enabled_bypress || ds_state.dragaction_enabled){
+            accumulated_v += mouse_report.y;
+            accumulated_h += mouse_report.x;
+            tmp_accumulated_v_abs = abs(accumulated_v);
+            tmp_accumulated_h_abs = abs(accumulated_h);
+            tmp_divisor_h = ploopyvia_config.dragscroll_divisor_h / 4;
+            tmp_divisor_v = ploopyvia_config.dragscroll_divisor_v / 4;
+        }
         if (ds_state.enabled_bylock || ds_state.enabled_bypress) {
             #if defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
                 if(ploopyvia_config.dragscroll_straighten_sensitivity){
@@ -169,23 +181,23 @@
 
             #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
                 if(ploopyvia_config.dragscroll_divisor_h > 0){
-                    mouse_report.h = (accumulated_h + mouse_report.x) / (ploopyvia_config.dragscroll_divisor_h / 4);
+                    mouse_report.h = (accumulated_h) / (tmp_divisor_h);
                     if(ploopyvia_config.dragscroll_invert_h){ mouse_report.h = -mouse_report.h; }
-                    accumulated_h = (accumulated_h + mouse_report.x) % (ploopyvia_config.dragscroll_divisor_h / 4);
+                    accumulated_h = (accumulated_h) % (tmp_divisor_h);
                 }
                 if(ploopyvia_config.dragscroll_divisor_v > 0){
-                    mouse_report.v = (accumulated_v + mouse_report.y) / (ploopyvia_config.dragscroll_divisor_v / 4);
+                    mouse_report.v = (accumulated_v) / (tmp_divisor_v);
                     if(ploopyvia_config.dragscroll_invert_v){ mouse_report.v = -mouse_report.v; }
-                    accumulated_v = (accumulated_v + mouse_report.y) % (ploopyvia_config.dragscroll_divisor_v / 4);
+                    accumulated_v = (accumulated_v) % (tmp_divisor_v);
                 }
             #else // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
-                mouse_report.h = (accumulated_h + mouse_report.x) / BETTER_DRAGSCROLL_DIVISOR_H;
+                mouse_report.h = (accumulated_h) / BETTER_DRAGSCROLL_DIVISOR_H;
                 if(ploopyvia_config.dragscroll_invert_h){mouse_report.h = -mouse_report.h; }
-                accumulated_h = (accumulated_h + mouse_report.x) % BETTER_DRAGSCROLL_DIVISOR_H;
+                accumulated_h = (accumulated_h) % BETTER_DRAGSCROLL_DIVISOR_H;
 
-                mouse_report.v = (accumulated_v + mouse_report.y) / BETTER_DRAGSCROLL_DIVISOR_V;
+                mouse_report.v = (accumulated_v) / BETTER_DRAGSCROLL_DIVISOR_V;
                 if(ploopyvia_config.dragscroll_invert_v){mouse_report.v = -mouse_report.v; }
-                accumulated_v = (accumulated_v + mouse_report.y) % BETTER_DRAGSCROLL_DIVISOR_V;
+                accumulated_v = (accumulated_v) % BETTER_DRAGSCROLL_DIVISOR_V;
             #endif // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
 
             // Clear the X and Y values of the mouse report
@@ -194,35 +206,35 @@
         }
         else if (ds_state.dragaction_enabled){
             dprintf( "v:%d(%d)|h:%d(%d)|v>h:%d \n",
-                (accumulated_v + mouse_report.y), abs(accumulated_v + mouse_report.y),
-                (accumulated_h + mouse_report.x), abs(accumulated_h + mouse_report.x),
-                (abs(accumulated_v + mouse_report.y) > abs(accumulated_h + mouse_report.x))
+                accumulated_v, tmp_accumulated_v_abs,
+                (accumulated_h), tmp_accumulated_h_abs,
+                (tmp_accumulated_v_abs > tmp_accumulated_h_abs)
             );
             if(
                 #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
                     (
                         ploopyvia_config.dragscroll_divisor_h > 0 &&
-                        1 <= (abs(accumulated_h + mouse_report.x) /
-                          ((ploopyvia_config.dragscroll_divisor_h / 4) * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR))
+                        1 <= (tmp_accumulated_h_abs /
+                          ((tmp_divisor_h) * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR))
                     ) ||
                     (
                         ploopyvia_config.dragscroll_divisor_v > 0 &&
-                        1 <= (abs(accumulated_v + mouse_report.y) /
-                          ((ploopyvia_config.dragscroll_divisor_v / 4) * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR))
+                        1 <= (tmp_accumulated_v_abs /
+                          ((tmp_divisor_v) * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR))
                     )
                 #else // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
                     (
-                        1 <= (abs(accumulated_h + mouse_report.x) /
+                        1 <= (tmp_accumulated_h_abs /
                           (BETTER_DRAGSCROLL_DIVISOR_H * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR))
                     ) ||
                     (
-                        1 <= (abs(accumulated_v + mouse_report.y) /
+                        1 <= (tmp_accumulated_v_abs /
                           (BETTER_DRAGSCROLL_DIVISOR_V * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR))
                     )
                 #endif // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
             )  {
-                if( abs(accumulated_v + mouse_report.y) > abs(accumulated_h + mouse_report.x) ){
-                    if(((accumulated_v + mouse_report.y) <= -1 && !ploopyvia_config.dragscroll_invert_v) || ((accumulated_v + mouse_report.y) >= 1 && ploopyvia_config.dragscroll_invert_v)) {
+                if( tmp_accumulated_v_abs > tmp_accumulated_h_abs ){
+                    if(((accumulated_v) <= -1 && !ploopyvia_config.dragscroll_invert_v) || ((accumulated_v) >= 1 && ploopyvia_config.dragscroll_invert_v)) {
                         if(!ds_state.dragaction_alt){
                             tap_code16(ploopyvia_config.dragscroll_dragact_a_down);
                             dprintf("AD\n");
@@ -244,7 +256,7 @@
                     }
                 }
                 else {
-                    if( ((accumulated_h + mouse_report.x) <= -1 && !ploopyvia_config.dragscroll_invert_h) || ((accumulated_h + mouse_report.x) >= 1 && ploopyvia_config.dragscroll_invert_h)){
+                    if( ((accumulated_h) <= -1 && !ploopyvia_config.dragscroll_invert_h) || ((accumulated_h) >= 1 && ploopyvia_config.dragscroll_invert_h)){
                         if(!ds_state.dragaction_alt){
                             tap_code16(ploopyvia_config.dragscroll_dragact_a_left);
                             dprintf("AL\n");
@@ -268,11 +280,11 @@
                 better_dragscroll_resetacc();
             }
             #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
-                accumulated_h = (accumulated_h + mouse_report.x) % ((ploopyvia_config.dragscroll_divisor_h / 4) * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR);
-                accumulated_v = (accumulated_v + mouse_report.y) % ((ploopyvia_config.dragscroll_divisor_v / 4) * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR);
+                accumulated_h = (accumulated_h) % ((tmp_divisor_h) * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR);
+                accumulated_v = (accumulated_v) % ((tmp_divisor_v) * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR);
             #else // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
-                accumulated_h = (accumulated_h + mouse_report.x) % (BETTER_DRAGSCROLL_DIVISOR_H * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR);
-                accumulated_v = (accumulated_v + mouse_report.y) % (BETTER_DRAGSCROLL_DIVISOR_V * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR);
+                accumulated_h = (accumulated_h) % (BETTER_DRAGSCROLL_DIVISOR_H * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR);
+                accumulated_v = (accumulated_v) % (BETTER_DRAGSCROLL_DIVISOR_V * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR);
             #endif // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
             mouse_report.x = 0;
             mouse_report.y = 0;
