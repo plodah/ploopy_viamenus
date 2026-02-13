@@ -6,11 +6,11 @@
     #include "better_dragscroll.h"
     #include "ploopy_via.h"
 
-  deferred_token ploopy_msgesture_switch_cooldown = INVALID_DEFERRED_TOKEN;
-  deferred_token ploopy_msgesture_switch_debounce = INVALID_DEFERRED_TOKEN;
+  deferred_token msgesture_switch_cooldown = INVALID_DEFERRED_TOKEN;
+  deferred_token msgesture_switch_debounce = INVALID_DEFERRED_TOKEN;
 
-  bool ploopy_msgesture_debounce = false;
-  bool ploopy_msgesture_cooldown = false;
+  bool msgesture_debounce = false;
+  bool msgesture_cooldown = false;
 
   void ploopy_msGestureUpdate(void){
         #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
@@ -36,8 +36,8 @@
     }
 
     void process_record_msgesture( void ){
-    ploopy_msgesture_switch_cooldown = INVALID_DEFERRED_TOKEN;
-    ploopy_msgesture_switch_debounce = INVALID_DEFERRED_TOKEN;
+    msgesture_switch_cooldown = INVALID_DEFERRED_TOKEN;
+    msgesture_switch_debounce = INVALID_DEFERRED_TOKEN;
         msgesture_reset(msgesture_x);
         msgesture_reset(msgesture_y);
     }
@@ -57,14 +57,14 @@
     }
 
     uint32_t msgesture_expire_debounce(uint32_t trigger_time, void *cb_arg){
-        ploopy_msgesture_debounce = false;
+        msgesture_debounce = false;
         msgesture_x.accum = 0;
         msgesture_y.accum = 0;
         return 0;
     }
 
     uint32_t msgesture_expire_cooldown(uint32_t trigger_time, void *cb_arg){
-        ploopy_msgesture_cooldown = false;
+        msgesture_cooldown = false;
         msgesture_x.accum = 0;
         msgesture_x.count = 0;
         msgesture_y.accum = 0;
@@ -73,8 +73,8 @@
     }
 
     void msgesture_triggered(uint8_t action){
-        ploopy_msgesture_cooldown = true;
-        ploopy_msgesture_switch_cooldown = defer_exec(PLOOPY_MSGESTURE_COOLDOWN, msgesture_expire_cooldown, NULL);
+        msgesture_cooldown = true;
+        msgesture_switch_cooldown = defer_exec(PLOOPY_MSGESTURE_COOLDOWN, msgesture_expire_cooldown, NULL);
         switch(action){
             case GESTURE_ACTION_MSJIGGLER:
                 #ifdef COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
@@ -88,7 +88,7 @@
     }
 
     report_mouse_t pointing_device_task_mouse_gesture(report_mouse_t mouse_report) {
-        if(ploopy_msgesture_debounce || ploopy_msgesture_cooldown){
+        if(msgesture_debounce || msgesture_cooldown){
             return mouse_report;
         }
         if(msgesture_x.action != 0){
@@ -99,25 +99,25 @@
         }
 
         if( abs(msgesture_x.accum) > abs(msgesture_y.accum) && abs(msgesture_x.accum) > PLOOPY_MSGESTURE_THRESHOLD ){
-            ploopy_msgesture_switch_debounce = defer_exec(PLOOPY_MSGESTURE_DEBOUNCE, msgesture_expire_debounce, NULL);
+            msgesture_switch_debounce = defer_exec(PLOOPY_MSGESTURE_DEBOUNCE, msgesture_expire_debounce, NULL);
             if( (abs(msgesture_x.accum) > PLOOPY_MSGESTURE_THRESHOLD && msgesture_x.count==0 ) || (msgesture_x.accum > PLOOPY_MSGESTURE_THRESHOLD && !msgesture_x.stage) || (msgesture_x.accum < -PLOOPY_MSGESTURE_THRESHOLD && msgesture_x.stage) ) {
                 msgesture_x.count++;
                 dprintf("==X==> C:%d,%d  acc:%d,%d (%d,%d) \n", msgesture_x.count, msgesture_y.count, msgesture_x.accum, msgesture_y.accum, abs(msgesture_x.accum), abs(msgesture_y.accum) );
 
                 msgesture_x.stage = msgesture_x.accum > PLOOPY_MSGESTURE_THRESHOLD;
-                ploopy_msgesture_debounce = true;
+                msgesture_debounce = true;
                 cancel_deferred_exec(msgesture_x.timeout);
                 msgesture_x.timeout = defer_exec( PLOOPY_MSGESTURE_TIMEOUT, msgesture_expire_x_timeout, NULL );
             }
         }
 
         if( abs(msgesture_y.accum) > abs(msgesture_x.accum) && abs(msgesture_y.accum) > PLOOPY_MSGESTURE_THRESHOLD ){
-            ploopy_msgesture_switch_debounce = defer_exec(PLOOPY_MSGESTURE_DEBOUNCE, msgesture_expire_debounce, NULL);
+            msgesture_switch_debounce = defer_exec(PLOOPY_MSGESTURE_DEBOUNCE, msgesture_expire_debounce, NULL);
             if( (abs(msgesture_y.accum) > PLOOPY_MSGESTURE_THRESHOLD && msgesture_y.count==0 ) || (msgesture_y.accum > PLOOPY_MSGESTURE_THRESHOLD && !msgesture_y.stage) || (msgesture_y.accum < -PLOOPY_MSGESTURE_THRESHOLD && msgesture_y.stage) ) {
                 msgesture_y.count++;
                 dprintf("==Y==> C:%d,%d  acc:%d,%d (%d,%d) \n", msgesture_x.count, msgesture_y.count, msgesture_x.accum, msgesture_y.accum, abs(msgesture_x.accum), abs(msgesture_y.accum) );
                 msgesture_y.stage = msgesture_y.accum > PLOOPY_MSGESTURE_THRESHOLD;
-                ploopy_msgesture_debounce = true;
+                msgesture_debounce = true;
                 cancel_deferred_exec(msgesture_y.timeout);
                 msgesture_y.timeout = defer_exec( PLOOPY_MSGESTURE_TIMEOUT, msgesture_expire_y_timeout, NULL );
             }
