@@ -7,9 +7,10 @@
     "keymap": "via",
     "layout": "LAYOUT",
     "modules": [
+        "plodah/dragscroll_straighten",
         "plodah/mouse_jiggler",
-        "plodah/task_switch",
-        "plodah/pmw_rotation"
+        "plodah/pmw_rotation",
+        "plodah/task_switch"
     ],
     "config": {
         "build": {

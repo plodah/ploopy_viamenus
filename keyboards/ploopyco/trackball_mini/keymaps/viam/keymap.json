@@ -4,9 +4,10 @@
     "author": "plodah",
     "documentation": "...",
     "keyboard": "ploopyco/trackball_mini",
-    "keymap": "via",
+    "keymap": "viam",
     "layout": "LAYOUT",
     "modules": [
+        "plodah/dragscroll_straighten",
         "plodah/mouse_jiggler",
         "plodah/task_switch"
     ],

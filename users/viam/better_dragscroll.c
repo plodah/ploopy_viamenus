@@ -23,7 +23,9 @@
     #include "quantum.h"
     #include "better_dragscroll.h"
     #include "ploopy_via.h"
-    #include "dragscroll_straighten.h"
+    #if defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
+      #include "dragscroll_straighten.h"
+    #endif // defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
 
     bool better_dragscroll_enabled_bylock = 0;
     bool better_dragscroll_enabled_bypress = 0;
@@ -36,9 +38,9 @@
     void better_dragscroll_resetacc(void){
         dragscroll_acc_h = 0;
         dragscroll_acc_v = 0;
-        if(ploopyvia_config.dragscroll_straighten_sensitivity){
+        #if defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
             drgstraight_reset();
-        }
+        #endif // defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
     }
 
     void better_dragscroll_toggle(bool pressed){
@@ -171,12 +173,14 @@
                 dragscroll_acc_v += (float)mouse_report.y / BETTER_DRAGSCROLL_DIVISOR_V;
             #endif // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
 
-            if(ploopyvia_config.dragscroll_straighten_sensitivity){
-                pointing_device_task_dragscroll_straighten(mouse_report);
-                if ( drgstraight_cancel_x ){ dragscroll_acc_h = 0; }
-                if ( drgstraight_cancel_y ){ dragscroll_acc_v = 0; }
-            }
-            
+            #if defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
+                if(ploopyvia_config.dragscroll_straighten_sensitivity){
+                    pointing_device_task_dragscroll_straighten(mouse_report);
+                    if ( drgstraight_cancel_x ){ dragscroll_acc_h = 0; }
+                    if ( drgstraight_cancel_y ){ dragscroll_acc_v = 0; }
+                }
+            #endif // defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
+
             // Assign integer parts of accumulated scroll values to the mouse report
             #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
                 if(ploopyvia_config.dragscroll_invert_h) {

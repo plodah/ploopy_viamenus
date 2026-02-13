@@ -10,9 +10,11 @@
     #endif // def COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
     #include "mouse_gesture.h"
     #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE
-      #include "pmw_rotation.h"
+        #include "pmw_rotation.h"
     #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
-    #include "dragscroll_straighten.h"
+    #if defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
+        #include "dragscroll_straighten.h"
+    #endif // defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
 
     void ploopyvia_config_load(void) {
         // ploopyvia_config.raw = eeconfig_read_user();
@@ -67,7 +69,9 @@
         #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE
             pmw_rotation_update_via();
         #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
-        drgstraight_set_sensitivity( ploopyvia_config.dragscroll_straighten_sensitivity );
+        #if defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
+            drgstraight_set_sensitivity( ploopyvia_config.dragscroll_straighten_sensitivity );
+        #endif // defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
         ploopy_msGestureUpdate();
         led_update_better_dragscroll(host_keyboard_led_state());
         dprintf("keyboard_post_init_user\n");
@@ -270,11 +274,13 @@
                 dprintf("sniper_b_dpi: %d\n", ploopyvia_config.sniper_b_dpi);
                 break;
 
-            case id_ploopystuff_dragscroll_straighten_sensitivity:
-                ploopyvia_config.dragscroll_straighten_sensitivity = *value_data;
-                drgstraight_set_sensitivity( ploopyvia_config.dragscroll_straighten_sensitivity );
-                dprintf("dragscroll_straighten_sensitivity: %d\n", ploopyvia_config.dragscroll_straighten_sensitivity);
-                break;
+            #if defined(COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
+                case id_ploopystuff_dragscroll_straighten_sensitivity:
+                    ploopyvia_config.dragscroll_straighten_sensitivity = *value_data;
+                    drgstraight_set_sensitivity( ploopyvia_config.dragscroll_straighten_sensitivity );
+                    dprintf("dragscroll_straighten_sensitivity: %d\n", ploopyvia_config.dragscroll_straighten_sensitivity);
+                    break;
+            #endif // defined(COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
 
             case id_ploopystuff_dragscroll_dragact_a_up:
                 ploopyvia_config.dragscroll_dragact_a_up = value_data[0] << 8 | value_data[1];
@@ -464,11 +470,13 @@
                 dprintf("sniper_b_dpi: %d\n", ploopyvia_config.sniper_b_dpi);
                 break;
 
-            case id_ploopystuff_dragscroll_straighten_sensitivity:
-                *value_data = ploopyvia_config.dragscroll_straighten_sensitivity;
-                dprintf("dragscroll_straighten_sensitivity: %d\n", ploopyvia_config.dragscroll_straighten_sensitivity);
-                break;
 
+            #if defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
+                case id_ploopystuff_dragscroll_straighten_sensitivity:
+                    *value_data = ploopyvia_config.dragscroll_straighten_sensitivity;
+                    dprintf("dragscroll_straighten_sensitivity: %d\n", ploopyvia_config.dragscroll_straighten_sensitivity);
+                    break;
+            #endif // defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
 
             case id_ploopystuff_dragscroll_dragact_a_up:
                 value_data[0] = ploopyvia_config.dragscroll_dragact_a_up >> 8;
