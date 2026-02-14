@@ -3,6 +3,7 @@
 #include "ploopy_via.c"
 
 #include "combos.c"
+#include "dpi.c"
 #include "debug.c"
 #include "tapdance.c"
 #include "0_led_update_user.c"

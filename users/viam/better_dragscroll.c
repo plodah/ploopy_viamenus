@@ -60,18 +60,6 @@
         }
     }
 
-    void better_dragscroll_set_dpi( void ){
-        if(ds_state.sniper_b_enabled){
-            pointing_device_set_cpi(ploopyvia_config.sniper_b_dpi);
-        }
-        else if(ds_state.sniper_a_enabled){
-            pointing_device_set_cpi(ploopyvia_config.sniper_a_dpi);
-        }
-        else {
-            pointing_device_set_cpi(dpi_array[keyboard_config.dpi_config]);
-        }
-    }
-
     bool process_record_better_dragscroll(uint16_t keycode, keyrecord_t *record) {
         switch (keycode) {
             case BETTER_DRAG_SCROLL_MOMENTARY:
@@ -91,34 +79,6 @@
                     else{
                         ds_state.dragaction_alt = false;
                     }
-                }
-                return false;
-
-            case BETTER_DRAG_SCROLL_SNIPER_A_MOMENTARY:
-                ds_state.sniper_a_enabled = record->event.pressed;
-                better_dragscroll_set_dpi();
-                dprintf("snp_a:%d dpi:%d\n", ds_state.sniper_a_enabled, ploopyvia_config.sniper_a_dpi);
-                return false;
-
-            case BETTER_DRAG_SCROLL_SNIPER_A_TOGGLE:
-                if(record->event.pressed){
-                    ds_state.sniper_a_enabled ^= 1;
-                    better_dragscroll_set_dpi();
-                    dprintf("snp_a:%d dpi:%d\n", ds_state.sniper_a_enabled, ploopyvia_config.sniper_a_dpi);
-                }
-                return false;
-
-            case BETTER_DRAG_SCROLL_SNIPER_B_MOMENTARY:
-                ds_state.sniper_b_enabled = record->event.pressed;
-                better_dragscroll_set_dpi();
-                dprintf("snp_b:%d dpi:%d\n", ds_state.sniper_b_enabled, ploopyvia_config.sniper_b_dpi);
-                return false;
-
-            case BETTER_DRAG_SCROLL_SNIPER_B_TOGGLE:
-                if(record->event.pressed){
-                    ds_state.sniper_b_enabled ^= 1;
-                    better_dragscroll_set_dpi();
-                    dprintf("snp_b:%d dpi:%d\n", ds_state.sniper_b_enabled, ploopyvia_config.sniper_b_dpi);
                 }
                 return false;
 

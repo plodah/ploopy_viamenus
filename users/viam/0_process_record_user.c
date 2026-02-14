@@ -5,6 +5,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     #if defined(BETTER_DRAGSCROLL)
         process_record_better_dragscroll(keycode, record);
     #endif // defined(BETTER_DRAGSCROLL)
+    process_record_dpi(keycode, record);
     #if defined(PLOOPY_MSGESTURE_ENABLE) && defined(DEFERRED_EXEC_ENABLE)
     process_record_msgesture();
     #endif // defined(PLOOPY_MSGESTURE_ENABLE) && defined(DEFERRED_EXEC_ENABLE)
