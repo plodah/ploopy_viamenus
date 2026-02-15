@@ -1,7 +1,6 @@
 #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
-    #pragma once
+    #include QMK_KEYBOARD_H
 
-    // #include QMK_KEYBOARD_H
     #include "ploopy_via.h"
     #include "better_dragscroll.h"
     #include "via.h"
@@ -531,20 +530,79 @@
                 dprintf("dpi_as_slider: %d\n", ploopyvia_config.dpi_as_slider);
                 break;
 
-            case id_ploopystuff_mcu_type:
-                #if defined(QMK_MCU_RP2040)
-                    dprintf("mcu_type: MCU_RP2040\n");
-                    *value_data = MCU_RP2040;
-                #elif defined(QMK_MCU_ATMEGA32U4)
-                    dprintf("mcu_type: MCU_ATMEGA32U4\n");
-                    *value_data = MCU_ATMEGA32U4;
-                #elif defined(QMK_MCU_STM32L432)
-                    dprintf("mcu_type: MCU_STM32L432\n");
-                    *value_data = MCU_STM32L432;
+            case id_ploopystuff_feature_dragscroll_straighten:
+                #if defined(COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
+                    dprintf("feature_dragscroll_straighten: FEATURE_AVAILABLE\n");
+                    *value_data = FEATURE_AVAILABLE;
                 #else
-                    dprintf("mcu_type: MCU_UNKNOWN");
-                    *value_data = MCU_UNKNOWN;
-                #endif
+                    dprintf("feature_dragscroll_straighten: FEATURE_UNAVAILABLE\n");
+                    *value_data = FEATURE_UNAVAILABLE;
+                #endif // COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE
+                break;
+
+            case id_ploopystuff_feature_mouse_jiggler:
+                #if defined(COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE)
+                    dprintf("feature_mouse_jiggler: FEATURE_AVAILABLE\n");
+                    *value_data = FEATURE_AVAILABLE;
+                #else
+                    dprintf("feature_mouse_jiggler: FEATURE_UNAVAILABLE\n");
+                    *value_data = FEATURE_UNAVAILABLE;
+                #endif // COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE
+                break;
+
+            case id_ploopystuff_feature_sensor_rotation:
+                #if defined(POINTING_DEVICE_DRIVER_PMW3360)
+                    #if defined(COMMUNITY_MODULE_PMW_ROTATION_ENABLE)
+                        dprintf("feature_sensor_rotation: FEATURE_AVAILABLE\n");
+                        *value_data = FEATURE_AVAILABLE;
+                    #else
+                        dprintf("feature_sensor_rotation: FEATURE_UNAVAILABLE\n");
+                        *value_data = FEATURE_UNAVAILABLE;
+                    #endif
+                #else
+                    dprintf("feature_sensor_rotation: FEATURE_UNSUPPORTED\n");
+                    *value_data = FEATURE_UNSUPPORTED;
+                #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
+                break;
+
+            case id_ploopystuff_feature_task_switch:
+                #if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE)
+                    dprintf("feature_task_switch: %d\n", FEATURE_AVAILABLE);
+                    *value_data = FEATURE_AVAILABLE;
+                #else
+                    dprintf("feature_task_switch: %d\n", FEATURE_UNAVAILABLE);
+                    *value_data = FEATURE_UNAVAILABLE;
+                #endif // COMMUNITY_MODULE_TASK_SWITCH_ENABLE
+                break;
+
+            case id_ploopystuff_feature_turbo_fire:
+                #if defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
+                    dprintf("feature_sensor_rotation: %d\n", FEATURE_AVAILABLE);
+                    *value_data = FEATURE_AVAILABLE;
+                #else
+                    dprintf("feature_sensor_rotation: %d\n", FEATURE_UNAVAILABLE);
+                    *value_data = FEATURE_UNAVAILABLE;
+                #endif // COMMUNITY_MODULE_TURBO_FIRE_ENABLE
+                break;
+
+            case id_ploopystuff_feature_morse_code:
+                #if defined(COMMUNITY_MODULE_MORSE_CODE_ENABLE)
+                    dprintf("feature_morse_code: %d\n", FEATURE_AVAILABLE);
+                    *value_data = FEATURE_AVAILABLE;
+                #else
+                    dprintf("feature_morse_code: %d\n", FEATURE_UNAVAILABLE);
+                    *value_data = FEATURE_UNAVAILABLE;
+                #endif // COMMUNITY_MODULE_MORSE_CODE_ENABLE
+                break;
+
+            case id_ploopystuff_feature_pointer_acc:
+                #if defined(COMMUNITY_MODULE_POINTER_ACC_ENABLE)
+                    dprintf("feature_pointer_acc: %d\n", FEATURE_AVAILABLE);
+                    *value_data = FEATURE_AVAILABLE;
+                #else
+                    dprintf("feature_pointer_acc: %d\n", FEATURE_UNAVAILABLE);
+                    *value_data = FEATURE_UNAVAILABLE;
+                #endif // COMMUNITY_MODULE_POINTER_ACC_ENABLE
                 break;
 
             case id_ploopystuff_sensor_type:
@@ -563,19 +621,20 @@
                 #endif
                 break;
 
-            case id_ploopystuff_sensor_rotation_available:
-                #if defined(POINTING_DEVICE_DRIVER_PMW3360)
-                    #if defined(COMMUNITY_MODULE_PMW_ROTATION_ENABLE)
-                        dprintf("sensor_rotation_available: 1\n");
-                        *value_data = 1;
-                    #else
-                        dprintf("sensor_rotation_available: 2\n");
-                        *value_data = 2;
-                    #endif
+            case id_ploopystuff_mcu_type:
+                #if defined(QMK_MCU_RP2040)
+                    dprintf("mcu_type: MCU_RP2040\n");
+                    *value_data = MCU_RP2040;
+                #elif defined(QMK_MCU_ATMEGA32U4)
+                    dprintf("mcu_type: MCU_ATMEGA32U4\n");
+                    *value_data = MCU_ATMEGA32U4;
+                #elif defined(QMK_MCU_STM32L432)
+                    dprintf("mcu_type: MCU_STM32L432\n");
+                    *value_data = MCU_STM32L432;
                 #else
-                    dprintf("sensor_rotation_available: 0\n");
-                    *value_data = 0;
-                #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
+                    dprintf("mcu_type: MCU_UNKNOWN");
+                    *value_data = MCU_UNKNOWN;
+                #endif
                 break;
         }
     }

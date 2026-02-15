@@ -1,6 +1,8 @@
 #pragma once
+#include QMK_KEYBOARD_H
 #include "mouse_gesture.h"
 
+void keyboard_post_init_user_viamenus(void);
 void ploopyvia_config_set_value( uint8_t *data );
 void ploopyvia_config_get_value( uint8_t *data );
 void ploopyvia_config_save ( void );
@@ -44,10 +46,16 @@ enum via_ploopystuff_value {
     id_ploopystuff_dragscroll_dragact_b_down,
     id_ploopystuff_dragscroll_dragact_b_left,
     id_ploopystuff_dragscroll_dragact_b_right,
-    id_ploopystuff_dummy_menuitem = 251,
-    id_ploopystuff_sensor_type,
-    id_ploopystuff_sensor_rotation_available,
+    id_ploopystuff_dummy_menuitem = 230,
     id_ploopystuff_dpi_as_slider,
+    id_ploopystuff_feature_dragscroll_straighten = 240,
+    id_ploopystuff_feature_mouse_jiggler,
+    id_ploopystuff_feature_sensor_rotation,
+    id_ploopystuff_feature_task_switch,
+    id_ploopystuff_feature_turbo_fire,
+    id_ploopystuff_feature_morse_code,
+    id_ploopystuff_feature_pointer_acc,
+    id_ploopystuff_sensor_type = 250,
     id_ploopystuff_mcu_type,
 };
 
@@ -63,6 +71,13 @@ enum sensor_types {
     SENSOR_PMW3360,
     SENSOR_ADNS5050,
     SENSOR_PAW3222,
+};
+
+enum feature_state {
+    FEATURE_UNKNOWN = 0,
+    FEATURE_AVAILABLE,
+    FEATURE_UNAVAILABLE,
+    FEATURE_UNSUPPORTED,
 };
 
 typedef struct {
@@ -105,7 +120,7 @@ typedef struct {
 
 via_ploopystuff_config ploopyvia_config;
 
-static via_ploopystuff_config ploopyvia_config_default = {
+const via_ploopystuff_config ploopyvia_config_default = {
     .dpi_multiplier             = 20,
     .pointer_invert_h           = false,
     .pointer_invert_v           = false,
@@ -176,7 +191,7 @@ static via_ploopystuff_config ploopyvia_config_default = {
     .dragscroll_dragact_b_down  = KC_NO,
     .dragscroll_dragact_b_left  = KC_NO,
     .dragscroll_dragact_b_right = KC_NO,
-    #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE
+    #ifdef COMMUNITY_MODULvia_ploopystuff_configE_PMW_ROTATION_ENABLE
     .pointer_rotation_value     = 0,
     .pointer_rotation_is_ccw    = false,
     #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
