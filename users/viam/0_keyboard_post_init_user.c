@@ -1,5 +1,7 @@
-#pragma once
-#include "debug.c"
+#include QMK_KEYBOARD_H
+#include "debug.h"
+#include "ploopy_via.h"
+
 #if defined (CONSOLE_ENABLE) || (defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS))
     void keyboard_post_init_user(void) {
         #ifdef CONSOLE_ENABLE

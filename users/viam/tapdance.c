@@ -1,5 +1,4 @@
 #if defined(TAP_DANCE_ENABLE)
-  #pragma once
 
   #if defined(BETTER_DRAGSCROLL_TAPDANCE)
     #include "better_dragscroll.h"
@@ -25,5 +24,4 @@
     #endif // BETTER_DRAGSCROLL_TAPDANCE
 
   };
-
 #endif // TAP_DANCE_ENABLE

@@ -1,4 +1,5 @@
 #pragma once
+#include QMK_KEYBOARD_H
 
 #define PLOOPY_MSGESTURE_TIMEOUT 225
 #define PLOOPY_MSGESTURE_DEBOUNCE 25

@@ -1,8 +1,5 @@
 #pragma once
-
-#include "quantum.h"
-#include <stdbool.h>
-#include <stdio.h>
+#include QMK_KEYBOARD_H
 
 #if !defined(BETTER_DRAGSCROLL_DIVISOR_H)
     #define BETTER_DRAGSCROLL_DIVISOR_H 4
@@ -41,3 +38,6 @@ dragscroll_state dragscroll_state_default = {
 };
 
 dragscroll_state ds_state;
+
+report_mouse_t pointing_device_task_better_dragscroll(report_mouse_t mouse_report);
+bool led_update_better_dragscroll(led_t led_state);

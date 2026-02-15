@@ -1,6 +1,5 @@
 #if defined(COMBO_ENABLE)
-  #pragma once
-
+    #include QMK_KEYBOARD_H
     const uint16_t PROGMEM pl_combo_ms12[] = {MS_BTN1, MS_BTN2, COMBO_END};
     const uint16_t PROGMEM pl_combo_ms24[] = {MS_BTN2, MS_BTN4, COMBO_END};
     const uint16_t PROGMEM pl_combo_ms24_lt1[] = {MS_BTN2 , LT(1, MS_BTN4), COMBO_END};

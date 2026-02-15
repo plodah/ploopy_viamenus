@@ -18,9 +18,7 @@
  */
 
  #if defined(BETTER_DRAGSCROLL)
-    #include <stdbool.h>
-    #include <stdio.h>
-    #include "quantum.h"
+    #include QMK_KEYBOARD_H
     #include "better_dragscroll.h"
     #include "ploopy_via.h"
     #if defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
