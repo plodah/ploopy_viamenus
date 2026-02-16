@@ -7,6 +7,7 @@
     "layout": "LAYOUT",
     "modules": [
         "plodah/dragscroll_straighten",
+        "plodah/morse_code",
         "plodah/mouse_jiggler",
         "plodah/pmw_rotation",
         "plodah/task_switch",
@@ -16,7 +17,7 @@
         "features": {
             "backlight": false,
             "combo": true,
-            "console": false,
+            "console": true,
             "deferred_exec": true,
             "encoder_map": false,
             "rgblight": false,

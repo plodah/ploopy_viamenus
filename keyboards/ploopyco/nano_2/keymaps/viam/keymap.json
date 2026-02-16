@@ -8,6 +8,7 @@
     "layout": "LAYOUT",
     "modules": [
         "plodah/dragscroll_straighten",
+        "plodah/morse_code",
         "plodah/mouse_jiggler",
         "plodah/task_switch",
         "plodah/turbo_fire"

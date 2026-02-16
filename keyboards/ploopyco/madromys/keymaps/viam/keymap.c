@@ -50,6 +50,9 @@ enum keymap_keycodes {
     TBO_MO3,
     TBO_TG4,
     TBO_MO4,
+    MOR_MAN,
+    MOR_DIT,
+    MOR_DSH,
 };
 
 enum {
