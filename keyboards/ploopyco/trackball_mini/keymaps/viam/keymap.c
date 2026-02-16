@@ -36,6 +36,14 @@ enum keymap_keycodes {
     DPI_SNIPER_B_TOGGLE,
     BETTER_DRAG_ACTION_A_MOMENTARY,
     BETTER_DRAG_ACTION_B_MOMENTARY,
+    TBO_TG1,
+    TBO_MO1,
+    TBO_TG2,
+    TBO_MO2,
+    TBO_TG3,
+    TBO_MO3,
+    TBO_TG4,
+    TBO_MO4,
 };
 
 enum {

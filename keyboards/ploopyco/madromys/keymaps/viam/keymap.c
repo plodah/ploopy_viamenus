@@ -42,6 +42,14 @@ enum keymap_keycodes {
     PMW_CCW,
     PMW_CW,
     PMW_RST,
+    TBO_TG1,
+    TBO_MO1,
+    TBO_TG2,
+    TBO_MO2,
+    TBO_TG3,
+    TBO_MO3,
+    TBO_TG4,
+    TBO_MO4,
 };
 
 enum {
@@ -56,11 +64,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         MS_BTN1,                   TD(TD_DRAGSCROLL)
     ),
     [_FNA] = LAYOUT(
-        _______, PL_TSKP, PL_TSKN, PMW_RST,
+        _______, PL_TSKP, PL_TSKN, _______,
         DPI_CONFIG,                P_DRGTG
     ),
     [_FNB] = LAYOUT(
-        PMW_CCW, _______, PMW_CW, P_SNTGA,
+        _______, _______, _______, P_SNTGA,
         PL_MSJG,                   P_DRGTG
     )
 };

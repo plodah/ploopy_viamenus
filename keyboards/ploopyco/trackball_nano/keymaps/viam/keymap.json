@@ -9,7 +9,8 @@
     "modules": [
         "plodah/dragscroll_straighten",
         "plodah/mouse_jiggler",
-        "plodah/task_switch"
+        "plodah/task_switch",
+        "plodah/turbo_fire"
     ],
     "config": {
         "build": {

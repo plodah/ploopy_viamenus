@@ -1,4 +1,7 @@
 /* Copyright 2025 Plodah
+ * Copyright 2023 Colin Lam (Ploopy Corporation)
+ * Copyright 2020 Christopher Courtney, aka Drashna Jael're  (@drashna) <drashna@live.com>
+ * Copyright 2019 Sunjun Kim
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,18 +15,17 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #pragma once
 
 #include "common.h"
 
-#define PLOOPY_DRAGSCROLL_SCRLK_ENABLE
 #define EECONFIG_USER_DATA_SIZE 47
 #define PLOOPY_MSGESTURE_ENABLE
+#define BETTER_DRAGSCROLL_TAPDANCE
+#define COMBO_SHOULD_TRIGGER
 
-#define BETTER_DRAGSCROLL_INVERT_V 1
-#define BETTER_DRAGSCROLL_DIVISOR_V 8
 #define BETTER_DRAGSCROLL_DIVISOR_H 8
-
+#define BETTER_DRAGSCROLL_DIVISOR_V 8
 #define TURBO_FIRE_KEYCOUNT 2

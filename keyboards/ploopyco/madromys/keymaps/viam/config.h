@@ -15,7 +15,6 @@
  */
 
 #pragma once
-
 #include "common.h"
 
 #define EECONFIG_USER_DATA_SIZE 47

@@ -39,6 +39,14 @@ enum keymap_keycodes {
     PMW_CCW,
     PMW_CW,
     PMW_RST,
+    TBO_TG1,
+    TBO_MO1,
+    TBO_TG2,
+    TBO_MO2,
+    TBO_TG3,
+    TBO_MO3,
+    TBO_TG4,
+    TBO_MO4,
 };
 
 enum {
