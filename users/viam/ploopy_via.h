@@ -1,6 +1,19 @@
 #pragma once
 #include QMK_KEYBOARD_H
+#include "better_dragscroll.h"
+#ifdef COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
+    #include "mouse_jiggler.h"
+#endif // def COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
 #include "mouse_gesture.h"
+#ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE
+    #include "pmw_rotation.h"
+#endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
+#if defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
+    #include "dragscroll_straighten.h"
+#endif // defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
+#if defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
+    #include "turbo_fire.h"
+#endif // COMMUNITY_MODULE_TURBO_FIRE_ENABLE
 
 void keyboard_post_init_user_viamenus(void);
 void ploopyvia_config_set_value( uint8_t *data );
@@ -45,7 +58,18 @@ enum via_ploopystuff_value {
     id_ploopystuff_dragscroll_dragact_b_up,
     id_ploopystuff_dragscroll_dragact_b_down,
     id_ploopystuff_dragscroll_dragact_b_left,
-    id_ploopystuff_dragscroll_dragact_b_right,
+    id_ploopystuff_dragscroll_dragact_b_right, // 68
+    id_ploopystuff_turbo_fire_keycode_count = 70,
+    id_ploopystuff_turbo_fire_rate,
+    id_ploopystuff_turbo_fire_duration,
+    id_ploopystuff_turbo_fire_keycode_a,
+    id_ploopystuff_turbo_fire_keycode_b,
+    id_ploopystuff_turbo_fire_keycode_c,
+    id_ploopystuff_turbo_fire_keycode_d,
+    id_ploopystuff_turbo_fire_keycode_e,
+    id_ploopystuff_turbo_fire_keycode_f,
+    id_ploopystuff_turbo_fire_keycode_g,
+    id_ploopystuff_turbo_fire_keycode_h, // 80
     id_ploopystuff_dummy_menuitem = 230,
     id_ploopystuff_dpi_as_slider,
     id_ploopystuff_feature_dragscroll_straighten = 240,
@@ -116,11 +140,16 @@ typedef struct {
     uint16_t dragscroll_dragact_b_down;
     uint16_t dragscroll_dragact_b_left;
     uint16_t dragscroll_dragact_b_right;
+    #ifdef COMMUNITY_MODULE_TURBO_FIRE_ENABLE
+        uint16_t turbo_fire_rate;
+        uint8_t turbo_fire_duration;
+        uint16_t turbo_fire_keycodes[TURBO_FIRE_KEYCOUNT];
+    #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
 } via_ploopystuff_config;
 
 via_ploopystuff_config ploopyvia_config;
 
-const via_ploopystuff_config ploopyvia_config_default = {
+static const via_ploopystuff_config ploopyvia_config_default = {
     .dpi_multiplier             = 20,
     .pointer_invert_h           = false,
     .pointer_invert_v           = false,
@@ -194,5 +223,10 @@ const via_ploopystuff_config ploopyvia_config_default = {
     #ifdef COMMUNITY_MODULvia_ploopystuff_configE_PMW_ROTATION_ENABLE
     .pointer_rotation_value     = 0,
     .pointer_rotation_is_ccw    = false,
+    #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
+    #ifdef COMMUNITY_MODULE_TURBO_FIRE_ENABLE
+        .turbo_fire_rate = 25,
+        .turbo_fire_duration = 10,
+        .turbo_fire_keycodes = {MS_BTN1},
     #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
 };

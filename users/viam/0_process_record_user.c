@@ -31,8 +31,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             case PMW_RST:
                 process_record_pmw_rotation ((keycode - (PMW_CCW - COMMUNITY_MODULE_PMW_ROTATE_CCW)), record);
                 pmw_rotation_update_via_keypress();
-            return false;
+                return false;
         #endif // defined(COMMUNITY_MODULE_PMW_ROTATION_ENABLE)
+
+        #if defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
+            case TBO_TG1:
+            case TBO_MO1:
+            case TBO_TG2:
+            case TBO_MO2:
+            case TBO_TG3:
+            case TBO_MO3:
+            case TBO_TG4:
+            case TBO_MO4:
+                process_record_turbo_fire ((keycode - (TBO_TG1 - COMMUNITY_MODULE_TURBO_A_TOGGLE)), record);
+                return false;
+        #endif // defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
     }
     return true;
 }

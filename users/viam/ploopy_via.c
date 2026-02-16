@@ -2,19 +2,6 @@
     #include QMK_KEYBOARD_H
 
     #include "ploopy_via.h"
-    #include "better_dragscroll.h"
-    #include "via.h"
-    #ifdef COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
-        #include "mouse_jiggler.h"
-    #endif // def COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
-    #include "mouse_gesture.h"
-    #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE
-        #include "pmw_rotation.h"
-    #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
-    #if defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
-        #include "dragscroll_straighten.h"
-    #endif // defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
-
     void ploopyvia_config_load(void) {
         // ploopyvia_config.raw = eeconfig_read_user();
         eeconfig_read_user_datablock(&ploopyvia_config, 0, EECONFIG_USER_DATA_SIZE);
@@ -32,6 +19,18 @@
         pointing_device_set_cpi(dpi_array[keyboard_config.dpi_config]);
         dprintf("Set CPI %d\n", dpi_array[keyboard_config.dpi_config]);
         eeconfig_update_kb(keyboard_config.raw);
+    }
+
+    void update_turbo_fire_kc(uint8_t index){
+        set_turbo_fire_keycode(index, ploopyvia_config.turbo_fire_keycodes[index]);
+    }
+
+    void update_turbo_fire_all(void){
+        for (int i = 0; i < get_turbo_fire_keycount(); i++){
+            update_turbo_fire_kc(i);
+        }
+        set_turbo_fire_rate(ploopyvia_config.turbo_fire_rate);
+        set_turbo_fire_duration(ploopyvia_config.turbo_fire_duration);
     }
 
     #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE
@@ -320,6 +319,29 @@
                 ploopyvia_config.dragscroll_dragact_b_right = value_data[0] << 8 | value_data[1];
                 dprintf("dragscroll_dragact_b_right: %d\n", ploopyvia_config.dragscroll_dragact_b_right);
                 break;
+
+            #if defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
+                case id_ploopystuff_turbo_fire_rate:
+                    ploopyvia_config.turbo_fire_rate = value_data[0] << 8 | value_data[1];
+                    set_turbo_fire_rate(ploopyvia_config.turbo_fire_rate);
+                    dprintf("turbo_fire_rate: %d\n", ploopyvia_config.turbo_fire_rate);
+                    break;
+
+                case id_ploopystuff_turbo_fire_duration:
+                    ploopyvia_config.turbo_fire_duration = *value_data;
+                    set_turbo_fire_duration(ploopyvia_config.turbo_fire_duration);
+                    dprintf("turbo_fire_duration: %d\n", ploopyvia_config.turbo_fire_duration);
+                    break;
+
+                case id_ploopystuff_turbo_fire_keycode_a ... (id_ploopystuff_turbo_fire_keycode_a + TURBO_FIRE_KEYCOUNT - 1):
+                    uint8_t temp_kcindex = *value_id - id_ploopystuff_turbo_fire_keycode_a;
+                    ploopyvia_config.turbo_fire_keycodes[temp_kcindex] = value_data[0] << 8 | value_data[1];
+                    update_turbo_fire_kc(temp_kcindex);
+                    dprintf("turbo_fire_keycodes[%d]: %d\n", temp_kcindex, ploopyvia_config.turbo_fire_keycodes[temp_kcindex]);
+                    break;
+
+            #endif // defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
+
             case id_ploopystuff_dpi_as_slider:
                 ploopyvia_config.dpi_as_slider = *value_data;
                 dprintf("dpi_as_slider: %d\n", ploopyvia_config.dpi_as_slider);
@@ -469,7 +491,6 @@
                 dprintf("sniper_b_dpi: %d\n", ploopyvia_config.sniper_b_dpi);
                 break;
 
-
             #if defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
                 case id_ploopystuff_dragscroll_straighten_sensitivity:
                     *value_data = ploopyvia_config.dragscroll_straighten_sensitivity;
@@ -524,6 +545,31 @@
                 value_data[1] = ploopyvia_config.dragscroll_dragact_b_right & 0xFF;
                 dprintf("dragscroll_dragact_b_right: %d\n", ploopyvia_config.dragscroll_dragact_b_right);
                 break;
+
+            #if defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
+                case id_ploopystuff_turbo_fire_keycode_count:
+                    *value_data = get_turbo_fire_keycount();
+                    dprintf("turbo_fire_duration: %d\n", get_turbo_fire_keycount());
+                    break;
+
+                case id_ploopystuff_turbo_fire_rate:
+                    value_data[0] = ploopyvia_config.turbo_fire_rate >> 8;
+                    value_data[1] = ploopyvia_config.turbo_fire_rate & 0xFF;
+                    dprintf("turbo_fire_rate: %d\n", ploopyvia_config.turbo_fire_rate);
+                    break;
+
+                case id_ploopystuff_turbo_fire_duration:
+                    *value_data = ploopyvia_config.turbo_fire_duration;
+                    dprintf("turbo_fire_duration: %d\n", ploopyvia_config.turbo_fire_duration);
+                    break;
+
+                case id_ploopystuff_turbo_fire_keycode_a...(id_ploopystuff_turbo_fire_keycode_a + TURBO_FIRE_KEYCOUNT - 1):
+                    uint8_t temp_kcindex = *value_id - id_ploopystuff_turbo_fire_keycode_a;
+                    value_data[0] = ploopyvia_config.turbo_fire_keycodes[temp_kcindex] >> 8;
+                    value_data[1] = ploopyvia_config.turbo_fire_keycodes[temp_kcindex] & 0xFF;
+                    dprintf("turbo_fire_keycodes[%d]: %d\n", temp_kcindex, ploopyvia_config.turbo_fire_keycodes[temp_kcindex]);
+                    break;
+            #endif // defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
 
             case id_ploopystuff_dpi_as_slider:
                 *value_data = ploopyvia_config.dpi_as_slider;
