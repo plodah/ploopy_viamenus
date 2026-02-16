@@ -30,7 +30,10 @@
         { "name": "Turbo Click Toggle C", "title": "Turbo Click Toggle C", "shortName": "TRBO TG C" },
         { "name": "Turbo Click Moment C", "title": "Turbo Click Moment C", "shortName": "TRBO MO C" },
         { "name": "Turbo Click Toggle D", "title": "Turbo Click Toggle D", "shortName": "TRBO TG D" },
-        { "name": "Turbo Click Moment D", "title": "Turbo Click Moment D", "shortName": "TRBO MO D" }
+        { "name": "Turbo Click Moment D", "title": "Turbo Click Moment D", "shortName": "TRBO MO D" },
+        { "name": "Morse Code Manual", "title": "Morse Code Manual", "shortName": "MCO Manual" },
+        { "name": "Morse Code Dit", "title": "Morse Code Dit", "shortName": "MCO Dit" },
+        { "name": "Morse Code Dash", "title": "Morse Code Dash", "shortName": "MCO DASH" }
     ],
     "layouts": {
         "keymap": [

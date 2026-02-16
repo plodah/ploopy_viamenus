@@ -46,6 +46,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 process_record_turbo_fire ((keycode - (TBO_TG1 - COMMUNITY_MODULE_TURBO_A_TOGGLE)), record);
                 return false;
         #endif // defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
+
+        #if defined(COMMUNITY_MODULE_MORSE_CODE_ENABLE)
+            case MOR_MAN:
+            case MOR_DIT:
+            case MOR_DSH:
+                process_record_turbo_fire ((keycode - (MOR_MAN - COMMUNITY_MODULE_MORSE_CODE_MANUAL)), record);
+                return false;
+        #endif // defined(COMMUNITY_MODULE_MORSE_CODE_ENABLE)
+
     }
     return true;
 }
