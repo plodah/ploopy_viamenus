@@ -21,7 +21,16 @@
         { "name": "Better DragSc Act A", "title": "Better Drag Scroll Action A", "shortName": "Drg AcA" },
         { "name": "Better DragSc Act B", "title": "Better Drag Scroll Action B", "shortName": "Drg AcB" },
         { "name": "Sensor Rotation -15", "title": "Sensor Rotation -15", "shortName": "Rotate-" },
-        { "name": "Sensor Rotation +15", "title": "Sensor Rotation +15", "shortName": "Rotate+" }
+        { "name": "Sensor Rotation +15", "title": "Sensor Rotation +15", "shortName": "Rotate+" },
+        { "name": "Sensor Rotation Reset", "title": "Sensor Rotation Reset", "shortName": "Reset Rot" },
+        { "name": "Turbo Click Toggle A", "title": "Turbo Click Toggle A", "shortName": "TRBO TG A" },
+        { "name": "Turbo Click Moment A", "title": "Turbo Click Moment A", "shortName": "TRBO MO A" },
+        { "name": "Turbo Click Toggle B", "title": "Turbo Click Toggle B", "shortName": "TRBO TG B" },
+        { "name": "Turbo Click Moment B", "title": "Turbo Click Moment B", "shortName": "TRBO MO B" },
+        { "name": "Turbo Click Toggle C", "title": "Turbo Click Toggle C", "shortName": "TRBO TG C" },
+        { "name": "Turbo Click Moment C", "title": "Turbo Click Moment C", "shortName": "TRBO MO C" },
+        { "name": "Turbo Click Toggle D", "title": "Turbo Click Toggle D", "shortName": "TRBO TG D" },
+        { "name": "Turbo Click Moment D", "title": "Turbo Click Moment D", "shortName": "TRBO MO D" }
     ],
     "layouts": {
         "keymap": [
@@ -581,6 +590,73 @@
                             "content": ["id_ploopystuff_sniper_b_dpi", 0, 42]
                         }
                     ]
+                },
+                {
+                    "label": "Turbo Clicker",
+                    "content": [
+                        {
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} && {id_turbo_fire_keycode_count} >= 1",
+                            "label": "Rate (ms between fires)",
+                            "type": "range",
+                            "options": [20, 4000],
+                            "content": ["id_turbo_fire_rate", 0, 71]
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} && {id_turbo_fire_keycode_count} >= 1",
+                            "label": "Duration (ms key held)",
+                            "type": "range",
+                            "options": [0, 255],
+                            "content": ["id_turbo_fire_duration", 0, 72]
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} && {id_turbo_fire_keycode_count} >= 1",
+                            "label": "Keycode A",
+                            "type": "keycode",
+                            "content": ["id_turbo_fire_keycode_a", 0, 73]
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} && {id_turbo_fire_keycode_count} >= 2",
+                            "label": "Keycode B",
+                            "type": "keycode",
+                            "content": ["id_turbo_fire_keycode_b", 0, 74]
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} && {id_turbo_fire_keycode_count} >= 3",
+                            "label": "Keycode C",
+                            "type": "keycode",
+                            "content": ["id_turbo_fire_keycode_c", 0, 75]
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} && {id_turbo_fire_keycode_count} >= 4",
+                            "label": "Keycode D",
+                            "type": "keycode",
+                            "content": ["id_turbo_fire_keycode_d", 0, 76]
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} && {id_turbo_fire_keycode_count} >= 5",
+                            "label": "Keycode E",
+                            "type": "keycode",
+                            "content": ["id_turbo_fire_keycode_e", 0, 77]
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} && {id_turbo_fire_keycode_count} >= 6",
+                            "label": "Keycode F",
+                            "type": "keycode",
+                            "content": ["id_turbo_fire_keycode_f", 0, 78]
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} && {id_turbo_fire_keycode_count} >= 7",
+                            "label": "Keycode G",
+                            "type": "keycode",
+                            "content": ["id_turbo_fire_keycode_g", 0, 79]
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} && {id_turbo_fire_keycode_count} >= 8",
+                            "label": "Keycode H",
+                            "type": "keycode",
+                            "content": ["id_turbo_fire_keycode_h", 0, 80]
+                        }
+                    ]
                 }
             ]
         },
@@ -889,6 +965,23 @@
                                 ["Disabled in firmware", 2]
                             ],
                             "content": ["id_feature_turbo_fire", 0, 244]
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire}",
+                            "label": "Turbo Fire Count",
+                            "type": "dropdown",
+                            "options": [
+                                ["Unknown", 0],
+                                ["1", 1],
+                                ["2", 2],
+                                ["3", 3],
+                                ["4", 4],
+                                ["5", 5],
+                                ["6", 6],
+                                ["7", 7],
+                                ["8", 8]
+                            ],
+                            "content": ["id_turbo_fire_keycode_count", 0, 70]
                         },
                         {
                             "showIf": "{id_firmware_version} >= 2",
