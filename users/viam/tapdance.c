@@ -3,7 +3,7 @@
   #if defined(BETTER_DRAGSCROLL_TAPDANCE)
     #include "better_dragscroll.h"
     void dragscrolltd_fin(tap_dance_state_t *state, void *user_data){
-      dprintf("fin; pressed:%d $dcount:%d \n", state->pressed, state->count);
+      dprintf("fin; pressed:%d count:%d \n", state->pressed, state->count);
       if(state->count >= 2){
         better_dragscroll_toggle(true);
       }

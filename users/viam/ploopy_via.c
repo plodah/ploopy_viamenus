@@ -390,7 +390,7 @@
                 ploopyvia_config.pointer_accel_takeoff =
                     PROJECT_FROM_VIA(takeoff, MACCEL_VIA_TKO_MIN, MACCEL_VIA_TKO_MAX);
                 #ifdef MACCEL_DEBUG
-                printf("MACCEL:via: TKO: %.3f grw: %.3f ofs: %.3f lmt: %.3f\n", ploopyvia_config.pointer_accel_takeoff,
+                dprintf("MACCEL:via: TKO: %.3f grw: %.3f ofs: %.3f lmt: %.3f\n", ploopyvia_config.pointer_accel_takeoff,
                        ploopyvia_config.pointer_accel_growth_rate, ploopyvia_config.pointer_accel_offset,
                        ploopyvia_config.pointer_accel_limit);
                 #endif
@@ -401,7 +401,7 @@
                 ploopyvia_config.pointer_accel_growth_rate =
                     PROJECT_FROM_VIA(growth_rate, MACCEL_VIA_GRO_MIN, MACCEL_VIA_GRO_MAX);
                 #ifdef MACCEL_DEBUG
-                printf("MACCEL:via: tko: %.3f GRW: %.3f ofs: %.3f lmt: %.3f\n", ploopyvia_config.pointer_accel_takeoff,
+                dprintf("MACCEL:via: tko: %.3f GRW: %.3f ofs: %.3f lmt: %.3f\n", ploopyvia_config.pointer_accel_takeoff,
                        ploopyvia_config.pointer_accel_growth_rate, ploopyvia_config.pointer_accel_offset,
                        ploopyvia_config.pointer_accel_limit);
                 #endif
@@ -413,7 +413,7 @@
                 ploopyvia_config.pointer_accel_offset =
                     PROJECT_FROM_VIA(offset, MACCEL_VIA_OFS_MIN, MACCEL_VIA_OFS_MAX);
                 #ifdef MACCEL_DEBUG
-                printf("MACCEL:via: tko: %.3f grw: %.3f OFS: %.3f lmt: %.3f\n", ploopyvia_config.pointer_accel_takeoff,
+                dprintf("MACCEL:via: tko: %.3f grw: %.3f OFS: %.3f lmt: %.3f\n", ploopyvia_config.pointer_accel_takeoff,
                        ploopyvia_config.pointer_accel_growth_rate, ploopyvia_config.pointer_accel_offset,
                        ploopyvia_config.pointer_accel_limit);
                 #endif
@@ -424,13 +424,14 @@
 
                 ploopyvia_config.pointer_accel_limit = PROJECT_FROM_VIA(limit, MACCEL_VIA_LMT_MIN, MACCEL_VIA_LMT_MAX);
                 #ifdef MACCEL_DEBUG
-                printf("MACCEL:via: tko: %.3f grw: %.3f ofs: %.3f LMT: %.3f\n", ploopyvia_config.pointer_accel_takeoff,
+                dprintf("MACCEL:via: tko: %.3f grw: %.3f ofs: %.3f LMT: %.3f\n", ploopyvia_config.pointer_accel_takeoff,
                        ploopyvia_config.pointer_accel_growth_rate, ploopyvia_config.pointer_accel_offset,
                        ploopyvia_config.pointer_accel_limit);
                 #endif
                 update_pointer_accelaration();
                 break;
             case id_pointing_device_enabled:
+                dprintf("MACCEL:via: enabled:%d", value_data[0]);
                 ploopyvia_config.pointer_accel_enabled = value_data[0];
                 update_pointer_accelaration();
                 break;
