@@ -107,7 +107,7 @@
                                 ["4", 3],
                                 ["5", 4]
                             ],
-                            "content": ["id_ploopystuff_dpi_activepreset", 0, 1]
+                            "content": ["id_dpi_activepreset", 0, 1]
                         },
                         {
                             "showIf": "{id_firmware_version} < 2",
@@ -127,23 +127,23 @@
                                 ["4x", 80],
                                 ["5x", 100]
                             ],
-                            "content": ["id_ploopystuff_dpi_multiplier", 0, 2]
+                            "content": ["id_dpi_multiplier", 0, 2]
                         },
                         {
                             "showIf": "{id_firmware_version} < 2 || ({id_firmware_version} >= 2 && {id_feature_mouse_jiggler} == 1)",
                             "label": "Mouse Jiggler",
                             "type": "toggle",
-                            "content": ["id_ploopystuff_msjiggler_enabled", 0, 3]
+                            "content": ["id_msjiggler_enabled", 0, 3]
                         },
                         {
                             "label": "Pointer Invert X",
                             "type": "toggle",
-                            "content": ["id_ploopystuff_pointer_invert_h", 0, 4]
+                            "content": ["id_pointer_invert_h", 0, 4]
                         },
                         {
                             "label": "Pointer Invert Y",
                             "type": "toggle",
-                            "content": ["id_ploopystuff_pointer_invert_v", 0, 5]
+                            "content": ["id_pointer_invert_v", 0, 5]
                         }
                     ]
                 },
@@ -171,7 +171,7 @@
                                 ["2000", 200],
                                 ["2400", 240]
                             ],
-                            "content": ["id_ploopystuff_dpi_presets[0]", 0, 31, 0]
+                            "content": ["id_dpi_presets[0]", 0, 31, 0]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 0 && {id_firmware_version} < 2",
@@ -194,7 +194,7 @@
                                 ["2000", 200],
                                 ["2400", 240]
                             ],
-                            "content": ["id_ploopystuff_dpi_presets[1]", 0, 31, 1]
+                            "content": ["id_dpi_presets[1]", 0, 31, 1]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 0 && {id_firmware_version} < 2",
@@ -217,7 +217,7 @@
                                 ["2000", 200],
                                 ["2400", 240]
                             ],
-                            "content": ["id_ploopystuff_dpi_presets[2]", 0, 31, 2]
+                            "content": ["id_dpi_presets[2]", 0, 31, 2]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 0 && {id_firmware_version} < 2",
@@ -240,7 +240,7 @@
                                 ["2000", 200],
                                 ["2400", 240]
                             ],
-                            "content": ["id_ploopystuff_dpi_presets[3]", 0, 31, 3]
+                            "content": ["id_dpi_presets[3]", 0, 31, 3]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 0 && {id_firmware_version} < 2",
@@ -263,7 +263,7 @@
                                 ["2000", 200],
                                 ["2400", 240]
                             ],
-                            "content": ["id_ploopystuff_dpi_presets[4]", 0, 31, 4]
+                            "content": ["id_dpi_presets[4]", 0, 31, 4]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 0 && {id_firmware_version} >=2",
@@ -286,7 +286,7 @@
                                 ["2000", 20],
                                 ["2400", 24]
                             ],
-                            "content": ["id_ploopystuff_dpi_presets[0]", 0, 31, 0]
+                            "content": ["id_dpi_presets[0]", 0, 31, 0]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 0 && {id_firmware_version} >=2",
@@ -309,7 +309,7 @@
                                 ["2000", 20],
                                 ["2400", 24]
                             ],
-                            "content": ["id_ploopystuff_dpi_presets[1]", 0, 31, 1]
+                            "content": ["id_dpi_presets[1]", 0, 31, 1]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 0 && {id_firmware_version} >=2",
@@ -332,7 +332,7 @@
                                 ["2000", 20],
                                 ["2400", 24]
                             ],
-                            "content": ["id_ploopystuff_dpi_presets[2]", 0, 31, 2]
+                            "content": ["id_dpi_presets[2]", 0, 31, 2]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 0 && {id_firmware_version} >=2",
@@ -355,7 +355,7 @@
                                 ["2000", 20],
                                 ["2400", 24]
                             ],
-                            "content": ["id_ploopystuff_dpi_presets[3]", 0, 31, 3]
+                            "content": ["id_dpi_presets[3]", 0, 31, 3]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 0 && {id_firmware_version} >=2",
@@ -378,90 +378,93 @@
                                 ["2000", 20],
                                 ["2400", 24]
                             ],
-                            "content": ["id_ploopystuff_dpi_presets[4]", 0, 31, 4]
+                            "content": ["id_dpi_presets[4]", 0, 31, 4]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 1 && {id_firmware_version} < 2",
                             "label": "Preset 1 (x10)",
                             "type": "range",
                             "options": [0, 250],
-                            "content": ["id_ploopystuff_dpi_presets[0]", 0, 31, 0]
+                            "content": ["id_dpi_presets[0]", 0, 31, 0]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 1 && {id_firmware_version} < 2",
                             "label": "Preset 2 (x10)",
                             "type": "range",
                             "options": [0, 250],
-                            "content": ["id_ploopystuff_dpi_presets[1]", 0, 31, 1]
+                            "content": ["id_dpi_presets[1]", 0, 31, 1]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 1 && {id_firmware_version} < 2",
                             "label": "Preset 3 (x10)",
                             "type": "range",
                             "options": [0, 250],
-                            "content": ["id_ploopystuff_dpi_presets[2]", 0, 31, 2]
+                            "content": ["id_dpi_presets[2]", 0, 31, 2]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 1 && {id_firmware_version} < 2",
                             "label": "Preset 4 (x10)",
                             "type": "range",
                             "options": [0, 250],
-                            "content": ["id_ploopystuff_dpi_presets[3]", 0, 31, 3]
+                            "content": ["id_dpi_presets[3]", 0, 31, 3]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 1 && {id_firmware_version} < 2",
                             "label": "Preset 5 (x10)",
                             "type": "range",
                             "options": [0, 250],
-                            "content": ["id_ploopystuff_dpi_presets[4]", 0, 31, 4]
+                            "content": ["id_dpi_presets[4]", 0, 31, 4]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 1 && {id_firmware_version} >= 2",
                             "label": "Preset 1 (x100)",
                             "type": "range",
                             "options": [0, 120],
-                            "content": ["id_ploopystuff_dpi_presets[0]", 0, 31, 0]
+                            "content": ["id_dpi_presets[0]", 0, 31, 0]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 1 && {id_firmware_version} >= 2",
                             "label": "Preset 2 (x100)",
                             "type": "range",
                             "options": [0, 120],
-                            "content": ["id_ploopystuff_dpi_presets[1]", 0, 31, 1]
+                            "content": ["id_dpi_presets[1]", 0, 31, 1]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 1 && {id_firmware_version} >= 2",
                             "label": "Preset 3 (x100)",
                             "type": "range",
                             "options": [0, 120],
-                            "content": ["id_ploopystuff_dpi_presets[2]", 0, 31, 2]
+                            "content": ["id_dpi_presets[2]", 0, 31, 2]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 1 && {id_firmware_version} >= 2",
                             "label": "Preset 4 (x100)",
                             "type": "range",
                             "options": [0, 120],
-                            "content": ["id_ploopystuff_dpi_presets[3]", 0, 31, 3]
+                            "content": ["id_dpi_presets[3]", 0, 31, 3]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 1 && {id_firmware_version} >= 2",
                             "label": "Preset 5 (x100)",
                             "type": "range",
                             "options": [0, 120],
-                            "content": ["id_ploopystuff_dpi_presets[4]", 0, 31, 4]
+                            "content": ["id_dpi_presets[4]", 0, 31, 4]
                         }
                     ]
                 },
                 {
+                    "showIf": "{id_firmware_version} < 2 || ({id_feature_gestures} == 1 && {id_firmware_version} >= 2)",
                     "label": "Gestures",
                     "content": [
                         {
+                            "showIf": "{id_firmware_version} < 2 || ({id_feature_gestures} == 1 && {id_firmware_version} >= 2)",
                             "label": "Wiggleball Wiggle Count",
                             "type": "range",
                             "options": [2, 10],
-                            "content": ["id_ploopystuff_gesture_count", 0, 11]
+                            "content": ["id_gesture_count", 0, 11]
                         },
                         {
+                            "showIf": "{id_firmware_version} < 2 || ({id_feature_gestures} == 1 && {id_firmware_version} >= 2)",
                             "label": "Wiggleball H",
                             "type": "dropdown",
                             "options": [
@@ -469,9 +472,10 @@
                                 ["Dragscroll", 1],
                                 ["Mouse Jiggler", 2]
                             ],
-                            "content": ["id_ploopystuff_gesture_action_h", 0, 12]
+                            "content": ["id_gesture_action_h", 0, 12]
                         },
                         {
+                            "showIf": "{id_firmware_version} < 2 || ({id_feature_gestures} == 1 && {id_firmware_version} >= 2)",
                             "label": "Wiggleball V",
                             "type": "dropdown",
                             "options": [
@@ -479,12 +483,13 @@
                                 ["Dragscroll", 1],
                                 ["Mouse Jiggler", 2]
                             ],
-                            "content": ["id_ploopystuff_gesture_action_v", 0, 13]
+                            "content": ["id_gesture_action_v", 0, 13]
                         },
                         {
+                            "showIf": "{id_firmware_version} < 2 || ({id_firmware_version} >= 2 && {id_feature_combos})",
                             "label": "Combos Enable",
                             "type": "toggle",
-                            "content": ["id_ploopystuff_combos_enabled", 0, 14]
+                            "content": ["id_combos_enabled", 0, 14]
                         }
                     ]
                 },
@@ -496,16 +501,17 @@
                             "label": "Rotate by __ degrees",
                             "type": "range",
                             "options": [0, 90],
-                            "content": ["id_ploopystuff_pointer_rotation_val", 0, 6]
+                            "content": ["id_pointer_rotation_val", 0, 6]
                         },
                         {
                             "label": "Counter-Clockwise",
                             "type": "toggle",
-                            "content": ["id_ploopystuff_pointer_rotation_is_ccw", 0, 7]
+                            "content": ["id_pointer_rotation_is_ccw", 0, 7]
                         }
                     ]
                 },
                 {
+                    "showIf": "{id_firmware_version} < 2 || ({id_feature_sniper} == 1 && {id_firmware_version} >= 2)",
                     "label": "Sniper DPIs",
                     "content": [
                         {
@@ -513,29 +519,29 @@
                             "label": "Sniper DPI A (x10)",
                             "type": "range",
                             "options": [10, 100],
-                            "content": ["id_ploopystuff_sniper_a_dpi", 0, 41]
+                            "content": ["id_sniper_a_dpi", 0, 41]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 1 && {id_firmware_version} < 2",
                             "label": "Sniper DPI B (x10)",
                             "type": "range",
                             "options": [10, 100],
-                            "content": ["id_ploopystuff_sniper_b_dpi", 0, 42]
+                            "content": ["id_sniper_b_dpi", 0, 42]
                         },
 
                         {
-                            "showIf": "{id_dpi_as_slider} == 1 && {id_firmware_version} >= 2",
+                            "showIf": "{id_dpi_as_slider} == 1 && {id_feature_sniper} == 1 && {id_firmware_version} >= 2",
                             "label": "Sniper DPI A (x100)",
                             "type": "range",
                             "options": [1, 10],
-                            "content": ["id_ploopystuff_sniper_a_dpi", 0, 41]
+                            "content": ["id_sniper_a_dpi", 0, 41]
                         },
                         {
-                            "showIf": "{id_dpi_as_slider} == 1 && {id_firmware_version} >= 2",
+                            "showIf": "{id_dpi_as_slider} == 1 && {id_feature_sniper} == 1 && {id_firmware_version} >= 2",
                             "label": "Sniper DPI B (x100)",
                             "type": "range",
                             "options": [1, 10],
-                            "content": ["id_ploopystuff_sniper_b_dpi", 0, 42]
+                            "content": ["id_sniper_b_dpi", 0, 42]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 0 && {id_firmware_version} < 2",
@@ -553,7 +559,7 @@
                                 ["900", 90],
                                 ["1000", 100]
                             ],
-                            "content": ["id_ploopystuff_sniper_a_dpi", 0, 41]
+                            "content": ["id_sniper_a_dpi", 0, 41]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 0 && {id_firmware_version} < 2",
@@ -571,10 +577,10 @@
                                 ["900", 90],
                                 ["1000", 100]
                             ],
-                            "content": ["id_ploopystuff_sniper_b_dpi", 0, 42]
+                            "content": ["id_sniper_b_dpi", 0, 42]
                         },
                         {
-                            "showIf": "{id_dpi_as_slider} == 0 && {id_firmware_version} >= 2",
+                            "showIf": "{id_dpi_as_slider} == 0 && {id_feature_sniper} == 1 && {id_firmware_version} >= 2",
                             "label": "Sniper DPI A",
                             "type": "dropdown",
                             "options": [
@@ -589,10 +595,10 @@
                                 ["900", 9],
                                 ["1000", 10]
                             ],
-                            "content": ["id_ploopystuff_sniper_a_dpi", 0, 41]
+                            "content": ["id_sniper_a_dpi", 0, 41]
                         },
                         {
-                            "showIf": "{id_dpi_as_slider} == 0 && {id_firmware_version} >= 2",
+                            "showIf": "{id_dpi_as_slider} == 0 && {id_feature_sniper} == 1 && {id_firmware_version} >= 2",
                             "label": "Sniper DPI B",
                             "type": "dropdown",
                             "options": [
@@ -607,7 +613,7 @@
                                 ["900", 9],
                                 ["1000", 10]
                             ],
-                            "content": ["id_ploopystuff_sniper_b_dpi", 0, 42]
+                            "content": ["id_sniper_b_dpi", 0, 42]
                         }
                     ]
                 },
@@ -712,7 +718,7 @@
                                 ["48", 192],
                                 ["64", 255]
                             ],
-                            "content": ["id_ploopystuff_dragscroll_divisor_h", 0, 23]
+                            "content": ["id_dragscroll_divisor_h", 0, 23]
                         },
                         {
                             "label": "Divisor Y",
@@ -740,24 +746,24 @@
                                 ["48", 192],
                                 ["64", 255]
                             ],
-                            "content": ["id_ploopystuff_dragscroll_divisor_v", 0, 24]
+                            "content": ["id_dragscroll_divisor_v", 0, 24]
                         },
                         {
                             "label": "Invert X",
                             "type": "toggle",
-                            "content": ["id_ploopystuff_dragscroll_invert_h", 0, 21]
+                            "content": ["id_dragscroll_invert_h", 0, 21]
                         },
                         {
                             "label": "Invert Y",
                             "type": "toggle",
-                            "content": ["id_ploopystuff_dragscroll_invert_v", 0, 22]
+                            "content": ["id_dragscroll_invert_v", 0, 22]
                         },
                         {
                             "showIf": "{id_firmware_version} < 2 || ({id_firmware_version} >= 2 && {id_feature_dragscroll_straighten} == 1)",
                             "label": "Straighten",
                             "type": "range",
                             "options": [0,100],
-                            "content": ["id_ploopystuff_dragscroll_straighten_enabled", 0, 51]
+                            "content": ["id_dragscroll_straighten_enabled", 0, 51]
                         }
                     ]
                 },
@@ -772,7 +778,7 @@
                                 ["Scroll while enabled", 1],
                                 ["Scroll while disabled", 2]
                             ],
-                            "content": ["id_ploopystuff_dragscroll_caps", 0, 25]
+                            "content": ["id_dragscroll_caps", 0, 25]
                         },
                         {
                             "label": "On Num Lock",
@@ -782,7 +788,7 @@
                                 ["Scroll while enabled", 1],
                                 ["Scroll while disabled", 2]
                             ],
-                            "content": ["id_ploopystuff_dragscroll_num", 0, 26]
+                            "content": ["id_dragscroll_num", 0, 26]
                         },
                         {
                             "label": "On Scroll Lock",
@@ -792,7 +798,7 @@
                                 ["Scroll while enabled", 1],
                                 ["Scroll while disabled", 2]
                             ],
-                            "content": ["id_ploopystuff_dragscroll_scroll", 0, 27]
+                            "content": ["id_dragscroll_scroll", 0, 27]
                         }
                     ]
                 },
@@ -802,12 +808,12 @@
                         {
                             "label": "Dragscroll on Permanently",
                             "type": "toggle",
-                            "content": ["id_ploopystuff_dragscroll_permanently", 0, 29]
+                            "content": ["id_dragscroll_permanently", 0, 29]
                         },
                         {
                             "label": "Dragscroll end on keypress",
                             "type": "toggle",
-                            "content": ["id_ploopystuff_dragscroll_end_on_keypress", 0, 28]
+                            "content": ["id_dragscroll_end_on_keypress", 0, 28]
                         },
                         {
                             "showIf": "{id_firmware_version} >= 2",
@@ -824,7 +830,7 @@
                                 ["7", 7],
                                 ["None", 255]
                             ],
-                            "content": ["id_ploopystuff_dragscroll_layer_a", 0, 19]
+                            "content": ["id_dragscroll_layer_a", 0, 19]
                         },
                         {
                             "showIf": "{id_firmware_version} >= 2",
@@ -841,7 +847,7 @@
                                 ["7", 7],
                                 ["None", 255]
                             ],
-                            "content": ["id_ploopystuff_dragscroll_layer_b", 0, 20]
+                            "content": ["id_dragscroll_layer_b", 0, 20]
                         }
                     ]
                 },
@@ -851,22 +857,22 @@
                         {
                             "label": "Up",
                             "type": "keycode",
-                            "content": ["id_ploopystuff_dragscroll_dragact_a_up", 0, 61]
+                            "content": ["id_dragscroll_dragact_a_up", 0, 61]
                         },
                         {
                             "label": "Down",
                             "type": "keycode",
-                            "content": ["id_ploopystuff_dragscroll_dragact_a_down", 0, 62]
+                            "content": ["id_dragscroll_dragact_a_down", 0, 62]
                         },
                         {
                             "label": "Left",
                             "type": "keycode",
-                            "content": ["id_ploopystuff_dragscroll_dragact_a_left", 0, 63]
+                            "content": ["id_dragscroll_dragact_a_left", 0, 63]
                         },
                         {
                             "label": "Right",
                             "type": "keycode",
-                            "content": ["id_ploopystuff_dragscroll_dragact_a_right", 0, 64]
+                            "content": ["id_dragscroll_dragact_a_right", 0, 64]
                         }
                     ]
                 },
@@ -876,22 +882,22 @@
                         {
                             "label": "Up",
                             "type": "keycode",
-                            "content": ["id_ploopystuff_dragscroll_dragact_b_up", 0, 65]
+                            "content": ["id_dragscroll_dragact_b_up", 0, 65]
                         },
                         {
                             "label": "Down",
                             "type": "keycode",
-                            "content": ["id_ploopystuff_dragscroll_dragact_b_down", 0, 66]
+                            "content": ["id_dragscroll_dragact_b_down", 0, 66]
                         },
                         {
                             "label": "Left",
                             "type": "keycode",
-                            "content": ["id_ploopystuff_dragscroll_dragact_b_left", 0, 67]
+                            "content": ["id_dragscroll_dragact_b_left", 0, 67]
                         },
                         {
                             "label": "Right",
                             "type": "keycode",
-                            "content": ["id_ploopystuff_dragscroll_dragact_b_right", 0, 68]
+                            "content": ["id_dragscroll_dragact_b_right", 0, 68]
                         }
                     ]
                 }
@@ -928,6 +934,42 @@
                         },
                         {
                             "showIf": "{id_firmware_version} >= 2",
+                            "label": "Combos",
+                            "type": "dropdown",
+                            "options": [
+                                ["Unknown", 0],
+                                ["don't change values", 99],
+                                ["Available", 1],
+                                ["Disabled in firmware", 2]
+                            ],
+                            "content": ["id_feature_combos", 0, 235]
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2",
+                            "label": "Gestures",
+                            "type": "dropdown",
+                            "options": [
+                                ["Unknown", 0],
+                                ["don't change values", 99],
+                                ["Available", 1],
+                                ["Disabled in firmware", 2]
+                            ],
+                            "content": ["id_feature_gestures", 0, 236]
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2",
+                            "label": "Dragscroll",
+                            "type": "dropdown",
+                            "options": [
+                                ["Unknown", 0],
+                                ["don't change values", 99],
+                                ["Available", 1],
+                                ["Disabled in firmware", 2]
+                            ],
+                            "content": ["id_feature_dragscroll", 0, 237]
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2",
                             "label": "Dragscroll Straighten",
                             "type": "dropdown",
                             "options": [
@@ -937,6 +979,18 @@
                                 ["Disabled in firmware", 2]
                             ],
                             "content": ["id_feature_dragscroll_straighten", 0, 240]
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2",
+                            "label": "Sniper",
+                            "type": "dropdown",
+                            "options": [
+                                ["Unknown", 0],
+                                ["don't change values", 99],
+                                ["Available", 1],
+                                ["Disabled in firmware", 2]
+                            ],
+                            "content": ["id_feature_sniper", 0, 238]
                         },
                         {
                             "showIf": "{id_firmware_version} >= 2",
@@ -1014,7 +1068,7 @@
                                 ["Available", 1],
                                 ["Disabled in firmware", 2]
                             ],
-                            "content": ["id_feature_morse_code", 0, 245]
+                            "content": ["id_feature_morse_code", 0, 239]
                         },
                         {
                             "showIf": "{id_firmware_version} >= 2",
@@ -1026,7 +1080,7 @@
                                 ["Available", 1],
                                 ["Disabled in firmware", 2]
                             ],
-                            "content": ["id_feature_pointer_acc", 0, 246]
+                            "content": ["id_feature_pointer_acc", 0, 245]
                         }
                     ]
                 },

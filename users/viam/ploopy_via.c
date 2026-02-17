@@ -576,6 +576,46 @@
                 dprintf("dpi_as_slider: %d\n", ploopyvia_config.dpi_as_slider);
                 break;
 
+            case id_ploopystuff_feature_combos:
+                #if defined(COMBO_ENABLE)
+                    dprintf("feature_combos: %d\n", FEATURE_AVAILABLE);
+                    *value_data = FEATURE_AVAILABLE;
+                #else
+                    dprintf("feature_combos: %d\n", FEATURE_UNAVAILABLE);
+                    *value_data = FEATURE_UNAVAILABLE;
+                #endif // COMBO_ENABLE
+                break;
+
+            case id_ploopystuff_feature_gestures:
+                #if defined(PLOOPY_MSGESTURE_ENABLE)
+                    dprintf("feature_gestures: %d\n", FEATURE_AVAILABLE);
+                    *value_data = FEATURE_AVAILABLE;
+                #else
+                    dprintf("feature_gestures: %d\n", FEATURE_UNAVAILABLE);
+                    *value_data = FEATURE_UNAVAILABLE;
+                #endif // PLOOPY_MSGESTURE_ENABLE
+                break;
+
+            case id_ploopystuff_feature_dragscroll:
+                #if defined(BETTER_DRAGSCROLL)
+                    dprintf("feature_dragscroll: %d\n", FEATURE_AVAILABLE);
+                    *value_data = FEATURE_AVAILABLE;
+                #else
+                    dprintf("feature_dragscroll: %d\n", FEATURE_UNAVAILABLE);
+                    *value_data = FEATURE_UNAVAILABLE;
+                #endif // BETTER_DRAGSCROLL
+                break;
+
+            case id_ploopystuff_feature_sniper:
+                #if defined(BETTER_DRAGSCROLL)
+                    dprintf("feature_sniper: %d\n", FEATURE_AVAILABLE);
+                    *value_data = FEATURE_AVAILABLE;
+                #else
+                    dprintf("feature_sniper: %d\n", FEATURE_UNAVAILABLE);
+                    *value_data = FEATURE_UNAVAILABLE;
+                #endif // BETTER_DRAGSCROLL
+                break;
+
             case id_ploopystuff_feature_dragscroll_straighten:
                 #if defined(COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
                     dprintf("feature_dragscroll_straighten: FEATURE_AVAILABLE\n");
