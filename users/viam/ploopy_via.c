@@ -21,6 +21,7 @@
         eeconfig_update_kb(keyboard_config.raw);
     }
 
+    #if defined (COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
     void update_turbo_fire_kc(uint8_t index){
         set_turbo_fire_keycode(index, ploopyvia_config.turbo_fire_keycodes[index]);
     }
@@ -32,6 +33,7 @@
         set_turbo_fire_rate(ploopyvia_config.turbo_fire_rate);
         set_turbo_fire_duration(ploopyvia_config.turbo_fire_duration);
     }
+    #endif // defined (COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
 
     #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE
         void pmw_rotation_update_via(void) {
