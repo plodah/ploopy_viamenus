@@ -483,7 +483,7 @@
                             "content": ["id_gesture_action_v", 0, 13]
                         },
                         {
-                            "showIf": "{id_firmware_version} < 2 || ({id_firmware_version} >= 2 && {id_feature_combos})",
+                            "showIf": "{id_firmware_version} < 2 || ({id_firmware_version} >= 2 && {id_feature_combos} == 1)",
                             "label": "Combos Enable",
                             "type": "toggle",
                             "content": ["id_combos_enabled", 0, 14]
@@ -491,7 +491,47 @@
                     ]
                 },
                 {
-                    "showIf": "{id_firmware_version} >= 2 && {id_feature_sensor_rotation}",
+                    "showIf": "{id_firmware_version} >= 2 && {id_feature_pointing_device_accel} == 1",
+                    "label": "Pointer Acceleration",
+                    "content": [
+                        {
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_pointing_device_accel} == 1",
+                            "content": ["id_maccel_enabled", 0, 105],
+                            "label": "Enabled",
+                            "type": "toggle"
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_pointing_device_accel} == 1",
+                            "content": ["id_maccel_takeoff", 0, 101],
+                            "label": "Takeoff",
+                            "options": [1, 60000],
+                            "type": "range"
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_pointing_device_accel} == 1",
+                            "content": ["id_maccel_growth_rate", 0, 102],
+                            "label": "Growth Rate",
+                            "options": [0, 60000],
+                            "type": "range"
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_pointing_device_accel} == 1",
+                            "content": ["id_maccel_offset", 0, 103],
+                            "label": "Offset",
+                            "options": [0, 60000],
+                            "type": "range"
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_pointing_device_accel} == 1",
+                            "content": ["id_maccel_limit", 0, 104],
+                            "label": "Limit",
+                            "options": [0, 60000],
+                            "type": "range"
+                        }
+                    ]
+                },
+                {
+                    "showIf": "{id_firmware_version} >= 2 && {id_feature_sensor_rotation} == 1",
                     "label": "Rotation",
                     "content": [
                         {

@@ -7,6 +7,7 @@
     "keymap": "viam",
     "layout": "LAYOUT",
     "modules": [
+        "drashna/pointing_device_accel",
         "plodah/dragscroll_straighten",
         "plodah/morse_code",
         "plodah/mouse_jiggler",

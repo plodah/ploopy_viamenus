@@ -14,6 +14,9 @@
 #if defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
     #include "turbo_fire.h"
 #endif // COMMUNITY_MODULE_TURBO_FIRE_ENABLE
+#if defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
+    #include "pointing_device_accel.h"
+#endif // COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE
 
 void keyboard_post_init_user_viamenus(void);
 void ploopyvia_config_set_value( uint8_t *data );
@@ -70,6 +73,11 @@ enum via_ploopystuff_value {
     id_ploopystuff_turbo_fire_keycode_f,
     id_ploopystuff_turbo_fire_keycode_g,
     id_ploopystuff_turbo_fire_keycode_h, // 80
+    id_pointing_device_takeoff = 101,
+    id_pointing_device_growth_rate,
+    id_pointing_device_offset,
+    id_pointing_device_limit,
+    id_pointing_device_enabled,
     id_ploopystuff_dummy_menuitem = 230,
     id_ploopystuff_dpi_as_slider,
     id_ploopystuff_feature_combos=235,
@@ -82,7 +90,7 @@ enum via_ploopystuff_value {
     id_ploopystuff_feature_sensor_rotation,
     id_ploopystuff_feature_task_switch,
     id_ploopystuff_feature_turbo_fire,
-    id_ploopystuff_feature_pointer_acc,
+    id_ploopystuff_feature_pointing_device_accel,
     id_ploopystuff_sensor_type = 250,
     id_ploopystuff_mcu_type,
 };
@@ -149,6 +157,13 @@ typedef struct {
         uint8_t turbo_fire_duration;
         uint16_t turbo_fire_keycodes[TURBO_FIRE_KEYCOUNT];
     #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
+    #ifdef COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE
+        bool  pointer_accel_enabled;
+        float pointer_accel_growth_rate;
+        float pointer_accel_offset;
+        float pointer_accel_limit;
+        float pointer_accel_takeoff;
+    #endif // def COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE
 } via_ploopystuff_config;
 
 via_ploopystuff_config ploopyvia_config;
@@ -233,4 +248,11 @@ static const via_ploopystuff_config ploopyvia_config_default = {
         .turbo_fire_duration = 10,
         .turbo_fire_keycodes = {MS_BTN1},
     #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
+    #ifdef COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE
+        .pointer_accel_enabled = 0,
+        .pointer_accel_growth_rate = POINTING_DEVICE_ACCEL_GROWTH_RATE,
+        .pointer_accel_offset = POINTING_DEVICE_ACCEL_OFFSET,
+        .pointer_accel_limit = POINTING_DEVICE_ACCEL_LIMIT,
+        .pointer_accel_takeoff = POINTING_DEVICE_ACCEL_TAKEOFF,
+    #endif // COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE
 };
