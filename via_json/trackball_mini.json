@@ -127,6 +127,7 @@
                             "content": ["id_ploopystuff_dpi_multiplier", 0, 2]
                         },
                         {
+                            "showIf": "{id_firmware_version} < 2 || ({id_firmware_version} >= 2 && {id_feature_mouse_jiggler} == 1)",
                             "label": "Mouse Jiggler",
                             "type": "toggle",
                             "content": ["id_ploopystuff_msjiggler_enabled", 0, 3]
@@ -140,59 +141,6 @@
                             "label": "Pointer Invert Y",
                             "type": "toggle",
                             "content": ["id_ploopystuff_pointer_invert_v", 0, 5]
-                        }
-                    ]
-                },
-                {
-                    "showIf": "{id_firmware_version} >= 2 && {id_feature_sensor_rotation}",
-                    "label": "Rotation",
-                    "content": [
-                        {
-                            "label": "Rotate by __ degrees",
-                            "type": "range",
-                            "options": [0, 90],
-                            "content": ["id_ploopystuff_pointer_rotation_val", 0, 6]
-                        },
-                        {
-                            "label": "Counter-Clockwise",
-                            "type": "toggle",
-                            "content": ["id_ploopystuff_pointer_rotation_is_ccw", 0, 7]
-                        }
-                    ]
-                },
-                {
-                    "label": "Gestures",
-                    "content": [
-                        {
-                            "label": "Wiggleball Wiggle Count",
-                            "type": "range",
-                            "options": [2, 10],
-                            "content": ["id_ploopystuff_gesture_count", 0, 11]
-                        },
-                        {
-                            "label": "Wiggleball H",
-                            "type": "dropdown",
-                            "options": [
-                                ["Do Nothing", 0],
-                                ["Dragscroll", 1],
-                                ["Mouse Jiggler", 2]
-                            ],
-                            "content": ["id_ploopystuff_gesture_action_h", 0, 12]
-                        },
-                        {
-                            "label": "Wiggleball V",
-                            "type": "dropdown",
-                            "options": [
-                                ["Do Nothing", 0],
-                                ["Dragscroll", 1],
-                                ["Mouse Jiggler", 2]
-                            ],
-                            "content": ["id_ploopystuff_gesture_action_v", 0, 13]
-                        },
-                        {
-                            "label": "Combos Enable",
-                            "type": "toggle",
-                            "content": ["id_ploopystuff_combos_enabled", 0, 14]
                         }
                     ]
                 },
@@ -502,6 +450,59 @@
                     ]
                 },
                 {
+                    "label": "Gestures",
+                    "content": [
+                        {
+                            "label": "Wiggleball Wiggle Count",
+                            "type": "range",
+                            "options": [2, 10],
+                            "content": ["id_ploopystuff_gesture_count", 0, 11]
+                        },
+                        {
+                            "label": "Wiggleball H",
+                            "type": "dropdown",
+                            "options": [
+                                ["Do Nothing", 0],
+                                ["Dragscroll", 1],
+                                ["Mouse Jiggler", 2]
+                            ],
+                            "content": ["id_ploopystuff_gesture_action_h", 0, 12]
+                        },
+                        {
+                            "label": "Wiggleball V",
+                            "type": "dropdown",
+                            "options": [
+                                ["Do Nothing", 0],
+                                ["Dragscroll", 1],
+                                ["Mouse Jiggler", 2]
+                            ],
+                            "content": ["id_ploopystuff_gesture_action_v", 0, 13]
+                        },
+                        {
+                            "label": "Combos Enable",
+                            "type": "toggle",
+                            "content": ["id_ploopystuff_combos_enabled", 0, 14]
+                        }
+                    ]
+                },
+                {
+                    "showIf": "{id_firmware_version} >= 2 && {id_feature_sensor_rotation}",
+                    "label": "Rotation",
+                    "content": [
+                        {
+                            "label": "Rotate by __ degrees",
+                            "type": "range",
+                            "options": [0, 90],
+                            "content": ["id_ploopystuff_pointer_rotation_val", 0, 6]
+                        },
+                        {
+                            "label": "Counter-Clockwise",
+                            "type": "toggle",
+                            "content": ["id_ploopystuff_pointer_rotation_is_ccw", 0, 7]
+                        }
+                    ]
+                },
+                {
                     "label": "Sniper DPIs",
                     "content": [
                         {
@@ -611,63 +612,63 @@
                     "label": "Turbo Clicker",
                     "content": [
                         {
-                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} && {id_turbo_fire_keycode_count} >= 1",
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 1",
                             "label": "Rate (ms between fires)",
                             "type": "range",
                             "options": [20, 4000],
                             "content": ["id_turbo_fire_rate", 0, 71]
                         },
                         {
-                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} && {id_turbo_fire_keycode_count} >= 1",
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 1",
                             "label": "Duration (ms key held)",
                             "type": "range",
                             "options": [0, 255],
                             "content": ["id_turbo_fire_duration", 0, 72]
                         },
                         {
-                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} && {id_turbo_fire_keycode_count} >= 1",
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 1",
                             "label": "Keycode A",
                             "type": "keycode",
                             "content": ["id_turbo_fire_keycode_a", 0, 73]
                         },
                         {
-                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} && {id_turbo_fire_keycode_count} >= 2",
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 2",
                             "label": "Keycode B",
                             "type": "keycode",
                             "content": ["id_turbo_fire_keycode_b", 0, 74]
                         },
                         {
-                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} && {id_turbo_fire_keycode_count} >= 3",
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 3",
                             "label": "Keycode C",
                             "type": "keycode",
                             "content": ["id_turbo_fire_keycode_c", 0, 75]
                         },
                         {
-                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} && {id_turbo_fire_keycode_count} >= 4",
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 4",
                             "label": "Keycode D",
                             "type": "keycode",
                             "content": ["id_turbo_fire_keycode_d", 0, 76]
                         },
                         {
-                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} && {id_turbo_fire_keycode_count} >= 5",
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 5",
                             "label": "Keycode E",
                             "type": "keycode",
                             "content": ["id_turbo_fire_keycode_e", 0, 77]
                         },
                         {
-                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} && {id_turbo_fire_keycode_count} >= 6",
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 6",
                             "label": "Keycode F",
                             "type": "keycode",
                             "content": ["id_turbo_fire_keycode_f", 0, 78]
                         },
                         {
-                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} && {id_turbo_fire_keycode_count} >= 7",
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 7",
                             "label": "Keycode G",
                             "type": "keycode",
                             "content": ["id_turbo_fire_keycode_g", 0, 79]
                         },
                         {
-                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} && {id_turbo_fire_keycode_count} >= 8",
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 8",
                             "label": "Keycode H",
                             "type": "keycode",
                             "content": ["id_turbo_fire_keycode_h", 0, 80]
@@ -749,6 +750,7 @@
                             "content": ["id_ploopystuff_dragscroll_invert_v", 0, 22]
                         },
                         {
+                            "showIf": "{id_firmware_version} < 2 || ({id_firmware_version} >= 2 && {id_feature_dragscroll_straighten} == 1)",
                             "label": "Straighten",
                             "type": "range",
                             "options": [0,100],
@@ -983,7 +985,7 @@
                             "content": ["id_feature_turbo_fire", 0, 244]
                         },
                         {
-                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire}",
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1",
                             "label": "Turbo Fire Count",
                             "type": "dropdown",
                             "options": [
