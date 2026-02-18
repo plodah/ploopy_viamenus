@@ -27,7 +27,6 @@ void values_save(void);
 
 enum via_ploopystuff_value {
     id_ploopystuff_dpi_activepreset = 1,
-    id_ploopystuff_dpi_multiplier,
     #ifdef COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
     id_ploopystuff_msjiggler_enabled = 3,
     #endif // COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
@@ -128,7 +127,6 @@ enum feature_state {
 };
 
 typedef struct {
-    uint8_t  dpi_multiplier; // Value stored *20 to allow fraction in uint8
     bool     dpi_as_slider;
     bool     pointer_invert_h;
     bool     pointer_invert_v;
@@ -184,7 +182,6 @@ typedef struct {
 via_ploopystuff_config ploopyvia_config;
 
 static const via_ploopystuff_config ploopyvia_config_default = {
-    .dpi_multiplier             = 20,
     .pointer_invert_h           = false,
     .pointer_invert_v           = false,
     .gesture_count              = PLOOPY_MSGESTURE_WIGGLES,

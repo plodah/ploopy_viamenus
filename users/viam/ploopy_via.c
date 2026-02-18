@@ -1,6 +1,6 @@
 #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
     #include QMK_KEYBOARD_H
-
+    #define VIA_DPI_STORE_RATIO 100
     #include "ploopy_via.h"
     void ploopyvia_config_load(void) {
         // ploopyvia_config.raw = eeconfig_read_user();
@@ -93,9 +93,12 @@
 
     void keyboard_post_init_user_viamenus(void) {
         ploopyvia_config_load();
+        // Did this do anything important? Maybe find another way to check for invalid 0 value
+        /*
         if(ploopyvia_config.dpi_multiplier == 0){
             eeconfig_init_user();
         }
+        */
         update_dpi();
         #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE
             pmw_rotation_update_via();
@@ -162,15 +165,6 @@
             case id_ploopystuff_dpi_activepreset:
                 keyboard_config.dpi_config = *value_data;
                 dprintf("dpi_preset: %d\n", keyboard_config.dpi_config);
-                update_dpi();
-                break;
-
-            case id_ploopystuff_dpi_multiplier:
-                for (int i = 0; i <  5; ++i) {
-                    ploopyvia_config.dpi_presets[i] = ploopyvia_config.dpi_presets[i] / ploopyvia_config.dpi_multiplier * *value_data;
-                }
-                ploopyvia_config.dpi_multiplier = *value_data;
-                dprintf("dpi_multiplier: %d\n", ploopyvia_config.dpi_multiplier);
                 update_dpi();
                 break;
 
@@ -295,18 +289,18 @@
                 break;
 
             case id_ploopystuff_dpi_presets:
-                ploopyvia_config.dpi_presets[value_data[0]] = (value_data[1]*100) * (ploopyvia_config.dpi_multiplier/20);
+                ploopyvia_config.dpi_presets[value_data[0]] = (value_data[1] * VIA_DPI_STORE_RATIO );
                 dprintf("dpi_presets[%d]: %d\n", value_data[0], value_data[1]);
                 update_dpi();
                 break;
 
             case id_ploopystuff_sniper_a_dpi:
-                ploopyvia_config.sniper_a_dpi = ((uint8_t)*value_data*100) * (ploopyvia_config.dpi_multiplier/20);
+                ploopyvia_config.sniper_a_dpi = ((uint8_t)*value_data * VIA_DPI_STORE_RATIO );
                 dprintf("sniper_a_dpi: %d\n", ploopyvia_config.sniper_a_dpi);
                 break;
 
             case id_ploopystuff_sniper_b_dpi:
-                ploopyvia_config.sniper_b_dpi = ((uint8_t)*value_data*100) * (ploopyvia_config.dpi_multiplier/20);
+                ploopyvia_config.sniper_b_dpi = ((uint8_t)*value_data * VIA_DPI_STORE_RATIO);
                 dprintf("sniper_b_dpi: %d\n", ploopyvia_config.sniper_b_dpi);
                 break;
 
@@ -566,17 +560,17 @@
                 break;
 
             case id_ploopystuff_dpi_presets:
-                value_data[1] = (ploopyvia_config.dpi_presets[value_data[0]] / 100) / (ploopyvia_config.dpi_multiplier/20);
+                value_data[1] = ploopyvia_config.dpi_presets[value_data[0]] / VIA_DPI_STORE_RATIO;
                 dprintf("dpi_presets[%d]: %d\n", value_data[0], ploopyvia_config.dpi_presets[value_data[0]]);
                 break;
 
             case id_ploopystuff_sniper_a_dpi:
-                *value_data = (ploopyvia_config.sniper_a_dpi / 100 ) / (ploopyvia_config.dpi_multiplier/20);
+                *value_data = ploopyvia_config.sniper_a_dpi / VIA_DPI_STORE_RATIO;
                 dprintf("sniper_a_dpi: %d\n", ploopyvia_config.sniper_a_dpi);
                 break;
 
             case id_ploopystuff_sniper_b_dpi:
-                *value_data = (ploopyvia_config.sniper_b_dpi / 100 ) / (ploopyvia_config.dpi_multiplier/20);
+                *value_data = ploopyvia_config.sniper_b_dpi / VIA_DPI_STORE_RATIO;
                 dprintf("sniper_b_dpi: %d\n", ploopyvia_config.sniper_b_dpi);
                 break;
 
