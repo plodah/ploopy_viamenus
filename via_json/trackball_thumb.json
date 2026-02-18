@@ -666,6 +666,7 @@
                     ]
                 },
                 {
+                    "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1",
                     "label": "Turbo Clicker",
                     "content": [
                         {
