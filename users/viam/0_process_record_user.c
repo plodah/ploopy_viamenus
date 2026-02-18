@@ -51,7 +51,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             case MOR_MAN:
             case MOR_DIT:
             case MOR_DSH:
-                process_record_turbo_fire ((keycode - (MOR_MAN - COMMUNITY_MODULE_MORSE_CODE_MANUAL)), record);
+                process_record_morse_code ((keycode - (MOR_MAN - COMMUNITY_MODULE_MORSE_CODE_MANUAL)), record);
                 return false;
         #endif // defined(COMMUNITY_MODULE_MORSE_CODE_ENABLE)
 
