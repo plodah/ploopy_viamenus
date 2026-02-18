@@ -1,6 +1,9 @@
 {
     "userspace_version": "1.1",
     "build_targets": [
-        ["all", "viam"]
+        ["all", "viam"],
+        ["all", "viam_alt"],
+        ["all", "viam_alt2"],
+        ["all", "viam_alt3"]
     ]
 }
