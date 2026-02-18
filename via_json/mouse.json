@@ -521,28 +521,28 @@
                             "showIf": "{id_firmware_version} >= 2 && {id_feature_pointing_device_accel} == 1",
                             "content": ["id_maccel_takeoff", 0, 101],
                             "label": "Takeoff",
-                            "options": [1, 60000],
+                            "options": [1, 500],
                             "type": "range"
                         },
                         {
                             "showIf": "{id_firmware_version} >= 2 && {id_feature_pointing_device_accel} == 1",
                             "content": ["id_maccel_growth_rate", 0, 102],
                             "label": "Growth Rate",
-                            "options": [0, 60000],
+                            "options": [1, 500],
                             "type": "range"
                         },
                         {
                             "showIf": "{id_firmware_version} >= 2 && {id_feature_pointing_device_accel} == 1",
                             "content": ["id_maccel_offset", 0, 103],
-                            "label": "Offset (Defer Takeoff)",
-                            "options": [0, 60000],
+                            "label": "Offset",
+                            "options": [0, 1500],
                             "type": "range"
                         },
                         {
                             "showIf": "{id_firmware_version} >= 2 && {id_feature_pointing_device_accel} == 1",
                             "content": ["id_maccel_limit", 0, 104],
                             "label": "Lower Limit",
-                            "options": [0, 60000],
+                            "options": [0, 100],
                             "type": "range"
                         }
                     ]

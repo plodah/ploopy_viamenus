@@ -2,6 +2,8 @@
     #include QMK_KEYBOARD_H
     #define VIA_DPI_STORE_RATIO 100
     #include "ploopy_via.h"
+
+    #define COMBINE_UINT8(a, b) ((a << 8) | b)
     void ploopyvia_config_load(void) {
         // ploopyvia_config.raw = eeconfig_read_user();
         eeconfig_read_user_datablock(&ploopyvia_config, 0, EECONFIG_USER_DATA_SIZE);
@@ -61,33 +63,19 @@
     #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
 
     #if defined (COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
-        #define MACCEL_VIA_TKO_MIN 0
-        #define MACCEL_VIA_TKO_MAX 5
-        #define MACCEL_VIA_GRO_MIN 0.01
-        #define MACCEL_VIA_GRO_MAX 5
-        #define MACCEL_VIA_OFS_MIN 0
-        #define MACCEL_VIA_OFS_MAX 15
-        #define MACCEL_VIA_LMT_MIN 0
-        #define MACCEL_VIA_LMT_MAX 1
-
-        #define MACCEL_VIA_UINT16_MIN 0
-        #define MACCEL_VIA_UINT16_MAX \
-            60000 // Not using the full range for historic reasons. Should be changed with breaking change requiring via json
-                // update.
-
-        #define PROJECT(val, rmin, rmax, tmin, tmax) \
-            ((rmax == rmin) ? tmin : ((((float)(val - rmin) / (float)(rmax - rmin)) * (float)(tmax - tmin)) + tmin))
-        #define PROJECT_TO_VIA(val, rmin, rmax)   PROJECT(val, rmin, rmax, MACCEL_VIA_UINT16_MIN, MACCEL_VIA_UINT16_MAX)
-        #define PROJECT_FROM_VIA(val, tmin, tmax) PROJECT(val, MACCEL_VIA_UINT16_MIN, MACCEL_VIA_UINT16_MAX, tmin, tmax)
-
-        #define COMBINE_UINT8(one, two) (two | (one << 8))
-
         void update_pointer_accelaration (void){
-            g_pointing_device_accel_config.enabled = ploopyvia_config.pointer_accel_enabled;
+            g_pointing_device_accel_config.enabled     = ploopyvia_config.pointer_accel_enabled;
             g_pointing_device_accel_config.growth_rate = ploopyvia_config.pointer_accel_growth_rate;
-            g_pointing_device_accel_config.offset = ploopyvia_config.pointer_accel_offset;
-            g_pointing_device_accel_config.limit = ploopyvia_config.pointer_accel_limit;
-            g_pointing_device_accel_config.takeoff = ploopyvia_config.pointer_accel_takeoff;
+            g_pointing_device_accel_config.offset      = ploopyvia_config.pointer_accel_offset;
+            g_pointing_device_accel_config.limit       = ploopyvia_config.pointer_accel_limit;
+            g_pointing_device_accel_config.takeoff     = ploopyvia_config.pointer_accel_takeoff;
+            dprintf("MACCEL: ena:%d tak:%.3f grw:%.3f off:%.3f lim: %.3f\n",
+                g_pointing_device_accel_config.enabled,
+                g_pointing_device_accel_config.takeoff,
+                g_pointing_device_accel_config.growth_rate,
+                g_pointing_device_accel_config.offset,
+                g_pointing_device_accel_config.limit
+            );
         }
     #endif // defined (COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
 
@@ -313,48 +301,48 @@
             #endif // defined(COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
 
             case id_ploopystuff_dragscroll_dragact_a_up:
-                ploopyvia_config.dragscroll_dragact_a_up = value_data[0] << 8 | value_data[1];
+                ploopyvia_config.dragscroll_dragact_a_up = COMBINE_UINT8(value_data[0], value_data[1]);
                 dprintf("dragscroll_dragact_a_up: %d\n", ploopyvia_config.dragscroll_dragact_a_up);
                 break;
 
             case id_ploopystuff_dragscroll_dragact_a_down:
-                ploopyvia_config.dragscroll_dragact_a_down = value_data[0] << 8 | value_data[1];
+                ploopyvia_config.dragscroll_dragact_a_down = COMBINE_UINT8(value_data[0], value_data[1]);
                 dprintf("dragscroll_dragact_a_down: %d\n", ploopyvia_config.dragscroll_dragact_a_down);
                 break;
 
             case id_ploopystuff_dragscroll_dragact_a_left:
-                ploopyvia_config.dragscroll_dragact_a_left = value_data[0] << 8 | value_data[1];
+                ploopyvia_config.dragscroll_dragact_a_left = COMBINE_UINT8(value_data[0], value_data[1]);
                 dprintf("dragscroll_dragact_a_left: %d\n", ploopyvia_config.dragscroll_dragact_a_left);
                 break;
 
             case id_ploopystuff_dragscroll_dragact_a_right:
-                ploopyvia_config.dragscroll_dragact_a_right = value_data[0] << 8 | value_data[1];
+                ploopyvia_config.dragscroll_dragact_a_right = COMBINE_UINT8(value_data[0], value_data[1]);
                 dprintf("dragscroll_dragact_a_right: %d\n", ploopyvia_config.dragscroll_dragact_a_right);
                 break;
 
             case id_ploopystuff_dragscroll_dragact_b_up:
-                ploopyvia_config.dragscroll_dragact_b_up = value_data[0] << 8 | value_data[1];
+                ploopyvia_config.dragscroll_dragact_b_up = COMBINE_UINT8(value_data[0], value_data[1]);
                 dprintf("dragscroll_dragact_b_up: %d\n", ploopyvia_config.dragscroll_dragact_b_up);
                 break;
 
             case id_ploopystuff_dragscroll_dragact_b_down:
-                ploopyvia_config.dragscroll_dragact_b_down = value_data[0] << 8 | value_data[1];
+                ploopyvia_config.dragscroll_dragact_b_down = COMBINE_UINT8(value_data[0], value_data[1]);
                 dprintf("dragscroll_dragact_b_down: %d\n", ploopyvia_config.dragscroll_dragact_b_down);
                 break;
 
             case id_ploopystuff_dragscroll_dragact_b_left:
-                ploopyvia_config.dragscroll_dragact_b_left = value_data[0] << 8 | value_data[1];
+                ploopyvia_config.dragscroll_dragact_b_left = COMBINE_UINT8(value_data[0], value_data[1]);
                 dprintf("dragscroll_dragact_b_left: %d\n", ploopyvia_config.dragscroll_dragact_b_left);
                 break;
 
             case id_ploopystuff_dragscroll_dragact_b_right:
-                ploopyvia_config.dragscroll_dragact_b_right = value_data[0] << 8 | value_data[1];
+                ploopyvia_config.dragscroll_dragact_b_right = COMBINE_UINT8(value_data[0], value_data[1]);
                 dprintf("dragscroll_dragact_b_right: %d\n", ploopyvia_config.dragscroll_dragact_b_right);
                 break;
 
             #if defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
                 case id_ploopystuff_turbo_fire_rate:
-                    ploopyvia_config.turbo_fire_rate = value_data[0] << 8 | value_data[1];
+                    ploopyvia_config.turbo_fire_rate = COMBINE_UINT8(value_data[0], value_data[1]);
                     set_turbo_fire_rate(ploopyvia_config.turbo_fire_rate);
                     dprintf("turbo_fire_rate: %d\n", ploopyvia_config.turbo_fire_rate);
                     break;
@@ -367,7 +355,7 @@
 
                 case id_ploopystuff_turbo_fire_keycode_a ... (id_ploopystuff_turbo_fire_keycode_a + TURBO_FIRE_KEYCOUNT - 1):
                     uint8_t temp_kcindex = *value_id - id_ploopystuff_turbo_fire_keycode_a;
-                    ploopyvia_config.turbo_fire_keycodes[temp_kcindex] = value_data[0] << 8 | value_data[1];
+                    ploopyvia_config.turbo_fire_keycodes[temp_kcindex] = COMBINE_UINT8(value_data[0], value_data[1]);
                     update_turbo_fire_kc(temp_kcindex);
                     dprintf("turbo_fire_keycodes[%d]: %d\n", temp_kcindex, ploopyvia_config.turbo_fire_keycodes[temp_kcindex]);
                     break;
@@ -381,53 +369,29 @@
 
             #if defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
             case id_pointing_device_takeoff:
-                uint16_t takeoff = COMBINE_UINT8(value_data[0], value_data[1]);
-
                 ploopyvia_config.pointer_accel_takeoff =
-                    PROJECT_FROM_VIA(takeoff, MACCEL_VIA_TKO_MIN, MACCEL_VIA_TKO_MAX);
-                #ifdef MACCEL_DEBUG
-                dprintf("MACCEL:via: TKO: %.3f grw: %.3f ofs: %.3f lmt: %.3f\n", ploopyvia_config.pointer_accel_takeoff,
-                       ploopyvia_config.pointer_accel_growth_rate, ploopyvia_config.pointer_accel_offset,
-                       ploopyvia_config.pointer_accel_limit);
-                #endif
+                    (float) COMBINE_UINT8(value_data[0], value_data[1]) / 100;
                 update_pointer_accelaration();
                 break;
+
             case id_pointing_device_growth_rate:
-                uint16_t growth_rate = COMBINE_UINT8(value_data[0], value_data[1]);
                 ploopyvia_config.pointer_accel_growth_rate =
-                    PROJECT_FROM_VIA(growth_rate, MACCEL_VIA_GRO_MIN, MACCEL_VIA_GRO_MAX);
-                #ifdef MACCEL_DEBUG
-                dprintf("MACCEL:via: tko: %.3f GRW: %.3f ofs: %.3f lmt: %.3f\n", ploopyvia_config.pointer_accel_takeoff,
-                       ploopyvia_config.pointer_accel_growth_rate, ploopyvia_config.pointer_accel_offset,
-                       ploopyvia_config.pointer_accel_limit);
-                #endif
+                    (float) COMBINE_UINT8(value_data[0], value_data[1]) / 100;
                 update_pointer_accelaration();
                 break;
+
             case id_pointing_device_offset:
-                uint16_t offset = COMBINE_UINT8(value_data[0], value_data[1]);
-
                 ploopyvia_config.pointer_accel_offset =
-                    PROJECT_FROM_VIA(offset, MACCEL_VIA_OFS_MIN, MACCEL_VIA_OFS_MAX);
-                #ifdef MACCEL_DEBUG
-                dprintf("MACCEL:via: tko: %.3f grw: %.3f OFS: %.3f lmt: %.3f\n", ploopyvia_config.pointer_accel_takeoff,
-                       ploopyvia_config.pointer_accel_growth_rate, ploopyvia_config.pointer_accel_offset,
-                       ploopyvia_config.pointer_accel_limit);
-                #endif
+                    (float) COMBINE_UINT8(value_data[0], value_data[1]) / 100;
                 update_pointer_accelaration();
                 break;
-            case id_pointing_device_limit:
-                uint16_t limit = COMBINE_UINT8(value_data[0], value_data[1]);
 
-                ploopyvia_config.pointer_accel_limit = PROJECT_FROM_VIA(limit, MACCEL_VIA_LMT_MIN, MACCEL_VIA_LMT_MAX);
-                #ifdef MACCEL_DEBUG
-                dprintf("MACCEL:via: tko: %.3f grw: %.3f ofs: %.3f LMT: %.3f\n", ploopyvia_config.pointer_accel_takeoff,
-                       ploopyvia_config.pointer_accel_growth_rate, ploopyvia_config.pointer_accel_offset,
-                       ploopyvia_config.pointer_accel_limit);
-                #endif
+            case id_pointing_device_limit:
+                ploopyvia_config.pointer_accel_limit = (float) value_data[0] / 100;
                 update_pointer_accelaration();
                 break;
+
             case id_pointing_device_enabled:
-                dprintf("MACCEL:via: enabled:%d", value_data[0]);
                 ploopyvia_config.pointer_accel_enabled = value_data[0];
                 update_pointer_accelaration();
                 break;
@@ -808,29 +772,22 @@
 
             #if defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
             case id_pointing_device_takeoff:
-                // uint16_t takeoff = (ploopyvia_config.pointer_accel_takeoff - 0.5) / (4.5 / 6) * 10000;
-                uint16_t takeoff =
-                    PROJECT_TO_VIA(ploopyvia_config.pointer_accel_takeoff, MACCEL_VIA_TKO_MIN, MACCEL_VIA_TKO_MAX);
+                uint16_t takeoff = ploopyvia_config.pointer_accel_takeoff * 100;
                 value_data[0] = takeoff >> 8;
                 value_data[1] = takeoff & 0xFF;
                 break;
             case id_pointing_device_growth_rate:
-                uint16_t growth_rate =
-                    PROJECT_TO_VIA(ploopyvia_config.pointer_accel_growth_rate, MACCEL_VIA_GRO_MIN, MACCEL_VIA_GRO_MAX);
+                uint16_t growth_rate = ploopyvia_config.pointer_accel_growth_rate * 100;
                 value_data[0] = growth_rate >> 8;
                 value_data[1] = growth_rate & 0xFF;
                 break;
             case id_pointing_device_offset:
-                uint16_t offset =
-                    PROJECT_TO_VIA(ploopyvia_config.pointer_accel_offset, MACCEL_VIA_OFS_MIN, MACCEL_VIA_OFS_MAX);
+                uint16_t offset = ploopyvia_config.pointer_accel_offset * 100;
                 value_data[0] = offset >> 8;
                 value_data[1] = offset & 0xFF;
                 break;
             case id_pointing_device_limit:
-                uint16_t limit =
-                    PROJECT_TO_VIA(ploopyvia_config.pointer_accel_limit, MACCEL_VIA_LMT_MIN, MACCEL_VIA_LMT_MAX);
-                value_data[0] = limit >> 8;
-                value_data[1] = limit & 0xFF;
+                value_data[0] = ploopyvia_config.pointer_accel_limit * 100;
                 break;
             case id_pointing_device_enabled:
                 value_data[0] = ploopyvia_config.pointer_accel_enabled;
