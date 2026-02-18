@@ -1229,7 +1229,7 @@
                                 ["RP2040", 2],
                                 ["STM32L432", 3]
                             ],
-                            "content": ["id_mcu_type", 0, 252]
+                            "content": ["id_mcu_type", 0, 251]
                         },
                         {
                             "showIf": "{id_firmware_version} >= 2",
