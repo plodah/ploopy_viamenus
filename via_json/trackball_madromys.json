@@ -504,14 +504,14 @@
                         {
                             "showIf": "{id_firmware_version} >= 2 && {id_feature_pointing_device_accel} == 1",
                             "content": ["id_maccel_offset", 0, 103],
-                            "label": "Offset",
+                            "label": "Offset (Defer Takeoff)",
                             "options": [0, 60000],
                             "type": "range"
                         },
                         {
                             "showIf": "{id_firmware_version} >= 2 && {id_feature_pointing_device_accel} == 1",
                             "content": ["id_maccel_limit", 0, 104],
-                            "label": "Limit",
+                            "label": "Lower Limit",
                             "options": [0, 60000],
                             "type": "range"
                         }
