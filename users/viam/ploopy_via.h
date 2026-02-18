@@ -28,17 +28,24 @@ void values_save(void);
 enum via_ploopystuff_value {
     id_ploopystuff_dpi_activepreset = 1,
     id_ploopystuff_dpi_multiplier,
-    id_ploopystuff_msjiggler_enabled,
-    id_ploopystuff_pointer_invert_h,
-    id_ploopystuff_pointer_invert_v,
+    #ifdef COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
+    id_ploopystuff_msjiggler_enabled = 3,
+    #endif // COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
+    id_ploopystuff_pointer_invert_h = 4,
+    id_ploopystuff_pointer_invert_v = 5,
     #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE
-    id_ploopystuff_pointer_rotation_value,
-    id_ploopystuff_pointer_rotation_is_ccw,
+    id_ploopystuff_pointer_rotation_value = 6,
+    id_ploopystuff_pointer_rotation_is_ccw = 7,
     #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
+
+    #if defined(PLOOPY_MSGESTURE_ENABLE)
     id_ploopystuff_gesture_count = 11,
     id_ploopystuff_gesture_action_h,
     id_ploopystuff_gesture_action_v,
-    id_ploopystuff_combos_enabled,
+    #endif // defined(PLOOPY_MSGESTURE_ENABLE))
+    #if defined(COMBO_ENABLE)
+    id_ploopystuff_combos_enabled = 14,
+    #endif // defined(COMBO_ENABLE))
     id_ploopystuff_dragscroll_layer_a = 19,
     id_ploopystuff_dragscroll_layer_b,
     id_ploopystuff_dragscroll_invert_h = 21,
@@ -62,6 +69,7 @@ enum via_ploopystuff_value {
     id_ploopystuff_dragscroll_dragact_b_down,
     id_ploopystuff_dragscroll_dragact_b_left,
     id_ploopystuff_dragscroll_dragact_b_right, // 68
+    #if defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
     id_ploopystuff_turbo_fire_keycode_count = 70,
     id_ploopystuff_turbo_fire_rate,
     id_ploopystuff_turbo_fire_duration,
@@ -73,11 +81,14 @@ enum via_ploopystuff_value {
     id_ploopystuff_turbo_fire_keycode_f,
     id_ploopystuff_turbo_fire_keycode_g,
     id_ploopystuff_turbo_fire_keycode_h, // 80
+    #endif // defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
+    #if defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
     id_pointing_device_takeoff = 101,
     id_pointing_device_growth_rate,
     id_pointing_device_offset,
     id_pointing_device_limit,
     id_pointing_device_enabled,
+    #endif // defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
     id_ploopystuff_dummy_menuitem = 230,
     id_ploopystuff_dpi_as_slider,
     id_ploopystuff_feature_combos=235,
@@ -121,10 +132,14 @@ typedef struct {
     bool     dpi_as_slider;
     bool     pointer_invert_h;
     bool     pointer_invert_v;
+    #ifdef PLOOPY_MSGESTURE_ENABLE
     uint8_t  gesture_count;
     uint8_t  gesture_action_h;
     uint8_t  gesture_action_v;
+    #endif // PLOOPY_MSGESTURE_ENABLE
+    #ifdef COMBO_ENABLE
     bool     combos_enabled;
+    #endif // COMBO_ENABLE
     bool     dragscroll_invert_h;
     bool     dragscroll_invert_v;
     #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE
@@ -175,7 +190,9 @@ static const via_ploopystuff_config ploopyvia_config_default = {
     .gesture_count              = PLOOPY_MSGESTURE_WIGGLES,
     .gesture_action_h           = GESTURE_ACTION_NOTHING,
     .gesture_action_v           = GESTURE_ACTION_NOTHING,
+    #if defined(COMBO_ENABLE)
     .combos_enabled             = false,
+    #endif // COMBO_ENABLE
     #if defined(BETTER_DRAGSCROLL_INVERT_H)
       .dragscroll_invert_h      = true,
     #else // BETTER_DRAGSCROLL_INVERT_H
@@ -239,7 +256,7 @@ static const via_ploopystuff_config ploopyvia_config_default = {
     .dragscroll_dragact_b_down  = KC_NO,
     .dragscroll_dragact_b_left  = KC_NO,
     .dragscroll_dragact_b_right = KC_NO,
-    #ifdef COMMUNITY_MODULvia_ploopystuff_configE_PMW_ROTATION_ENABLE
+    #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE
     .pointer_rotation_value     = 0,
     .pointer_rotation_is_ccw    = false,
     #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE

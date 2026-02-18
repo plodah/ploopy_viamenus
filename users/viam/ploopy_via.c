@@ -207,7 +207,7 @@
                     pmw_rotation_update_via();
                 break;
             #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
-
+            #if defined(PLOOPY_MSGESTURE_ENABLE)
             case id_ploopystuff_gesture_count:
                 ploopyvia_config.gesture_count = *value_data;
                 ploopy_msGestureUpdate();
@@ -225,11 +225,13 @@
                 ploopy_msGestureUpdate();
                 dprintf("gesture_action_v:%d\n", ploopyvia_config.gesture_action_v);
                 break;
-
+            #endif // defined(PLOOPY_MSGESTURE_ENABLE)
+            #if defined(COMBO_ENABLE)
             case id_ploopystuff_combos_enabled:
                 ploopyvia_config.combos_enabled = *value_data;
                 dprintf("combos_enabled:%d\n", ploopyvia_config.combos_enabled);
                 break;
+            #endif // defined(PLOOPY_MSGESTURE_ENABLE))
 
             case id_ploopystuff_dragscroll_invert_h:
                 ploopyvia_config.dragscroll_invert_h = *value_data;
@@ -439,21 +441,14 @@
         }
     }
 
-    void ploopyvia_config_get_value( uint8_t *data )
-    {
+    void ploopyvia_config_get_value( uint8_t *data ) {
         uint8_t *value_id   = &(data[0]);
         uint8_t *value_data = &(data[1]);
 
-        switch ( *value_id )
-        {
+        switch ( *value_id ) {
             case id_ploopystuff_dpi_activepreset:
                 *value_data = keyboard_config.dpi_config;
                 dprintf("dpi_preset: %d\n", keyboard_config.dpi_config);
-                break;
-
-            case id_ploopystuff_dpi_multiplier:
-                *value_data = ploopyvia_config.dpi_multiplier;
-                dprintf("dpi_multiplier: %d\n", ploopyvia_config.dpi_multiplier);
                 break;
 
             #ifdef COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
@@ -491,6 +486,7 @@
                 break;
             #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
 
+            #if defined(PLOOPY_MSGESTURE_ENABLE)
             case id_ploopystuff_gesture_count:
                 *value_data = ploopyvia_config.gesture_count;
                 dprintf("gesture_count:%d\n", ploopyvia_config.gesture_count);
@@ -505,11 +501,14 @@
                 *value_data = ploopyvia_config.gesture_action_v;
                 dprintf("gesture_action_v:%d\n", ploopyvia_config.gesture_action_v);
                 break;
+            #endif // defined(PLOOPY_MSGESTURE_ENABLE)
 
+            #if defined(COMBO_ENABLE)
             case id_ploopystuff_combos_enabled:
                 *value_data = ploopyvia_config.combos_enabled;
                 dprintf("combos_enabled:%d\n", ploopyvia_config.combos_enabled);
                 break;
+            #endif // defined(PLOOPY_MSGESTURE_ENABLE))
 
             case id_ploopystuff_dragscroll_invert_h:
                 *value_data = ploopyvia_config.dragscroll_invert_h;
