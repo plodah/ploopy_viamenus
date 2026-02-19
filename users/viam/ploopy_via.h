@@ -17,6 +17,9 @@
 #if defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
     #include "pointing_device_accel.h"
 #endif // COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE
+#if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
+    #include "task_switch.h"
+#endif // COMMUNITY_MODULE_TASK_SWITCH_ENABLE && defined(TASK_SWITCH_MENUS_ENABLE)
 
 void keyboard_post_init_user_viamenus(void);
 void ploopyvia_config_set_value( uint8_t *data );
@@ -81,6 +84,12 @@ enum via_ploopystuff_value {
     id_ploopystuff_turbo_fire_keycode_g,
     id_ploopystuff_turbo_fire_keycode_h, // 80
     #endif // defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
+    #if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
+    id_ploopystuff_task_switch_mod = 85,
+    id_ploopystuff_task_switch_rev_mod,
+    id_ploopystuff_task_switch_tap_key,
+    id_ploopystuff_task_switch_delay, // 88
+    #endif // defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
     #if defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
     id_pointing_device_takeoff = 101,
     id_pointing_device_growth_rate,
@@ -90,17 +99,18 @@ enum via_ploopystuff_value {
     #endif // defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
     id_ploopystuff_dummy_menuitem = 230,
     id_ploopystuff_dpi_as_slider,
+    id_ploopystuff_feature_task_switch_menus = 232,
     id_ploopystuff_feature_combos=235,
     id_ploopystuff_feature_gestures,
     id_ploopystuff_feature_dragscroll,
     id_ploopystuff_feature_sniper,
     id_ploopystuff_feature_morse_code,
-    id_ploopystuff_feature_dragscroll_straighten,
+    id_ploopystuff_feature_dragscroll_straighten, // 240,
     id_ploopystuff_feature_mouse_jiggler,
     id_ploopystuff_feature_sensor_rotation,
     id_ploopystuff_feature_task_switch,
     id_ploopystuff_feature_turbo_fire,
-    id_ploopystuff_feature_pointing_device_accel,
+    id_ploopystuff_feature_pointing_device_accel, // 245
     id_ploopystuff_sensor_type = 250,
     id_ploopystuff_mcu_type,
 };
@@ -177,6 +187,12 @@ typedef struct {
         float pointer_accel_limit;
         float pointer_accel_takeoff;
     #endif // def COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE
+    #if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
+        uint8_t task_switch_mod;
+        uint8_t task_switch_rev_mod;
+        uint16_t task_switch_tap_key;
+        uint16_t task_switch_delay;
+    #endif // defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
 } via_ploopystuff_config;
 
 via_ploopystuff_config ploopyvia_config;
@@ -269,4 +285,10 @@ static const via_ploopystuff_config ploopyvia_config_default = {
         .pointer_accel_limit = POINTING_DEVICE_ACCEL_LIMIT,
         .pointer_accel_takeoff = POINTING_DEVICE_ACCEL_TAKEOFF,
     #endif // COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE
+    #if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
+        .task_switch_mod = TASKSWITCH_MOD,
+        .task_switch_rev_mod = TASKSWITCH_REVERSE_MOD,
+        .task_switch_tap_key = TASKSWITCH_TAP,
+        .task_switch_delay = TASKSWITCH_DELAY,
+    #endif // defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
 };

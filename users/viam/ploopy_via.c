@@ -79,6 +79,15 @@
         }
     #endif // defined (COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
 
+    #if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
+    void update_task_switch( void ){
+        taskswitch_set_mod(ploopyvia_config.task_switch_mod);
+        taskswitch_set_rev_mod(ploopyvia_config.task_switch_rev_mod);
+        taskswitch_set_tap(ploopyvia_config.task_switch_tap_key);
+        taskswitch_set_delay(ploopyvia_config.task_switch_delay);
+    }
+    #endif // COMMUNITY_MODULE_TASK_SWITCH_ENABLE && defined(TASK_SWITCH_MENUS_ENABLE)
+
     void keyboard_post_init_user_viamenus(void) {
         ploopyvia_config_load();
         // Did this do anything important? Maybe find another way to check for invalid 0 value
@@ -97,6 +106,9 @@
         #if defined (COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
             update_pointer_accelaration();
         #endif // COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE
+        #if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
+            update_task_switch();
+        #endif // defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
         ploopy_msGestureUpdate();
         led_update_better_dragscroll(host_keyboard_led_state());
         dprintf("keyboard_post_init_user\n");
@@ -396,6 +408,25 @@
                 update_pointer_accelaration();
                 break;
             #endif // defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
+
+            #if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
+            case id_ploopystuff_task_switch_delay:
+                ploopyvia_config.task_switch_delay = COMBINE_UINT8(value_data[0], value_data[1]);
+                update_task_switch();
+                break;
+            case id_ploopystuff_task_switch_tap_key:
+                ploopyvia_config.task_switch_tap_key = COMBINE_UINT8(value_data[0], value_data[1]);
+                update_task_switch();
+                break;
+            case id_ploopystuff_task_switch_mod:
+                ploopyvia_config.task_switch_mod = *value_data;
+                update_task_switch();
+                break;
+            case id_ploopystuff_task_switch_rev_mod:
+                ploopyvia_config.task_switch_rev_mod = *value_data;
+                update_task_switch();
+                break;
+            #endif // defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE)  && defined(TASK_SWITCH_MENUS_ENABLE)
         }
     }
 
@@ -708,6 +739,16 @@
                 #endif // COMMUNITY_MODULE_TASK_SWITCH_ENABLE
                 break;
 
+            case id_ploopystuff_feature_task_switch_menus:
+                #if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
+                    dprintf("feature_task_switch_menus: %d\n", FEATURE_AVAILABLE);
+                    *value_data = FEATURE_AVAILABLE;
+                #else
+                    dprintf("feature_task_switch_menus: %d\n", FEATURE_UNAVAILABLE);
+                    *value_data = FEATURE_UNAVAILABLE;
+                #endif // COMMUNITY_MODULE_TASK_SWITCH_ENABLE && defined(TASK_SWITCH_MENUS_ENABLE)
+                break;
+
             case id_ploopystuff_feature_turbo_fire:
                 #if defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
                     dprintf("feature_sensor_rotation: %d\n", FEATURE_AVAILABLE);
@@ -793,6 +834,23 @@
                 value_data[0] = ploopyvia_config.pointer_accel_enabled;
                 break;
             #endif // defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
+
+            #if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
+            case id_ploopystuff_task_switch_delay:
+                value_data[0] = ploopyvia_config.task_switch_delay >> 8;
+                value_data[1] = ploopyvia_config.task_switch_delay & 0xFF;
+                break;
+            case id_ploopystuff_task_switch_tap_key:
+                value_data[0] = ploopyvia_config.task_switch_tap_key >> 8;
+                value_data[1] = ploopyvia_config.task_switch_tap_key & 0xFF;
+                break;
+            case id_ploopystuff_task_switch_mod:
+                *value_data = ploopyvia_config.task_switch_mod;
+                break;
+            case id_ploopystuff_task_switch_rev_mod:
+                *value_data = ploopyvia_config.task_switch_rev_mod;
+                break;
+            #endif // defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
         }
     }
 

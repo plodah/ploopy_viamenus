@@ -642,6 +642,73 @@
                     ]
                 },
                 {
+                    "showIf": "{id_firmware_version} >= 2 && {id_feature_task_switch} == 1 && {id_feature_task_switch_menus} == 1",
+                    "label": "Task Switch",
+                    "content": [
+                        {
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_task_switch} == 1 && {id_feature_task_switch_menus} == 1",
+                            "label": "Hold duration",
+                            "type": "range",
+                            "options": [0, 10000],
+                            "content": ["id_taskswitch_delay", 0, 88]
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_task_switch} == 1 && {id_feature_task_switch_menus} == 1",
+                            "label": "Hold Mods",
+                            "type": "dropdown",
+                            "options": [
+                                ["None", 0],
+                                ["Ctrl", 1],
+                                ["Shift", 2],
+                                ["Alt (Opt)", 4],
+                                ["Win (Cmd)", 8],
+                                ["Ctrl + Shift", 3],
+                                ["Ctrl + Alt", 5],
+                                ["Ctrl + Win", 9],
+                                ["Shift + Alt", 6],
+                                ["Shift + Win", 10],
+                                ["Alt + Win", 12],
+                                ["CSA", 7],
+                                ["CSW", 11],
+                                ["CAW", 13],
+                                ["SAW", 14],
+                                ["CSAW", 15]
+                            ],
+                            "content": ["id_taskswitch_mod", 0, 85]
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_task_switch} == 1 && {id_feature_task_switch_menus} == 1",
+                            "label": "Reverse Mods",
+                            "type": "dropdown",
+                            "options": [
+                                ["None", 0],
+                                ["Ctrl", 1],
+                                ["Shift", 2],
+                                ["Alt (Opt)", 4],
+                                ["Win (Cmd)", 8],
+                                ["Ctrl + Shift", 3],
+                                ["Ctrl + Alt", 5],
+                                ["Ctrl + Win", 9],
+                                ["Shift + Alt", 6],
+                                ["Shift + Win", 10],
+                                ["Alt + Win", 12],
+                                ["CSA", 7],
+                                ["CSW", 11],
+                                ["CAW", 13],
+                                ["SAW", 14],
+                                ["CSAW", 15]
+                            ],
+                            "content": ["id_taskswitch_rmod", 0, 86]
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_task_switch} == 1 && {id_feature_task_switch_menus} == 1",
+                            "label": "Tap key",
+                            "type": "keycode",
+                            "content": ["id_taskswitch_key", 0, 87]
+                        }
+                    ]
+                },
+                {
                     "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1",
                     "label": "Turbo Clicker",
                     "content": [
@@ -1053,6 +1120,18 @@
                                 ["Disabled in firmware", 2]
                             ],
                             "content": ["id_feature_task_switch", 0, 243]
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_task_switch} == 1",
+                            "label": "Task Switch Configuration",
+                            "type": "dropdown",
+                            "options": [
+                                ["Unknown", 0],
+                                ["don't change values", 99],
+                                ["Available", 1],
+                                ["Disabled in firmware", 2]
+                            ],
+                            "content": ["id_feature_task_switch_menus", 0, 232]
                         },
                         {
                             "showIf": "{id_firmware_version} >= 2",
