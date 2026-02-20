@@ -1,0 +1,53 @@
+name: Build QMK firmware
+
+on: [push, workflow_dispatch]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: 'QMK Userspace Build'
+    uses: qmk/.github/.github/workflows/qmk_userspace_build.yml@main
+    if: github.ref == 'refs/heads/main'
+    with:
+      qmk_repo: plodah/qmk_firmware
+      qmk_ref: ploopybuilds
+
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && always() && !cancelled()
+    needs: build
+    with:
+      release_name: 'pre-release'
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-tags: true
+
+      - name: Download binaries
+        if: always() && !cancelled()
+        uses: actions/download-artifact@v4
+        with:
+          name: Firmware
+
+      - name: Delete release
+        run: gh release delete ${{ inputs.release_name || 'latest' }} --cleanup-tag || true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Generate Release
+        uses: softprops/action-gh-release@v2
+        if: always() && !cancelled()
+        with:
+          token: ${{ github.token }}
+          name: Pre-release firmware
+          tag_name: ${{ inputs.release_name || 'latest' }}
+          fail_on_unmatched_files: false
+          draft: false
+          prerelease: true
+          files: |
+            **/*viam*.hex
+            **/*viam*.bin
+            **/*viam*.uf2
