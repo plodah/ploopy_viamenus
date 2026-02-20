@@ -31,7 +31,7 @@ jobs:
           name: Firmware
 
       - name: Delete release
-        run: gh release delete ${{ inputs.release_name || 'latest' }} --cleanup-tag || true
+        run: gh release delete ${{ inputs.release_name || 'pre-release' }} --cleanup-tag || true
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
@@ -41,7 +41,7 @@ jobs:
         with:
           token: ${{ github.token }}
           name: Pre-release firmware
-          tag_name: ${{ inputs.release_name || 'latest' }}
+          tag_name: ${{ inputs.release_name || 'pre-release' }}
           fail_on_unmatched_files: false
           draft: false
           prerelease: true
@@ -49,5 +49,3 @@ jobs:
             **/*viam*.hex
             **/*viam*.bin
             **/*viam*.uf2
-    with:
-      release_name: 'pre-release'
