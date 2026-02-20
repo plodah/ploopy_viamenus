@@ -49,3 +49,4 @@ jobs:
             **/*viam*.hex
             **/*viam*.bin
             **/*viam*.uf2
+            **/via_json/*.json
