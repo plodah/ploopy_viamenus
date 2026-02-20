@@ -84,7 +84,7 @@
                 default:
                     if(record->event.pressed){
                         #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
-                            if(ploopyvia_config.dragscroll_end_on_keypress){
+                            if(ploopyvia_config.dragscroll_enable_end_on_keypress){
                                 ds_state.enabled_bypress = 0;
                             }
                         #else // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
@@ -257,15 +257,15 @@
     bool led_update_better_dragscroll(led_t led_state) {
         if( false
         #if (defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS))
-            || ( ploopyvia_config.dragscroll_caps == 1 && led_state.caps_lock)
-            || ( ploopyvia_config.dragscroll_caps == 2 && ! led_state.caps_lock )
-            || ( ploopyvia_config.dragscroll_num == 1 && led_state.num_lock)
-            || ( ploopyvia_config.dragscroll_num == 2 && ! led_state.num_lock )
-            || ( ploopyvia_config.dragscroll_scroll == 1 && led_state.scroll_lock)
-            || ( ploopyvia_config.dragscroll_scroll == 2 && ! led_state.scroll_lock )
-            || ( ploopyvia_config.dragscroll_layer_a == get_highest_layer(layer_state | default_layer_state) )
-            || ( ploopyvia_config.dragscroll_layer_b == get_highest_layer(layer_state | default_layer_state) )
-            || ( ploopyvia_config.dragscroll_permanently )
+            || ( ploopyvia_config.dragscroll_enable_caps == 1 && led_state.caps_lock)
+            || ( ploopyvia_config.dragscroll_enable_caps == 2 && ! led_state.caps_lock )
+            || ( ploopyvia_config.dragscroll_enable_num == 1 && led_state.num_lock)
+            || ( ploopyvia_config.dragscroll_enable_num == 2 && ! led_state.num_lock )
+            || ( ploopyvia_config.dragscroll_enable_scroll == 1 && led_state.scroll_lock)
+            || ( ploopyvia_config.dragscroll_enable_scroll == 2 && ! led_state.scroll_lock )
+            || ( ploopyvia_config.dragscroll_enable_layer_a == get_highest_layer(layer_state | default_layer_state) )
+            || ( ploopyvia_config.dragscroll_enable_layer_b == get_highest_layer(layer_state | default_layer_state) )
+            || ( ploopyvia_config.dragscroll_enable_permanently )
         #else // (defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS))
             #if defined(BETTER_DRAGSCROLL_SCRLK_ENABLE)
                 || led_state.scroll_lock

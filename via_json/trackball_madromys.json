@@ -870,7 +870,7 @@
                                 ["Scroll while enabled", 1],
                                 ["Scroll while disabled", 2]
                             ],
-                            "content": ["id_dragscroll_caps", 0, 25]
+                            "content": ["id_dragscroll_enable_caps", 0, 25]
                         },
                         {
                             "label": "On Num Lock",
@@ -880,7 +880,7 @@
                                 ["Scroll while enabled", 1],
                                 ["Scroll while disabled", 2]
                             ],
-                            "content": ["id_dragscroll_num", 0, 26]
+                            "content": ["id_dragscroll_enable_num", 0, 26]
                         },
                         {
                             "label": "On Scroll Lock",
@@ -890,7 +890,7 @@
                                 ["Scroll while enabled", 1],
                                 ["Scroll while disabled", 2]
                             ],
-                            "content": ["id_dragscroll_scroll", 0, 27]
+                            "content": ["id_dragscroll_enable_scroll", 0, 27]
                         }
                     ]
                 },
@@ -900,12 +900,12 @@
                         {
                             "label": "Dragscroll on Permanently",
                             "type": "toggle",
-                            "content": ["id_dragscroll_permanently", 0, 29]
+                            "content": ["id_dragscroll_enable_permanently", 0, 29]
                         },
                         {
                             "label": "Dragscroll end on keypress",
                             "type": "toggle",
-                            "content": ["id_dragscroll_end_on_keypress", 0, 28]
+                            "content": ["id_dragscroll_enable_end_on_keypress", 0, 28]
                         },
                         {
                             "showIf": "{id_firmware_version} >= 2",
@@ -922,7 +922,7 @@
                                 ["7", 7],
                                 ["None", 255]
                             ],
-                            "content": ["id_dragscroll_layer_a", 0, 19]
+                            "content": ["id_dragscroll_enable_layer_a", 0, 19]
                         },
                         {
                             "showIf": "{id_firmware_version} >= 2",
@@ -939,7 +939,7 @@
                                 ["7", 7],
                                 ["None", 255]
                             ],
-                            "content": ["id_dragscroll_layer_b", 0, 20]
+                            "content": ["id_dragscroll_enable_layer_b", 0, 20]
                         }
                     ]
                 },

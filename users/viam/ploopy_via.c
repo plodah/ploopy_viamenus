@@ -156,8 +156,7 @@
         *command_id = id_unhandled;
     }
 
-    void ploopyvia_config_set_value( uint8_t *data )
-    {
+    void ploopyvia_config_set_value( uint8_t *data ) {
         uint8_t *value_id   = &(data[0]);
         uint8_t *value_data = &(data[1]);
 
@@ -247,44 +246,44 @@
                 dprintf("dragscroll_divisor_v:%d\n", ploopyvia_config.dragscroll_divisor_v);
                 break;
 
-            case id_ploopystuff_dragscroll_caps:
-                ploopyvia_config.dragscroll_caps = *value_data;
-                dprintf("dragscroll_caps: %d\n", ploopyvia_config.dragscroll_caps);
+            case id_ploopystuff_dragscroll_enable_caps:
+                ploopyvia_config.dragscroll_enable_caps = *value_data;
+                dprintf("dragscroll_enable_caps: %d\n", ploopyvia_config.dragscroll_enable_caps);
                 led_update_better_dragscroll(host_keyboard_led_state());
                 break;
 
-            case id_ploopystuff_dragscroll_num:
-                ploopyvia_config.dragscroll_num = *value_data;
-                dprintf("dragscroll_num: %d\n", ploopyvia_config.dragscroll_num);
+            case id_ploopystuff_dragscroll_enable_num:
+                ploopyvia_config.dragscroll_enable_num = *value_data;
+                dprintf("dragscroll_enable_num: %d\n", ploopyvia_config.dragscroll_enable_num);
                 led_update_better_dragscroll(host_keyboard_led_state());
                 break;
 
-            case id_ploopystuff_dragscroll_scroll:
-                ploopyvia_config.dragscroll_scroll = *value_data;
-                dprintf("dragscroll_scroll: %d\n", ploopyvia_config.dragscroll_scroll);
+            case id_ploopystuff_dragscroll_enable_scroll:
+                ploopyvia_config.dragscroll_enable_scroll = *value_data;
+                dprintf("dragscroll_enable_scroll: %d\n", ploopyvia_config.dragscroll_enable_scroll);
                 led_update_better_dragscroll(host_keyboard_led_state());
                 break;
 
-            case id_ploopystuff_dragscroll_end_on_keypress:
-                ploopyvia_config.dragscroll_end_on_keypress = *value_data;
-                dprintf("dragscroll_end_on_keypress: %d\n", ploopyvia_config.dragscroll_end_on_keypress);
+            case id_ploopystuff_dragscroll_enable_end_on_keypress:
+                ploopyvia_config.dragscroll_enable_end_on_keypress = *value_data;
+                dprintf("dragscroll_enable_end_on_keypress: %d\n", ploopyvia_config.dragscroll_enable_end_on_keypress);
                 break;
 
-            case id_ploopystuff_dragscroll_permanently:
-                ploopyvia_config.dragscroll_permanently = *value_data;
-                dprintf("dragscroll_permanently: %d\n", ploopyvia_config.dragscroll_permanently);
+            case id_ploopystuff_dragscroll_enable_permanently:
+                ploopyvia_config.dragscroll_enable_permanently = *value_data;
+                dprintf("dragscroll_enable_permanently: %d\n", ploopyvia_config.dragscroll_enable_permanently);
                 led_update_better_dragscroll(host_keyboard_led_state());
                 break;
 
-            case id_ploopystuff_dragscroll_layer_a:
-                ploopyvia_config.dragscroll_layer_a = *value_data;
-                dprintf("dragscroll_layer_a: %d\n", ploopyvia_config.dragscroll_layer_a);
+            case id_ploopystuff_dragscroll_enable_layer_a:
+                ploopyvia_config.dragscroll_enable_layer_a = *value_data;
+                dprintf("dragscroll_enable_layer_a: %d\n", ploopyvia_config.dragscroll_enable_layer_a);
                 led_update_better_dragscroll(host_keyboard_led_state());
                 break;
 
-            case id_ploopystuff_dragscroll_layer_b:
-                ploopyvia_config.dragscroll_layer_b = *value_data;
-                dprintf("dragscroll_layer_b: %d\n", ploopyvia_config.dragscroll_layer_b);
+            case id_ploopystuff_dragscroll_enable_layer_b:
+                ploopyvia_config.dragscroll_enable_layer_b = *value_data;
+                dprintf("dragscroll_enable_layer_b: %d\n", ploopyvia_config.dragscroll_enable_layer_b);
                 led_update_better_dragscroll(host_keyboard_led_state());
                 break;
 
@@ -519,39 +518,39 @@
                 dprintf("dragscroll_divisor_v:%d\n", ploopyvia_config.dragscroll_divisor_v);
                 break;
 
-            case id_ploopystuff_dragscroll_caps:
-                *value_data = ploopyvia_config.dragscroll_caps;
-                dprintf("dragscroll_caps: %d\n", ploopyvia_config.dragscroll_caps);
+            case id_ploopystuff_dragscroll_enable_caps:
+                *value_data = ploopyvia_config.dragscroll_enable_caps;
+                dprintf("dragscroll_enable_caps: %d\n", ploopyvia_config.dragscroll_enable_caps);
                 break;
 
-            case id_ploopystuff_dragscroll_num:
-                *value_data = ploopyvia_config.dragscroll_num;
-                dprintf("dragscroll_num: %d\n", ploopyvia_config.dragscroll_num);
+            case id_ploopystuff_dragscroll_enable_num:
+                *value_data = ploopyvia_config.dragscroll_enable_num;
+                dprintf("dragscroll_enable_num: %d\n", ploopyvia_config.dragscroll_enable_num);
                 break;
 
-            case id_ploopystuff_dragscroll_scroll:
-                *value_data = ploopyvia_config.dragscroll_scroll;
-                dprintf("dragscroll_scroll: %d\n", ploopyvia_config.dragscroll_scroll);
+            case id_ploopystuff_dragscroll_enable_scroll:
+                *value_data = ploopyvia_config.dragscroll_enable_scroll;
+                dprintf("dragscroll_enable_scroll: %d\n", ploopyvia_config.dragscroll_enable_scroll);
                 break;
 
-            case id_ploopystuff_dragscroll_end_on_keypress:
-                *value_data = ploopyvia_config.dragscroll_end_on_keypress;
-                dprintf("dragscroll_end_on_keypress: %d\n", ploopyvia_config.dragscroll_end_on_keypress);
+            case id_ploopystuff_dragscroll_enable_end_on_keypress:
+                *value_data = ploopyvia_config.dragscroll_enable_end_on_keypress;
+                dprintf("dragscroll_enable_end_on_keypress: %d\n", ploopyvia_config.dragscroll_enable_end_on_keypress);
                 break;
 
-            case id_ploopystuff_dragscroll_permanently:
-                *value_data = ploopyvia_config.dragscroll_permanently;
-                dprintf("dragscroll_permanently: %d\n", ploopyvia_config.dragscroll_permanently);
+            case id_ploopystuff_dragscroll_enable_permanently:
+                *value_data = ploopyvia_config.dragscroll_enable_permanently;
+                dprintf("dragscroll_enable_permanently: %d\n", ploopyvia_config.dragscroll_enable_permanently);
                 break;
 
-            case id_ploopystuff_dragscroll_layer_a:
-                *value_data = ploopyvia_config.dragscroll_layer_a;
-                dprintf("dragscroll_layer_a: %d\n", ploopyvia_config.dragscroll_layer_a);
+            case id_ploopystuff_dragscroll_enable_layer_a:
+                *value_data = ploopyvia_config.dragscroll_enable_layer_a;
+                dprintf("dragscroll_enable_layer_a: %d\n", ploopyvia_config.dragscroll_enable_layer_a);
                 break;
 
-            case id_ploopystuff_dragscroll_layer_b:
-                *value_data = ploopyvia_config.dragscroll_layer_b;
-                dprintf("dragscroll_layer_b: %d\n", ploopyvia_config.dragscroll_layer_b);
+            case id_ploopystuff_dragscroll_enable_layer_b:
+                *value_data = ploopyvia_config.dragscroll_enable_layer_b;
+                dprintf("dragscroll_enable_layer_b: %d\n", ploopyvia_config.dragscroll_enable_layer_b);
                 break;
 
             case id_ploopystuff_dpi_presets:
