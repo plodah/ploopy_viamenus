@@ -678,20 +678,6 @@
                     "content": [
                         {
                             "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 1",
-                            "label": "Rate (ms between fires)",
-                            "type": "range",
-                            "options": [20, 4000],
-                            "content": ["id_turbo_fire_rate", 0, 71]
-                        },
-                        {
-                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 1",
-                            "label": "Duration (ms key held)",
-                            "type": "range",
-                            "options": [0, 255],
-                            "content": ["id_turbo_fire_duration", 0, 72]
-                        },
-                        {
-                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 1",
                             "label": "Keycode A",
                             "type": "keycode",
                             "content": ["id_turbo_fire_keycode_a", 0, 73]
@@ -737,6 +723,61 @@
                             "label": "Keycode H",
                             "type": "keycode",
                             "content": ["id_turbo_fire_keycode_h", 0, 80]
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 1",
+                            "label": "Rate range",
+                            "type": "dropdown",
+                            "options": [
+                                ["Turbo 20-60ms", 1],
+                                ["Fast 40-100ms", 2],
+                                ["Medium 100-600ms", 101],
+                                ["Slow 500-1200ms", 102],
+                                ["Turtle 1-60s", 103]
+                            ],
+                            "content": ["id_turbo_fire_rate_range", 0, 81]
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 1 && {id_turbo_fire_rate_range} == 1 ",
+                            "label": "Rate (ms between fires)",
+                            "type": "range",
+                            "options": [20, 60],
+                            "content": ["id_turbo_fire_rate", 0, 71]
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 1 && {id_turbo_fire_rate_range} == 2 ",
+                            "label": "Rate (ms between fires)",
+                            "type": "range",
+                            "options": [40, 100],
+                            "content": ["id_turbo_fire_rate", 0, 71]
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 1 && {id_turbo_fire_rate_range} == 3 ",
+                            "label": "Rate (ms between fires)",
+                            "type": "range",
+                            "options": [100, 600],
+                            "content": ["id_turbo_fire_rate", 0, 71]
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 1 && {id_turbo_fire_rate_range} == 4 ",
+                            "label": "Rate (ms between fires)",
+                            "type": "range",
+                            "options": [500, 1200],
+                            "content": ["id_turbo_fire_rate", 0, 71]
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 1 && {id_turbo_fire_rate_range} == 5 ",
+                            "label": "Rate (ms between fires)",
+                            "type": "range",
+                            "options": [1000, 60000],
+                            "content": ["id_turbo_fire_rate", 0, 71]
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 1",
+                            "label": "Duration (ms key held)",
+                            "type": "range",
+                            "options": [0, 255],
+                            "content": ["id_turbo_fire_duration", 0, 72]
                         }
                     ]
                 }

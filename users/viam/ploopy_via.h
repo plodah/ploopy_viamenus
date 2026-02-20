@@ -82,7 +82,8 @@ enum via_ploopystuff_value {
     id_ploopystuff_turbo_fire_keycode_e,
     id_ploopystuff_turbo_fire_keycode_f,
     id_ploopystuff_turbo_fire_keycode_g,
-    id_ploopystuff_turbo_fire_keycode_h, // 80
+    id_ploopystuff_turbo_fire_keycode_h,
+    id_ploopystuff_turbo_fire_rate_range, // 81
     #endif // defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
     #if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
     id_ploopystuff_task_switch_mod = 85,
@@ -190,6 +191,7 @@ typedef struct {
     #endif // defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
     #ifdef COMMUNITY_MODULE_TURBO_FIRE_ENABLE
         uint16_t turbo_fire_rate;
+        uint8_t turbo_fire_rate_range;
         uint8_t turbo_fire_duration;
         uint16_t turbo_fire_keycodes[TURBO_FIRE_KEYCOUNT];
     #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
@@ -296,6 +298,7 @@ static const via_ploopystuff_config ploopyvia_config_default = {
 
     #ifdef COMMUNITY_MODULE_TURBO_FIRE_ENABLE
         .turbo_fire_rate = 25,
+        .turbo_fire_rate_range = 1,
         .turbo_fire_duration = 10,
         .turbo_fire_keycodes = {MS_BTN1},
     #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE

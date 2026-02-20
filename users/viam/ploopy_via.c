@@ -353,9 +353,19 @@
 
             #if defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
                 case id_ploopystuff_turbo_fire_rate:
-                    ploopyvia_config.turbo_fire_rate = COMBINE_UINT8(value_data[0], value_data[1]);
+                    if(ploopyvia_config.turbo_fire_rate_range >= 100 || value_data[1]>0){
+                        ploopyvia_config.turbo_fire_rate = COMBINE_UINT8(value_data[0], value_data[1]);
+                    }
+                    else{
+                        ploopyvia_config.turbo_fire_rate = value_data[0];
+                    }
                     set_turbo_fire_rate(ploopyvia_config.turbo_fire_rate);
                     dprintf("turbo_fire_rate: %d\n", ploopyvia_config.turbo_fire_rate);
+                    break;
+
+                case id_ploopystuff_turbo_fire_rate_range:
+                    ploopyvia_config.turbo_fire_rate_range = *value_data;
+                    dprintf("turbo_fire_rate_range: %d\n", ploopyvia_config.turbo_fire_rate_range);
                     break;
 
                 case id_ploopystuff_turbo_fire_duration:
@@ -630,9 +640,22 @@
                     break;
 
                 case id_ploopystuff_turbo_fire_rate:
-                    value_data[0] = ploopyvia_config.turbo_fire_rate >> 8;
-                    value_data[1] = ploopyvia_config.turbo_fire_rate & 0xFF;
+
+
+                    if( ploopyvia_config.turbo_fire_rate_range >= 100 || (ploopyvia_config.turbo_fire_rate >> 8) > 0 ){
+                        value_data[0] = ploopyvia_config.turbo_fire_rate >> 8;
+                        value_data[1] = ploopyvia_config.turbo_fire_rate & 0xFF;
+                    }
+                    else{
+                        *value_data = ploopyvia_config.dragscroll_enable_layer_b;
+                    }
+
                     dprintf("turbo_fire_rate: %d\n", ploopyvia_config.turbo_fire_rate);
+                    break;
+
+                case id_ploopystuff_turbo_fire_rate_range:
+                    *value_data = ploopyvia_config.turbo_fire_rate_range;
+                    dprintf("turbo_fire_rate_range: %d\n", ploopyvia_config.turbo_fire_rate_range);
                     break;
 
                 case id_ploopystuff_turbo_fire_duration:
