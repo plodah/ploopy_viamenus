@@ -1,32 +1,31 @@
 # Plodah's Via Menus for Ploopy
 
-This firmware for Ploopy trackballs & mice enables the use of menus in Via to control mouse settings. It also adds a variety of additional features.
+This firmware adds several features to Ploopy trackballs and mice.
+These features can then be tweaked from menus in Via.
 
-This repo is essentially a [qmk_user](https://docs.qmk.fm/newbs_external_userspace) containing supplementary keymaps for [qmk_firmware](https://github.com/qmk/qmk_firmware).
+This repo is essentially a [qmk_userspace](https://docs.qmk.fm/newbs_external_userspace) containing supplementary keymaps and user-level features for [qmk_firmware](https://github.com/qmk/qmk_firmware).
 
 If you're looking for more information on anything here, you may be able to find it within the docs for [QMK](https://docs.qmk.fm/), and [Via](https://caniusvia.com/). 
 
-
-### Please Note
+## Please Note
 **Testing has limitations!**
-I use this firmware, on my Adept or Thumb daily but I am just one guy. As much as I woulc like to, I also don't have every device to test things with.
+I use this firmware, on my Adept or Thumb daily but I am just one guy. As much as I would like to, I don't have every device, so am completely relying on user feedback if I don't have the hardware.
 
-So naturally, there have been problems in the firwmare that I didn't notice myself, and  there could be more. If you do notice anything, let me know with a discussion post here. I can often be reached on the Ploopy Discord.
-
-I'd recommend that you're comfortable returning your device to the original firmware in case you come across any such problems.
-Please let me know or PR a fix if you find anything, but I can't commit to fixing any issue and provide no warranty etc. It's free after all!
-
-![Example menu with DPI preset dropdown menus](readme-resources/dropdown-example.png)
+Naturally, there are problems in the firwmare that I haven't noticed. I've fixed many, but fully expect there to be more found. If you do notice anything, let me know with a discussion post here. I can often be reached on the Ploopy Discord.
 
 ## What does it do? 
 
-This firmware adds several features to Ploopy Devices and allows those features to be tweaked from Via.
+First and foremost, I made this firmware so that I could adjust the DPI and dragscroll settings to whatever I wanted without re-compiling firmware.
 
-Some are plain useful, like allowing you to change DPI presets without re-compiling firmware.. Some are just plain stupid, like typing in morse code.
+![Example menu with DPI preset dropdown menus](readme-resources/dropdown-example.png)
 
-*See the [Feature list](readme-resources/FEATURES.md) for more info.*
+From there, I just kept adding stuff. Some of it is genuinely useful and some of it completely stupid (but fun). 
+- **Drag Actions** - Can turn the trackball into a volume control while held
+- **Mouse Jiggler** - No software solution to stopping a computer from going to sleep.
+- **Rotation** - If you want to use an Adept at an angle, change the pointer rotation to compensate.
+- *See the [Feature list](readme-resources/FEATURES.md) for a more comprehensive list*
 
- #### What's new for Feb 2026
+ ### What's new (Feb 2026)
 - Add support for Ploopy Nano 2
 - Pointer rotation compensate for device orientation (on PMW3360 devices)
 - Pointer Acceleration - As per [Drashna's module](https://github.com/drashna/qmk_modules/tree/main/pointing_device_accel)
@@ -39,22 +38,7 @@ Some are plain useful, like allowing you to change DPI presets without re-compil
 +Tab instead of Alt+Tab for Mac users
 - Feature flags - Check what features are available when deciding what menus to show.
 
-
-## How do I use it?
-1. Download Firmware and JSON from [**Releases**](https://github.com/plodah/ploopy_viamenus/releases)
-      
-   I do not recommend using the `latest` release- it may have new stuff but is 10x more likely to be borked and lacks documentation.
-2. Flash the firmware
-
-   For most new ploopy devices (those with RP2040 chips), you hold some button while plugging in the device then copy a uf2 file to a storage drive. 
-   
-   Otherwise, use QMK toolbox. [Here is QMK's guide](https://docs.qmk.fm/newbs_flashing).
-3. Import the json file to Via's 🖌️ design tab. If you don't have 🖌️ at the top of the Via, enable design tab it in settings ⚙️
-    
-    Alternatively, use my version of Via at [via.plodah.uk](https://via.plodah.uk), which allows you to skip importing the json.
-4. When updating to a new release, please update both firmware and Via JSON.
-
-### Problems and workarounds
+### Known Problems
 #### No major issues overall
 Things pretty much work as intended, as far as I am aware.
 Most of the messages I receive are asking about more features!
@@ -73,7 +57,6 @@ Affected devices are:
 - Thumb (before Jan 2025* refresh)
 
 *source: Ploopy's [Our plans for 2025](https://blog.ploopy.co/our-plans-for-2025-158) blog post*
-
 
 #### Tapdances
 Via only supports the "keyboard" level custom keycodes. Those that are set up in a module, or at the user level can't be added to the custom menu
@@ -100,6 +83,27 @@ These will appear as their hex keycode in Via and can only be assigned with the 
 - invoke custom actions by moving the pointer in a circle, figure 8.
 - Customizeable tapdances within Via
 - World peace
+
+## How do I use it?
+
+Before following these instructions I would ask you make sure you're comfortable with what you're doing. It's very difficult to permanently brick a device, but it can be very frustrating to trouble shoot when you're not famililar.
+
+It's also worth reviewing the instructions at the bottom of the page which let you know how to return your device to (something like) the original firmware as a plan B.
+
+### Download and flash the firmware
+
+1. Download Firmware and JSON from [**Releases**](https://github.com/plodah/ploopy_viamenus/releases)
+      
+   I do not recommend using the `latest` release- it may have new stuff but is 10x more likely to be borked and lacks documentation.
+2. Flash the firmware
+
+   For most new ploopy devices (those with RP2040 chips), you hold some button while plugging in the device then copy a uf2 file to a storage drive. 
+   
+   Otherwise, use QMK toolbox. [Here is QMK's guide](https://docs.qmk.fm/newbs_flashing).
+3. Import the json file to Via's 🖌️ design tab. If you don't have 🖌️ at the top of the Via, enable design tab it in settings ⚙️
+    
+    Alternatively, use my version of Via at [via.plodah.uk](https://via.plodah.uk), which allows you to skip importing the json.
+4. When updating to a new release, please update both firmware and Via JSON.
 
 ## I regret everything, take me back
 If it all gets too much and you yearn for a simpler time, and wish to return your device to the original firmware or just something simpler.

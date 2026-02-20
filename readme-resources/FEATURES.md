@@ -72,11 +72,16 @@ This is just As per [Drashna's module](https://github.com/drashna/qmk_modules/tr
 
 The scroll wheel shows like a knob would in Via. This allows you to customize what the scroll wheel does.. maybe use it as Volume in a secondary layer.
 
+Don't like it that way? show it as a button from the "layouts" menu.
+![scrollwheel options](scrollwheel-options.png)
+
 ## Turbo Fire
 Repeatedly send a click or keyboard key.
 Menus allow the key that's sent to be customized, as well as the interval between clicks and how long one click lasts.
 
 I hope you like Cookies.
+
+I just right now while writing this decided I need to make a super slow version to tap F5 every 30 seconds.. Yeah you could do that with a browser extension but my work computer blocks 'em.
 
 ## Morse Code
 *Plodah was so preoccupied with whether they could, they didn't stop to think if they should.*
