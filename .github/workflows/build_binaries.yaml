@@ -20,4 +20,4 @@ jobs:
     if: github.ref == 'refs/heads/main' && always() && !cancelled()
     needs: build
     with:
-      release_name: 'pre-release (testing)'
+      release_name: 'pre-release-(testing)'
