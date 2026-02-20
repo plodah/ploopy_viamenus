@@ -733,43 +733,43 @@
                             "content": ["id_turbo_fire_keycode_a", 0, 73]
                         },
                         {
-                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 1",
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 2",
                             "label": "Keycode B",
                             "type": "keycode",
                             "content": ["id_turbo_fire_keycode_b", 0, 74]
                         },
                         {
-                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 1",
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 3",
                             "label": "Keycode C",
                             "type": "keycode",
                             "content": ["id_turbo_fire_keycode_c", 0, 75]
                         },
                         {
-                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 1",
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 4",
                             "label": "Keycode D",
                             "type": "keycode",
                             "content": ["id_turbo_fire_keycode_d", 0, 76]
                         },
                         {
-                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 1",
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 5",
                             "label": "Keycode E",
                             "type": "keycode",
                             "content": ["id_turbo_fire_keycode_e", 0, 77]
                         },
                         {
-                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 1",
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 6",
                             "label": "Keycode F",
                             "type": "keycode",
                             "content": ["id_turbo_fire_keycode_f", 0, 78]
                         },
                         {
-                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 1",
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 7",
                             "label": "Keycode G",
                             "type": "keycode",
                             "content": ["id_turbo_fire_keycode_g", 0, 79]
                         },
                         {
-                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 1",
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 8",
                             "label": "Keycode H",
                             "type": "keycode",
                             "content": ["id_turbo_fire_keycode_h", 0, 80]
