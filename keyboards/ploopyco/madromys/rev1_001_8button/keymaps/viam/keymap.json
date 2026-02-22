@@ -1,8 +1,8 @@
 {
     "version": 1,
-    "notes": "Hello",
-    "author": "Plodah",
-    "documentation": "...",
+    "notes": "This is the primary keymap used in the ViaMenus repository",
+    "author": "plodah",
+    "documentation": "https://github.com/plodah/ploopy_viamenus/blob/main/README.md",
     "keymap": "viam",
     "layout": "LAYOUT",
     "modules": [
@@ -26,7 +26,7 @@
             "tap_dance": true,
             "via": true
         },
-        "keyboard_name": "8-button Adept (Madromys) | viamenus",
+        "keyboard_name": "8-button Adept (Madromys) | viam",
         "manufacturer": "Ploopy"
     }
 }

@@ -1,15 +1,14 @@
 {
     "version": 1,
-    "notes": "Hello",
+    "notes": "This is the primary keymap used in the ViaMenus repository",
     "author": "plodah",
-    "documentation": "...",
-    "keyboard": "ploopyco/trackball_thumb",
-    "keymap": "via",
+    "documentation": "https://github.com/plodah/ploopy_viamenus/blob/main/README.md",
+    "keyboard": "ploopyco/trackball_thumb/rev1_001",
+    "keymap": "viam",
     "layout": "LAYOUT",
     "modules": [
         "plodah/dragscroll_straighten",
         "plodah/mouse_jiggler",
-        "plodah/pmw_rotation",
         "plodah/task_switch",
         "plodah/turbo_fire"
     ],
@@ -25,13 +24,13 @@
             "encoder_map": true,
             "rgblight": false,
             "rgb_matrix": false,
-            "tap_dance": true,
+            "tap_dance": false,
             "via": true,
             "space_cadet": false,
             "grave_esc": false,
             "magic": false
         },
-        "keyboard_name": "Trackball Thumb | viamenus",
+        "keyboard_name": "Trackball Thumb | viam",
         "manufacturer": "Ploopy",
         "usb": {
             "shared_endpoint": {

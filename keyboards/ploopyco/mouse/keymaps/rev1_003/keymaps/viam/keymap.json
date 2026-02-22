@@ -1,9 +1,9 @@
 {
     "version": 1,
-    "notes": "Hello",
+    "notes": "This is the primary keymap used in the ViaMenus repository",
     "author": "plodah",
-    "documentation": "...",
-    "keyboard": "ploopyco/mouse",
+    "documentation": "https://github.com/plodah/ploopy_viamenus/blob/main/README.md",
+    "keyboard": "ploopyco/mouse/rev1_003",
     "keymap": "viam",
     "layout": "LAYOUT",
     "modules": [
@@ -33,7 +33,7 @@
             "grave_esc": false,
             "magic": false
         },
-        "keyboard_name": "Mouse | viamenus",
+        "keyboard_name": "Mouse | viam",
         "manufacturer": "Ploopy",
         "usb": {
             "shared_endpoint": {

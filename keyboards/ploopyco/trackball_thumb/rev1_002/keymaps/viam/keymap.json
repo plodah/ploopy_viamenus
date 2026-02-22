@@ -1,10 +1,10 @@
 {
     "version": 1,
-    "notes": "Hello",
+    "notes": "This is the primary keymap used in the ViaMenus repository",
     "author": "plodah",
-    "documentation": "...",
-    "keyboard": "ploopyco/trackball_thumb",
-    "keymap": "via",
+    "documentation": "https://github.com/plodah/ploopy_viamenus/blob/main/README.md",
+    "keyboard": "ploopyco/trackball_thumb/rev1_002",
+    "keymap": "viam",
     "layout": "LAYOUT",
     "modules": [
         "drashna/pointing_device_accel",
@@ -33,7 +33,7 @@
             "grave_esc": false,
             "magic": false
         },
-        "keyboard_name": "Trackball Thumb | viamenus",
+        "keyboard_name": "Trackball Thumb | viam",
         "manufacturer": "Ploopy",
         "usb": {
             "shared_endpoint": {

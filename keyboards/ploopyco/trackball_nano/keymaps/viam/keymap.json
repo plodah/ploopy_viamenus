@@ -1,8 +1,8 @@
 {
     "version": 1,
-    "notes": "Hello",
+    "notes": "This is the primary keymap used in the ViaMenus repository",
     "author": "plodah",
-    "documentation": "...",
+    "documentation": "https://github.com/plodah/ploopy_viamenus/blob/main/README.md",
     "keyboard": "ploopyco/trackball_nano",
     "keymap": "viam",
     "layout": "LAYOUT",
@@ -33,7 +33,7 @@
             "grave_esc": false,
             "magic": false
         },
-        "keyboard_name": "Trackball Nano | viamenus",
+        "keyboard_name": "Trackball Nano | viam",
         "manufacturer": "Ploopy",
         "matrix_pins": {
             "direct": [

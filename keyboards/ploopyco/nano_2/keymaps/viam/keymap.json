@@ -1,8 +1,8 @@
 {
     "version": 1,
-    "notes": "Hello",
+    "notes": "This is the primary keymap used in the ViaMenus repository",
     "author": "plodah",
-    "documentation": "...",
+    "documentation": "https://github.com/plodah/ploopy_viamenus/blob/main/README.md",
     "keyboard": "ploopyco/nano_2",
     "keymap": "viam",
     "layout": "LAYOUT",
@@ -29,7 +29,7 @@
             "tap_dance": false,
             "via": true
         },
-        "keyboard_name": "Trackball Nano 2 | viamenus",
+        "keyboard_name": "Trackball Nano 2 | viam",
         "manufacturer": "Ploopy",
         "usb": {
             "shared_endpoint": {
