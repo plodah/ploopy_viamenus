@@ -1,0 +1,44 @@
+{
+    "version": 1,
+    "notes": "This is a secondary keymap used by the author for testing",
+    "author": "plodah",
+    "documentation": "https://github.com/plodah/ploopy_viamenus/blob/main/README.md",
+    "keyboard": "ploopyco/trackball/rev1_007",
+    "keymap": "plodah_testing",
+    "layout": "LAYOUT",
+    "modules": [
+        "drashna/pointing_device_accel",
+        "plodah/dragscroll_straighten",
+        "plodah/morse_code",
+        "plodah/mouse_jiggler",
+        "plodah/pmw_rotation",
+        "plodah/task_switch",
+        "plodah/turbo_fire"
+    ],
+    "config": {
+        "build": {
+            "lto": true
+        },
+        "features": {
+            "backlight": false,
+            "combo": true,
+            "console": false,
+            "deferred_exec": true,
+            "encoder_map": true,
+            "rgblight": false,
+            "rgb_matrix": false,
+            "tap_dance": true,
+            "via": true,
+            "space_cadet": false,
+            "grave_esc": false,
+            "magic": false
+        },
+        "keyboard_name": "Trackball | plodah_testing",
+        "manufacturer": "Ploopy",
+        "usb": {
+            "shared_endpoint": {
+                "keyboard": true
+            }
+        }
+    }
+}

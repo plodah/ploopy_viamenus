@@ -1,0 +1,32 @@
+{
+    "version": 1,
+    "notes": "This is a secondary keymap used by the author for testing",
+    "author": "plodah",
+    "documentation": "https://github.com/plodah/ploopy_viamenus/blob/main/README.md",
+    "keymap": "plodah_testing",
+    "layout": "LAYOUT",
+    "modules": [
+        "drashna/pointing_device_accel",
+        "plodah/dragscroll_straighten",
+        "plodah/morse_code",
+        "plodah/mouse_jiggler",
+        "plodah/pmw_rotation",
+        "plodah/task_switch",
+        "plodah/turbo_fire"
+    ],
+    "config": {
+        "features": {
+            "backlight": false,
+            "combo": true,
+            "console": true,
+            "deferred_exec": true,
+            "encoder_map": false,
+            "rgblight": false,
+            "rgb_matrix": false,
+            "tap_dance": true,
+            "via": true
+        },
+        "keyboard_name": "8-button Adept (Madromys) | plodah_testing",
+        "manufacturer": "Ploopy"
+    }
+}

@@ -59,18 +59,9 @@ enum {
 #include "common.c"
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [_BASE] = LAYOUT(
-        P_MS4FA, MS_BTN1, MS_BTN3, MS_BTN2, P_MS5FB,
-        DPI_CONFIG
-    ),
-    [_FNA] = LAYOUT(
-        _______, PL_TSKP, _______, PL_TSKN, _______,
-        PL_MSJG
-    ),
-    [_FNB] = LAYOUT(
-        _______, _______, _______, _______, _______,
-        _______
-    )
+    [_BASE] = LAYOUT( MS_BTN1, MS_BTN3, MS_BTN2, P_MS4FA, P_MS5FB ),
+    [_FNA] = LAYOUT( PL_TSKP, DPI_CONFIG, PL_TSKN, _______, _______ ),
+    [_FNB] = LAYOUT( PL_TSKP, DPI_CONFIG, PL_TSKN, _______, _______ )
 };
 
 #if defined(ENCODER_MAP_ENABLE)

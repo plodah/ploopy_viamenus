@@ -1,37 +1,35 @@
 {
     "version": 1,
-    "notes": "Hello",
+    "notes": "This is a secondary keymap used by the author for testing",
     "author": "plodah",
-    "documentation": "...",
-    "keyboard": "ploopyco/trackball_thumb",
-    "keymap": "via",
+    "documentation": "https://github.com/plodah/ploopy_viamenus/blob/main/README.md",
+    "keymap": "plodah_testing",
     "layout": "LAYOUT",
     "modules": [
         "drashna/pointing_device_accel",
         "plodah/dragscroll_straighten",
+        "plodah/morse_code",
         "plodah/mouse_jiggler",
         "plodah/pmw_rotation",
-        "plodah/task_switch"
+        "plodah/task_switch",
+        "plodah/turbo_fire"
     ],
     "config": {
-        "build": {
-            "lto": true
-        },
         "features": {
             "backlight": false,
-            "combo": false,
-            "console": false,
+            "combo": true,
+            "console": true,
             "deferred_exec": true,
-            "encoder_map": true,
+            "encoder_map": false,
             "rgblight": false,
             "rgb_matrix": false,
-            "tap_dance": false,
-            "via": true,
-            "space_cadet": false,
-            "grave_esc": false,
-            "magic": false
+            "tap_dance": true,
+            "via": true
         },
-        "keyboard_name": "Trackball Thumb | viamenus",
+        "ws2812": {
+            "driver": "vendor"
+        },
+        "keyboard_name": "Adept (Madromys) | plodah_testing",
         "manufacturer": "Ploopy",
         "usb": {
             "shared_endpoint": {
