@@ -109,7 +109,9 @@
         #if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
             update_task_switch();
         #endif // defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
-        ploopy_msGestureUpdate();
+        #if defined(PLOOPY_MSGESTURE_ENABLE)
+            ploopy_msGestureUpdate();
+        #endif // defined(PLOOPY_MSGESTURE_ENABLE)
         led_update_better_dragscroll(host_keyboard_led_state());
         dprintf("keyboard_post_init_user\n");
     }

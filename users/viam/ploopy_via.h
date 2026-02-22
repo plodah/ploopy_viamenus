@@ -137,7 +137,7 @@ enum feature_state {
     FEATURE_UNSUPPORTED,
 };
 
-typedef struct {
+typedef struct PACKED {
     bool     dpi_as_slider;
     uint16_t dpi_presets[5]; // 10 bytes!
     bool     pointer_invert_h;
@@ -196,7 +196,6 @@ typedef struct {
         uint16_t turbo_fire_keycodes[TURBO_FIRE_KEYCOUNT];
     #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
 } via_ploopystuff_config;
-
 via_ploopystuff_config ploopyvia_config;
 
 static const via_ploopystuff_config ploopyvia_config_default = {
