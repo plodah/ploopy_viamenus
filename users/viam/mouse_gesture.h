@@ -7,19 +7,29 @@
 #define PLOOPY_MSGESTURE_WIGGLES 4
 #define PLOOPY_MSGESTURE_THRESHOLD 1800
 
+#if defined(DEFERRED_EXEC_ENABLE) && (!defined(MSGESTURE_FORCE_NON_DE))
+    #define MSGESTURE_MODE_DE
+#endif
+
 report_mouse_t pointing_device_task_mouse_gesture(report_mouse_t mouse_report);
 void process_record_msgesture(void);
 void ploopy_msGestureUpdate(void);
-
+#if !defined(MSGESTURE_MODE_DE)
+    void housekeeping_task_msgesture(void);
+#endif // !defined(MSGESTURE_MODE_DE)
 enum gesture_actions {
     GESTURE_ACTION_NOTHING = 0,
     GESTURE_ACTION_DRAGSCROLL,
     GESTURE_ACTION_MSJIGGLER,
+    GESTURE_ACTION_KEYCODE,
 };
 
 typedef struct msgesture_t {
-    deferred_token cooldown;
-    deferred_token timeout;
+    #if defined(MSGESTURE_MODE_DE)
+        deferred_token timeout;
+    #else // MSGESTURE_MODE_DE
+        uint16_t timer;
+    #endif
     uint8_t action;
     uint8_t count;
     int16_t accum;
