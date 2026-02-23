@@ -1,0 +1,33 @@
+{
+    "version": 1,
+    "notes": "This is a test for msaccel, disabled pretty much everything else to get it out of the way.",
+    "author": "plodah",
+    "documentation": "https://github.com/plodah/ploopy_viamenus/blob/main/README.md",
+    "keyboard": "ploopyco/trackball_thumb/rev1_001",
+    "keymap": "basic_testaccel",
+    "layout": "LAYOUT",
+    "modules": [
+        "drashna/pointing_device_accel"
+    ],
+    "config": {
+        "build": {
+            "lto": true
+        },
+        "features": {
+            "backlight": false,
+            "combo": false,
+            "console": false,
+            "deferred_exec": false,
+            "encoder_map": true,
+            "rgblight": false,
+            "rgb_matrix": false,
+            "tap_dance": false,
+            "via": false,
+            "space_cadet": false,
+            "grave_esc": false,
+            "magic": false
+        },
+        "keyboard_name": "Trackball Thumb | maccel_test",
+        "manufacturer": "Ploopy"
+    }
+}
