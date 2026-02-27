@@ -4,6 +4,7 @@
         ["all", "viam"],
         ["all", "viam_alt"],
         ["all", "viam_rgb"],
+        ["all", "plodah"],
         ["all", "plodah_testing"]
     ]
 }
