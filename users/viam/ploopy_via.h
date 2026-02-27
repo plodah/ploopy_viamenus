@@ -1,6 +1,9 @@
 #pragma once
 #include QMK_KEYBOARD_H
 #include "better_dragscroll.h"
+#ifndef PLOOPY_DPI_OPTIONS
+    #define PLOOPY_DPI_OPTIONS { 600, 900, 1200, 1600, 2400 }
+#endif
 #ifdef COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
     #include "mouse_jiggler.h"
 #endif // def COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
