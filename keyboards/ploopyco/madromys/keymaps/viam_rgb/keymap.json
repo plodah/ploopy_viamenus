@@ -1,0 +1,43 @@
+{
+    "version": 1,
+    "notes": "This is the primary keymap used in the ViaMenus repository",
+    "author": "plodah",
+    "documentation": "https://github.com/plodah/ploopy_viamenus/blob/main/README.md",
+    "keymap": "viam",
+    "layout": "LAYOUT",
+    "modules": [
+        "drashna/pointing_device_accel",
+        "plodah/dragscroll_straighten",
+        "plodah/morse_code",
+        "plodah/mouse_jiggler",
+        "plodah/pmw_rotation",
+        "plodah/task_switch",
+        "plodah/turbo_fire"
+    ],
+    "config": {
+        "features": {
+            "backlight": false,
+            "combo": true,
+            "console": false,
+            "deferred_exec": true,
+            "encoder_map": false,
+            "rgblight": true,
+            "rgb_matrix": false,
+            "tap_dance": true,
+            "via": true
+        },
+        "rgblight": {
+            "led_count": 3
+        },
+        "ws2812": {
+            "driver": "vendor"
+        },
+        "keyboard_name": "Adept (Madromys) | viam",
+        "manufacturer": "Ploopy",
+        "usb": {
+            "shared_endpoint": {
+                "keyboard": true
+            }
+        }
+    }
+}

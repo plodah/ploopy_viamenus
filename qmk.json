@@ -3,8 +3,7 @@
     "build_targets": [
         ["all", "viam"],
         ["all", "viam_alt"],
-        ["all", "viam_alt2"],
-        ["all", "viam_alt3"],
+        ["all", "viam_rgb"],
         ["all", "plodah_testing"]
     ]
 }
