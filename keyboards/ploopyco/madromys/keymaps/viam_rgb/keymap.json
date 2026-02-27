@@ -3,7 +3,7 @@
     "notes": "This is the primary keymap used in the ViaMenus repository",
     "author": "plodah",
     "documentation": "https://github.com/plodah/ploopy_viamenus/blob/main/README.md",
-    "keymap": "viam",
+    "keymap": "viam_rgb",
     "layout": "LAYOUT",
     "modules": [
         "drashna/pointing_device_accel",
@@ -27,12 +27,12 @@
             "via": true
         },
         "rgblight": {
-            "led_count": 3
+            "led_count": 2
         },
         "ws2812": {
             "driver": "vendor"
         },
-        "keyboard_name": "Adept (Madromys) | viam",
+        "keyboard_name": "Adept (Madromys) | viam_rgb",
         "manufacturer": "Ploopy",
         "usb": {
             "shared_endpoint": {

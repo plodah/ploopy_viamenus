@@ -1,10 +1,9 @@
 {
     "version": 1,
-    "notes": "This is the primary keymap used in the ViaMenus repository",
+    "notes": "This is a secondary keymap used by the author for testing",
     "author": "plodah",
     "documentation": "https://github.com/plodah/ploopy_viamenus/blob/main/README.md",
-    "keyboard": "ploopyco/trackball/rev1_007",
-    "keymap": "viam_rgb",
+    "keymap": "plodah(viam)",
     "layout": "LAYOUT",
     "modules": [
         "drashna/pointing_device_accel",
@@ -16,30 +15,24 @@
         "plodah/turbo_fire"
     ],
     "config": {
-        "build": {
-            "lto": true
-        },
         "features": {
             "backlight": false,
             "combo": true,
-            "console": false,
+            "console": true,
             "deferred_exec": true,
-            "encoder_map": true,
+            "encoder_map": false,
             "rgblight": true,
             "rgb_matrix": false,
             "tap_dance": true,
-            "via": true,
-            "space_cadet": false,
-            "grave_esc": false,
-            "magic": false
+            "via": true
         },
         "rgblight": {
-            "led_count": 3
+            "led_count": 2
         },
         "ws2812": {
             "driver": "vendor"
         },
-        "keyboard_name": "Trackball | viam_rgb",
+        "keyboard_name": "Adept (Madromys) | plodah(viam)",
         "manufacturer": "Ploopy",
         "usb": {
             "shared_endpoint": {

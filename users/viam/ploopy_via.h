@@ -10,12 +10,21 @@
 #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
 #if defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
     #include "dragscroll_straighten.h"
+    #if !defined(DRAGSCROLL_STRAIGHTEN_SENSITIVITY)
+        #define DRAGSCROLL_STRAIGHTEN_SENSITIVITY 0
+    #endif // DRAGSCROLL_STRAIGHTEN_SENSITIVITY
 #endif // defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
 #if defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
     #include "turbo_fire.h"
 #endif // COMMUNITY_MODULE_TURBO_FIRE_ENABLE
+#if defined(COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE)
+    #include "basic_pointing_acceleration.h"
+#endif // COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE
 #if defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
     #include "pointing_device_accel.h"
+    #if !defined(POINTING_DEVICE_ACCEL_ENABLE_DEF)
+        #define POINTING_DEVICE_ACCEL_ENABLE_DEF 0
+    #endif // POINTING_DEVICE_ACCEL_ENABLE_DEF
 #endif // COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE
 #if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
     #include "task_switch.h"
@@ -62,7 +71,9 @@ enum via_ploopystuff_value {
     id_ploopystuff_dpi_presets = 31,
     id_ploopystuff_sniper_a_dpi = 41,
     id_ploopystuff_sniper_b_dpi,
+    #if defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
     id_ploopystuff_dragscroll_straighten_sensitivity = 51,
+    #endif // defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
     id_ploopystuff_dragscroll_dragact_a_up = 61,
     id_ploopystuff_dragscroll_dragact_a_down,
     id_ploopystuff_dragscroll_dragact_a_left,
@@ -155,7 +166,9 @@ typedef struct PACKED {
     uint8_t  dragscroll_enable_layer_a;
     uint8_t  dragscroll_enable_layer_b;
     bool     dragscroll_enable_permanently;
+    #if defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
     uint8_t  dragscroll_straighten_sensitivity;
+    #endif // defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
     uint16_t dragscroll_dragact_a_up;
     uint16_t dragscroll_dragact_a_down;
     uint16_t dragscroll_dragact_a_left;
@@ -200,7 +213,7 @@ via_ploopystuff_config ploopyvia_config;
 
 static const via_ploopystuff_config ploopyvia_config_default = {
     .dpi_as_slider              = false,
-    .dpi_presets                = { 600, 900, 1200, 1600, 2400 },
+    .dpi_presets                = PLOOPY_DPI_OPTIONS,
     .pointer_invert_h           = false,
     .pointer_invert_v           = false,
     .sniper_a_dpi               = 100,
@@ -255,7 +268,9 @@ static const via_ploopystuff_config ploopyvia_config_default = {
     .dragscroll_enable_layer_a         = 255,
     .dragscroll_enable_layer_b         = 255,
     .dragscroll_enable_permanently     = false,
-    .dragscroll_straighten_sensitivity = 0,
+    #if defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
+        .dragscroll_straighten_sensitivity = DRAGSCROLL_STRAIGHTEN_SENSITIVITY,
+    #endif //defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
     .dragscroll_dragact_a_up    = KC_VOLU,
     .dragscroll_dragact_a_down  = KC_VOLD,
     .dragscroll_dragact_a_left  = KC_NO,
@@ -276,7 +291,7 @@ static const via_ploopystuff_config ploopyvia_config_default = {
     #endif // PLOOPY_MSGESTURE_ENABLE
 
     #ifdef COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE
-        .pointer_accel_enabled = 0,
+        .pointer_accel_enabled = POINTING_DEVICE_ACCEL_ENABLE_DEF,
         .pointer_accel_growth_rate = POINTING_DEVICE_ACCEL_GROWTH_RATE,
         .pointer_accel_offset = POINTING_DEVICE_ACCEL_OFFSET,
         .pointer_accel_limit = POINTING_DEVICE_ACCEL_LIMIT,

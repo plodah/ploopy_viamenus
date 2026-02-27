@@ -1,10 +1,10 @@
 {
     "version": 1,
-    "notes": "This is the primary keymap used in the ViaMenus repository",
+    "notes": "This is a secondary keymap used by the author for testing",
     "author": "plodah",
     "documentation": "https://github.com/plodah/ploopy_viamenus/blob/main/README.md",
     "keyboard": "ploopyco/trackball/rev1_007",
-    "keymap": "viam_rgb",
+    "keymap": "plodah(viam)",
     "layout": "LAYOUT",
     "modules": [
         "drashna/pointing_device_accel",
@@ -39,7 +39,7 @@
         "ws2812": {
             "driver": "vendor"
         },
-        "keyboard_name": "Trackball | viam_rgb",
+        "keyboard_name": "Trackball | plodah(viam)",
         "manufacturer": "Ploopy",
         "usb": {
             "shared_endpoint": {
