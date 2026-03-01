@@ -1,9 +1,19 @@
 #pragma once
 #include QMK_KEYBOARD_H
-#include "better_dragscroll.h"
+#if defined(BETTER_DRAGSCROLL)
+    #include "better_dragscroll.h"
+    #if !defined(BETTER_DRAGSCROLL_ENABLE_LAYER_A)
+        #define BETTER_DRAGSCROLL_ENABLE_LAYER_A 255
+    #endif // BETTER_DRAGSCROLL_ENABLE_LAYER_A
+    #if !defined(BETTER_DRAGSCROLL_ENABLE_LAYER_B)
+        #define BETTER_DRAGSCROLL_ENABLE_LAYER_B 255
+    #endif // BETTER_DRAGSCROLL_ENABLE_LAYER_B
+#endif // defined(BETTER_DRAGSCROLL)
+
 #ifndef PLOOPY_DPI_OPTIONS
     #define PLOOPY_DPI_OPTIONS { 600, 900, 1200, 1600, 2400 }
 #endif
+
 #ifdef COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
     #include "mouse_jiggler.h"
 #endif // def COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
@@ -268,8 +278,8 @@ static const via_ploopystuff_config ploopyvia_config_default = {
     #else // BETTER_DRAGSCROLL_END_ON_KEYPRESS
         .dragscroll_enable_end_on_keypress = false,
     #endif // BETTER_DRAGSCROLL_END_ON_KEYPRESS
-    .dragscroll_enable_layer_a         = 255,
-    .dragscroll_enable_layer_b         = 255,
+    .dragscroll_enable_layer_a         = BETTER_DRAGSCROLL_ENABLE_LAYER_A,
+    .dragscroll_enable_layer_b         = BETTER_DRAGSCROLL_ENABLE_LAYER_B,
     .dragscroll_enable_permanently     = false,
     #if defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
         .dragscroll_straighten_sensitivity = DRAGSCROLL_STRAIGHTEN_SENSITIVITY,
