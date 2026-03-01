@@ -16,9 +16,6 @@
         "plodah/turbo_fire"
     ],
     "config": {
-        "build": {
-            "lto": true
-        },
         "features": {
             "backlight": false,
             "combo": true,

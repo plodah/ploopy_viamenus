@@ -3,7 +3,7 @@
     "notes": "This is the primary keymap used in the ViaMenus repository",
     "author": "plodah",
     "documentation": "https://github.com/plodah/ploopy_viamenus/blob/main/README.md",
-    "keyboard": "ploopyco/trackball/rev1_007",
+    "keyboard": "ploopyco/mouse/rev1_003",
     "keymap": "viam",
     "layout": "LAYOUT",
     "modules": [
@@ -30,7 +30,7 @@
             "grave_esc": false,
             "magic": false
         },
-        "keyboard_name": "Trackball | viam",
+        "keyboard_name": "Mouse | viam",
         "manufacturer": "Ploopy",
         "usb": {
             "shared_endpoint": {

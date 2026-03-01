@@ -3,15 +3,11 @@
     "notes": "This is the primary keymap used in the ViaMenus repository",
     "author": "plodah",
     "documentation": "https://github.com/plodah/ploopy_viamenus/blob/main/README.md",
-    "keyboard": "ploopyco/mouse/rev1_003",
+    "keyboard": "ploopyco/mouse",
     "keymap": "viam",
     "layout": "LAYOUT",
     "modules": [
-        "drashna/pointing_device_accel",
-        "plodah/dragscroll_straighten",
-        "plodah/morse_code",
         "plodah/mouse_jiggler",
-        "plodah/pmw_rotation",
         "plodah/task_switch",
         "plodah/turbo_fire"
     ],
@@ -23,11 +19,11 @@
             "backlight": false,
             "combo": true,
             "console": false,
-            "deferred_exec": true,
+            "deferred_exec": false,
             "encoder_map": true,
-            "rgblight": false,
+            "rgblight": true,
             "rgb_matrix": false,
-            "tap_dance": true,
+            "tap_dance": false,
             "via": true,
             "space_cadet": false,
             "grave_esc": false,
@@ -35,6 +31,10 @@
         },
         "keyboard_name": "Mouse | viam",
         "manufacturer": "Ploopy",
+        "rgblight": {
+            "led_count": 8,
+            "max_brightness": 120
+        },
         "usb": {
             "shared_endpoint": {
                 "keyboard": true

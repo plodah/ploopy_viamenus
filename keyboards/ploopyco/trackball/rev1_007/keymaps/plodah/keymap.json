@@ -16,9 +16,6 @@
         "plodah/turbo_fire"
     ],
     "config": {
-        "build": {
-            "lto": true
-        },
         "features": {
             "backlight": false,
             "combo": true,
@@ -34,7 +31,8 @@
             "magic": false
         },
         "rgblight": {
-            "led_count": 3
+            "led_count": 3,
+            "max_brightness": 120
         },
         "ws2812": {
             "driver": "vendor"
