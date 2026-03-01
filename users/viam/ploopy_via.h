@@ -32,6 +32,9 @@
 #endif // COMMUNITY_MODULE_TURBO_FIRE_ENABLE
 #if defined(COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE)
     #include "basic_pointing_acceleration.h"
+    #if !defined(POINTING_DEVICE_ACCEL_ENABLE_DEF)
+        #define POINTING_DEVICE_ACCEL_ENABLE_DEF 0
+    #endif // POINTING_DEVICE_ACCEL_ENABLE_DEF
 #endif // COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE
 #if defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
     #include "pointing_device_accel.h"
@@ -115,7 +118,7 @@ enum via_ploopystuff_value {
     id_ploopystuff_task_switch_tap_key,
     id_ploopystuff_task_switch_delay, // 88
     #endif // defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
-    #if defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
+    #if(defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)||defined(COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE))
     id_pointing_device_takeoff = 101,
     id_pointing_device_growth_rate,
     id_pointing_device_offset,
@@ -198,7 +201,7 @@ typedef struct PACKED {
     uint8_t  gesture_action_h;
     uint8_t  gesture_action_v;
     #endif // PLOOPY_MSGESTURE_ENABLE
-    #ifdef COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE
+    #if(defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)||defined(COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE))
         bool  pointer_accel_enabled;
         float pointer_accel_growth_rate;
         float pointer_accel_offset;
@@ -303,12 +306,14 @@ static const via_ploopystuff_config ploopyvia_config_default = {
     .gesture_action_v           = GESTURE_ACTION_NOTHING,
     #endif // PLOOPY_MSGESTURE_ENABLE
 
-    #ifdef COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE
+    #if(defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)||defined(COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE))
         .pointer_accel_enabled = POINTING_DEVICE_ACCEL_ENABLE_DEF,
         .pointer_accel_growth_rate = POINTING_DEVICE_ACCEL_GROWTH_RATE,
         .pointer_accel_offset = POINTING_DEVICE_ACCEL_OFFSET,
         .pointer_accel_limit = POINTING_DEVICE_ACCEL_LIMIT,
+    #if defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
         .pointer_accel_takeoff = POINTING_DEVICE_ACCEL_TAKEOFF,
+    #endif
     #endif // COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE
 
     #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE

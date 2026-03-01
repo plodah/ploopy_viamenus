@@ -62,8 +62,9 @@
         }
     #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
 
-    #if defined (COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
+    #if (defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)||defined(COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE))
         void update_pointer_acceleration (void){
+            #if defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
             g_pointing_device_accel_config.enabled     = ploopyvia_config.pointer_accel_enabled;
             g_pointing_device_accel_config.growth_rate = ploopyvia_config.pointer_accel_growth_rate;
             g_pointing_device_accel_config.offset      = ploopyvia_config.pointer_accel_offset;
@@ -76,8 +77,20 @@
                 g_pointing_device_accel_config.offset,
                 g_pointing_device_accel_config.limit
             );
+            #else
+            g_basic_pointing_acceleration_config.enabled     = ploopyvia_config.pointer_accel_enabled;
+            g_basic_pointing_acceleration_config.growth_rate = ploopyvia_config.pointer_accel_growth_rate;
+            g_basic_pointing_acceleration_config.offset      = ploopyvia_config.pointer_accel_offset;
+            g_basic_pointing_acceleration_config.limit       = ploopyvia_config.pointer_accel_limit;
+            dprintf("MACCEL: ena:%d grw:%.3f off:%.3f lim: %.3f\n",
+                g_basic_pointing_acceleration_config.enabled,
+                g_basic_pointing_acceleration_config.growth_rate,
+                g_basic_pointing_acceleration_config.offset,
+                g_basic_pointing_acceleration_config.limit
+            );
+            #endif
         }
-    #endif // defined (COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
+    #endif // defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
 
     #if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
     void update_task_switch( void ){
@@ -103,7 +116,7 @@
         #if defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
             drgstraight_set_sensitivity( ploopyvia_config.dragscroll_straighten_sensitivity );
         #endif // defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
-        #if defined (COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
+        #if(defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)||defined(COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE))
             update_pointer_acceleration();
         #endif // COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE
         #if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
@@ -390,7 +403,7 @@
                 dprintf("dpi_as_slider: %d\n", ploopyvia_config.dpi_as_slider);
                 break;
 
-            #if defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
+            #if(defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)||defined(COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE))
             case id_pointing_device_takeoff:
                 ploopyvia_config.pointer_accel_takeoff =
                     (float) COMBINE_UINT8(value_data[0], value_data[1]) / 100;
@@ -794,7 +807,7 @@
                 break;
 
             case id_ploopystuff_feature_pointing_device_accel:
-                #if defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
+            #if(defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)||defined(COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE))
                     dprintf("feature_pointing_device_accel: %d\n", FEATURE_AVAILABLE);
                     *value_data = FEATURE_AVAILABLE;
                 #else
@@ -835,7 +848,7 @@
                 #endif
                 break;
 
-            #if defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
+            #if(defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)||defined(COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE))
             case id_pointing_device_takeoff:
                 uint16_t takeoff = ploopyvia_config.pointer_accel_takeoff * 100;
                 value_data[0] = takeoff >> 8;
