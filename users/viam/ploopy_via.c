@@ -63,7 +63,7 @@
     #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
 
     #if defined (COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
-        void update_pointer_accelaration (void){
+        void update_pointer_acceleration (void){
             g_pointing_device_accel_config.enabled     = ploopyvia_config.pointer_accel_enabled;
             g_pointing_device_accel_config.growth_rate = ploopyvia_config.pointer_accel_growth_rate;
             g_pointing_device_accel_config.offset      = ploopyvia_config.pointer_accel_offset;
@@ -104,7 +104,7 @@
             drgstraight_set_sensitivity( ploopyvia_config.dragscroll_straighten_sensitivity );
         #endif // defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
         #if defined (COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
-            update_pointer_accelaration();
+            update_pointer_acceleration();
         #endif // COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE
         #if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
             update_task_switch();
@@ -394,29 +394,29 @@
             case id_pointing_device_takeoff:
                 ploopyvia_config.pointer_accel_takeoff =
                     (float) COMBINE_UINT8(value_data[0], value_data[1]) / 100;
-                update_pointer_accelaration();
+                update_pointer_acceleration();
                 break;
 
             case id_pointing_device_growth_rate:
                 ploopyvia_config.pointer_accel_growth_rate =
                     (float) COMBINE_UINT8(value_data[0], value_data[1]) / 100;
-                update_pointer_accelaration();
+                update_pointer_acceleration();
                 break;
 
             case id_pointing_device_offset:
                 ploopyvia_config.pointer_accel_offset =
                     (float) COMBINE_UINT8(value_data[0], value_data[1]) / 100;
-                update_pointer_accelaration();
+                update_pointer_acceleration();
                 break;
 
             case id_pointing_device_limit:
                 ploopyvia_config.pointer_accel_limit = (float) value_data[0] / 100;
-                update_pointer_accelaration();
+                update_pointer_acceleration();
                 break;
 
             case id_pointing_device_enabled:
                 ploopyvia_config.pointer_accel_enabled = value_data[0];
-                update_pointer_accelaration();
+                update_pointer_acceleration();
                 break;
             #endif // defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
 
