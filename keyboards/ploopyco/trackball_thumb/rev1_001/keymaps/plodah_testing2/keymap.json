@@ -1,0 +1,41 @@
+{
+    "version": 1,
+    "notes": "Hello",
+    "author": "plodah",
+    "documentation": "...",
+    "keyboard": "ploopyco/trackball_thumb/rev1_001",
+    "keymap": "plodah_testing",
+    "layout": "LAYOUT",
+    "modules": [
+        "plodah/basic_pointing_acceleration"
+    ],
+    "config": {
+        "build": {
+            "lto": true
+        },
+        "features": {
+            "backlight": false,
+            "combo": false,
+            "console": false,
+            "deferred_exec": false,
+            "encoder_map": true,
+            "rgblight": true,
+            "rgb_matrix": false,
+            "tap_dance": false,
+            "via": true,
+            "space_cadet": false,
+            "grave_esc": false,
+            "magic": false
+        },
+        "keyboard_name": "Trackball Thumb | plodah_testing",
+        "manufacturer": "Ploopy",
+        "rgblight": {
+            "max_brightness": 120
+        },
+        "usb": {
+            "shared_endpoint": {
+                "keyboard": true
+            }
+        }
+    }
+}

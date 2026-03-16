@@ -22,52 +22,25 @@ enum layers {
     _FNB,
 };
 
-enum keymap_keycodes {
-    KB_DPI_CONFIG       = QK_KB_0,
-    KB_DRAG_SCROLL,
-    BETTER_DRAG_SCROLL_MOMENTARY,
-    BETTER_DRAG_SCROLL_TOGGLE,
-    PL_MSJG,
-    PL_TSKN,
-    PL_TSKP,
-    DPI_SNIPER_A_MOMENTARY,
-    DPI_SNIPER_A_TOGGLE,
-    DPI_SNIPER_B_MOMENTARY,
-    DPI_SNIPER_B_TOGGLE,
-    BETTER_DRAG_ACTION_A_MOMENTARY,
-    BETTER_DRAG_ACTION_B_MOMENTARY,
-    PMW_CCW,
-    PMW_CW,
-    PMW_RST,
-    TBO_TG1,
-    TBO_MO1,
-    TBO_TG2,
-    TBO_MO2,
-    TBO_TG3,
-    TBO_MO3,
-    TBO_TG4,
-    TBO_MO4,
-    MOR_MAN,
-    MOR_DIT,
-    MOR_DSH,
-};
-
-enum {
-    TD_DRAGSCROLL,
-};
-
-#include "common.c"
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [_BASE] = LAYOUT( MS_BTN1, MS_BTN3, P_MS4FA, MS_BTN2, P_MS5FB ),
-    [_FNA] = LAYOUT( _______, DPI_CONFIG, _______, PL_TSKP, PL_TSKN ),
-    [_FNB] = LAYOUT( MOR_MAN, DPI_CONFIG, PL_MSJG, _______, _______ )
+    [_BASE] = LAYOUT(
+        LT(_FNA, MS_BTN4), MS_BTN1, MS_BTN3, MS_BTN2, LT(_FNB, MS_BTN5),
+        DPI_CONFIG
+    ),
+    [_FNA] = LAYOUT(
+        _______, _______, _______, _______, _______,
+        _______
+    ),
+    [_FNB] = LAYOUT(
+        _______, _______, _______, _______, _______,
+        _______
+    )
 };
 
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [_BASE] = {ENCODER_CCW_CW(MS_WHLD, MS_WHLU)},
     [_FNA] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
-    [_FNB] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)}
+    [_FNB] = {ENCODER_CCW_CW(_______, _______)}
 };
 #endif // ENCODER_MAP_ENABLE
