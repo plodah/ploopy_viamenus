@@ -17,7 +17,7 @@
 #pragma once
 #include "common.h"
 
-#define EECONFIG_USER_DATA_SIZE 47
+#define EECONFIG_USER_DATA_SIZE 64
 #define PLOOPY_MSGESTURE_ENABLE
 #define BETTER_DRAGSCROLL_TAPDANCE
 #define COMBO_SHOULD_TRIGGER

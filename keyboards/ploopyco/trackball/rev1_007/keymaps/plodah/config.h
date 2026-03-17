@@ -20,12 +20,30 @@
 #pragma once
 
 #include "common.h"
+/*
+    //--  ALWAYS ON  --//
+    // Dragscroll basics // 4 bytes
+    // Dragscroll enablement // 7 bytes
+    // Dragscroll DragAct // 16 bytes
+    // TOTAL: 27 Bytes
 
-#define EECONFIG_USER_DATA_SIZE 47
+    // COMBO_ENABLE // 1 Byte
+    // PLOOPY_MSGESTURE_ENABLE // 3 Byte
+
+    // COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE // 1 Byte
+    // COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE // 1 Byte
+
+    // COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE
+    //  --or-- COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE // 17 Bytes
+    // COMMUNITY_MODULE_PMW_ROTATION_ENABLE // 2 Bytes
+    // COMMUNITY_MODULE_TASK_SWITCH_ENABLE && TASK_SWITCH_MENUS_ENABLE // 6 Bytes
+    // COMMUNITY_MODULE_TURBO_FIRE_ENABLE // 6 Bytes
+*/
+
+#define EECONFIG_USER_DATA_SIZE 64
 #define PLOOPY_MSGESTURE_ENABLE
 #define BETTER_DRAGSCROLL_TAPDANCE
 #define COMBO_SHOULD_TRIGGER
-
 
 #define PLOOPY_DPI_OPTIONS { 400, 500, 600, 800, 1000 }
 #define PLOOPY_DPI_DEFAULT 2 // zero indexed!
