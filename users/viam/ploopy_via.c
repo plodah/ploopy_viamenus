@@ -14,6 +14,16 @@
         eeconfig_update_user_datablock(&ploopyvia_config, 0, EECONFIG_USER_DATA_SIZE);
     }
 
+    #if defined(COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE)
+        void update_msjiggler(bool action) {
+            if( jiggler_get_state() ^ (action) ) {
+                // ^ is an XOR, buddy
+                jiggler_toggle();
+            }
+            ploopyvia_config.msjiggler_enabled = action;
+        }
+    #endif // COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
+
     void update_dpi(void) {
         for (int i=0; i<5; i++){
             dpi_array[i] = ploopyvia_config.dpi_presets[i];
@@ -125,6 +135,9 @@
         #if defined(PLOOPY_MSGESTURE_ENABLE)
             ploopy_msGestureUpdate();
         #endif // defined(PLOOPY_MSGESTURE_ENABLE)
+        #if defined(COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE)
+            update_msjiggler(ploopyvia_config.msjiggler_enabled);
+        #endif // COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
         led_update_better_dragscroll(host_keyboard_led_state());
         dprintf("keyboard_post_init_user\n");
     }
@@ -184,11 +197,8 @@
 
             #ifdef COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
                 case id_ploopystuff_msjiggler_enabled:
-                    if( jiggler_get_state() ^ (*value_data) ) {
-                        // ^ is an XOR, buddy
-                        jiggler_toggle();
-                        dprintf("msjiggler_enabled\n");
-                    }
+                    dprintf("msjiggler_enabled\n");
+                    update_msjiggler(*value_data);
                     break;
             #endif // def COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
 
@@ -833,6 +843,7 @@
                 break;
 
             case id_ploopystuff_mcu_type:
+                dprintf("CONFIG SIZE::%d\n", sizeof(ploopyvia_config));
                 #if defined(QMK_MCU_RP2040)
                     dprintf("mcu_type: MCU_RP2040\n");
                     *value_data = MCU_RP2040;
