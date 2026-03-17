@@ -59,15 +59,15 @@ enum {
 #include "common.c"
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [_BASE] = LAYOUT( MS_BTN1, MS_BTN3, MS_BTN2, P_MS4FA, P_MS5FB ),
-    [_FNA] = LAYOUT( PL_TSKP, DPI_CONFIG, PL_TSKN, _______, _______ ),
-    [_FNB] = LAYOUT( PL_TSKP, DPI_CONFIG, PL_TSKN, _______, _______ )
+    [_BASE] = LAYOUT( MS_BTN1, MS_BTN3, P_MS4FA, MS_BTN2, P_MS5FB ),
+    [_FNA] = LAYOUT( _______, DPI_CONFIG, _______, PL_TSKP, PL_TSKN ),
+    [_FNB] = LAYOUT( MOR_MAN, DPI_CONFIG, PL_MSJG, _______, _______ )
 };
 
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [_BASE] = {ENCODER_CCW_CW(MS_WHLD, MS_WHLU)},
     [_FNA] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
-    [_FNB] = {ENCODER_CCW_CW(_______, _______)}
+    [_FNB] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)}
 };
 #endif // ENCODER_MAP_ENABLE

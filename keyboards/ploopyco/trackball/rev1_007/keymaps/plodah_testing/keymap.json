@@ -16,19 +16,32 @@
         "plodah/turbo_fire"
     ],
     "config": {
+        "eeprom": {
+            "wear_leveling":{
+                "backing_size": 8192,
+                "logical_size": 2048
+            }
+        },
         "features": {
             "backlight": false,
             "combo": true,
-            "console": false,
+            "console": true,
             "deferred_exec": true,
             "encoder_map": true,
-            "rgblight": false,
+            "rgblight": true,
             "rgb_matrix": false,
             "tap_dance": true,
             "via": true,
             "space_cadet": false,
             "grave_esc": false,
             "magic": false
+        },
+        "rgblight": {
+            "led_count": 3,
+            "max_brightness": 120
+        },
+        "ws2812": {
+            "driver": "vendor"
         },
         "keyboard_name": "Trackball | plodah_testing",
         "manufacturer": "Ploopy",
