@@ -15,6 +15,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             case PL_MSJG:
                 // jiggler_toggle();
                 process_record_mouse_jiggler(COMMUNITY_MODULE_MOUSE_JIGGLER_TOGGLE, record);
+                ploopyvia_config.msjiggler_enabled = jiggler_get_state();
                 return false;
         #endif // defined(COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE)
 

@@ -75,29 +75,30 @@
     #if (defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)||defined(COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE))
         void update_pointer_acceleration (void){
             #if defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
-            g_pointing_device_accel_config.enabled     = ploopyvia_config.pointer_accel_enabled;
-            g_pointing_device_accel_config.growth_rate = ploopyvia_config.pointer_accel_growth_rate;
-            g_pointing_device_accel_config.offset      = ploopyvia_config.pointer_accel_offset;
-            g_pointing_device_accel_config.limit       = ploopyvia_config.pointer_accel_limit;
-            g_pointing_device_accel_config.takeoff     = ploopyvia_config.pointer_accel_takeoff;
-            dprintf("MACCEL: ena:%d tak:%.3f grw:%.3f off:%.3f lim: %.3f\n",
-                g_pointing_device_accel_config.enabled,
-                g_pointing_device_accel_config.takeoff,
-                g_pointing_device_accel_config.growth_rate,
-                g_pointing_device_accel_config.offset,
-                g_pointing_device_accel_config.limit
-            );
+                pointing_device_accel_enabled(ploopyvia_config.pointer_accel_enabled);
+                pointing_device_accel_set_takeoff((float) ploopyvia_config.pointer_accel_takeoff/100);
+                pointing_device_accel_set_growth_rate((float) ploopyvia_config.pointer_accel_growth_rate/100);
+                pointing_device_accel_set_offset((float) ploopyvia_config.pointer_accel_offset/100);
+                pointing_device_accel_set_limit((float) ploopyvia_config.pointer_accel_limit/100);
+
+                dprintf("MACCEL: ena:%d tak:%.3f grw:%.3f off:%.3f lim: %.3f\n",
+                    pointing_device_accel_get_enabled(),
+                    pointing_device_accel_get_takeoff(),
+                    pointing_device_accel_get_growth_rate(),
+                    pointing_device_accel_get_offset(),
+                    pointing_device_accel_get_limit()
+                );
             #else
-            g_basic_pointing_acceleration_config.enabled     = ploopyvia_config.pointer_accel_enabled;
-            g_basic_pointing_acceleration_config.growth_rate = ploopyvia_config.pointer_accel_growth_rate;
-            g_basic_pointing_acceleration_config.offset      = ploopyvia_config.pointer_accel_offset;
-            g_basic_pointing_acceleration_config.limit       = ploopyvia_config.pointer_accel_limit;
-            dprintf("MACCEL: ena:%d grw:%.3f off:%.3f lim: %.3f\n",
-                g_basic_pointing_acceleration_config.enabled,
-                g_basic_pointing_acceleration_config.growth_rate,
-                g_basic_pointing_acceleration_config.offset,
-                g_basic_pointing_acceleration_config.limit
-            );
+                g_basic_pointing_acceleration_config.enabled     = ploopyvia_config.pointer_accel_enabled;
+                g_basic_pointing_acceleration_config.growth_rate = ploopyvia_config.pointer_accel_growth_rate;
+                g_basic_pointing_acceleration_config.offset      = ploopyvia_config.pointer_accel_offset;
+                g_basic_pointing_acceleration_config.limit       = ploopyvia_config.pointer_accel_limit;
+                dprintf("MACCEL: ena:%d grw:%.3f off:%.3f lim: %.3f\n",
+                    g_basic_pointing_acceleration_config.enabled,
+                    g_basic_pointing_acceleration_config.growth_rate,
+                    g_basic_pointing_acceleration_config.offset,
+                    g_basic_pointing_acceleration_config.limit
+                );
             #endif
         }
     #endif // defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
@@ -414,31 +415,28 @@
                 break;
 
             #if(defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)||defined(COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE))
+            case id_pointing_device_enabled:
+                ploopyvia_config.pointer_accel_enabled = value_data[0];
+                update_pointer_acceleration();
+                break;
+
             case id_pointing_device_takeoff:
-                ploopyvia_config.pointer_accel_takeoff =
-                    (float) COMBINE_UINT8(value_data[0], value_data[1]) / 100;
+                ploopyvia_config.pointer_accel_takeoff = COMBINE_UINT8(value_data[0], value_data[1]);
                 update_pointer_acceleration();
                 break;
 
             case id_pointing_device_growth_rate:
-                ploopyvia_config.pointer_accel_growth_rate =
-                    (float) COMBINE_UINT8(value_data[0], value_data[1]) / 100;
+                ploopyvia_config.pointer_accel_growth_rate = COMBINE_UINT8(value_data[0], value_data[1]);
                 update_pointer_acceleration();
                 break;
 
             case id_pointing_device_offset:
-                ploopyvia_config.pointer_accel_offset =
-                    (float) COMBINE_UINT8(value_data[0], value_data[1]) / 100;
+                ploopyvia_config.pointer_accel_offset = COMBINE_UINT8(value_data[0], value_data[1]);
                 update_pointer_acceleration();
                 break;
 
             case id_pointing_device_limit:
-                ploopyvia_config.pointer_accel_limit = (float) value_data[0] / 100;
-                update_pointer_acceleration();
-                break;
-
-            case id_pointing_device_enabled:
-                ploopyvia_config.pointer_accel_enabled = value_data[0];
+                ploopyvia_config.pointer_accel_limit = value_data[0];
                 update_pointer_acceleration();
                 break;
             #endif // defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
@@ -860,42 +858,52 @@
                 break;
 
             #if(defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)||defined(COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE))
+            case id_pointing_device_enabled:
+                dprintf("pointing_device_enabled: %d\n", ploopyvia_config.pointer_accel_enabled);
+                value_data[0] = ploopyvia_config.pointer_accel_enabled;
+                break;
             case id_pointing_device_takeoff:
-                uint16_t takeoff = ploopyvia_config.pointer_accel_takeoff * 100;
+                uint16_t takeoff = ploopyvia_config.pointer_accel_takeoff;
+                dprintf("pointing_device_takeoff: %d\n", takeoff);
                 value_data[0] = takeoff >> 8;
                 value_data[1] = takeoff & 0xFF;
                 break;
             case id_pointing_device_growth_rate:
-                uint16_t growth_rate = ploopyvia_config.pointer_accel_growth_rate * 100;
+                uint16_t growth_rate = ploopyvia_config.pointer_accel_growth_rate;
+                dprintf("pointing_device_growth_rate: %d\n", growth_rate);
                 value_data[0] = growth_rate >> 8;
                 value_data[1] = growth_rate & 0xFF;
                 break;
             case id_pointing_device_offset:
-                uint16_t offset = ploopyvia_config.pointer_accel_offset * 100;
+                uint16_t offset = ploopyvia_config.pointer_accel_offset;
+                dprintf("pointing_device_offset: %d\n", offset);
                 value_data[0] = offset >> 8;
                 value_data[1] = offset & 0xFF;
                 break;
             case id_pointing_device_limit:
-                value_data[0] = ploopyvia_config.pointer_accel_limit * 100;
-                break;
-            case id_pointing_device_enabled:
-                value_data[0] = ploopyvia_config.pointer_accel_enabled;
+                uint8_t limit = ploopyvia_config.pointer_accel_limit;
+                dprintf("pointing_device_limit: %d\n", limit);
+                value_data[0] = limit;
                 break;
             #endif // defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
 
             #if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
             case id_ploopystuff_task_switch_delay:
+                dprintf("task_switch_delay: %d\n", ploopyvia_config.task_switch_delay);
                 value_data[0] = ploopyvia_config.task_switch_delay >> 8;
                 value_data[1] = ploopyvia_config.task_switch_delay & 0xFF;
                 break;
             case id_ploopystuff_task_switch_tap_key:
+                dprintf("task_switch_tap_key: %d\n", ploopyvia_config.task_switch_tap_key);
                 value_data[0] = ploopyvia_config.task_switch_tap_key >> 8;
                 value_data[1] = ploopyvia_config.task_switch_tap_key & 0xFF;
                 break;
             case id_ploopystuff_task_switch_mod:
+                dprintf("task_switch_mod: %d\n", ploopyvia_config.task_switch_mod);
                 *value_data = ploopyvia_config.task_switch_mod;
                 break;
             case id_ploopystuff_task_switch_rev_mod:
+                dprintf("task_switch_rev_mod: %d\n", ploopyvia_config.task_switch_rev_mod);
                 *value_data = ploopyvia_config.task_switch_rev_mod;
                 break;
             #endif // defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
