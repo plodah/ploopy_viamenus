@@ -2,6 +2,7 @@
     #include QMK_KEYBOARD_H
     #define VIA_DPI_STORE_RATIO 100
     #include "ploopy_via.h"
+    _Static_assert(sizeof(ploopyvia_config) <= EECONFIG_USER_DATA_SIZE, "config storage insufficient!");
 
     #define COMBINE_UINT8(a, b) ((a << 8) | b)
     void ploopyvia_config_load(void) {
@@ -699,6 +700,12 @@
                 dprintf("dpi_as_slider: %d\n", ploopyvia_config.dpi_as_slider);
                 break;
 
+            case id_ploopystuff_config_size:
+                dprintf("config_size: %d\n", sizeof(ploopyvia_config));
+                value_data[0] = sizeof(ploopyvia_config) >> 8;
+                value_data[1] = sizeof(ploopyvia_config) & 0xFF;
+                break;
+
             case id_ploopystuff_feature_combos:
                 #if defined(COMBO_ENABLE)
                     dprintf("feature_combos: %d\n", FEATURE_AVAILABLE);
@@ -841,7 +848,6 @@
                 break;
 
             case id_ploopystuff_mcu_type:
-                dprintf("CONFIG SIZE::%d\n", sizeof(ploopyvia_config));
                 #if defined(QMK_MCU_RP2040)
                     dprintf("mcu_type: MCU_RP2040\n");
                     *value_data = MCU_RP2040;

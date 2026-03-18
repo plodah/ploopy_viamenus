@@ -1136,7 +1136,7 @@
                                 ["Available", 1],
                                 ["Disabled in firmware", 2]
                             ],
-                            "content": ["id_feature_task_switch_menus", 0, 232]
+                            "content": ["id_feature_task_switch_menus", 0, 246]
                         },
                         {
                             "showIf": "{id_firmware_version} >= 2",
@@ -1238,6 +1238,13 @@
                                 ["25", 25]
                             ],
                             "content": ["id_firmware_version", 0, 0]
+                        },
+                        {
+                            "showIf": "{id_firmware_version} >= 2",
+                            "label": "Config Size",
+                            "type": "range",
+                            "options": [0, 4096],
+                            "content": ["id_config_size", 0, 232]
                         },
                         {
                             "showIf": "{id_firmware_version} < 2",
