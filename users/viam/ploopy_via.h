@@ -55,24 +55,15 @@ void values_save(void);
 
 enum via_ploopystuff_value {
     id_ploopystuff_dpi_activepreset = 1,
-    #ifdef COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
     id_ploopystuff_msjiggler_enabled = 3,
-    #endif // COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
     id_ploopystuff_pointer_invert_h = 4,
     id_ploopystuff_pointer_invert_v = 5,
-    #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE
     id_ploopystuff_pointer_rotation_value = 6,
     id_ploopystuff_pointer_rotation_is_ccw = 7,
-    #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
-
-    #if defined(PLOOPY_MSGESTURE_ENABLE)
     id_ploopystuff_gesture_count = 11,
     id_ploopystuff_gesture_action_h,
     id_ploopystuff_gesture_action_v,
-    #endif // defined(PLOOPY_MSGESTURE_ENABLE))
-    #if defined(COMBO_ENABLE)
     id_ploopystuff_combos_enabled = 14,
-    #endif // defined(COMBO_ENABLE))
     id_ploopystuff_dragscroll_enable_layer_a = 19,
     id_ploopystuff_dragscroll_enable_layer_b,
     id_ploopystuff_dragscroll_invert_h = 21,
@@ -87,9 +78,7 @@ enum via_ploopystuff_value {
     id_ploopystuff_dpi_presets = 31,
     id_ploopystuff_sniper_a_dpi = 41,
     id_ploopystuff_sniper_b_dpi,
-    #if defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
     id_ploopystuff_dragscroll_straighten_sensitivity = 51,
-    #endif // defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
     id_ploopystuff_dragscroll_dragact_a_up = 61,
     id_ploopystuff_dragscroll_dragact_a_down,
     id_ploopystuff_dragscroll_dragact_a_left,
@@ -98,7 +87,6 @@ enum via_ploopystuff_value {
     id_ploopystuff_dragscroll_dragact_b_down,
     id_ploopystuff_dragscroll_dragact_b_left,
     id_ploopystuff_dragscroll_dragact_b_right, // 68
-    #if defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
     id_ploopystuff_turbo_fire_keycode_count = 70,
     id_ploopystuff_turbo_fire_rate,
     id_ploopystuff_turbo_fire_duration,
@@ -111,20 +99,15 @@ enum via_ploopystuff_value {
     id_ploopystuff_turbo_fire_keycode_g,
     id_ploopystuff_turbo_fire_keycode_h,
     id_ploopystuff_turbo_fire_rate_range, // 81
-    #endif // defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
-    #if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
     id_ploopystuff_task_switch_mod = 85,
     id_ploopystuff_task_switch_rev_mod,
     id_ploopystuff_task_switch_tap_key,
     id_ploopystuff_task_switch_delay, // 88
-    #endif // defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
-    #if(defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)||defined(COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE))
     id_pointing_device_takeoff = 101,
     id_pointing_device_growth_rate,
     id_pointing_device_offset,
     id_pointing_device_limit,
     id_pointing_device_enabled,
-    #endif // defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
     id_ploopystuff_dummy_menuitem = 230,
     id_ploopystuff_dpi_as_slider,
     id_ploopystuff_feature_task_switch_menus = 232,
