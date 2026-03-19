@@ -788,21 +788,21 @@
                             "content": ["id_turbo_fire_rate", 0, 71]
                         },
                         {
-                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 1 && {id_turbo_fire_rate_range} == 3 ",
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 1 && {id_turbo_fire_rate_range} == 101 ",
                             "label": "Rate (ms between fires)",
                             "type": "range",
                             "options": [100, 600],
                             "content": ["id_turbo_fire_rate", 0, 71]
                         },
                         {
-                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 1 && {id_turbo_fire_rate_range} == 4 ",
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 1 && {id_turbo_fire_rate_range} == 102 ",
                             "label": "Rate (ms between fires)",
                             "type": "range",
                             "options": [500, 1200],
                             "content": ["id_turbo_fire_rate", 0, 71]
                         },
                         {
-                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 1 && {id_turbo_fire_rate_range} == 5 ",
+                            "showIf": "{id_firmware_version} >= 2 && {id_feature_turbo_fire} == 1 && {id_turbo_fire_keycode_count} >= 1 && {id_turbo_fire_rate_range} == 103 ",
                             "label": "Rate (ms between fires)",
                             "type": "range",
                             "options": [1000, 60000],
