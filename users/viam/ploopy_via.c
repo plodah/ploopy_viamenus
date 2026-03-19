@@ -2,7 +2,8 @@
     #include QMK_KEYBOARD_H
     #define VIA_DPI_STORE_RATIO 100
     #include "ploopy_via.h"
-    _Static_assert(sizeof(ploopyvia_config) <= EECONFIG_USER_DATA_SIZE, "config storage insufficient!");
+    _Static_assert(sizeof(via_ploopystuff_config) <= EECONFIG_USER_DATA_SIZE, "config storage insufficient!");
+    _Static_assert(sizeof(via_ploopystuff_config) != EECONFIG_USER_DATA_SIZE, "config storage incorrect!");
 
     #define COMBINE_UINT8(a, b) ((a << 8) | b)
     void ploopyvia_config_load(void) {
