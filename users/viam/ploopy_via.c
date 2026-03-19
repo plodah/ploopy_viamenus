@@ -380,7 +380,7 @@
 
             #if defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
                 case id_ploopystuff_turbo_fire_rate:
-                    if(ploopyvia_config.turbo_fire_rate_range >= 100 || value_data[1]>0){
+                    if(ploopyvia_config.turbo_fire_rate_range >= 100){
                         ploopyvia_config.turbo_fire_rate = COMBINE_UINT8(value_data[0], value_data[1]);
                     }
                     else{
@@ -664,14 +664,12 @@
                     break;
 
                 case id_ploopystuff_turbo_fire_rate:
-
-
-                    if( ploopyvia_config.turbo_fire_rate_range >= 100 || (ploopyvia_config.turbo_fire_rate >> 8) > 0 ){
+                    if( ploopyvia_config.turbo_fire_rate_range >= 100){
                         value_data[0] = ploopyvia_config.turbo_fire_rate >> 8;
                         value_data[1] = ploopyvia_config.turbo_fire_rate & 0xFF;
                     }
                     else{
-                        *value_data = ploopyvia_config.dragscroll_enable_layer_b;
+                        *value_data = ploopyvia_config.turbo_fire_rate;
                     }
 
                     dprintf("turbo_fire_rate: %d\n", ploopyvia_config.turbo_fire_rate);
