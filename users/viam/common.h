@@ -1,7 +1,7 @@
 #pragma once
 #include "kc_aliases.h"
 
-#define VIA_FIRMWARE_VERSION 2
+#define VIA_FIRMWARE_VERSION 3
 #define VIA_INSECURE
 #define PLOOPY_VIAMENUS
 #define BETTER_DRAGSCROLL

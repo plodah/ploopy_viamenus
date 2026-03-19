@@ -1313,7 +1313,7 @@
                             "content": ["id_config_size", 0, 232]
                         },
                         {
-                            "showIf": "{id_firmware_version} < 2",
+                            "showIf": "{id_firmware_version} < 3",
                             "label": "Firmware Update Available",
                             "type": "dropdown",
                             "options": [

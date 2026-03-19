@@ -37,8 +37,8 @@
         "ws2812": {
             "driver": "vendor"
         },
-        "keyboard_name": "Trackball | plodah(viam)",
-        "manufacturer": "Ploopy",
+        "keyboard_name": "Trackball",
+        "manufacturer": "Generic",
         "usb": {
             "shared_endpoint": {
                 "keyboard": true
