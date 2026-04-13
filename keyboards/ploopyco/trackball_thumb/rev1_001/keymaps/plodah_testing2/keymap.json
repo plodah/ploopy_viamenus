@@ -2,12 +2,14 @@
     "version": 1,
     "notes": "Hello",
     "author": "plodah",
-    "documentation": "...",
+    "documentation": "https://github.com/plodah/ploopy_viamenus/blob/main/README.md",
     "keyboard": "ploopyco/trackball_thumb/rev1_001",
     "keymap": "plodah_testing",
     "layout": "LAYOUT",
     "modules": [
-        "plodah/basic_pointing_acceleration"
+        "drashna/pointing_device_accel",
+        "plodah/dragscroll_straighten",
+        "plodah/mouse_jiggler"
     ],
     "config": {
         "build": {
@@ -27,10 +29,15 @@
             "grave_esc": false,
             "magic": false
         },
-        "keyboard_name": "Trackball Thumb | plodah_testing",
+        "keyboard_name": "Trackball Thumb | plodah_testing2",
         "manufacturer": "Ploopy",
         "rgblight": {
-            "max_brightness": 120
+            "max_brightness": 120,
+            "animations": {
+                "breathing": false,
+                "rainbow_mood": false,
+                "rainbow_swirl": false
+            }
         },
         "usb": {
             "shared_endpoint": {

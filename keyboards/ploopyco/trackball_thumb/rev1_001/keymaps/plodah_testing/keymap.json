@@ -2,12 +2,15 @@
     "version": 1,
     "notes": "Hello",
     "author": "plodah",
-    "documentation": "...",
+    "documentation": "https://github.com/plodah/ploopy_viamenus/blob/main/README.md",
     "keyboard": "ploopyco/trackball_thumb/rev1_001",
     "keymap": "plodah_testing",
     "layout": "LAYOUT",
     "modules": [
-        "drashna/pointing_device_accel"
+        "drashna/pointing_device_accel",
+        "plodah/dragscroll_straighten",
+        "plodah/mouse_jiggler",
+        "plodah/task_switch"
     ],
     "config": {
         "build": {
