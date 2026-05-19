@@ -25,8 +25,19 @@
       #include "dragscroll_straighten.h"
     #endif // defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
 
+    #if !defined(M3_SCROLL_DEADZONE)
+        #define M3_SCROLL_DEADZONE 3
+    #endif // defined(M3_SCROLL_DEADZONE)
+
     int16_t accumulated_h = 0;
     int16_t accumulated_v = 0;
+
+    #if defined(BETTER_DRAGSCROLL_M3_ENABLE)
+    bool m3_scroll_pressed = false;
+    bool m3_scroll_dragging = false;
+    int16_t m3_scroll_acc = 0;
+    bool m3_scroll_simple = false;
+    #endif // defined(BETTER_DRAGSCROLL_M3_ENABLE)
 
     void better_dragscroll_init(void){
         ds_state = dragscroll_state_default;
@@ -66,6 +77,35 @@
             case BETTER_DRAG_SCROLL_TOGGLE:
                 better_dragscroll_toggle(record->event.pressed);
                 return false;
+            #if defined(BETTER_DRAGSCROLL_M3_ENABLE)
+            case BETTER_DRAG_SCROLL_M3:
+                if (m3_scroll_simple) {
+                    if (record->event.pressed) {
+                        register_code16(MS_BTN3);
+                    } else {
+                        unregister_code16(MS_BTN3);
+                    }
+                    return false;
+                }
+                if (record->event.pressed) {
+                    m3_scroll_pressed = true;
+                    m3_scroll_dragging = false;
+                    m3_scroll_acc = 0;
+                } else {
+                    m3_scroll_pressed = false;
+                    if (m3_scroll_dragging) {
+                        better_dragscroll_momentary(false);
+                    } else {
+                        tap_code16(MS_BTN3);
+                    }
+                }
+                return false;
+            case BETTER_DRAG_SCROLL_M3_TOGGLE:
+                if (record->event.pressed) {
+                    m3_scroll_simple ^= 1;
+                }
+                return false;
+            #endif // defined(BETTER_DRAGSCROLL_M3_ENABLE)
             case BETTER_DRAG_ACTION_A_MOMENTARY:
             case BETTER_DRAG_ACTION_B_MOMENTARY:
                 ds_state.dragaction_enabled = record->event.pressed;
@@ -119,6 +159,16 @@
                 mouse_report.y = -mouse_report.y;
             #endif // BETTER_DRAGSCROLL_POINTERINVERT_Y
         #endif // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
+
+        #if defined(BETTER_DRAGSCROLL_M3_ENABLE)
+        if (m3_scroll_pressed) {
+            m3_scroll_acc += abs(mouse_report.x) + abs(mouse_report.y);
+            if (!m3_scroll_dragging && m3_scroll_acc > M3_SCROLL_DEADZONE) {
+                m3_scroll_dragging = true;
+                better_dragscroll_momentary(true);
+            }
+        }
+        #endif // defined(BETTER_DRAGSCROLL_M3_ENABLE)
 
         if(ds_state.enabled_bylock || ds_state.enabled_bypress || ds_state.dragaction_enabled){
             accumulated_v += mouse_report.y;
