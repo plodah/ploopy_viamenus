@@ -9,7 +9,7 @@ jobs:
   build:
     name: 'QMK Userspace Build'
     uses: qmk/.github/.github/workflows/qmk_userspace_build.yml@main
-    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+    if: github.ref == 'refs/heads/main'
     with:
       qmk_repo: plodah/qmk_firmware
       qmk_ref: ploopybuilds
