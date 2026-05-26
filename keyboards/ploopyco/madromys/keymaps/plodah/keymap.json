@@ -27,7 +27,15 @@
             "via": true
         },
         "rgblight": {
-            "led_count": 2
+            "default": {
+                "animation": "static_light",
+                "on": true,
+                "hue": 123,
+                "sat": 240,
+                "val": 127
+            },
+            "led_count": 2,
+            "max_brightness": 191
         },
         "ws2812": {
             "driver": "vendor"
