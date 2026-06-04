@@ -1,0 +1,88 @@
+{
+    "name": "PloopyCo Knob",
+    "vendorId": "0x5043",
+    "productId": "0x63C3",
+    "matrix": {
+        "rows": 1,
+        "cols": 1
+    },
+    "layouts": {
+        "keymap": [["0,0"]]
+    },
+    "menus": [
+        {
+            "label": "Knob fiddling",
+            "content": [
+                {
+                    "label": "Knob fiddling",
+                    "content": [
+                        {
+                            "label": "Default Action",
+                            "type": "dropdown",
+                            "options": [
+                                ["Do nothing", 0],
+                                ["Scroll - Vertical", 1],
+                                ["Scroll - Horizontal", 2],
+                                ["Volume", 3],
+                                ["Arrow Keys - Vertical", 4],
+                                ["Arrow Keys - Horizontal", 5],
+                                ["WASD - Vertical", 6],
+                                ["WASD - Horizontal", 7],
+                                ["Screen Brightness", 8]
+                            ],
+                            "content": ["id_ploopyknob_act_default", 0, 1]
+                        },
+                        {
+                            "label": "Num Lock Action",
+                            "type": "dropdown",
+                            "options": [
+                                ["Do nothing", 0],
+                                ["Scroll - Vertical", 1],
+                                ["Scroll - Horizontal", 2],
+                                ["Volume", 3],
+                                ["Arrow Keys - Vertical", 4],
+                                ["Arrow Keys - Horizontal", 5],
+                                ["WASD - Vertical", 6],
+                                ["WASD - Horizontal", 7],
+                                ["Screen Brightness", 8]
+                            ],
+                            "content": ["id_ploopyknob_act_numlk", 0, 2]
+                        },
+                        {
+                            "label": "Caps Lock Action",
+                            "type": "dropdown",
+                            "options": [
+                                ["Do nothing", 0],
+                                ["Scroll - Vertical", 1],
+                                ["Scroll - Horizontal", 2],
+                                ["Volume", 3],
+                                ["Arrow Keys - Vertical", 4],
+                                ["Arrow Keys - Horizontal", 5],
+                                ["WASD - Vertical", 6],
+                                ["WASD - Horizontal", 7],
+                                ["Screen Brightness", 8]
+                            ],
+                            "content": ["id_ploopyknob_act_capslk", 0, 3]
+                        },
+                        {
+                            "label": "Scroll Lock Action",
+                            "type": "dropdown",
+                            "options": [
+                                ["Do nothing", 0],
+                                ["Scroll - Vertical", 1],
+                                ["Scroll - Horizontal", 2],
+                                ["Volume", 3],
+                                ["Arrow Keys - Vertical", 4],
+                                ["Arrow Keys - Horizontal", 5],
+                                ["WASD - Vertical", 6],
+                                ["WASD - Horizontal", 7],
+                                ["Screen Brightness", 8]
+                            ],
+                            "content": ["id_ploopyknob_act_scrlk", 0, 4]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,27 @@
+{
+    "version": 1,
+    "notes": "This is the primary keymap used in the ViaMenus repository",
+    "author": "plodah",
+    "documentation": "https://github.com/plodah/ploopy_viamenus/blob/main/README.md",
+    "keymap": "viam",
+    "layout": "LAYOUT",
+    "modules": [
+        "plodah/mouse_jiggler",
+        "plodah/task_switch"
+    ],
+    "config": {
+        "features": {
+            "backlight": false,
+            "combo": false,
+            "console": true,
+            "deferred_exec": true,
+            "encoder_map": false,
+            "rgblight": false,
+            "rgb_matrix": false,
+            "tap_dance": false,
+            "via": true
+        },
+        "keyboard_name": "Ploopy Knob | viam",
+        "manufacturer": "Ploopy"
+    }
+}
