@@ -33,7 +33,9 @@
         { "name": "Turbo Click Moment D", "title": "Turbo Click Moment D", "shortName": "TRBO MO D" },
         { "name": "Morse Code Manual", "title": "Morse Code Manual", "shortName": "MCO Manual" },
         { "name": "Morse Code Dit", "title": "Morse Code Dit", "shortName": "MCO Dit" },
-        { "name": "Morse Code Dash", "title": "Morse Code Dash", "shortName": "MCO DASH" }
+        { "name": "Morse Code Dash", "title": "Morse Code Dash", "shortName": "MCO DASH" },
+        { "name": "DragScroll M3", "title": "Drag Scroll or Middle Click", "shortName": "Drg M3" },
+        { "name": "DragScroll M3 Toggle", "title": "Toggle M3 Simple Mode", "shortName": "M3 Tg" }
     ],
     "layouts": {
         "keymap": [
