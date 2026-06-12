@@ -41,4 +41,5 @@
     #define RGBLIGHT_DEFAULT_VAL 127
     #define RGBLIGHT_DEFAULT_SPD 127
     #define RGBLIGHT_DEFAULT_ON true
+    #define RGBLIGHT_TIMEOUT ( 10 * 60 * 1000 )
 #endif // defined(RGBLIGHT_ENABLE)

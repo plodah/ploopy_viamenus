@@ -12,6 +12,7 @@
         "plodah/morse_code",
         "plodah/mouse_jiggler",
         "plodah/pmw_rotation",
+        "plodah/rgblight_timeout",
         "plodah/task_switch",
         "plodah/turbo_fire"
     ],
