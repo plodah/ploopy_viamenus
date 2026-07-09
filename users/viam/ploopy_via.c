@@ -315,9 +315,33 @@
                 led_update_better_dragscroll(host_keyboard_led_state());
                 break;
 
-            case id_ploopystuff_dpi_presets:
-                ploopyvia_config.dpi_presets[value_data[0]] = (value_data[1] * VIA_DPI_STORE_RATIO );
-                dprintf("dpi_presets[%d]: %d\n", value_data[0], value_data[1]);
+            case id_ploopystuff_dpi_presets_0:
+                ploopyvia_config.dpi_presets[0] = (value_data[0] * VIA_DPI_STORE_RATIO );
+                dprintf("dpi_presets[0]: %d\n", value_data[0]);
+                update_dpi();
+                break;
+
+            case id_ploopystuff_dpi_presets_1:
+                ploopyvia_config.dpi_presets[1] = (value_data[0] * VIA_DPI_STORE_RATIO );
+                dprintf("dpi_presets[1]: %d\n", value_data[0]);
+                update_dpi();
+                break;
+
+            case id_ploopystuff_dpi_presets_2:
+                ploopyvia_config.dpi_presets[2] = (value_data[0] * VIA_DPI_STORE_RATIO );
+                dprintf("dpi_presets[2]: %d\n", value_data[0]);
+                update_dpi();
+                break;
+
+            case id_ploopystuff_dpi_presets_3:
+                ploopyvia_config.dpi_presets[3] = (value_data[0] * VIA_DPI_STORE_RATIO );
+                dprintf("dpi_presets[3]: %d\n", value_data[0]);
+                update_dpi();
+                break;
+
+            case id_ploopystuff_dpi_presets_4:
+                ploopyvia_config.dpi_presets[4] = (value_data[0] * VIA_DPI_STORE_RATIO );
+                dprintf("dpi_presets[4]: %d\n", value_data[0]);
                 update_dpi();
                 break;
 
@@ -588,9 +612,29 @@
                 dprintf("dragscroll_enable_layer_b: %d\n", ploopyvia_config.dragscroll_enable_layer_b);
                 break;
 
-            case id_ploopystuff_dpi_presets:
-                value_data[1] = ploopyvia_config.dpi_presets[value_data[0]] / VIA_DPI_STORE_RATIO;
-                dprintf("dpi_presets[%d]: %d\n", value_data[0], ploopyvia_config.dpi_presets[value_data[0]]);
+            case id_ploopystuff_dpi_presets_0:
+                *value_data = ploopyvia_config.dpi_presets[0] / VIA_DPI_STORE_RATIO;
+                dprintf("dpi_presets[0]: %d\n", ploopyvia_config.dpi_presets[0]);
+                break;
+
+            case id_ploopystuff_dpi_presets_1:
+                *value_data = ploopyvia_config.dpi_presets[1] / VIA_DPI_STORE_RATIO;
+                dprintf("dpi_presets[1]: %d\n", ploopyvia_config.dpi_presets[1]);
+                break;
+
+            case id_ploopystuff_dpi_presets_2:
+                *value_data = ploopyvia_config.dpi_presets[2] / VIA_DPI_STORE_RATIO;
+                dprintf("dpi_presets[2]: %d\n", ploopyvia_config.dpi_presets[2]);
+                break;
+
+            case id_ploopystuff_dpi_presets_3:
+                *value_data = ploopyvia_config.dpi_presets[3] / VIA_DPI_STORE_RATIO;
+                dprintf("dpi_presets[3]: %d\n", ploopyvia_config.dpi_presets[3]);
+                break;
+
+            case id_ploopystuff_dpi_presets_4:
+                *value_data = ploopyvia_config.dpi_presets[4] / VIA_DPI_STORE_RATIO;
+                dprintf("dpi_presets[4]: %d\n", ploopyvia_config.dpi_presets[4]);
                 break;
 
             case id_ploopystuff_sniper_a_dpi:

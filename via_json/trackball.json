@@ -171,7 +171,7 @@
                                 ["2000", 200],
                                 ["2400", 240]
                             ],
-                            "content": ["id_dpi_presets[0]", 0, 31, 0]
+                            "content": ["id_dpi_presets_0", 0, 31]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 0 && {id_firmware_version} < 2",
@@ -194,7 +194,7 @@
                                 ["2000", 200],
                                 ["2400", 240]
                             ],
-                            "content": ["id_dpi_presets[1]", 0, 31, 1]
+                            "content": ["id_dpi_presets_1", 0, 32]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 0 && {id_firmware_version} < 2",
@@ -217,7 +217,7 @@
                                 ["2000", 200],
                                 ["2400", 240]
                             ],
-                            "content": ["id_dpi_presets[2]", 0, 31, 2]
+                            "content": ["id_dpi_presets_2", 0, 33]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 0 && {id_firmware_version} < 2",
@@ -240,7 +240,7 @@
                                 ["2000", 200],
                                 ["2400", 240]
                             ],
-                            "content": ["id_dpi_presets[3]", 0, 31, 3]
+                            "content": ["id_dpi_presets_3", 0, 34]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 0 && {id_firmware_version} < 2",
@@ -263,7 +263,7 @@
                                 ["2000", 200],
                                 ["2400", 240]
                             ],
-                            "content": ["id_dpi_presets[4]", 0, 31, 4]
+                            "content": ["id_dpi_presets_4", 0, 35]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 0 && {id_firmware_version} >=2",
@@ -286,7 +286,7 @@
                                 ["2000", 20],
                                 ["2400", 24]
                             ],
-                            "content": ["id_dpi_presets[0]", 0, 31, 0]
+                            "content": ["id_dpi_presets_0", 0, 31]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 0 && {id_firmware_version} >=2",
@@ -309,7 +309,7 @@
                                 ["2000", 20],
                                 ["2400", 24]
                             ],
-                            "content": ["id_dpi_presets[1]", 0, 31, 1]
+                            "content": ["id_dpi_presets_1", 0, 32]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 0 && {id_firmware_version} >=2",
@@ -332,7 +332,7 @@
                                 ["2000", 20],
                                 ["2400", 24]
                             ],
-                            "content": ["id_dpi_presets[2]", 0, 31, 2]
+                            "content": ["id_dpi_presets_2", 0, 33]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 0 && {id_firmware_version} >=2",
@@ -355,7 +355,7 @@
                                 ["2000", 20],
                                 ["2400", 24]
                             ],
-                            "content": ["id_dpi_presets[3]", 0, 31, 3]
+                            "content": ["id_dpi_presets_3", 0, 34]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 0 && {id_firmware_version} >=2",
@@ -378,77 +378,77 @@
                                 ["2000", 20],
                                 ["2400", 24]
                             ],
-                            "content": ["id_dpi_presets[4]", 0, 31, 4]
+                            "content": ["id_dpi_presets_4", 0, 35]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 1 && {id_firmware_version} < 2",
                             "label": "Preset 1 (x10)",
                             "type": "range",
                             "options": [0, 250],
-                            "content": ["id_dpi_presets[0]", 0, 31, 0]
+                            "content": ["id_dpi_presets_0", 0, 31]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 1 && {id_firmware_version} < 2",
                             "label": "Preset 2 (x10)",
                             "type": "range",
                             "options": [0, 250],
-                            "content": ["id_dpi_presets[1]", 0, 31, 1]
+                            "content": ["id_dpi_presets_1", 0, 32]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 1 && {id_firmware_version} < 2",
                             "label": "Preset 3 (x10)",
                             "type": "range",
                             "options": [0, 250],
-                            "content": ["id_dpi_presets[2]", 0, 31, 2]
+                            "content": ["id_dpi_presets_2", 0, 33]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 1 && {id_firmware_version} < 2",
                             "label": "Preset 4 (x10)",
                             "type": "range",
                             "options": [0, 250],
-                            "content": ["id_dpi_presets[3]", 0, 31, 3]
+                            "content": ["id_dpi_presets_3", 0, 34]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 1 && {id_firmware_version} < 2",
                             "label": "Preset 5 (x10)",
                             "type": "range",
                             "options": [0, 250],
-                            "content": ["id_dpi_presets[4]", 0, 31, 4]
+                            "content": ["id_dpi_presets_4", 0, 35]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 1 && {id_firmware_version} >= 2",
                             "label": "Preset 1 (x100)",
                             "type": "range",
                             "options": [0, 120],
-                            "content": ["id_dpi_presets[0]", 0, 31, 0]
+                            "content": ["id_dpi_presets_0", 0, 31]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 1 && {id_firmware_version} >= 2",
                             "label": "Preset 2 (x100)",
                             "type": "range",
                             "options": [0, 120],
-                            "content": ["id_dpi_presets[1]", 0, 31, 1]
+                            "content": ["id_dpi_presets_1", 0, 32]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 1 && {id_firmware_version} >= 2",
                             "label": "Preset 3 (x100)",
                             "type": "range",
                             "options": [0, 120],
-                            "content": ["id_dpi_presets[2]", 0, 31, 2]
+                            "content": ["id_dpi_presets_2", 0, 33]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 1 && {id_firmware_version} >= 2",
                             "label": "Preset 4 (x100)",
                             "type": "range",
                             "options": [0, 120],
-                            "content": ["id_dpi_presets[3]", 0, 31, 3]
+                            "content": ["id_dpi_presets_3", 0, 34]
                         },
                         {
                             "showIf": "{id_dpi_as_slider} == 1 && {id_firmware_version} >= 2",
                             "label": "Preset 5 (x100)",
                             "type": "range",
                             "options": [0, 120],
-                            "content": ["id_dpi_presets[4]", 0, 31, 4]
+                            "content": ["id_dpi_presets_4", 0, 35]
                         }
                     ]
                 },
