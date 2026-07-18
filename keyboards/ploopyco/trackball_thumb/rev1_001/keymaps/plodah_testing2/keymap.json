@@ -36,7 +36,14 @@
             "animations": {
                 "breathing": false,
                 "rainbow_mood": false,
-                "rainbow_swirl": false
+                "rainbow_swirl": false,
+                "snake": false,
+                "knight": false,
+                "christmas": false,
+                "static_gradient": false,
+                "rgb_test": false,
+                "alternating": false,
+                "twinkle": false
             }
         },
         "usb": {
