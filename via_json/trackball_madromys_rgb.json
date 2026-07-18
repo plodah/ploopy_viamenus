@@ -35,6 +35,7 @@
         { "name": "Morse Code Dit", "title": "Morse Code Dit", "shortName": "MCO Dit" },
         { "name": "Morse Code Dash", "title": "Morse Code Dash", "shortName": "MCO DASH" }
     ],
+    "keycodes": ["qmk_lighting"],
     "layouts": {
         "keymap": [
             [
@@ -76,7 +77,6 @@
     },
     "menus": [
         "qmk_rgblight",
-
         {
             "label": "Ploopy Settings",
             "content": [
