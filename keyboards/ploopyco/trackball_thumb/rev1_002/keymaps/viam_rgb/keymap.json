@@ -51,6 +51,9 @@
             "shared_endpoint": {
                 "keyboard": true
             }
+        },
+        "ws2812": {
+            "driver": "vendor"
         }
     }
 }
