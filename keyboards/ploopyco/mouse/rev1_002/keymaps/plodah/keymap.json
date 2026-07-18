@@ -17,9 +17,9 @@
         },
         "features": {
             "backlight": false,
-            "combo": true,
+            "combo": false,
             "console": false,
-            "deferred_exec": false,
+            "deferred_exec": true,
             "encoder_map": true,
             "rgblight": true,
             "rgb_matrix": false,
