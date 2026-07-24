@@ -31,7 +31,7 @@
             dpi_array[i] = ploopyvia_config.dpi_presets[i];
         }
         pointing_device_set_cpi(dpi_array[keyboard_config.dpi_config]);
-        dprintf("Set CPI %d\n", dpi_array[keyboard_config.dpi_config]);
+        pvv_dprintf("Set CPI:%d\n", dpi_array[keyboard_config.dpi_config]);
         eeconfig_update_kb(keyboard_config.raw);
     }
 
@@ -74,36 +74,51 @@
         }
     #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
 
-    #if (defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)||defined(COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE))
-        void update_pointer_acceleration (void){
-            #if defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
-                pointing_device_accel_enabled(ploopyvia_config.pointer_accel_enabled);
-                pointing_device_accel_set_takeoff((float) ploopyvia_config.pointer_accel_takeoff/100);
-                pointing_device_accel_set_growth_rate((float) ploopyvia_config.pointer_accel_growth_rate/100);
-                pointing_device_accel_set_offset((float) ploopyvia_config.pointer_accel_offset/100);
-                pointing_device_accel_set_limit((float) ploopyvia_config.pointer_accel_limit/100);
+    #if defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
+        void update_pointing_acceleration (void){
+            pointing_device_accel_enabled(ploopyvia_config.pointing_accel_enabled);
+            pointing_device_accel_set_takeoff((float) ploopyvia_config.pointing_accel_takeoff/100);
+            pointing_device_accel_set_growth_rate((float) ploopyvia_config.pointing_accel_growth_rate/100);
+            pointing_device_accel_set_offset((float) ploopyvia_config.pointing_accel_offset/100);
+            pointing_device_accel_set_limit((float) ploopyvia_config.pointing_accel_limit/100);
 
-                dprintf("MACCEL: ena:%d tak:%.3f grw:%.3f off:%.3f lim: %.3f\n",
-                    pointing_device_accel_get_enabled(),
-                    pointing_device_accel_get_takeoff(),
-                    pointing_device_accel_get_growth_rate(),
-                    pointing_device_accel_get_offset(),
-                    pointing_device_accel_get_limit()
-                );
-            #else
-                g_basic_pointing_acceleration_config.enabled     = ploopyvia_config.pointer_accel_enabled;
-                g_basic_pointing_acceleration_config.growth_rate = ploopyvia_config.pointer_accel_growth_rate;
-                g_basic_pointing_acceleration_config.offset      = ploopyvia_config.pointer_accel_offset;
-                g_basic_pointing_acceleration_config.limit       = ploopyvia_config.pointer_accel_limit;
-                dprintf("MACCEL: ena:%d grw:%.3f off:%.3f lim: %.3f\n",
-                    g_basic_pointing_acceleration_config.enabled,
-                    g_basic_pointing_acceleration_config.growth_rate,
-                    g_basic_pointing_acceleration_config.offset,
-                    g_basic_pointing_acceleration_config.limit
-                );
-            #endif
-        }
+            pv_dprintf("MA: e:%d t:%.3f g:%.3f o:%.3f l: %.3f\n",
+                pointing_device_accel_get_enabled(),
+                pointing_device_accel_get_takeoff(),
+                pointing_device_accel_get_growth_rate(),
+                pointing_device_accel_get_offset(),
+                pointing_device_accel_get_limit()
+            );
+            pvv_dprintf("MACCEL: ena:%d tak:%.3f grw:%.3f off:%.3f lim: %.3f\n",
+                pointing_device_accel_get_enabled(),
+                pointing_device_accel_get_takeoff(),
+                pointing_device_accel_get_growth_rate(),
+                pointing_device_accel_get_offset(),
+                pointing_device_accel_get_limit()
+            );
+        };
     #endif // defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
+
+    #if defined(COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE)
+        void update_pointing_acceleration (void){
+            g_basic_pointing_acceleration_config.enabled     = ploopyvia_config.pointing_accel_enabled;
+            g_basic_pointing_acceleration_config.growth_rate = ploopyvia_config.pointing_accel_growth_rate;
+            g_basic_pointing_acceleration_config.offset      = ploopyvia_config.pointing_accel_offset;
+            g_basic_pointing_acceleration_config.limit       = ploopyvia_config.pointing_accel_limit;
+            pv_dprintf("MA: e:%d g:%.3f o:%.3f l: %.3f\n",
+                g_basic_pointing_acceleration_config.enabled,
+                g_basic_pointing_acceleration_config.growth_rate,
+                g_basic_pointing_acceleration_config.offset,
+                g_basic_pointing_acceleration_config.limit
+            );
+            pvv_dprintf("MACCEL_BASIC: ena:%d tak:%.3f grw:%.3f off:%.3f lim: %.3f\n",
+                g_basic_pointing_acceleration_config.enabled,
+                g_basic_pointing_acceleration_config.growth_rate,
+                g_basic_pointing_acceleration_config.offset,
+                g_basic_pointing_acceleration_config.limit
+            );
+        }
+    #endif // defined(COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE)
 
     #if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
     void update_task_switch( void ){
@@ -130,7 +145,7 @@
             drgstraight_set_sensitivity( ploopyvia_config.dragscroll_straighten_sensitivity );
         #endif // defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
         #if(defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)||defined(COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE))
-            update_pointer_acceleration();
+            update_pointing_acceleration();
         #endif // COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE
         #if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
             update_task_switch();
@@ -142,13 +157,13 @@
             update_msjiggler(ploopyvia_config.msjiggler_enabled);
         #endif // COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
         led_update_better_dragscroll(host_keyboard_led_state());
-        dprintf("keyboard_post_init_user\n");
+        pvv_dprintf("keyboard_post_init_user\n");
     }
 
     void eeconfig_init_user(void) {
         ploopyvia_config = ploopyvia_config_default;
         ploopyvia_config_save();
-        dprintf("eeconfig_init_user\n");
+        pvv_dprintf("eeconfig_init_user\n");
     }
 
     void via_custom_value_command_kb(uint8_t *data, uint8_t length) {
@@ -194,189 +209,214 @@
         switch ( *value_id ) {
             case id_ploopystuff_dpi_activepreset:
                 keyboard_config.dpi_config = *value_data;
-                dprintf("dpi_preset: %d\n", keyboard_config.dpi_config);
+                pv_dprintf("dpip:%d\n", keyboard_config.dpi_config);
+                pvv_dprintf("dpi_activepreset:%d\n", keyboard_config.dpi_config);
                 update_dpi();
                 break;
 
             #ifdef COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
                 case id_ploopystuff_msjiggler_enabled:
-                    dprintf("msjiggler_enabled\n");
+                    pv_dprintf("msjg\n");
                     update_msjiggler(*value_data);
                     break;
             #endif // def COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
 
             case id_ploopystuff_pointer_invert_h:
                 ploopyvia_config.pointer_invert_h = *value_data;
-                dprintf("pointer_invert_h:%d\n", ploopyvia_config.pointer_invert_h);
+                pv_dprintf("invh:%d\n", ploopyvia_config.pointer_invert_h);
+                pvv_dprintf("pointer_invert_h:%d\n", ploopyvia_config.pointer_invert_h);
+
                 break;
 
             case id_ploopystuff_pointer_invert_v:
                 ploopyvia_config.pointer_invert_v = *value_data;
-                dprintf("pointer_invert_v:%d\n", ploopyvia_config.pointer_invert_v);
+                pv_dprintf("invv:%d\n", ploopyvia_config.pointer_invert_v);
+                pvv_dprintf("pointer_invert_v:%d\n", ploopyvia_config.pointer_invert_v);
                 break;
 
             #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE
-            case id_ploopystuff_pointer_rotation_value:
-                    ploopyvia_config.pointer_rotation_value = *value_data;
-                    dprintf("pointer_rotation_value:%d\n", ploopyvia_config.pointer_rotation_value);
-                    pmw_rotation_update_via();
-                break;
+                case id_ploopystuff_pointer_rotation_value:
+                        ploopyvia_config.pointer_rotation_value = *value_data;
+                        pv_dprintf("rotv:%d\n", ploopyvia_config.pointer_rotation_value);
+                        pvv_dprintf("pointer_rotation_value:%d\n", ploopyvia_config.pointer_rotation_value);
+                        pmw_rotation_update_via();
+                    break;
 
-            case id_ploopystuff_pointer_rotation_is_ccw:
-                    ploopyvia_config.pointer_rotation_is_ccw = *value_data;
-                    dprintf("pointer_rotation_is_ccw:%d\n", ploopyvia_config.pointer_rotation_is_ccw);
-                    pmw_rotation_update_via();
-                break;
+                case id_ploopystuff_pointer_rotation_is_ccw:
+                        ploopyvia_config.pointer_rotation_is_ccw = *value_data;
+                        pv_dprintf("rotc:%d\n", ploopyvia_config.pointer_rotation_is_ccw);
+                        pvv_dprintf("pointer_rotation_is_ccw:%d\n", ploopyvia_config.pointer_rotation_is_ccw);
+                        pmw_rotation_update_via();
+                    break;
             #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
+
             #if defined(PLOOPY_MSGESTURE_ENABLE)
-            case id_ploopystuff_gesture_count:
-                ploopyvia_config.gesture_count = *value_data;
-                ploopy_msGestureUpdate();
-                dprintf("gesture_count:%d\n", ploopyvia_config.gesture_count);
-                break;
+                case id_ploopystuff_gesture_count:
+                    ploopyvia_config.gesture_count = *value_data;
+                    ploopy_msGestureUpdate();
+                    pv_dprintf("gstc:%d\n", ploopyvia_config.gesture_count);
+                    pvv_dprintf("gesture_count:%d\n", ploopyvia_config.gesture_count);
+                    break;
 
-            case id_ploopystuff_gesture_action_h:
-                ploopyvia_config.gesture_action_h = *value_data;
-                ploopy_msGestureUpdate();
-                dprintf("gesture_action_h:%d\n", ploopyvia_config.gesture_action_h);
-                break;
+                case id_ploopystuff_gesture_action_h:
+                    ploopyvia_config.gesture_action_h = *value_data;
+                    ploopy_msGestureUpdate();
+                    pv_dprintf("gstah:%d\n", ploopyvia_config.gesture_action_h);
+                    pvv_dprintf("gesture_action_h:%d\n", ploopyvia_config.gesture_action_h);
+                    break;
 
-            case id_ploopystuff_gesture_action_v:
-                ploopyvia_config.gesture_action_v = *value_data;
-                ploopy_msGestureUpdate();
-                dprintf("gesture_action_v:%d\n", ploopyvia_config.gesture_action_v);
-                break;
+                case id_ploopystuff_gesture_action_v:
+                    ploopyvia_config.gesture_action_v = *value_data;
+                    ploopy_msGestureUpdate();
+                    pv_dprintf("gstav:%d\n", ploopyvia_config.gesture_action_v);
+                    pvv_dprintf("gesture_action_v:%d\n", ploopyvia_config.gesture_action_v);
+                    break;
             #endif // defined(PLOOPY_MSGESTURE_ENABLE)
             #if defined(COMBO_ENABLE)
-            case id_ploopystuff_combos_enabled:
-                ploopyvia_config.combos_enabled = *value_data;
-                dprintf("combos_enabled:%d\n", ploopyvia_config.combos_enabled);
-                break;
-            #endif // defined(PLOOPY_MSGESTURE_ENABLE))
+                case id_ploopystuff_combos_enabled:
+                    ploopyvia_config.combos_enabled = *value_data;
+                    pv_dprintf("cmbe:%d\n", ploopyvia_config.combos_enabled);
+                    pvv_dprintf("combos_enabled:%d\n", ploopyvia_config.combos_enabled);
+                    break;
+            #endif // defined(COMBO_ENABLE))
 
             case id_ploopystuff_dragscroll_invert_h:
                 ploopyvia_config.dragscroll_invert_h = *value_data;
-                dprintf("dragscroll_invert_h:%d\n", ploopyvia_config.dragscroll_invert_h);
+                pvv_dprintf("dragscroll_invert_h:%d\n", ploopyvia_config.dragscroll_invert_h);
                 break;
 
             case id_ploopystuff_dragscroll_invert_v:
                 ploopyvia_config.dragscroll_invert_v = *value_data;
-                dprintf("dragscroll_invert_v:%d\n", ploopyvia_config.dragscroll_invert_v);
+                pvv_dprintf("dragscroll_invert_v:%d\n", ploopyvia_config.dragscroll_invert_v);
                 break;
 
             case id_ploopystuff_dragscroll_divisor_h:
                 ploopyvia_config.dragscroll_divisor_h = *value_data;
-                dprintf("dragscroll_divisor_h:%d\n", ploopyvia_config.dragscroll_divisor_h);
+                pv_dprintf("dsdh:%d\n", ploopyvia_config.dragscroll_divisor_h);
+                pvv_dprintf("dragscroll_divisor_h:%d\n", ploopyvia_config.dragscroll_divisor_h);
                 break;
 
             case id_ploopystuff_dragscroll_divisor_v:
                 ploopyvia_config.dragscroll_divisor_v = *value_data;
-                dprintf("dragscroll_divisor_v:%d\n", ploopyvia_config.dragscroll_divisor_v);
+                pv_dprintf("dsdv:%d\n", ploopyvia_config.dragscroll_divisor_v);
+                pvv_dprintf("dragscroll_divisor_v:%d\n", ploopyvia_config.dragscroll_divisor_v);
                 break;
 
             case id_ploopystuff_dragscroll_enable_caps:
                 ploopyvia_config.dragscroll_enable_caps = *value_data;
-                dprintf("dragscroll_enable_caps: %d\n", ploopyvia_config.dragscroll_enable_caps);
+                pvv_dprintf("dragscroll_enable_caps: %d\n", ploopyvia_config.dragscroll_enable_caps);
                 led_update_better_dragscroll(host_keyboard_led_state());
                 break;
 
             case id_ploopystuff_dragscroll_enable_num:
                 ploopyvia_config.dragscroll_enable_num = *value_data;
-                dprintf("dragscroll_enable_num: %d\n", ploopyvia_config.dragscroll_enable_num);
+                pvv_dprintf("dragscroll_enable_num: %d\n", ploopyvia_config.dragscroll_enable_num);
                 led_update_better_dragscroll(host_keyboard_led_state());
                 break;
 
             case id_ploopystuff_dragscroll_enable_scroll:
                 ploopyvia_config.dragscroll_enable_scroll = *value_data;
-                dprintf("dragscroll_enable_scroll: %d\n", ploopyvia_config.dragscroll_enable_scroll);
+                pvv_dprintf("dragscroll_enable_scroll: %d\n", ploopyvia_config.dragscroll_enable_scroll);
                 led_update_better_dragscroll(host_keyboard_led_state());
                 break;
 
             case id_ploopystuff_dragscroll_enable_end_on_keypress:
                 ploopyvia_config.dragscroll_enable_end_on_keypress = *value_data;
-                dprintf("dragscroll_enable_end_on_keypress: %d\n", ploopyvia_config.dragscroll_enable_end_on_keypress);
+                pvv_dprintf("dragscroll_enable_end_on_keypress: %d\n", ploopyvia_config.dragscroll_enable_end_on_keypress);
                 break;
 
             case id_ploopystuff_dragscroll_enable_permanently:
                 ploopyvia_config.dragscroll_enable_permanently = *value_data;
-                dprintf("dragscroll_enable_permanently: %d\n", ploopyvia_config.dragscroll_enable_permanently);
+                pvv_dprintf("dragscroll_enable_permanently: %d\n", ploopyvia_config.dragscroll_enable_permanently);
                 led_update_better_dragscroll(host_keyboard_led_state());
                 break;
 
             case id_ploopystuff_dragscroll_enable_layer_a:
                 ploopyvia_config.dragscroll_enable_layer_a = *value_data;
-                dprintf("dragscroll_enable_layer_a: %d\n", ploopyvia_config.dragscroll_enable_layer_a);
+                pvv_dprintf("dragscroll_enable_layer_a: %d\n", ploopyvia_config.dragscroll_enable_layer_a);
                 led_update_better_dragscroll(host_keyboard_led_state());
                 break;
 
             case id_ploopystuff_dragscroll_enable_layer_b:
                 ploopyvia_config.dragscroll_enable_layer_b = *value_data;
-                dprintf("dragscroll_enable_layer_b: %d\n", ploopyvia_config.dragscroll_enable_layer_b);
+                pvv_dprintf("dragscroll_enable_layer_b: %d\n", ploopyvia_config.dragscroll_enable_layer_b);
                 led_update_better_dragscroll(host_keyboard_led_state());
                 break;
 
             case id_ploopystuff_dpi_presets:
                 ploopyvia_config.dpi_presets[value_data[0]] = (value_data[1] * VIA_DPI_STORE_RATIO );
-                dprintf("dpi_presets[%d]: %d\n", value_data[0], value_data[1]);
+                pv_dprintf("dpi[%d]:%d\n", value_data[0], value_data[1]);
+                pvv_dprintf("dpi_presets[%d]: %d\n", value_data[0], value_data[1]);
                 update_dpi();
                 break;
 
             case id_ploopystuff_sniper_a_dpi:
                 ploopyvia_config.sniper_a_dpi = ((uint8_t)*value_data * VIA_DPI_STORE_RATIO );
-                dprintf("sniper_a_dpi: %d\n", ploopyvia_config.sniper_a_dpi);
+                pv_dprintf("snpa:%d\n", ploopyvia_config.sniper_a_dpi);
+                pvv_dprintf("sniper_a_dpi: %d\n", ploopyvia_config.sniper_a_dpi);
                 break;
 
             case id_ploopystuff_sniper_b_dpi:
                 ploopyvia_config.sniper_b_dpi = ((uint8_t)*value_data * VIA_DPI_STORE_RATIO);
-                dprintf("sniper_b_dpi: %d\n", ploopyvia_config.sniper_b_dpi);
+                pv_dprintf("snpb:%d\n", ploopyvia_config.sniper_b_dpi);
+                pvv_dprintf("sniper_b_dpi: %d\n", ploopyvia_config.sniper_b_dpi);
                 break;
 
             #if defined(COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
                 case id_ploopystuff_dragscroll_straighten_sensitivity:
                     ploopyvia_config.dragscroll_straighten_sensitivity = *value_data;
                     drgstraight_set_sensitivity( ploopyvia_config.dragscroll_straighten_sensitivity );
-                    dprintf("dragscroll_straighten_sensitivity: %d\n", ploopyvia_config.dragscroll_straighten_sensitivity);
+                    pv_dprintf("dstr:%d\n", ploopyvia_config.dragscroll_straighten_sensitivity);
+                    pvv_dprintf("dragscroll_straighten_sensitivity: %d\n", ploopyvia_config.dragscroll_straighten_sensitivity);
                     break;
             #endif // defined(COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
 
             case id_ploopystuff_dragscroll_dragact_a_up:
                 ploopyvia_config.dragscroll_dragact_a_up = COMBINE_UINT8(value_data[0], value_data[1]);
-                dprintf("dragscroll_dragact_a_up: %d\n", ploopyvia_config.dragscroll_dragact_a_up);
+                pv_dprintf("daau:%d\n", ploopyvia_config.dragscroll_dragact_a_up);
+                pvv_dprintf("dragscroll_dragact_a_up: %d\n", ploopyvia_config.dragscroll_dragact_a_up);
                 break;
 
             case id_ploopystuff_dragscroll_dragact_a_down:
                 ploopyvia_config.dragscroll_dragact_a_down = COMBINE_UINT8(value_data[0], value_data[1]);
-                dprintf("dragscroll_dragact_a_down: %d\n", ploopyvia_config.dragscroll_dragact_a_down);
+                pv_dprintf("daad:%d\n", ploopyvia_config.dragscroll_dragact_a_down);
+                pvv_dprintf("dragscroll_dragact_a_down: %d\n", ploopyvia_config.dragscroll_dragact_a_down);
                 break;
 
             case id_ploopystuff_dragscroll_dragact_a_left:
                 ploopyvia_config.dragscroll_dragact_a_left = COMBINE_UINT8(value_data[0], value_data[1]);
-                dprintf("dragscroll_dragact_a_left: %d\n", ploopyvia_config.dragscroll_dragact_a_left);
+                pv_dprintf("daal:%d\n", ploopyvia_config.dragscroll_dragact_a_left);
+                pvv_dprintf("dragscroll_dragact_a_left: %d\n", ploopyvia_config.dragscroll_dragact_a_left);
                 break;
 
             case id_ploopystuff_dragscroll_dragact_a_right:
                 ploopyvia_config.dragscroll_dragact_a_right = COMBINE_UINT8(value_data[0], value_data[1]);
-                dprintf("dragscroll_dragact_a_right: %d\n", ploopyvia_config.dragscroll_dragact_a_right);
+                pv_dprintf("daar:%d\n", ploopyvia_config.dragscroll_dragact_a_right);
+                pvv_dprintf("dragscroll_dragact_a_right: %d\n", ploopyvia_config.dragscroll_dragact_a_right);
                 break;
 
             case id_ploopystuff_dragscroll_dragact_b_up:
                 ploopyvia_config.dragscroll_dragact_b_up = COMBINE_UINT8(value_data[0], value_data[1]);
-                dprintf("dragscroll_dragact_b_up: %d\n", ploopyvia_config.dragscroll_dragact_b_up);
+                pv_dprintf("dabu:%d\n", ploopyvia_config.dragscroll_dragact_b_up);
+                pvv_dprintf("dragscroll_dragact_b_up: %d\n", ploopyvia_config.dragscroll_dragact_b_up);
                 break;
 
             case id_ploopystuff_dragscroll_dragact_b_down:
                 ploopyvia_config.dragscroll_dragact_b_down = COMBINE_UINT8(value_data[0], value_data[1]);
-                dprintf("dragscroll_dragact_b_down: %d\n", ploopyvia_config.dragscroll_dragact_b_down);
+                pv_dprintf("dabd:%d\n", ploopyvia_config.dragscroll_dragact_b_down);
+                pvv_dprintf("dragscroll_dragact_b_down: %d\n", ploopyvia_config.dragscroll_dragact_b_down);
                 break;
 
             case id_ploopystuff_dragscroll_dragact_b_left:
                 ploopyvia_config.dragscroll_dragact_b_left = COMBINE_UINT8(value_data[0], value_data[1]);
-                dprintf("dragscroll_dragact_b_left: %d\n", ploopyvia_config.dragscroll_dragact_b_left);
+                pv_dprintf("dabl:%d\n", ploopyvia_config.dragscroll_dragact_b_left);
+                pvv_dprintf("dragscroll_dragact_b_left: %d\n", ploopyvia_config.dragscroll_dragact_b_left);
                 break;
 
             case id_ploopystuff_dragscroll_dragact_b_right:
                 ploopyvia_config.dragscroll_dragact_b_right = COMBINE_UINT8(value_data[0], value_data[1]);
-                dprintf("dragscroll_dragact_b_right: %d\n", ploopyvia_config.dragscroll_dragact_b_right);
+                pv_dprintf("dabr:%d\n", ploopyvia_config.dragscroll_dragact_b_right);
+                pvv_dprintf("dragscroll_dragact_b_right: %d\n", ploopyvia_config.dragscroll_dragact_b_right);
                 break;
 
             #if defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
@@ -388,78 +428,83 @@
                         ploopyvia_config.turbo_fire_rate = value_data[0];
                     }
                     set_turbo_fire_rate(ploopyvia_config.turbo_fire_rate);
-                    dprintf("turbo_fire_rate: %d\n", ploopyvia_config.turbo_fire_rate);
+                    pv_dprintf("tfr:%d\n", ploopyvia_config.turbo_fire_rate);
+                    pvv_dprintf("turbo_fire_rate: %d\n", ploopyvia_config.turbo_fire_rate);
                     break;
 
                 case id_ploopystuff_turbo_fire_rate_range:
                     ploopyvia_config.turbo_fire_rate_range = *value_data;
-                    dprintf("turbo_fire_rate_range: %d\n", ploopyvia_config.turbo_fire_rate_range);
+                    pv_dprintf("tfrr:%d\n", ploopyvia_config.turbo_fire_rate_range);
+                    pvv_dprintf("turbo_fire_rate_range: %d\n", ploopyvia_config.turbo_fire_rate_range);
                     break;
 
                 case id_ploopystuff_turbo_fire_duration:
                     ploopyvia_config.turbo_fire_duration = *value_data;
                     set_turbo_fire_duration(ploopyvia_config.turbo_fire_duration);
-                    dprintf("turbo_fire_duration: %d\n", ploopyvia_config.turbo_fire_duration);
+                    pv_dprintf("tfd:%d\n", ploopyvia_config.turbo_fire_duration);
+                    pvv_dprintf("turbo_fire_duration: %d\n", ploopyvia_config.turbo_fire_duration);
                     break;
 
                 case id_ploopystuff_turbo_fire_keycode_a ... (id_ploopystuff_turbo_fire_keycode_a + TURBO_FIRE_KEYCOUNT - 1):
                     uint8_t temp_kcindex = *value_id - id_ploopystuff_turbo_fire_keycode_a;
                     ploopyvia_config.turbo_fire_keycodes[temp_kcindex] = COMBINE_UINT8(value_data[0], value_data[1]);
                     update_turbo_fire_kc(temp_kcindex);
-                    dprintf("turbo_fire_keycodes[%d]: %d\n", temp_kcindex, ploopyvia_config.turbo_fire_keycodes[temp_kcindex]);
+                    pv_dprintf("tfk[%d]:%d\n", temp_kcindex, ploopyvia_config.turbo_fire_keycodes[temp_kcindex]);
+                    pvv_dprintf("turbo_fire_keycodes[%d]: %d\n", temp_kcindex, ploopyvia_config.turbo_fire_keycodes[temp_kcindex]);
                     break;
 
             #endif // defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
 
             case id_ploopystuff_dpi_as_slider:
                 ploopyvia_config.dpi_as_slider = *value_data;
-                dprintf("dpi_as_slider: %d\n", ploopyvia_config.dpi_as_slider);
+                pv_dprintf("dpsl:%d\n", ploopyvia_config.dpi_as_slider);
+                pvv_dprintf("dpi_as_slider: %d\n", ploopyvia_config.dpi_as_slider);
                 break;
 
             #if(defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)||defined(COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE))
-            case id_pointing_device_enabled:
-                ploopyvia_config.pointer_accel_enabled = value_data[0];
-                update_pointer_acceleration();
-                break;
+                case id_pointing_accel_enabled:
+                    ploopyvia_config.pointing_accel_enabled = value_data[0];
+                    update_pointing_acceleration();
+                    break;
 
-            case id_pointing_device_takeoff:
-                ploopyvia_config.pointer_accel_takeoff = COMBINE_UINT8(value_data[0], value_data[1]);
-                update_pointer_acceleration();
-                break;
+                case id_pointing_accel_takeoff:
+                    ploopyvia_config.pointing_accel_takeoff = COMBINE_UINT8(value_data[0], value_data[1]);
+                    update_pointing_acceleration();
+                    break;
 
-            case id_pointing_device_growth_rate:
-                ploopyvia_config.pointer_accel_growth_rate = COMBINE_UINT8(value_data[0], value_data[1]);
-                update_pointer_acceleration();
-                break;
+                case id_pointing_accel_growth_rate:
+                    ploopyvia_config.pointing_accel_growth_rate = COMBINE_UINT8(value_data[0], value_data[1]);
+                    update_pointing_acceleration();
+                    break;
 
-            case id_pointing_device_offset:
-                ploopyvia_config.pointer_accel_offset = COMBINE_UINT8(value_data[0], value_data[1]);
-                update_pointer_acceleration();
-                break;
+                case id_pointing_accel_offset:
+                    ploopyvia_config.pointing_accel_offset = COMBINE_UINT8(value_data[0], value_data[1]);
+                    update_pointing_acceleration();
+                    break;
 
-            case id_pointing_device_limit:
-                ploopyvia_config.pointer_accel_limit = value_data[0];
-                update_pointer_acceleration();
-                break;
+                case id_pointing_accel_limit:
+                    ploopyvia_config.pointing_accel_limit = value_data[0];
+                    update_pointing_acceleration();
+                    break;
             #endif // defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
 
             #if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
-            case id_ploopystuff_task_switch_delay:
-                ploopyvia_config.task_switch_delay = COMBINE_UINT8(value_data[0], value_data[1]);
-                update_task_switch();
-                break;
-            case id_ploopystuff_task_switch_tap_key:
-                ploopyvia_config.task_switch_tap_key = COMBINE_UINT8(value_data[0], value_data[1]);
-                update_task_switch();
-                break;
-            case id_ploopystuff_task_switch_mod:
-                ploopyvia_config.task_switch_mod = *value_data;
-                update_task_switch();
-                break;
-            case id_ploopystuff_task_switch_rev_mod:
-                ploopyvia_config.task_switch_rev_mod = *value_data;
-                update_task_switch();
-                break;
+                case id_ploopystuff_task_switch_delay:
+                    ploopyvia_config.task_switch_delay = COMBINE_UINT8(value_data[0], value_data[1]);
+                    update_task_switch();
+                    break;
+                case id_ploopystuff_task_switch_tap_key:
+                    ploopyvia_config.task_switch_tap_key = COMBINE_UINT8(value_data[0], value_data[1]);
+                    update_task_switch();
+                    break;
+                case id_ploopystuff_task_switch_mod:
+                    ploopyvia_config.task_switch_mod = *value_data;
+                    update_task_switch();
+                    break;
+                case id_ploopystuff_task_switch_rev_mod:
+                    ploopyvia_config.task_switch_rev_mod = *value_data;
+                    update_task_switch();
+                    break;
             #endif // defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE)  && defined(TASK_SWITCH_MENUS_ENABLE)
         }
     }
@@ -471,197 +516,226 @@
         switch ( *value_id ) {
             case id_ploopystuff_dpi_activepreset:
                 *value_data = keyboard_config.dpi_config;
-                dprintf("dpi_preset: %d\n", keyboard_config.dpi_config);
+                pv_dprintf("dpip:%d\n", keyboard_config.dpi_config);
+                pvv_dprintf("dpi_preset: %d\n", keyboard_config.dpi_config);
                 break;
 
             #ifdef COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
-            case id_ploopystuff_msjiggler_enabled:
-                if(jiggler_get_state()){
-                    dprintf("msjiggler_enabled true \n");
+                case id_ploopystuff_msjiggler_enabled:
+                    pv_dprintf("msjg:%d\n", jiggler_get_state());
+                    pvv_dprintf("msjiggler_enabled true \n");
+                    *value_data = jiggler_get_state();
                     *value_data = true;
-                }
-                else{
-                    dprintf("msjiggler_enabled false \n");
-                    *value_data = false;
-                }
-                break;
+                    break;
             #endif // def COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
 
             case id_ploopystuff_pointer_invert_h:
                 *value_data = ploopyvia_config.pointer_invert_h;
-                dprintf("pointer_invert_h:%d\n", ploopyvia_config.pointer_invert_h);
+                pv_dprintf("invh:%d\n", ploopyvia_config.pointer_invert_h);
+                pvv_dprintf("pointer_invert_h:%d\n", ploopyvia_config.pointer_invert_h);
                 break;
 
             case id_ploopystuff_pointer_invert_v:
                 *value_data = ploopyvia_config.pointer_invert_v;
-                dprintf("pointer_invert_v:%d\n", ploopyvia_config.pointer_invert_v);
+                pv_dprintf("invv:%d\n", ploopyvia_config.pointer_invert_v);
+                pvv_dprintf("pointer_invert_v:%d\n", ploopyvia_config.pointer_invert_v);
                 break;
 
             #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE
-            case id_ploopystuff_pointer_rotation_value:
+                case id_ploopystuff_pointer_rotation_value:
                     *value_data = ploopyvia_config.pointer_rotation_value;
-                    dprintf("pointer_rotation_value:%d\n", ploopyvia_config.pointer_rotation_value);
-                break;
+                    pv_dprintf("rotv:%d\n", ploopyvia_config.pointer_rotation_value);
+                    pvv_dprintf("pointer_rotation_value:%d\n", ploopyvia_config.pointer_rotation_value);
+                    break;
 
-            case id_ploopystuff_pointer_rotation_is_ccw:
+                case id_ploopystuff_pointer_rotation_is_ccw:
                     *value_data = ploopyvia_config.pointer_rotation_is_ccw;
-                    dprintf("pointer_rotation_is_ccw:%d\n", ploopyvia_config.pointer_rotation_is_ccw);
-                break;
+                    pv_dprintf("rotc:%d\n", ploopyvia_config.pointer_rotation_is_ccw);
+                    pvv_dprintf("pointer_rotation_is_ccw:%d\n", ploopyvia_config.pointer_rotation_is_ccw);
+                    break;
             #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
 
             #if defined(PLOOPY_MSGESTURE_ENABLE)
-            case id_ploopystuff_gesture_count:
-                *value_data = ploopyvia_config.gesture_count;
-                dprintf("gesture_count:%d\n", ploopyvia_config.gesture_count);
-                break;
+                case id_ploopystuff_gesture_count:
+                    *value_data = ploopyvia_config.gesture_count;
+                    pv_dprintf("gstc:%d\n", ploopyvia_config.gesture_count);
+                    pvv_dprintf("gesture_count:%d\n", ploopyvia_config.gesture_count);
+                    break;
 
-            case id_ploopystuff_gesture_action_h:
-                *value_data = ploopyvia_config.gesture_action_h;
-                dprintf("gesture_action_h:%d\n", ploopyvia_config.gesture_action_h);
-                break;
+                case id_ploopystuff_gesture_action_h:
+                    *value_data = ploopyvia_config.gesture_action_h;
+                    pv_dprintf("gstah:%d\n", ploopyvia_config.gesture_action_h);
+                    pvv_dprintf("gesture_action_h:%d\n", ploopyvia_config.gesture_action_h);
+                    break;
 
-            case id_ploopystuff_gesture_action_v:
-                *value_data = ploopyvia_config.gesture_action_v;
-                dprintf("gesture_action_v:%d\n", ploopyvia_config.gesture_action_v);
-                break;
+                case id_ploopystuff_gesture_action_v:
+                    *value_data = ploopyvia_config.gesture_action_v;
+                    pv_dprintf("gstav:%d\n", ploopyvia_config.gesture_action_v);
+                    pvv_dprintf("gesture_action_v:%d\n", ploopyvia_config.gesture_action_v);
+                    break;
             #endif // defined(PLOOPY_MSGESTURE_ENABLE)
 
             #if defined(COMBO_ENABLE)
-            case id_ploopystuff_combos_enabled:
-                *value_data = ploopyvia_config.combos_enabled;
-                dprintf("combos_enabled:%d\n", ploopyvia_config.combos_enabled);
-                break;
+                case id_ploopystuff_combos_enabled:
+                    *value_data = ploopyvia_config.combos_enabled;
+                    pv_dprintf("cmbe:%d\n", ploopyvia_config.combos_enabled);
+                    pvv_dprintf("combos_enabled:%d\n", ploopyvia_config.combos_enabled);
+                    break;
             #endif // defined(PLOOPY_MSGESTURE_ENABLE))
 
             case id_ploopystuff_dragscroll_invert_h:
                 *value_data = ploopyvia_config.dragscroll_invert_h;
-                dprintf("dragscroll_invert_h:%d\n", ploopyvia_config.dragscroll_invert_h);
+                pv_dprintf("dsih:%d\n", ploopyvia_config.dragscroll_invert_h);
+                pvv_dprintf("dragscroll_invert_h:%d\n", ploopyvia_config.dragscroll_invert_h);
                 break;
 
             case id_ploopystuff_dragscroll_invert_v:
                 *value_data = ploopyvia_config.dragscroll_invert_v;
-                dprintf("dragscroll_invert_v:%d\n", ploopyvia_config.dragscroll_invert_v);
+                pv_dprintf("dsiv:%d\n", ploopyvia_config.dragscroll_invert_v);
+                pvv_dprintf("dragscroll_invert_v:%d\n", ploopyvia_config.dragscroll_invert_v);
                 break;
 
             case id_ploopystuff_dragscroll_divisor_h:
                 *value_data = ploopyvia_config.dragscroll_divisor_h;
-                dprintf("dragscroll_divisor_h:%d\n", ploopyvia_config.dragscroll_divisor_h);
+                pv_dprintf("dsdh:%d\n", ploopyvia_config.dragscroll_divisor_h);
+                pvv_dprintf("dragscroll_divisor_h:%d\n", ploopyvia_config.dragscroll_divisor_h);
                 break;
 
             case id_ploopystuff_dragscroll_divisor_v:
                 *value_data = ploopyvia_config.dragscroll_divisor_v;
-                dprintf("dragscroll_divisor_v:%d\n", ploopyvia_config.dragscroll_divisor_v);
+                pv_dprintf("dsdv:%d\n", ploopyvia_config.dragscroll_divisor_v);
+                pvv_dprintf("dragscroll_divisor_v:%d\n", ploopyvia_config.dragscroll_divisor_v);
                 break;
 
             case id_ploopystuff_dragscroll_enable_caps:
                 *value_data = ploopyvia_config.dragscroll_enable_caps;
-                dprintf("dragscroll_enable_caps: %d\n", ploopyvia_config.dragscroll_enable_caps);
+                pv_dprintf("dsec:%d\n", ploopyvia_config.dragscroll_enable_caps);
+                pvv_dprintf("dragscroll_enable_caps: %d\n", ploopyvia_config.dragscroll_enable_caps);
                 break;
 
             case id_ploopystuff_dragscroll_enable_num:
                 *value_data = ploopyvia_config.dragscroll_enable_num;
-                dprintf("dragscroll_enable_num: %d\n", ploopyvia_config.dragscroll_enable_num);
+                pv_dprintf("dsen:%d\n", ploopyvia_config.dragscroll_enable_num);
+                pvv_dprintf("dragscroll_enable_num: %d\n", ploopyvia_config.dragscroll_enable_num);
                 break;
 
             case id_ploopystuff_dragscroll_enable_scroll:
                 *value_data = ploopyvia_config.dragscroll_enable_scroll;
-                dprintf("dragscroll_enable_scroll: %d\n", ploopyvia_config.dragscroll_enable_scroll);
+                pv_dprintf("dses:%d\n", ploopyvia_config.dragscroll_enable_scroll);
+                pvv_dprintf("dragscroll_enable_scroll: %d\n", ploopyvia_config.dragscroll_enable_scroll);
                 break;
 
             case id_ploopystuff_dragscroll_enable_end_on_keypress:
                 *value_data = ploopyvia_config.dragscroll_enable_end_on_keypress;
-                dprintf("dragscroll_enable_end_on_keypress: %d\n", ploopyvia_config.dragscroll_enable_end_on_keypress);
+                pv_dprintf("dskp:%d\n", ploopyvia_config.dragscroll_enable_end_on_keypress);
+                pvv_dprintf("dragscroll_enable_end_on_keypress: %d\n", ploopyvia_config.dragscroll_enable_end_on_keypress);
                 break;
 
             case id_ploopystuff_dragscroll_enable_permanently:
                 *value_data = ploopyvia_config.dragscroll_enable_permanently;
-                dprintf("dragscroll_enable_permanently: %d\n", ploopyvia_config.dragscroll_enable_permanently);
+                pv_dprintf("dsep:%d\n", ploopyvia_config.dragscroll_enable_permanently);
+                pvv_dprintf("dragscroll_enable_permanently: %d\n", ploopyvia_config.dragscroll_enable_permanently);
                 break;
 
             case id_ploopystuff_dragscroll_enable_layer_a:
                 *value_data = ploopyvia_config.dragscroll_enable_layer_a;
-                dprintf("dragscroll_enable_layer_a: %d\n", ploopyvia_config.dragscroll_enable_layer_a);
+                pv_dprintf("dsla:%d\n", ploopyvia_config.dragscroll_enable_layer_a);
+                pvv_dprintf("dragscroll_enable_layer_a: %d\n", ploopyvia_config.dragscroll_enable_layer_a);
                 break;
 
             case id_ploopystuff_dragscroll_enable_layer_b:
                 *value_data = ploopyvia_config.dragscroll_enable_layer_b;
-                dprintf("dragscroll_enable_layer_b: %d\n", ploopyvia_config.dragscroll_enable_layer_b);
+                pv_dprintf("dslb:%d\n", ploopyvia_config.dragscroll_enable_layer_b);
+                pvv_dprintf("dragscroll_enable_layer_b: %d\n", ploopyvia_config.dragscroll_enable_layer_b);
                 break;
 
             case id_ploopystuff_dpi_presets:
                 value_data[1] = ploopyvia_config.dpi_presets[value_data[0]] / VIA_DPI_STORE_RATIO;
-                dprintf("dpi_presets[%d]: %d\n", value_data[0], ploopyvia_config.dpi_presets[value_data[0]]);
+                pv_dprintf("dpi[%d]:%d\n", value_data[0], ploopyvia_config.dpi_presets[value_data[0]]);
+                pvv_dprintf("dpi_presets[%d]: %d\n", value_data[0], ploopyvia_config.dpi_presets[value_data[0]]);
                 break;
 
             case id_ploopystuff_sniper_a_dpi:
                 *value_data = ploopyvia_config.sniper_a_dpi / VIA_DPI_STORE_RATIO;
-                dprintf("sniper_a_dpi: %d\n", ploopyvia_config.sniper_a_dpi);
+                pv_dprintf("snpa:%d\n", ploopyvia_config.sniper_a_dpi);
+                pvv_dprintf("sniper_a_dpi: %d\n", ploopyvia_config.sniper_a_dpi);
                 break;
 
             case id_ploopystuff_sniper_b_dpi:
                 *value_data = ploopyvia_config.sniper_b_dpi / VIA_DPI_STORE_RATIO;
-                dprintf("sniper_b_dpi: %d\n", ploopyvia_config.sniper_b_dpi);
+                pv_dprintf("snpb:%d\n", ploopyvia_config.sniper_b_dpi);
+                pvv_dprintf("sniper_b_dpi: %d\n", ploopyvia_config.sniper_b_dpi);
                 break;
 
             #if defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
                 case id_ploopystuff_dragscroll_straighten_sensitivity:
                     *value_data = ploopyvia_config.dragscroll_straighten_sensitivity;
-                    dprintf("dragscroll_straighten_sensitivity: %d\n", ploopyvia_config.dragscroll_straighten_sensitivity);
+                    pv_dprintf("dstr:%d\n", ploopyvia_config.dragscroll_straighten_sensitivity);
+                    pvv_dprintf("dragscroll_straighten_sensitivity: %d\n", ploopyvia_config.dragscroll_straighten_sensitivity);
                     break;
             #endif // defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
 
             case id_ploopystuff_dragscroll_dragact_a_up:
                 value_data[0] = ploopyvia_config.dragscroll_dragact_a_up >> 8;
                 value_data[1] = ploopyvia_config.dragscroll_dragact_a_up & 0xFF;
-                dprintf("dragscroll_dragact_a_up: %d\n", ploopyvia_config.dragscroll_dragact_a_up);
+                pv_dprintf("daau:%d\n", ploopyvia_config.dragscroll_dragact_a_up);
+                pvv_dprintf("dragscroll_dragact_a_up: %d\n", ploopyvia_config.dragscroll_dragact_a_up);
                 break;
 
             case id_ploopystuff_dragscroll_dragact_a_down:
                 value_data[0] = ploopyvia_config.dragscroll_dragact_a_down >> 8;
                 value_data[1] = ploopyvia_config.dragscroll_dragact_a_down & 0xFF;
-                dprintf("dragscroll_dragact_a_down: %d\n", ploopyvia_config.dragscroll_dragact_a_down);
+                pv_dprintf("daad:%d\n", ploopyvia_config.dragscroll_dragact_a_down);
+                pvv_dprintf("dragscroll_dragact_a_down: %d\n", ploopyvia_config.dragscroll_dragact_a_down);
                 break;
 
             case id_ploopystuff_dragscroll_dragact_a_left:
                 value_data[0] = ploopyvia_config.dragscroll_dragact_a_left >> 8;
                 value_data[1] = ploopyvia_config.dragscroll_dragact_a_left & 0xFF;
-                dprintf("dragscroll_dragact_a_left: %d\n", ploopyvia_config.dragscroll_dragact_a_left);
+                pv_dprintf("daal:%d\n", ploopyvia_config.dragscroll_dragact_a_left);
+                pvv_dprintf("dragscroll_dragact_a_left: %d\n", ploopyvia_config.dragscroll_dragact_a_left);
                 break;
 
             case id_ploopystuff_dragscroll_dragact_a_right:
                 value_data[0] = ploopyvia_config.dragscroll_dragact_a_right >> 8;
                 value_data[1] = ploopyvia_config.dragscroll_dragact_a_right & 0xFF;
-                dprintf("dragscroll_dragact_a_right: %d\n", ploopyvia_config.dragscroll_dragact_a_right);
+                pv_dprintf("daar:%d\n", ploopyvia_config.dragscroll_dragact_a_right);
+                pvv_dprintf("dragscroll_dragact_a_right: %d\n", ploopyvia_config.dragscroll_dragact_a_right);
                 break;
 
             case id_ploopystuff_dragscroll_dragact_b_up:
                 value_data[0] = ploopyvia_config.dragscroll_dragact_b_up >> 8;
                 value_data[1] = ploopyvia_config.dragscroll_dragact_b_up & 0xFF;
-                dprintf("dragscroll_dragact_b_up: %d\n", ploopyvia_config.dragscroll_dragact_b_up);
+                pv_dprintf("dabu:%d\n", ploopyvia_config.dragscroll_dragact_b_up);
+                pvv_dprintf("dragscroll_dragact_b_up: %d\n", ploopyvia_config.dragscroll_dragact_b_up);
                 break;
 
             case id_ploopystuff_dragscroll_dragact_b_down:
                 value_data[0] = ploopyvia_config.dragscroll_dragact_b_down >> 8;
                 value_data[1] = ploopyvia_config.dragscroll_dragact_b_down & 0xFF;
-                dprintf("dragscroll_dragact_b_down: %d\n", ploopyvia_config.dragscroll_dragact_b_down);
+                pv_dprintf("dabd:%d\n", ploopyvia_config.dragscroll_dragact_b_down);
+                pvv_dprintf("dragscroll_dragact_b_down: %d\n", ploopyvia_config.dragscroll_dragact_b_down);
                 break;
 
             case id_ploopystuff_dragscroll_dragact_b_left:
                 value_data[0] = ploopyvia_config.dragscroll_dragact_b_left >> 8;
                 value_data[1] = ploopyvia_config.dragscroll_dragact_b_left & 0xFF;
-                dprintf("dragscroll_dragact_b_left: %d\n", ploopyvia_config.dragscroll_dragact_b_left);
+                pv_dprintf("dabl:%d\n", ploopyvia_config.dragscroll_dragact_b_left);
+                pvv_dprintf("dragscroll_dragact_b_left: %d\n", ploopyvia_config.dragscroll_dragact_b_left);
                 break;
 
             case id_ploopystuff_dragscroll_dragact_b_right:
                 value_data[0] = ploopyvia_config.dragscroll_dragact_b_right >> 8;
                 value_data[1] = ploopyvia_config.dragscroll_dragact_b_right & 0xFF;
-                dprintf("dragscroll_dragact_b_right: %d\n", ploopyvia_config.dragscroll_dragact_b_right);
+                pv_dprintf("dabr:%d\n", ploopyvia_config.dragscroll_dragact_b_right);
+                pvv_dprintf("dragscroll_dragact_b_right: %d\n", ploopyvia_config.dragscroll_dragact_b_right);
                 break;
 
             #if defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
                 case id_ploopystuff_turbo_fire_keycode_count:
                     *value_data = get_turbo_fire_keycount();
-                    dprintf("turbo_fire_duration: %d\n", get_turbo_fire_keycount());
+                    pv_dprintf("tfcou:%d\n", get_turbo_fire_keycount());
+                    pvv_dprintf("turbo_fire_keycode_count: %d\n", get_turbo_fire_keycount());
                     break;
 
                 case id_ploopystuff_turbo_fire_rate:
@@ -672,245 +746,257 @@
                     else{
                         *value_data = ploopyvia_config.turbo_fire_rate;
                     }
-
-                    dprintf("turbo_fire_rate: %d\n", ploopyvia_config.turbo_fire_rate);
+                    pv_dprintf("tfr:%d\n", ploopyvia_config.turbo_fire_rate);
+                    pvv_dprintf("turbo_fire_rate: %d\n", ploopyvia_config.turbo_fire_rate);
                     break;
 
                 case id_ploopystuff_turbo_fire_rate_range:
                     *value_data = ploopyvia_config.turbo_fire_rate_range;
-                    dprintf("turbo_fire_rate_range: %d\n", ploopyvia_config.turbo_fire_rate_range);
+                    pv_dprintf("tfrr:%d\n", ploopyvia_config.turbo_fire_rate_range);
+                    pvv_dprintf("turbo_fire_rate_range: %d\n", ploopyvia_config.turbo_fire_rate_range);
                     break;
 
                 case id_ploopystuff_turbo_fire_duration:
                     *value_data = ploopyvia_config.turbo_fire_duration;
-                    dprintf("turbo_fire_duration: %d\n", ploopyvia_config.turbo_fire_duration);
+                    pv_dprintf("tfd:%d\n", ploopyvia_config.turbo_fire_duration);
+                    pvv_dprintf("turbo_fire_duration: %d\n", ploopyvia_config.turbo_fire_duration);
                     break;
 
                 case id_ploopystuff_turbo_fire_keycode_a...(id_ploopystuff_turbo_fire_keycode_a + TURBO_FIRE_KEYCOUNT - 1):
                     uint8_t temp_kcindex = *value_id - id_ploopystuff_turbo_fire_keycode_a;
                     value_data[0] = ploopyvia_config.turbo_fire_keycodes[temp_kcindex] >> 8;
                     value_data[1] = ploopyvia_config.turbo_fire_keycodes[temp_kcindex] & 0xFF;
-                    dprintf("turbo_fire_keycodes[%d]: %d\n", temp_kcindex, ploopyvia_config.turbo_fire_keycodes[temp_kcindex]);
+                    pv_dprintf("tfk[%d]:%d\n", temp_kcindex, ploopyvia_config.turbo_fire_keycodes[temp_kcindex]);
+                    pvv_dprintf("turbo_fire_keycodes[%d]: %d\n", temp_kcindex, ploopyvia_config.turbo_fire_keycodes[temp_kcindex]);
                     break;
             #endif // defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
 
             case id_ploopystuff_dpi_as_slider:
                 *value_data = ploopyvia_config.dpi_as_slider;
-                dprintf("dpi_as_slider: %d\n", ploopyvia_config.dpi_as_slider);
+                pvv_dprintf("dpi_as_slider: %d\n", ploopyvia_config.dpi_as_slider);
                 break;
 
             case id_ploopystuff_config_size:
-                dprintf("config_size: %d\n", sizeof(ploopyvia_config));
                 value_data[0] = sizeof(ploopyvia_config) >> 8;
                 value_data[1] = sizeof(ploopyvia_config) & 0xFF;
+                pvv_dprintf("config_size: %d\n", sizeof(ploopyvia_config));
                 break;
 
             case id_ploopystuff_feature_combos:
                 #if defined(COMBO_ENABLE)
-                    dprintf("feature_combos: %d\n", FEATURE_AVAILABLE);
                     *value_data = FEATURE_AVAILABLE;
+                    pvv_dprintf("feature_combos: %d\n", FEATURE_AVAILABLE);
                 #else
-                    dprintf("feature_combos: %d\n", FEATURE_UNAVAILABLE);
                     *value_data = FEATURE_UNAVAILABLE;
+                    pvv_dprintf("feature_combos:%d\n", FEATURE_UNAVAILABLE);
                 #endif // COMBO_ENABLE
                 break;
 
             case id_ploopystuff_feature_gestures:
                 #if defined(PLOOPY_MSGESTURE_ENABLE)
-                    dprintf("feature_gestures: %d\n", FEATURE_AVAILABLE);
                     *value_data = FEATURE_AVAILABLE;
+                    pvv_dprintf("feature_gestures:%d\n", FEATURE_AVAILABLE);
                 #else
-                    dprintf("feature_gestures: %d\n", FEATURE_UNAVAILABLE);
                     *value_data = FEATURE_UNAVAILABLE;
+                    pvv_dprintf("feature_gestures:%d\n", FEATURE_UNAVAILABLE);
                 #endif // PLOOPY_MSGESTURE_ENABLE
                 break;
 
             case id_ploopystuff_feature_dragscroll:
                 #if defined(BETTER_DRAGSCROLL)
-                    dprintf("feature_dragscroll: %d\n", FEATURE_AVAILABLE);
                     *value_data = FEATURE_AVAILABLE;
+                    pvv_dprintf("feature_dragscroll:%d\n", FEATURE_AVAILABLE);
                 #else
-                    dprintf("feature_dragscroll: %d\n", FEATURE_UNAVAILABLE);
                     *value_data = FEATURE_UNAVAILABLE;
+                    pvv_dprintf("feature_dragscroll:%d\n", FEATURE_UNAVAILABLE);
                 #endif // BETTER_DRAGSCROLL
                 break;
 
             case id_ploopystuff_feature_sniper:
                 #if defined(BETTER_DRAGSCROLL)
-                    dprintf("feature_sniper: %d\n", FEATURE_AVAILABLE);
                     *value_data = FEATURE_AVAILABLE;
+                    pvv_dprintf("feature_sniper:%d\n", FEATURE_AVAILABLE);
                 #else
-                    dprintf("feature_sniper: %d\n", FEATURE_UNAVAILABLE);
                     *value_data = FEATURE_UNAVAILABLE;
+                    pvv_dprintf("feature_sniper:%d\n", FEATURE_UNAVAILABLE);
                 #endif // BETTER_DRAGSCROLL
                 break;
 
             case id_ploopystuff_feature_dragscroll_straighten:
                 #if defined(COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
-                    dprintf("feature_dragscroll_straighten: FEATURE_AVAILABLE\n");
                     *value_data = FEATURE_AVAILABLE;
+                    pvv_dprintf("feature_dragscroll_straighten:%d\n", FEATURE_AVAILABLE);
                 #else
-                    dprintf("feature_dragscroll_straighten: FEATURE_UNAVAILABLE\n");
                     *value_data = FEATURE_UNAVAILABLE;
+                    pvv_dprintf("feature_dragscroll_straighten:%d\n", FEATURE_UNAVAILABLE);
                 #endif // COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE
                 break;
 
             case id_ploopystuff_feature_mouse_jiggler:
                 #if defined(COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE)
-                    dprintf("feature_mouse_jiggler: FEATURE_AVAILABLE\n");
                     *value_data = FEATURE_AVAILABLE;
+                    pvv_dprintf("feature_mouse_jiggler:%d\n", FEATURE_AVAILABLE);
                 #else
-                    dprintf("feature_mouse_jiggler: FEATURE_UNAVAILABLE\n");
                     *value_data = FEATURE_UNAVAILABLE;
+                    pvv_dprintf("feature_mouse_jiggler:%d\n", FEATURE_UNAVAILABLE);
                 #endif // COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE
                 break;
 
             case id_ploopystuff_feature_sensor_rotation:
                 #if defined(POINTING_DEVICE_DRIVER_PMW3360)
                     #if defined(COMMUNITY_MODULE_PMW_ROTATION_ENABLE)
-                        dprintf("feature_sensor_rotation: FEATURE_AVAILABLE\n");
                         *value_data = FEATURE_AVAILABLE;
+                        pvv_dprintf("feature_sensor_rotation:%d\n", FEATURE_AVAILABLE);
                     #else
-                        dprintf("feature_sensor_rotation: FEATURE_UNAVAILABLE\n");
                         *value_data = FEATURE_UNAVAILABLE;
+                        pvv_dprintf("feature_sensor_rotation:%d\n", FEATURE_UNAVAILABLE);
                     #endif
                 #else
-                    dprintf("feature_sensor_rotation: FEATURE_UNSUPPORTED\n");
                     *value_data = FEATURE_UNSUPPORTED;
+                    pvv_dprintf("feature_sensor_rotation:%d\n", FEATURE_UNSUPPORTED);
                 #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
                 break;
 
             case id_ploopystuff_feature_task_switch:
                 #if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE)
-                    dprintf("feature_task_switch: %d\n", FEATURE_AVAILABLE);
                     *value_data = FEATURE_AVAILABLE;
+                    pvv_dprintf("feature_task_switch:%d\n", FEATURE_AVAILABLE);
                 #else
-                    dprintf("feature_task_switch: %d\n", FEATURE_UNAVAILABLE);
                     *value_data = FEATURE_UNAVAILABLE;
+                    pvv_dprintf("feature_task_switch:%d\n", FEATURE_UNAVAILABLE);
                 #endif // COMMUNITY_MODULE_TASK_SWITCH_ENABLE
                 break;
 
             case id_ploopystuff_feature_task_switch_menus:
                 #if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
-                    dprintf("feature_task_switch_menus: %d\n", FEATURE_AVAILABLE);
                     *value_data = FEATURE_AVAILABLE;
+                    pvv_dprintf("feature_task_switch_menus:%d\n", FEATURE_AVAILABLE);
                 #else
-                    dprintf("feature_task_switch_menus: %d\n", FEATURE_UNAVAILABLE);
                     *value_data = FEATURE_UNAVAILABLE;
+                    pvv_dprintf("feature_task_switch_menus:%d\n", FEATURE_UNAVAILABLE);
                 #endif // COMMUNITY_MODULE_TASK_SWITCH_ENABLE && defined(TASK_SWITCH_MENUS_ENABLE)
                 break;
 
             case id_ploopystuff_feature_turbo_fire:
                 #if defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
-                    dprintf("feature_sensor_rotation: %d\n", FEATURE_AVAILABLE);
                     *value_data = FEATURE_AVAILABLE;
+                    pvv_dprintf("feature_sensor_rotation:%d\n", FEATURE_AVAILABLE);
                 #else
-                    dprintf("feature_sensor_rotation: %d\n", FEATURE_UNAVAILABLE);
                     *value_data = FEATURE_UNAVAILABLE;
+                    pvv_dprintf("feature_sensor_rotation:%d\n", FEATURE_UNAVAILABLE);
                 #endif // COMMUNITY_MODULE_TURBO_FIRE_ENABLE
                 break;
 
             case id_ploopystuff_feature_morse_code:
                 #if defined(COMMUNITY_MODULE_MORSE_CODE_ENABLE)
-                    dprintf("feature_morse_code: %d\n", FEATURE_AVAILABLE);
                     *value_data = FEATURE_AVAILABLE;
+                    pvv_dprintf("feature_morse_code:%d\n", FEATURE_AVAILABLE);
                 #else
-                    dprintf("feature_morse_code: %d\n", FEATURE_UNAVAILABLE);
                     *value_data = FEATURE_UNAVAILABLE;
+                    pvv_dprintf("feature_morse_code:%d\n", FEATURE_UNAVAILABLE);
                 #endif // COMMUNITY_MODULE_MORSE_CODE_ENABLE
                 break;
 
             case id_ploopystuff_feature_pointing_device_accel:
-            #if(defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)||defined(COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE))
-                    dprintf("feature_pointing_device_accel: %d\n", FEATURE_AVAILABLE);
+                #if(defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)||defined(COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE))
                     *value_data = FEATURE_AVAILABLE;
+                    pvv_dprintf("feature_pointing_device_accel:%d\n", FEATURE_AVAILABLE);
                 #else
-                    dprintf("feature_pointing_device_accel: %d\n", FEATURE_UNAVAILABLE);
                     *value_data = FEATURE_UNAVAILABLE;
+                    pvv_dprintf("feature_pointing_device_accel:%d\n", FEATURE_UNAVAILABLE);
                 #endif // COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE
                 break;
 
             case id_ploopystuff_sensor_type:
                 #if defined(POINTING_DEVICE_DRIVER_PMW3360)
-                    dprintf("sensor_type: SENSOR_PMW3360\n");
                     *value_data = SENSOR_PMW3360;
+                    pvv_dprintf("sensor_type:SENSOR_PMW3360\n");
                 #elif defined(POINTING_DEVICE_DRIVER_ADNS5050)
-                    dprintf("sensor_type: SENSOR_ADNS5050\n");
                     *value_data = SENSOR_ADNS5050;
+                    pvv_dprintf("sensor_type:SENSOR_ADNS5050\n");
                 #elif defined(POINTING_DEVICE_DRIVER_PAW3222)
-                    dprintf("sensor_type: SENSOR_PAW3222\n");
                     *value_data = SENSOR_PAW3222;
+                    pvv_dprintf("sensor_type:SENSOR_PAW3222\n");
                 #else
-                    dprintf("sensor_type: SENSOR_UNKNOWN\n");
                     *value_data = SENSOR_UNKNOWN;
+                    pvv_dprintf("sensor_type:SENSOR_UNKNOWN\n");
                 #endif
                 break;
 
             case id_ploopystuff_mcu_type:
                 #if defined(QMK_MCU_RP2040)
-                    dprintf("mcu_type: MCU_RP2040\n");
                     *value_data = MCU_RP2040;
+                    pvv_dprintf("mcu_type:MCU_RP2040\n");
                 #elif defined(QMK_MCU_ATMEGA32U4)
-                    dprintf("mcu_type: MCU_ATMEGA32U4\n");
                     *value_data = MCU_ATMEGA32U4;
+                    pvv_dprintf("mcu_type:MCU_ATMEGA32U4\n");
                 #elif defined(QMK_MCU_STM32L432)
-                    dprintf("mcu_type: MCU_STM32L432\n");
                     *value_data = MCU_STM32L432;
+                    pvv_dprintf("mcu_type:MCU_STM32L432\n");
                 #else
-                    dprintf("mcu_type: MCU_UNKNOWN");
                     *value_data = MCU_UNKNOWN;
+                    pvv_dprintf("mcu_type:MCU_UNKNOWN");
                 #endif
                 break;
 
             #if(defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)||defined(COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE))
-            case id_pointing_device_enabled:
-                dprintf("pointing_device_enabled: %d\n", ploopyvia_config.pointer_accel_enabled);
-                value_data[0] = ploopyvia_config.pointer_accel_enabled;
-                break;
-            case id_pointing_device_takeoff:
-                uint16_t takeoff = ploopyvia_config.pointer_accel_takeoff;
-                dprintf("pointing_device_takeoff: %d\n", takeoff);
-                value_data[0] = takeoff >> 8;
-                value_data[1] = takeoff & 0xFF;
-                break;
-            case id_pointing_device_growth_rate:
-                uint16_t growth_rate = ploopyvia_config.pointer_accel_growth_rate;
-                dprintf("pointing_device_growth_rate: %d\n", growth_rate);
-                value_data[0] = growth_rate >> 8;
-                value_data[1] = growth_rate & 0xFF;
-                break;
-            case id_pointing_device_offset:
-                uint16_t offset = ploopyvia_config.pointer_accel_offset;
-                dprintf("pointing_device_offset: %d\n", offset);
-                value_data[0] = offset >> 8;
-                value_data[1] = offset & 0xFF;
-                break;
-            case id_pointing_device_limit:
-                uint8_t limit = ploopyvia_config.pointer_accel_limit;
-                dprintf("pointing_device_limit: %d\n", limit);
-                value_data[0] = limit;
-                break;
+                case id_pointing_accel_enabled:
+                    value_data[0] = ploopyvia_config.pointing_accel_enabled;
+                    pv_dprintf("PAe:%d\n", ploopyvia_config.pointing_accel_enabled);
+                    pvv_dprintf("pointing_accel_enabled: %d\n", ploopyvia_config.pointing_accel_enabled);
+                    break;
+                case id_pointing_accel_takeoff:
+                    uint16_t takeoff = ploopyvia_config.pointing_accel_takeoff;
+                    value_data[0] = takeoff >> 8;
+                    value_data[1] = takeoff & 0xFF;
+                    pv_dprintf("PAt:%d\n", takeoff);
+                    pvv_dprintf("pointing_accel_takeoff: %d\n", takeoff);
+                    break;
+                case id_pointing_accel_growth_rate:
+                    uint16_t growth_rate = ploopyvia_config.pointing_accel_growth_rate;
+                    value_data[0] = growth_rate >> 8;
+                    value_data[1] = growth_rate & 0xFF;
+                    pv_dprintf("PAg:%d\n", growth_rate);
+                    pvv_dprintf("pointing_accel_growth_rate: %d\n", growth_rate);
+                    break;
+                case id_pointing_accel_offset:
+                    uint16_t offset = ploopyvia_config.pointing_accel_offset;
+                    value_data[0] = offset >> 8;
+                    value_data[1] = offset & 0xFF;
+                    pv_dprintf("PAo:%d\n", offset);
+                    pvv_dprintf("pointing_accel_offset: %d\n", offset);
+                    break;
+                case id_pointing_accel_limit:
+                    uint8_t limit = ploopyvia_config.pointing_accel_limit;
+                    value_data[0] = limit;
+                    pv_dprintf("PAl:%d\n", limit);
+                    pvv_dprintf("pointing_accel_limit: %d\n", limit);
+                    break;
             #endif // defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
 
             #if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
-            case id_ploopystuff_task_switch_delay:
-                dprintf("task_switch_delay: %d\n", ploopyvia_config.task_switch_delay);
-                value_data[0] = ploopyvia_config.task_switch_delay >> 8;
-                value_data[1] = ploopyvia_config.task_switch_delay & 0xFF;
-                break;
-            case id_ploopystuff_task_switch_tap_key:
-                dprintf("task_switch_tap_key: %d\n", ploopyvia_config.task_switch_tap_key);
-                value_data[0] = ploopyvia_config.task_switch_tap_key >> 8;
-                value_data[1] = ploopyvia_config.task_switch_tap_key & 0xFF;
-                break;
-            case id_ploopystuff_task_switch_mod:
-                dprintf("task_switch_mod: %d\n", ploopyvia_config.task_switch_mod);
-                *value_data = ploopyvia_config.task_switch_mod;
-                break;
-            case id_ploopystuff_task_switch_rev_mod:
-                dprintf("task_switch_rev_mod: %d\n", ploopyvia_config.task_switch_rev_mod);
-                *value_data = ploopyvia_config.task_switch_rev_mod;
-                break;
+                case id_ploopystuff_task_switch_delay:
+                    value_data[0] = ploopyvia_config.task_switch_delay >> 8;
+                    value_data[1] = ploopyvia_config.task_switch_delay & 0xFF;
+                    pv_dprintf("TSd:%d\n", ploopyvia_config.task_switch_delay);
+                    pvv_dprintf("task_switch_delay: %d\n", ploopyvia_config.task_switch_delay);
+                    break;
+                case id_ploopystuff_task_switch_tap_key:
+                    value_data[0] = ploopyvia_config.task_switch_tap_key >> 8;
+                    value_data[1] = ploopyvia_config.task_switch_tap_key & 0xFF;
+                    pv_dprintf("TSk:%d\n", ploopyvia_config.task_switch_tap_key);
+                    pvv_dprintf("task_switch_tap_key: %d\n", ploopyvia_config.task_switch_tap_key);
+                    break;
+                case id_ploopystuff_task_switch_mod:
+                    *value_data = ploopyvia_config.task_switch_mod;
+                    pv_dprintf("TSm:%d\n", ploopyvia_config.task_switch_mod);
+                    pvv_dprintf("task_switch_mod: %d\n", ploopyvia_config.task_switch_mod);
+                    break;
+                case id_ploopystuff_task_switch_rev_mod:
+                    *value_data = ploopyvia_config.task_switch_rev_mod;
+                    pv_dprintf("TSr:%d\n", ploopyvia_config.task_switch_rev_mod);
+                    pvv_dprintf("task_switch_rev_mod: %d\n", ploopyvia_config.task_switch_rev_mod);
+                    break;
             #endif // defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
         }
     }

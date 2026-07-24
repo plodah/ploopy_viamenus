@@ -19,7 +19,7 @@
         "features": {
             "backlight": false,
             "combo": true,
-            "console": true,
+            "console": false,
             "deferred_exec": true,
             "encoder_map": false,
             "rgblight": true,

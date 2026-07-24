@@ -115,11 +115,11 @@ enum via_ploopystuff_value {
     id_ploopystuff_task_switch_rev_mod,
     id_ploopystuff_task_switch_tap_key,
     id_ploopystuff_task_switch_delay, // 88
-    id_pointing_device_takeoff = 101,
-    id_pointing_device_growth_rate,
-    id_pointing_device_offset,
-    id_pointing_device_limit,
-    id_pointing_device_enabled,
+    id_pointing_accel_takeoff = 101,
+    id_pointing_accel_growth_rate,
+    id_pointing_accel_offset,
+    id_pointing_accel_limit,
+    id_pointing_accel_enabled,
     id_ploopystuff_dummy_menuitem = 230,
     id_ploopystuff_dpi_as_slider,
     id_ploopystuff_config_size,
@@ -208,11 +208,11 @@ typedef struct PACKED {
     #endif // PLOOPY_MSGESTURE_ENABLE
     #if(defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)||defined(COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE))
         // 17 bytes
-        bool  pointer_accel_enabled;
-        uint16_t pointer_accel_takeoff;
-        uint16_t pointer_accel_growth_rate;
-        uint16_t pointer_accel_offset;
-        uint16_t pointer_accel_limit;
+        bool  pointing_accel_enabled;
+        uint16_t pointing_accel_takeoff;
+        uint16_t pointing_accel_growth_rate;
+        uint16_t pointing_accel_offset;
+        uint16_t pointing_accel_limit;
     #endif // def COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE
     #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE // 2 Bytes
         int8_t   pointer_rotation_value;
@@ -318,13 +318,13 @@ static const via_ploopystuff_config ploopyvia_config_default = {
     #endif // PLOOPY_MSGESTURE_ENABLE
 
     #if(defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)||defined(COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE))
-        .pointer_accel_enabled = POINTING_DEVICE_ACCEL_ENABLE_DEF,
+        .pointing_accel_enabled = POINTING_DEVICE_ACCEL_ENABLE_DEF,
         #if defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
-            .pointer_accel_takeoff = POINTING_DEVICE_ACCEL_TAKEOFF,
+            .pointing_accel_takeoff = POINTING_DEVICE_ACCEL_TAKEOFF,
         #endif
-        .pointer_accel_growth_rate = POINTING_DEVICE_ACCEL_GROWTH_RATE,
-        .pointer_accel_offset = POINTING_DEVICE_ACCEL_OFFSET,
-        .pointer_accel_limit = POINTING_DEVICE_ACCEL_LIMIT,
+        .pointing_accel_growth_rate = POINTING_DEVICE_ACCEL_GROWTH_RATE,
+        .pointing_accel_offset = POINTING_DEVICE_ACCEL_OFFSET,
+        .pointing_accel_limit = POINTING_DEVICE_ACCEL_LIMIT,
     #endif // COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE
 
     #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE
@@ -346,3 +346,33 @@ static const via_ploopystuff_config ploopyvia_config_default = {
         .turbo_fire_keycodes = {MS_BTN1},
     #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
 };
+
+#if defined(PLOOPYVIA_DEBUG) && defined(CONSOLE_ENABLE)
+#pragma message "PLOOPYVIA_DEBUG"
+#    include <debug.h>
+#    include <print.h>
+#    define pv_dprintf(...)            \
+        do {                           \
+            dprintf("%s: ", __func__); \
+            dprintf(__VA_ARGS__);      \
+        } while (0)
+#else
+#    define pv_dprintf(...) \
+        do {                \
+        } while (0)
+#endif
+
+#if defined(PLOOPYVIA_DEBUG_VERBOSE) && defined(CONSOLE_ENABLE)
+#pragma message "PLOOPYVIA_DEBUG_VERBOSE"
+#    include <debug.h>
+#    include <print.h>
+#    define pvv_dprintf(...)            \
+        do {                           \
+            dprintf("%s: ", __func__); \
+            dprintf(__VA_ARGS__);      \
+        } while (0)
+#else
+#    define pvv_dprintf(...) \
+        do {                \
+        } while (0)
+#endif
