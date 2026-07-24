@@ -1238,7 +1238,7 @@
                                 ["Available", 1],
                                 ["Disabled in firmware", 2]
                             ],
-                            "content": ["id_feature_pointer_acc", 0, 245]
+                            "content": ["id_feature_pointing_device_accel", 0, 245]
                         }
                     ]
                 },
