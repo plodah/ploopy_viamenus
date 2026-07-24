@@ -1,13 +1,16 @@
 {
     "version": 1,
-    "notes": "This is a secondary keymap used by the author for testing",
+    "notes": "This is a secondary keymap used by the author",
     "author": "plodah",
     "documentation": "https://github.com/plodah/ploopy_viamenus/blob/main/README.md",
     "keyboard": "ploopyco/trackball_mini",
-    "keymap": "plodah_testing",
+    "keymap": "plodah",
     "layout": "LAYOUT",
     "modules": [
-        "plodah/task_switch"
+        "plodah/dragscroll_straighten",
+        "plodah/mouse_jiggler",
+        "plodah/task_switch",
+        "plodah/turbo_fire"
     ],
     "config": {
         "build": {
@@ -15,19 +18,19 @@
         },
         "features": {
             "backlight": false,
-            "combo": false,
-            "console": true,
-            "deferred_exec": false,
+            "combo": true,
+            "console": false,
+            "deferred_exec": true,
             "encoder_map": true,
             "rgblight": false,
             "rgb_matrix": false,
-            "tap_dance": false,
+            "tap_dance": true,
             "via": true,
             "space_cadet": false,
             "grave_esc": false,
             "magic": false
         },
-        "keyboard_name": "Trackball Mini | plodah_testing",
+        "keyboard_name": "Trackball Mini | plodah",
         "manufacturer": "Ploopy",
         "usb": {
             "shared_endpoint": {
