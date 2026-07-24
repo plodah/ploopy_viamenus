@@ -68,14 +68,14 @@
     }
 
     void expire_debounce (void){
-        dprintf("gesture debounce expired\n");
+        mg_dprintf("gesture debounce expired\n");
         debounce_active = false;
         msgesture_x.accum = 0;
         msgesture_y.accum = 0;
     }
 
     void expire_cooldown (void){
-        dprintf("gesture cooldown expired\n");
+        mg_dprintf("gesture cooldown expired\n");
         cooldown_active = false;
         msgesture_x.accum = 0;
         msgesture_x.count = 0;
@@ -105,19 +105,19 @@
     #else // MSGESTURE_MODE_DE
         void housekeeping_task_msgesture(void) {
             if (cooldown_active && timer_elapsed(cooldown_timer) > PLOOPY_MSGESTURE_COOLDOWN) {
-                dprintf("expire_cooldown\n");
+                mg_dprintf("expire_cooldown\n");
                 expire_cooldown();
             }
             if (debounce_active && timer_elapsed(debounce_timer) > PLOOPY_MSGESTURE_DEBOUNCE) {
-                dprintf("expire_debounce\n");
+                mg_dprintf("expire_debounce\n");
                 expire_debounce();
             }
             if (msgesture_x.count >= 1 && timer_elapsed(msgesture_x.timer) > PLOOPY_MSGESTURE_TIMEOUT) {
-                dprintf("expire_msgesture_x\n");
+                mg_dprintf("expire_msgesture_x\n");
                 msgesture_reset_x();
             }
             if (msgesture_y.count >= 1 && timer_elapsed(msgesture_y.timer) > PLOOPY_MSGESTURE_TIMEOUT) {
-                dprintf("expire_msgesture_y\n");
+                mg_dprintf("expire_msgesture_y\n");
                 msgesture_reset_y();
             }
         }
@@ -181,7 +181,7 @@
                 )
             ) {
                 msgesture_x.count++;
-                dprintf("==X==> C:%d,%d  acc:%d,%d (%d,%d) \n",
+                mg_dprintf("==X==> C:%d,%d  acc:%d,%d (%d,%d) \n",
                     msgesture_x.count, msgesture_y.count,
                     msgesture_x.accum, msgesture_y.accum,
                     abs(msgesture_x.accum), abs(msgesture_y.accum)
@@ -190,17 +190,17 @@
                 msgesture_x.stage = msgesture_x.accum > PLOOPY_MSGESTURE_THRESHOLD;
                 debounce_active = true;
                 #if defined(MSGESTURE_MODE_DE)
-                    dprintf("MsGesture X start timeout\n");
+                    mg_dprintf("MsGesture X start timeout\n");
                     cancel_deferred_exec(msgesture_x.timeout);
                     msgesture_x.timeout = defer_exec( PLOOPY_MSGESTURE_TIMEOUT, expire_timeout_x_de, NULL );
                     /*
                     // This is logically better but takes up 80 bytes. I hate this.
                     if(msgesture_x.timeout != INVALID_DEFERRED_TOKEN){
-                        dprintf("MsGesture X extend\n");
+                        mg_dprintf("MsGesture X extend\n");
                         extend_deferred_exec(msgesture_x.timeout, PLOOPY_MSGESTURE_TIMEOUT);
                     }
                     else{
-                        dprintf("MsGesture X new\n");
+                        mg_dprintf("MsGesture X new\n");
                         msgesture_x.timeout = defer_exec( PLOOPY_MSGESTURE_TIMEOUT, expire_timeout_x_de, NULL );
                     }
                     */
@@ -230,7 +230,7 @@
                 )
             ) {
                 msgesture_y.count++;
-                dprintf(
+                mg_dprintf(
                     "==Y==> C:%d,%d  acc:%d,%d (%d,%d) \n",
                     msgesture_x.count, msgesture_y.count,
                     msgesture_x.accum, msgesture_y.accum,
@@ -240,17 +240,17 @@
                 debounce_active = true;
 
                 #if defined(MSGESTURE_MODE_DE)
-                    dprintf("MsGesture Y start timeout\n");
+                    mg_dprintf("MsGesture Y start timeout\n");
                     cancel_deferred_exec(msgesture_y.timeout);
                     msgesture_y.timeout = defer_exec( PLOOPY_MSGESTURE_TIMEOUT, expire_timeout_y_de, NULL );
                     /*
                     // This is logically better but takes up 80 bytes. I hate this.
                     if(msgesture_y.timeout != INVALID_DEFERRED_TOKEN){
-                        dprintf("MsGesture Y extend\n");
+                        mg_dprintf("MsGesture Y extend\n");
                         extend_deferred_exec(msgesture_y.timeout, PLOOPY_MSGESTURE_TIMEOUT);
                     }
                     else{
-                        dprintf("MsGesture Y new\n");
+                        mg_dprintf("MsGesture Y new\n");
                         msgesture_y.timeout = defer_exec( PLOOPY_MSGESTURE_TIMEOUT, expire_timeout_y_de, NULL );
                     }
                     */
@@ -263,12 +263,12 @@
         }
 
         if( msgesture_x.count >= gestureCount ) {
-            dprintf("X gesture act:%d\n", msgesture_x.action);
+            mg_dprintf("X gesture act:%d\n", msgesture_x.action);
             msgesture_triggered(msgesture_x.action);
         }
 
         if( msgesture_y.count >= gestureCount ) {
-            dprintf("Y gesture act:%d\n", msgesture_y.action);
+            mg_dprintf("Y gesture act:%d\n", msgesture_y.action);
             msgesture_triggered(msgesture_y.action);
         }
         return mouse_report;

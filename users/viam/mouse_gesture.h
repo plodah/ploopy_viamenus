@@ -38,3 +38,18 @@ typedef struct msgesture_t {
 msgesture_t msgesture_x;
 msgesture_t msgesture_y;
 uint8_t gestureCount;
+
+#if defined(MSGESTURE_DEBUG) && defined(CONSOLE_ENABLE)
+#pragma message "PLOOPYVIA_DEBUG"
+#    include <debug.h>
+#    include <print.h>
+#    define mg_dprintf(...)            \
+        do {                           \
+            dprintf("%s: ", __func__); \
+            dprintf(__VA_ARGS__);      \
+        } while (0)
+#else
+#    define mg_dprintf(...) \
+        do {                \
+        } while (0)
+#endif
