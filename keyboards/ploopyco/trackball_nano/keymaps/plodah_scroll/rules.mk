@@ -1,0 +1,2 @@
+AVR_USE_MINIMAL_PRINTF = yes
+USER_NAME = viam
