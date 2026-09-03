@@ -1,0 +1,64 @@
+{
+    "version": 1,
+    "notes": "This is a secondary keymap used by the author",
+    "author": "plodah",
+    "documentation": "https://github.com/plodah/ploopy_viamenus/blob/main/README.md",
+    "keymap": "plodah_testing",
+    "layout": "LAYOUT",
+    "modules": [
+        "drashna/pointing_device_accel",
+        "plodah/dragscroll_straighten",
+        "plodah/morse_code",
+        "plodah/mouse_jiggler",
+        "plodah/pmw_rotation",
+        "plodah/task_switch",
+        "plodah/turbo_fire"
+    ],
+    "config": {
+        "eeprom": {
+            "wear_leveling":{
+                "backing_size": 65536,
+                "logical_size": 16384
+            }
+        },
+        "features": {
+            "backlight": false,
+            "combo": true,
+            "console": false,
+            "deferred_exec": true,
+            "encoder_map": false,
+            "rgblight": true,
+            "rgb_matrix": false,
+            "tap_dance": true,
+            "via": true
+        },
+        "rgblight": {
+            "default": {
+                "animation": "static_light",
+                "on": true,
+                "hue": 123,
+                "sat": 240,
+                "val": 127
+            },
+            "led_count": 2,
+            "max_brightness": 191,
+            "animations": {
+                "breathing": true,
+                "rainbow_mood": true,
+                "rainbow_swirl": true,
+                "snake": true,
+                "knight": true,
+                "christmas": true,
+                "static_gradient": true,
+                "rgb_test": true,
+                "alternating": true,
+                "twinkle": true
+            }
+        },
+        "ws2812": {
+            "driver": "vendor"
+        },
+        "keyboard_name": "8-button Adept (Madromys) | plodah",
+        "manufacturer": "Ploopy"
+    }
+}
