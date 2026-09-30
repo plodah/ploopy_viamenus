@@ -3,7 +3,7 @@
     "notes": "This is a secondary keymap used by the author for testing",
     "author": "plodah",
     "documentation": "https://github.com/plodah/ploopy_viamenus/blob/main/README.md",
-    "keymap": "plodah_testing",
+    "keymap": "plodah(viam)_testing",
     "layout": "LAYOUT",
     "modules": [
         "drashna/pointing_device_accel",
@@ -11,6 +11,7 @@
         "plodah/morse_code",
         "plodah/mouse_jiggler",
         "plodah/pmw_rotation",
+        "plodah/rgblight_timeout",
         "plodah/task_switch",
         "plodah/turbo_fire"
     ],
@@ -27,15 +28,38 @@
             "console": true,
             "deferred_exec": true,
             "encoder_map": false,
-            "rgblight": false,
+            "rgblight": true,
             "rgb_matrix": false,
             "tap_dance": true,
             "via": true
         },
+        "rgblight": {
+            "default": {
+                "animation": "static_light",
+                "on": true,
+                "hue": 123,
+                "sat": 240,
+                "val": 127
+            },
+            "led_count": 2,
+            "max_brightness": 191,
+            "animations": {
+                "breathing": true,
+                "rainbow_mood": true,
+                "rainbow_swirl": true,
+                "snake": true,
+                "knight": true,
+                "christmas": true,
+                "static_gradient": true,
+                "rgb_test": true,
+                "alternating": true,
+                "twinkle": true
+            }
+        },
         "ws2812": {
             "driver": "vendor"
         },
-        "keyboard_name": "Adept (Madromys) | plodah_testing",
+        "keyboard_name": "Adept (Madromys) | plodah(viam)",
         "manufacturer": "Ploopy",
         "usb": {
             "shared_endpoint": {
