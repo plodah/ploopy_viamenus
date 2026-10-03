@@ -7,7 +7,9 @@
     "keymap": "plodah_testing",
     "layout": "LAYOUT",
     "modules": [
+        "drashna/pointing_device_accel",
         "plodah/dragscroll_straighten",
+        "plodah/morse_code",
         "plodah/mouse_jiggler",
         "plodah/pmw_rotation",
         "plodah/task_switch",

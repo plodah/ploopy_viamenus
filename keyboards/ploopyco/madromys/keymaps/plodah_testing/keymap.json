@@ -28,6 +28,7 @@
             "console": true,
             "deferred_exec": true,
             "encoder_map": false,
+            "os_detection": true,
             "rgblight": true,
             "rgb_matrix": false,
             "tap_dance": true,

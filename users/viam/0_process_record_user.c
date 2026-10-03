@@ -13,9 +13,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
         #if defined(COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE)
             case PL_MSJG:
-                // jiggler_toggle();
                 process_record_mouse_jiggler(COMMUNITY_MODULE_MOUSE_JIGGLER_TOGGLE, record);
-                ploopyvia_config.msjiggler_enabled = jiggler_get_state();
                 return false;
         #endif // defined(COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE)
 
@@ -31,7 +29,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             case PMW_CW:
             case PMW_RST:
                 process_record_pmw_rotation ((keycode - (PMW_CCW - COMMUNITY_MODULE_PMW_ROTATE_CCW)), record);
-                pmw_rotation_update_via_keypress();
                 return false;
         #endif // defined(COMMUNITY_MODULE_PMW_ROTATION_ENABLE)
 

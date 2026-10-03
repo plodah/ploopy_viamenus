@@ -18,7 +18,7 @@
 
 #include "common.h"
 
-#define EECONFIG_USER_DATA_SIZE 49
+#define EECONFIG_USER_DATA_SIZE 43
 #define PLOOPY_MSGESTURE_ENABLE
 #define PLOOPY_DPI_DEFAULT 1 // 0 indexed
 #define PLOOPY_DPI_OPTIONS { 300, 400, 500, 600, 800 }

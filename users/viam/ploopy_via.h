@@ -3,10 +3,10 @@
 #if defined(BETTER_DRAGSCROLL)
     #include "better_dragscroll.h"
     #if !defined(BETTER_DRAGSCROLL_ENABLE_LAYER_A)
-        #define BETTER_DRAGSCROLL_ENABLE_LAYER_A 255
+        #define BETTER_DRAGSCROLL_ENABLE_LAYER_A 15
     #endif // BETTER_DRAGSCROLL_ENABLE_LAYER_A
     #if !defined(BETTER_DRAGSCROLL_ENABLE_LAYER_B)
-        #define BETTER_DRAGSCROLL_ENABLE_LAYER_B 255
+        #define BETTER_DRAGSCROLL_ENABLE_LAYER_B 15
     #endif // BETTER_DRAGSCROLL_ENABLE_LAYER_B
 #endif // defined(BETTER_DRAGSCROLL)
 
@@ -14,46 +14,13 @@
     #define PLOOPY_DPI_OPTIONS { 600, 900, 1200, 1600, 2400 }
 #endif
 
-#ifdef COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
-    #include "mouse_jiggler.h"
-#endif // def COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE
 #include "mouse_gesture.h"
-#ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE
-    #include "pmw_rotation.h"
-#endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
-#if defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
-    #include "dragscroll_straighten.h"
-    #if !defined(DRAGSCROLL_STRAIGHTEN_SENSITIVITY)
-        #define DRAGSCROLL_STRAIGHTEN_SENSITIVITY 0
-    #endif // DRAGSCROLL_STRAIGHTEN_SENSITIVITY
-#endif // defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
-#if defined(COMMUNITY_MODULE_TURBO_FIRE_ENABLE)
-    #include "turbo_fire.h"
-#endif // COMMUNITY_MODULE_TURBO_FIRE_ENABLE
 #if defined(COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE)
     #include "basic_pointing_acceleration.h"
     #if !defined(POINTING_DEVICE_ACCEL_ENABLE_DEF)
         #define POINTING_DEVICE_ACCEL_ENABLE_DEF 0
     #endif // POINTING_DEVICE_ACCEL_ENABLE_DEF
 #endif // COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE
-#if defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
-    #if !defined(POINTING_DEVICE_ACCEL_ENABLE_DEF)
-        #define POINTING_DEVICE_ACCEL_ENABLE_DEF 0
-    #endif // POINTING_DEVICE_ACCEL_ENABLE_DEF
-    #if !defined(POINTING_DEVICE_ACCEL_TAKEOFF)
-        #define POINTING_DEVICE_ACCEL_TAKEOFF 200
-    #endif // POINTING_DEVICE_ACCEL_TAKEOFF
-    #if !defined(POINTING_DEVICE_ACCEL_GROWTH_RATE)
-        #define POINTING_DEVICE_ACCEL_GROWTH_RATE 25
-    #endif // POINTING_DEVICE_ACCEL_GROWTH_RATE
-    #if !defined(POINTING_DEVICE_ACCEL_OFFSET)
-        #define POINTING_DEVICE_ACCEL_OFFSET 220
-    #endif // POINTING_DEVICE_ACCEL_OFFSET
-    #if !defined(POINTING_DEVICE_ACCEL_LIMIT)
-        #define POINTING_DEVICE_ACCEL_LIMIT 20
-    #endif // POINTING_DEVICE_ACCEL_LIMIT
-    #include "pointing_device_accel.h"
-#endif // COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE
 #if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
     #include "task_switch.h"
 #endif // COMMUNITY_MODULE_TASK_SWITCH_ENABLE && defined(TASK_SWITCH_MENUS_ENABLE)
@@ -115,11 +82,22 @@ enum via_ploopystuff_value {
     id_ploopystuff_task_switch_rev_mod,
     id_ploopystuff_task_switch_tap_key,
     id_ploopystuff_task_switch_delay, // 88
+    id_ploopystuff_task_switch_rev_tap_key,
+    id_ploopystuff_task_switch_mod_b,
+    id_ploopystuff_task_switch_rev_mod_b,
+    id_ploopystuff_task_switch_tap_key_b,
+    id_ploopystuff_task_switch_rev_tap_key_b, // 93
+    id_ploopystuff_task_switch_os_detection,
+    id_ploopystuff_task_switch_option_mac,
+    id_ploopystuff_task_switch_option_win,
+    id_ploopystuff_task_switch_option_lin,
+    id_ploopystuff_task_switch_option_unk,
+    id_ploopystuff_task_switch_option_man, // 99!
     id_pointing_accel_takeoff = 101,
     id_pointing_accel_growth_rate,
     id_pointing_accel_offset,
     id_pointing_accel_limit,
-    id_pointing_accel_enabled,
+    id_pointing_accel_enabled, // 105
     id_ploopystuff_dummy_menuitem = 230,
     id_ploopystuff_dpi_as_slider,
     id_ploopystuff_config_size,
@@ -135,8 +113,10 @@ enum via_ploopystuff_value {
     id_ploopystuff_feature_turbo_fire,
     id_ploopystuff_feature_pointing_device_accel, // 245
     id_ploopystuff_feature_task_switch_menus,
+    id_ploopystuff_feature_os_detection,
     id_ploopystuff_sensor_type = 250,
     id_ploopystuff_mcu_type,
+    id_ploopystuff_detected_os,
 };
 
 enum mcu_types {
@@ -160,77 +140,57 @@ enum feature_state {
     FEATURE_UNSUPPORTED,
 };
 
-typedef struct PACKED {
+enum lock_state {
+    LOCKSTATE_NONE = 0,
+    LOCKSTATE_WHILE_ENABLED,
+    LOCKSTATE_WHILE_DISABLED,
+};
+
+typedef struct {
     // misc // 13 bytes
     bool     dpi_as_slider;
     uint16_t dpi_presets[5]; // 10 bytes!
     bool     pointer_invert_h;
     bool     pointer_invert_v;
     // sniper // 4 bytes
-    uint16_t sniper_a_dpi;
-    uint16_t sniper_b_dpi;
+    uint16_t sniper_a_dpi:16;
+    uint16_t sniper_b_dpi:16;
 
     // Dragscroll basics // 4 bytes
     bool     dragscroll_invert_h;
     bool     dragscroll_invert_v;
-    uint8_t  dragscroll_divisor_h; // Value stored *4 to allow fraction in uint8
-    uint8_t  dragscroll_divisor_v; // Value stored *4 to allow fraction in uint8
+    uint8_t  dragscroll_divisor_h:8; // Value stored *4 to allow fraction in uint8
+    uint8_t  dragscroll_divisor_v:8; // Value stored *4 to allow fraction in uint8
     // Dragscroll enablement // 7 bytes
-    uint8_t  dragscroll_enable_caps;
-    uint8_t  dragscroll_enable_num;
-    uint8_t  dragscroll_enable_scroll;
+    uint8_t  dragscroll_enable_caps:2;
+    uint8_t  dragscroll_enable_num:2;
+    uint8_t  dragscroll_enable_scroll:2;
     bool     dragscroll_enable_end_on_keypress;
-    uint8_t  dragscroll_enable_layer_a;
-    uint8_t  dragscroll_enable_layer_b;
+    uint8_t  dragscroll_enable_layer_a:4;
+    uint8_t  dragscroll_enable_layer_b:4;
     bool     dragscroll_enable_permanently;
     // Dragscroll DragAct // 16 bytes
-    uint16_t dragscroll_dragact_a_up;
-    uint16_t dragscroll_dragact_a_down;
-    uint16_t dragscroll_dragact_a_left;
-    uint16_t dragscroll_dragact_a_right;
-    uint16_t dragscroll_dragact_b_up;
-    uint16_t dragscroll_dragact_b_down;
-    uint16_t dragscroll_dragact_b_left;
-    uint16_t dragscroll_dragact_b_right;
-    #if defined( COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE ) // 1 byte
-        bool     msjiggler_enabled;
-    #endif // defined( COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE )
-    #if defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE) // 1 byte
-        uint8_t  dragscroll_straighten_sensitivity;
-    #endif // defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
+    uint16_t dragscroll_dragact_a_up:16;
+    uint16_t dragscroll_dragact_a_down:16;
+    uint16_t dragscroll_dragact_a_left:16;
+    uint16_t dragscroll_dragact_a_right:16;
+    uint16_t dragscroll_dragact_b_up:16;
+    uint16_t dragscroll_dragact_b_down:16;
+    uint16_t dragscroll_dragact_b_left:16;
+    uint16_t dragscroll_dragact_b_right:16;
     #ifdef COMBO_ENABLE // 1 byte
         bool     combos_enabled;
     #endif // COMBO_ENABLE
     #ifdef PLOOPY_MSGESTURE_ENABLE // 3 bytes
-        uint8_t  gesture_count;
-        uint8_t  gesture_action_h;
-        uint8_t  gesture_action_v;
+        uint8_t  gesture_count:4;
+        uint8_t  gesture_action_h:4;
+        uint8_t  gesture_action_v:4;
     #endif // PLOOPY_MSGESTURE_ENABLE
-    #if(defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)||defined(COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE))
-        // 17 bytes
-        bool  pointing_accel_enabled;
-        uint16_t pointing_accel_takeoff;
-        uint16_t pointing_accel_growth_rate;
-        uint16_t pointing_accel_offset;
-        uint16_t pointing_accel_limit;
-    #endif // def COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE
-    #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE // 2 Bytes
-        int8_t   pointer_rotation_value;
-        bool     pointer_rotation_is_ccw;
-    #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
-    #if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE) // 6 Bytes
-        uint8_t task_switch_mod;
-        uint8_t task_switch_rev_mod;
-        uint16_t task_switch_tap_key;
-        uint16_t task_switch_delay;
-    #endif // defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
-    #ifdef COMMUNITY_MODULE_TURBO_FIRE_ENABLE // 6 Bytes
-        uint16_t turbo_fire_rate;
-        uint8_t turbo_fire_rate_range;
-        uint8_t turbo_fire_duration;
-        uint16_t turbo_fire_keycodes[TURBO_FIRE_KEYCOUNT];
-    #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
-} via_ploopystuff_config;
+    #ifdef COMMUNITY_MODULE_TURBO_FIRE_ENABLE // 1 byte
+        // Decides scale of rate slider in Via. Not part of module.
+        uint8_t turbo_fire_rate_range:8;
+    #endif // COMMUNITY_MODULE_TURBO_FIRE_ENABLE
+} PACKED via_ploopystuff_config;
 via_ploopystuff_config ploopyvia_config;
 
 static const via_ploopystuff_config ploopyvia_config_default = {
@@ -265,21 +225,21 @@ static const via_ploopystuff_config ploopyvia_config_default = {
     #endif // BETTER_DRAGSCROLL_DIVISOR_V
 
     #if defined(BETTER_DRAGSCROLL_CAPLK_ENABLE)
-        .dragscroll_enable_caps        = 1,
+        .dragscroll_enable_caps        = LOCKSTATE_WHILE_ENABLED,
     #else // BETTER_DRAGSCROLL_CAPLK_ENABLE
-        .dragscroll_enable_caps        = 0,
+        .dragscroll_enable_caps        = LOCKSTATE_NONE,
     #endif // BETTER_DRAGSCROLL_CAPLK_ENABLE
 
     #if defined(BETTER_DRAGSCROLL_NUMLK_ENABLE)
-        .dragscroll_enable_num         = 1,
+        .dragscroll_enable_num         = LOCKSTATE_WHILE_ENABLED,
     #else // BETTER_DRAGSCROLL_NUMLK_ENABLE
-        .dragscroll_enable_num         = 0,
+        .dragscroll_enable_num         = LOCKSTATE_NONE,
     #endif // BETTER_DRAGSCROLL_NUMLK_ENABLE
 
     #if defined(BETTER_DRAGSCROLL_SCRLK_ENABLE)
-        .dragscroll_enable_scroll      = 1,
+        .dragscroll_enable_scroll      = LOCKSTATE_WHILE_ENABLED,
     #else // BETTER_DRAGSCROLL_SCRLK_ENABLE
-        .dragscroll_enable_scroll      = 0,
+        .dragscroll_enable_scroll      = LOCKSTATE_NONE,
     #endif // BETTER_DRAGSCROLL_SCRLK_ENABLE
 
     #if defined(BETTER_DRAGSCROLL_END_ON_KEYPRESS)
@@ -299,14 +259,6 @@ static const via_ploopystuff_config ploopyvia_config_default = {
     .dragscroll_dragact_b_left  = KC_NO,
     .dragscroll_dragact_b_right = KC_NO,
 
-    #if defined( COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE )
-        .msjiggler_enabled          = false,
-    #endif // defined( COMMUNITY_MODULE_MOUSE_JIGGLER_ENABLE )
-
-    #if defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
-        .dragscroll_straighten_sensitivity = DRAGSCROLL_STRAIGHTEN_SENSITIVITY,
-    #endif //defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
-
     #if defined(COMBO_ENABLE)
     .combos_enabled             = false,
     #endif // COMBO_ENABLE
@@ -317,34 +269,9 @@ static const via_ploopystuff_config ploopyvia_config_default = {
         .gesture_action_v           = GESTURE_ACTION_NOTHING,
     #endif // PLOOPY_MSGESTURE_ENABLE
 
-    #if(defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)||defined(COMMUNITY_MODULE_BASIC_POINTING_ACCELERATION_ENABLE))
-        .pointing_accel_enabled = POINTING_DEVICE_ACCEL_ENABLE_DEF,
-        #if defined(COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE)
-            .pointing_accel_takeoff = POINTING_DEVICE_ACCEL_TAKEOFF,
-        #endif
-        .pointing_accel_growth_rate = POINTING_DEVICE_ACCEL_GROWTH_RATE,
-        .pointing_accel_offset = POINTING_DEVICE_ACCEL_OFFSET,
-        .pointing_accel_limit = POINTING_DEVICE_ACCEL_LIMIT,
-    #endif // COMMUNITY_MODULE_POINTING_DEVICE_ACCEL_ENABLE
-
-    #ifdef COMMUNITY_MODULE_PMW_ROTATION_ENABLE
-        .pointer_rotation_value     = 0,
-        .pointer_rotation_is_ccw    = false,
-    #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
-
-    #if defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
-        .task_switch_mod = TASKSWITCH_MOD,
-        .task_switch_rev_mod = TASKSWITCH_REVERSE_MOD,
-        .task_switch_tap_key = TASKSWITCH_TAP,
-        .task_switch_delay = TASKSWITCH_DELAY,
-    #endif // defined(COMMUNITY_MODULE_TASK_SWITCH_ENABLE) && defined(TASK_SWITCH_MENUS_ENABLE)
-
     #ifdef COMMUNITY_MODULE_TURBO_FIRE_ENABLE
-        .turbo_fire_rate = 25,
         .turbo_fire_rate_range = 1,
-        .turbo_fire_duration = 10,
-        .turbo_fire_keycodes = {MS_BTN1},
-    #endif // COMMUNITY_MODULE_PMW_ROTATION_ENABLE
+    #endif // COMMUNITY_MODULE_TURBO_FIRE_ENABLE
 };
 
 #if defined(PLOOPYVIA_DEBUG) && defined(CONSOLE_ENABLE)

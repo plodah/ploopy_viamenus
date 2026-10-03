@@ -130,8 +130,8 @@
         }
         if (ds_state.enabled_bylock || ds_state.enabled_bypress) {
             #if defined( COMMUNITY_MODULE_DRAGSCROLL_STRAIGHTEN_ENABLE)
-                if(ploopyvia_config.dragscroll_straighten_sensitivity){
-                    mouse_report = pointing_device_task_dragscroll_straighten(mouse_report);
+                if(drgstraight_get_sensitivity()){
+                    //mouse_report = pointing_device_task_dragscroll_straighten(mouse_report);
                     if ( drgstraight_cancel_x ){ accumulated_h = 0; }
                     if ( drgstraight_cancel_y ){ accumulated_v = 0; }
                 }
