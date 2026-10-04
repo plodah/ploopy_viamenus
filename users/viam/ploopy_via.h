@@ -146,6 +146,16 @@ enum lock_state {
     LOCKSTATE_WHILE_DISABLED,
 };
 
+#ifndef BETTER_DRAGSCROLL_CAPLK_ENABLE
+#define BETTER_DRAGSCROLL_CAPLK_ENABLE LOCKSTATE_NONE
+#endif
+#ifndef BETTER_DRAGSCROLL_NUMLK_ENABLE
+#define BETTER_DRAGSCROLL_NUMLK_ENABLE LOCKSTATE_NONE
+#endif
+#ifndef BETTER_DRAGSCROLL_SCRLK_ENABLE
+#define BETTER_DRAGSCROLL_SCRLK_ENABLE LOCKSTATE_NONE
+#endif
+
 typedef struct {
     // misc // 13 bytes
     bool     dpi_as_slider;
@@ -224,23 +234,9 @@ static const via_ploopystuff_config ploopyvia_config_default = {
         .dragscroll_divisor_v       = 4 * BETTER_DRAGSCROLL_DIVISOR_V,
     #endif // BETTER_DRAGSCROLL_DIVISOR_V
 
-    #if defined(BETTER_DRAGSCROLL_CAPLK_ENABLE)
-        .dragscroll_enable_caps        = LOCKSTATE_WHILE_ENABLED,
-    #else // BETTER_DRAGSCROLL_CAPLK_ENABLE
-        .dragscroll_enable_caps        = LOCKSTATE_NONE,
-    #endif // BETTER_DRAGSCROLL_CAPLK_ENABLE
-
-    #if defined(BETTER_DRAGSCROLL_NUMLK_ENABLE)
-        .dragscroll_enable_num         = LOCKSTATE_WHILE_ENABLED,
-    #else // BETTER_DRAGSCROLL_NUMLK_ENABLE
-        .dragscroll_enable_num         = LOCKSTATE_NONE,
-    #endif // BETTER_DRAGSCROLL_NUMLK_ENABLE
-
-    #if defined(BETTER_DRAGSCROLL_SCRLK_ENABLE)
-        .dragscroll_enable_scroll      = LOCKSTATE_WHILE_ENABLED,
-    #else // BETTER_DRAGSCROLL_SCRLK_ENABLE
-        .dragscroll_enable_scroll      = LOCKSTATE_NONE,
-    #endif // BETTER_DRAGSCROLL_SCRLK_ENABLE
+    .dragscroll_enable_caps        = BETTER_DRAGSCROLL_CAPLK_ENABLE,
+    .dragscroll_enable_num         = BETTER_DRAGSCROLL_NUMLK_ENABLE,
+    .dragscroll_enable_scroll      = BETTER_DRAGSCROLL_SCRLK_ENABLE,
 
     #if defined(BETTER_DRAGSCROLL_END_ON_KEYPRESS)
         .dragscroll_enable_end_on_keypress = true,
