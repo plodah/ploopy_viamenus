@@ -32,7 +32,7 @@
             "grave_esc": false,
             "magic": false
         },
-        "keyboard_name": "Trackball Nano | plodah_scroll",
+        "keyboard_name": "Trackball Nano | plodah_hrscroll",
         "manufacturer": "Ploopy",
         "matrix_pins": {
             "direct": [
