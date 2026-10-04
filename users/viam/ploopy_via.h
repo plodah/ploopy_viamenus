@@ -101,6 +101,7 @@ enum via_ploopystuff_value {
     id_ploopystuff_dummy_menuitem = 230,
     id_ploopystuff_dpi_as_slider,
     id_ploopystuff_config_size,
+    id_ploopystuff_hires_scrolling_res,
     id_ploopystuff_feature_combos=235,
     id_ploopystuff_feature_gestures,
     id_ploopystuff_feature_dragscroll,

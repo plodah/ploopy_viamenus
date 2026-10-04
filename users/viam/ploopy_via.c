@@ -727,6 +727,15 @@
                 pvv_dprintf("config_size: %d\n", sizeof(ploopyvia_config));
                 break;
 
+            case id_ploopystuff_hires_scrolling_res:
+                #ifdef POINTING_DEVICE_HIRES_SCROLL_ENABLE
+                    value_data[0] = pointing_device_get_hires_scroll_resolution() >> 8;
+                    value_data[1] = pointing_device_get_hires_scroll_resolution() & 0xFF;
+                #else
+                    *value_data = 0;
+                #endif
+                break;
+
             case id_ploopystuff_feature_combos:
                 #if defined(COMBO_ENABLE)
                     *value_data = FEATURE_AVAILABLE;
